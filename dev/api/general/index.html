@@ -421,11 +421,6 @@ function checkPageExistsAndRedirect(event) {
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#asynchronous-execution">
-   Asynchronous execution
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#sessions">
    Sessions
   </a>
@@ -441,18 +436,13 @@ function checkPageExistsAndRedirect(event) {
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#post-objects">
-   Post objects
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#scheduler">
    Scheduler
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#case-reader">
-   Case reader
+  <a class="reference internal nav-link" href="#case">
+   Case
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -466,13 +456,8 @@ function checkPageExistsAndRedirect(event) {
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#meta">
-   Meta
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#quantity">
-   Quantity
+  <a class="reference internal nav-link" href="#workflow">
+   Workflow
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -481,8 +466,23 @@ function checkPageExistsAndRedirect(event) {
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#workflow">
-   Workflow
+  <a class="reference internal nav-link" href="#quantity">
+   Quantity
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#post-objects">
+   Post objects
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#asynchronous-execution">
+   Asynchronous execution
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#meta">
+   Meta
   </a>
  </li>
 </ul>
@@ -508,60 +508,59 @@ function checkPageExistsAndRedirect(event) {
 <span id="ref-general"></span><h1>General<a class="headerlink" href="#general" title="Permalink to this heading">#</a></h1>
 <section id="launcher">
 <h2>Launcher<a class="headerlink" href="#launcher" title="Permalink to this heading">#</a></h2>
-<p><a class="reference internal" href="launcher/index.html#ref-launcher"><span class="std std-ref">Launcher</span></a> provides access to starting Fluent locally in server mode or connecting to a running Fluent
-server instance.</p>
-</section>
-<section id="asynchronous-execution">
-<h2>Asynchronous execution<a class="headerlink" href="#asynchronous-execution" title="Permalink to this heading">#</a></h2>
-<p><a class="reference internal" href="utils/index.html#ref-utils"><span class="std std-ref">Asynchronous execution</span></a> consists solely of a function to allow for asynchronous execution.</p>
+<p><a class="reference internal" href="launcher/index.html#ref-launcher"><span class="std std-ref">Launcher</span></a> includes instructions on how to launch and connect to Fluent.</p>
 </section>
 <section id="sessions">
 <h2>Sessions<a class="headerlink" href="#sessions" title="Permalink to this heading">#</a></h2>
-<p><a class="reference internal" href="sessions/index.html#ref-sessions"><span class="std std-ref">Sessions</span></a> consists of available Fluent sessions.</p>
+<p><a class="reference internal" href="sessions/index.html#ref-sessions"><span class="std std-ref">Sessions</span></a> describes the various types of PyFluent session objects, which connect to Fluent sessions.</p>
 </section>
 <section id="services">
 <h2>Services<a class="headerlink" href="#services" title="Permalink to this heading">#</a></h2>
-<p><a class="reference internal" href="services/index.html#ref-services"><span class="std std-ref">Services</span></a> consists of gRPC services for Fluent sessions.</p>
+<p><a class="reference internal" href="services/index.html#ref-services"><span class="std std-ref">Services</span></a> outlines fundamental gRPC services, upon which PyFluent depends (and are directly usable).</p>
 </section>
 <section id="streaming-services">
 <h2>Streaming services<a class="headerlink" href="#streaming-services" title="Permalink to this heading">#</a></h2>
-<p><a class="reference internal" href="streaming_services/index.html#ref-streaming-services"><span class="std std-ref">Streaming services</span></a> consists of streaming services for management of gRPC services.</p>
-</section>
-<section id="post-objects">
-<h2>Post objects<a class="headerlink" href="#post-objects" title="Permalink to this heading">#</a></h2>
-<p><a class="reference internal" href="post_objects/index.html#ref-post-objects"><span class="std std-ref">Post objects</span></a> consists of visualization objects for Matplotlib.</p>
+<p><a class="reference internal" href="streaming_services/index.html#ref-streaming-services"><span class="std std-ref">Streaming services</span></a> outlines fundamental gRPC streaming services, upon which PyFluent depends (and are directly usable).</p>
 </section>
 <section id="scheduler">
 <h2>Scheduler<a class="headerlink" href="#scheduler" title="Permalink to this heading">#</a></h2>
-<p><a class="reference internal" href="scheduler/index.html#ref-scheduler"><span class="std std-ref">Scheduler</span></a> consists of abstract machine objects and their use for queue system interface.</p>
+<p><a class="reference internal" href="scheduler/index.html#ref-scheduler"><span class="std std-ref">Scheduler</span></a> describes a module for facilitating use of external job scheduling systems.</p>
 </section>
-<section id="case-reader">
-<h2>Case reader<a class="headerlink" href="#case-reader" title="Permalink to this heading">#</a></h2>
-<p><a class="reference internal" href="case_reader.html#ref-case-reader"><span class="std std-ref">Case reader</span></a> demonstrates reading of Fluent’s case files.</p>
+<section id="case">
+<h2>Case<a class="headerlink" href="#case" title="Permalink to this heading">#</a></h2>
+<p><a class="reference internal" href="case_reader.html#ref-case-reader"><span class="std std-ref">Case reader</span></a> documents a class for parsing Fluent case files in pure Python code.</p>
 </section>
 <section id="data-transfer">
 <h2>Data transfer<a class="headerlink" href="#data-transfer" title="Permalink to this heading">#</a></h2>
-<p><a class="reference internal" href="data_transfer.html#ref-data-transfer"><span class="std std-ref">Transfer data</span></a> demonstrates transfer of Fluent’s case files.</p>
+<p><a class="reference internal" href="data_transfer.html#ref-data-transfer"><span class="std std-ref">Transfer data</span></a> describes how to transfer mesh data between PyFluent sessions.</p>
 </section>
 <section id="journaling">
 <h2>Journaling<a class="headerlink" href="#journaling" title="Permalink to this heading">#</a></h2>
-<p><a class="reference internal" href="journaling.html#ref-journaling"><span class="std std-ref">Journaling</span></a> consists of read-write of journal.</p>
-</section>
-<section id="meta">
-<h2>Meta<a class="headerlink" href="#meta" title="Permalink to this heading">#</a></h2>
-<p><a class="reference internal" href="meta.html#ref-meta"><span class="std std-ref">Meta</span></a> consists of used meta classes.</p>
-</section>
-<section id="quantity">
-<h2>Quantity<a class="headerlink" href="#quantity" title="Permalink to this heading">#</a></h2>
-<p><a class="reference internal" href="quantity.html#ref-quantity"><span class="std std-ref">Quantity</span></a> is a module for creation and manipulation of physical quantities.</p>
-</section>
-<section id="rpvars">
-<h2>rpvars<a class="headerlink" href="#rpvars" title="Permalink to this heading">#</a></h2>
-<p><a class="reference internal" href="rpvars.html#ref-rpvars"><span class="std std-ref">rpvars</span></a> shows access and modification of rpvars.</p>
+<p><a class="reference internal" href="journaling.html#ref-journaling"><span class="std std-ref">Journaling</span></a> explains how to read and write Python journals that are reusable between PyFluent and Fluent.</p>
 </section>
 <section id="workflow">
 <h2>Workflow<a class="headerlink" href="#workflow" title="Permalink to this heading">#</a></h2>
-<p><a class="reference internal" href="workflow.html#ref-workflow"><span class="std std-ref">Workflow</span></a> used for creation of TaskObject instance.</p>
+<p><a class="reference internal" href="workflow.html#ref-workflow"><span class="std std-ref">Workflow</span></a> documents high-level interfaces to the task-based workflows, including meshing workflow.</p>
+</section>
+<section id="rpvars">
+<h2>rpvars<a class="headerlink" href="#rpvars" title="Permalink to this heading">#</a></h2>
+<p><a class="reference internal" href="rpvars.html#ref-rpvars"><span class="std std-ref">rpvars</span></a> shows how you can access and modify live Fluent rpvars via PyFluent.</p>
+</section>
+<section id="quantity">
+<h2>Quantity<a class="headerlink" href="#quantity" title="Permalink to this heading">#</a></h2>
+<p><a class="reference internal" href="quantity.html#ref-quantity"><span class="std std-ref">Quantity</span></a> reveals a powerful quantity class that exposes real values and units of API (and other) objects.</p>
+</section>
+<section id="post-objects">
+<h2>Post objects<a class="headerlink" href="#post-objects" title="Permalink to this heading">#</a></h2>
+<p><a class="reference internal" href="post_objects/index.html#ref-post-objects"><span class="std std-ref">Post objects</span></a> documents visualization objects for interfacing to Matplotlib and pyvista.</p>
+</section>
+<section id="asynchronous-execution">
+<h2>Asynchronous execution<a class="headerlink" href="#asynchronous-execution" title="Permalink to this heading">#</a></h2>
+<p><a class="reference internal" href="utils/index.html#ref-utils"><span class="std std-ref">Asynchronous execution</span></a> documents tools for asynchronous function execution.</p>
+</section>
+<section id="meta">
+<h2>Meta<a class="headerlink" href="#meta" title="Permalink to this heading">#</a></h2>
+<p><a class="reference internal" href="meta.html#ref-meta"><span class="std std-ref">Meta</span></a> consists of some metaclasses used in the PyFluent codebase.</p>
 <table class="autosummary longtable table autosummary">
 <tbody>
 </tbody>

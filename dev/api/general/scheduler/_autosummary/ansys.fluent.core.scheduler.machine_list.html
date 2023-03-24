@@ -445,9 +445,24 @@ function checkPageExistsAndRedirect(event) {
     
     <div class="toc-item">
       
+<div class="tocsection onthispage mt-5 pt-1 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
 
 <nav id="bd-toc-nav">
-    
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#machine">
+   Machine
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#machinelist">
+   MachineList
+  </a>
+ </li>
+</ul>
+
 </nav>
     </div>
     
@@ -469,16 +484,19 @@ function checkPageExistsAndRedirect(event) {
 <span id="machine-list"></span><h1>machine_list<a class="headerlink" href="#module-ansys.fluent.core.scheduler.machine_list" title="Permalink to this heading">#</a></h1>
 <p>A module used to provide abstract machine objects for queue system
 interfaces.</p>
-<p>This module provides two objects that help with interfacing python
-scripts with
-the job scheduler environments:</p>
-<p>Machine
-This is used to represent a single machine allocated by the queue system
+<p>This module provides two objects that help with interfacing Python
+scripts with job scheduler environments:</p>
+<section id="machine">
+<h2>Machine<a class="headerlink" href="#machine" title="Permalink to this heading">#</a></h2>
+<p>This is used to represent a single machine allocated by the queue system
 and query details about it.</p>
-<p>MachineList
-This is used to load and query a queue system machine file.  Instances
-of this object hold a collection of Machine objects that are initialized
+</section>
+<section id="machinelist">
+<h2>MachineList<a class="headerlink" href="#machinelist" title="Permalink to this heading">#</a></h2>
+<p>This is used to load and query a queue system machine file. Instances
+of this object hold a collection of <code class="docutils literal notranslate"><span class="pre">Machine</span></code> objects that are initialized
 when the machine file is loaded.</p>
+</section>
 <p class="rubric">Classes</p>
 <table class="autosummary longtable table autosummary">
 <tbody>

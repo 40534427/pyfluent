@@ -552,12 +552,11 @@ function checkPageExistsAndRedirect(event) {
 <dl class="py class">
 <dt class="sig sig-object py" id="ansys.fluent.core.session_pure_meshing.PureMeshing">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ansys.fluent.core.session_pure_meshing.</span></span><span class="sig-name descname"><span class="pre">PureMeshing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fluent_connection</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.fluent.core.session_pure_meshing.PureMeshing" title="Permalink to this definition">#</a></dt>
-<dd><p>Encapsulates a Fluent - Pure Meshing session connection.
-PureMeshing(_BaseSession) holds the top-level objects
-for meshing TUI and various meshing datamodel API calls.
-In pure-meshing mode, switch to solver is not available.
-Public attributes of this class or extracted from the _BaseMeshing
-class</p>
+<dd><p>Encapsulates a Fluent meshing session. A <code class="docutils literal notranslate"><span class="pre">tui</span></code> object
+for meshing TUI commanding, and <code class="docutils literal notranslate"><span class="pre">meshing</span></code> and <code class="docutils literal notranslate"><span class="pre">workflow</span></code>
+objects for access to task-based meshing workflows are all
+exposed here. No <code class="docutils literal notranslate"><span class="pre">switch_to_solver</span></code> method is available
+in this mode.</p>
 <p class="rubric">Methods</p>
 <table class="autosummary longtable table autosummary">
 <tbody>
