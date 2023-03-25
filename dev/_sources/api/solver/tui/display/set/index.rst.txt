@@ -14,13 +14,13 @@ solver.tui.display.set
 .. toctree::
    :hidden:
 
-   titles/index
-   rendering_options/index
-   picture/index
-   particle_tracks/index
-   windows/index
-   colors/index
-   velocity_vectors/index
-   contours/index
    path_lines/index
    lights/index
+   velocity_vectors/index
+   contours/index
+   colors/index
+   rendering_options/index
+   picture/index
+   titles/index
+   particle_tracks/index
+   windows/index

@@ -14,15 +14,15 @@ solver.tui.file
 .. toctree::
    :hidden:
 
-   import_/index
-   table_manager/index
    em_mapping/index
-   interpolate/index
-   cffio_options/index
-   auto_save/index
-   transient_export/index
-   solution_files/index
-   export/index
    parametric_project/index
+   cffio_options/index
+   solution_files/index
+   interpolate/index
+   export/index
+   transient_export/index
+   auto_save/index
    project/index
    fsi/index
+   import_/index
+   table_manager/index
