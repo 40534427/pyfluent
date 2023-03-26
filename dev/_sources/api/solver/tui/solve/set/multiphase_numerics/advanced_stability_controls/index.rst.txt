@@ -15,8 +15,8 @@ solver.tui.solve.set.multiphase\_numerics.advanced\_stability\_controls
    :hidden:
 
    p_v_coupling/index
-   anti_diffusion/index
-   num_ventilation/index
-   hybrid_nita/index
    pseudo_time/index
+   hybrid_nita/index
+   anti_diffusion/index
    equation_order/index
+   num_ventilation/index

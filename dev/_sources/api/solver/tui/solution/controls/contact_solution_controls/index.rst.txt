@@ -14,10 +14,10 @@ solver.tui.solution.controls.contact\_solution\_controls
 .. toctree::
    :hidden:
 
+   spatial/index
+   models/index
    parameters/index
    methods/index
-   amg/index
-   spatial/index
-   miscellaneous/index
    transient/index
-   models/index
+   miscellaneous/index
+   amg/index

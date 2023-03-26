@@ -15,10 +15,10 @@ solver.tui.define.boundary\_conditions
    :hidden:
 
    non_reflecting_bc/index
-   impedance_data_fitting/index
    bc_settings/index
-   modify_zones/index
-   perforated_walls/index
    set/index
-   rename_zone/index
+   impedance_data_fitting/index
+   modify_zones/index
    advanced/index
+   rename_zone/index
+   perforated_walls/index

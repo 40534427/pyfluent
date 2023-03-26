@@ -14,13 +14,13 @@ solver.tui.report
 .. toctree::
    :hidden:
 
-   simulation_reports/index
-   reference_values/index
-   heat_exchanger/index
-   population_balance/index
-   system/index
-   modified_setting/index
+   icing/index
    forces/index
    dpm_histogram/index
    fluxes/index
-   icing/index
+   heat_exchanger/index
+   modified_setting/index
+   system/index
+   simulation_reports/index
+   reference_values/index
+   population_balance/index
