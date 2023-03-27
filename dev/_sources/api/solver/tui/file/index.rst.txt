@@ -15,14 +15,14 @@ solver.tui.file
    :hidden:
 
    import_/index
-   fsi/index
-   export/index
-   table_manager/index
-   interpolate/index
-   solution_files/index
-   cffio_options/index
+   auto_save/index
    transient_export/index
    em_mapping/index
+   cffio_options/index
    parametric_project/index
-   auto_save/index
+   fsi/index
+   table_manager/index
+   export/index
+   solution_files/index
    project/index
+   interpolate/index

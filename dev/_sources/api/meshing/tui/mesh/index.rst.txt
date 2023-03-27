@@ -14,21 +14,21 @@ meshing.tui.mesh
 .. toctree::
    :hidden:
 
-   cell_zone_conditions/index
-   poly_hexcore/index
-   pyramid/index
+   manage/index
    thin_volume_mesh/index
-   domains/index
-   cartesian/index
-   poly/index
-   cavity/index
-   hexcore/index
    tet/index
    modify/index
-   manage/index
-   separate/index
+   pyramid/index
+   poly/index
    auto_mesh_controls/index
-   non_conformals/index
+   cell_zone_conditions/index
    prism/index
+   poly_hexcore/index
+   cavity/index
+   non_conformals/index
    rapid_octree/index
+   cartesian/index
+   separate/index
+   domains/index
    scoped_prisms/index
+   hexcore/index

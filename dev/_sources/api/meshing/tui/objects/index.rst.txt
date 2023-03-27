@@ -14,13 +14,13 @@ meshing.tui.objects
 .. toctree::
    :hidden:
 
-   volumetric_regions/index
    create_new_mesh_object/index
-   fix_holes/index
+   remove_gaps/index
+   join_intersect/index
    set/index
    wrap/index
    cad_association/index
-   deprecated/index
+   volumetric_regions/index
    labels/index
-   remove_gaps/index
-   join_intersect/index
+   deprecated/index
+   fix_holes/index

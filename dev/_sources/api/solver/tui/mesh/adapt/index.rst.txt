@@ -15,8 +15,8 @@ solver.tui.mesh.adapt
    :hidden:
 
    profile/index
-   set/index
    cell_registers/index
+   geometry/index
    manage_criteria/index
    multi_layer_refinement/index
-   geometry/index
+   set/index

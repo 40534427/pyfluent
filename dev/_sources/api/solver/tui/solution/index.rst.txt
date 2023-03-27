@@ -14,12 +14,12 @@ solver.tui.solution
 .. toctree::
    :hidden:
 
-   initialize/index
-   calculation_activities/index
    cell_registers/index
-   expert/index
+   controls/index
+   calculation_activities/index
+   methods/index
    report_definitions/index
+   initialize/index
    run_calculation/index
    monitors/index
-   methods/index
-   controls/index
+   expert/index
