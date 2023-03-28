@@ -14,25 +14,25 @@ main_menu
 .. toctree::
    :hidden:
 
-   simulation_reports/index
+   parametric_study/index
+   parallel/index
+   file/index
    icing/index
-   adjoint/index
+   views/index
+   solution/index
    surface/index
-   solve/index
-   preferences/index
-   parameters__and__customization/index
-   server/index
-   report/index
+   mesh/index
+   turbo_workflow/index
    define/index
    setup/index
-   solution/index
-   display/index
-   parallel/index
+   preferences/index
    turbo_post/index
-   turbo_workflow/index
-   plot/index
+   solve/index
    results/index
-   views/index
-   file/index
-   mesh/index
-   parametric_study/index
+   parameters__and__customization/index
+   server/index
+   adjoint/index
+   simulation_reports/index
+   report/index
+   plot/index
+   display/index

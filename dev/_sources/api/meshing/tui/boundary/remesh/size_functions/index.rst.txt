@@ -14,5 +14,5 @@ size_functions
 .. toctree::
    :hidden:
 
-   controls/index
    contours/index
+   controls/index

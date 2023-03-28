@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_flicing:
 
-Root
-====
+solver.datamodel.flicing
+========================
 
 .. autoclass:: ansys.fluent.core.datamodel_231.flicing.Root
    :members:

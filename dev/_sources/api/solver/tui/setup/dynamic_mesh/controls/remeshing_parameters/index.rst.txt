@@ -15,5 +15,5 @@ remeshing_parameters
    :hidden:
 
    sizing_controls/index
-   prism_layer_parameters/index
    prism_controls/index
+   prism_layer_parameters/index

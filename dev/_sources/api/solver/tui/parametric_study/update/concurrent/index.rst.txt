@@ -14,6 +14,6 @@ concurrent
 .. toctree::
    :hidden:
 
-   licensing/index
    print_to_console/index
+   licensing/index
    set/index

@@ -14,10 +14,10 @@ contact_solution_controls
 .. toctree::
    :hidden:
 
-   transient/index
-   models/index
-   amg/index
-   miscellaneous/index
    parameters/index
-   spatial/index
+   amg/index
+   models/index
+   transient/index
    methods/index
+   miscellaneous/index
+   spatial/index

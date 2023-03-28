@@ -14,5 +14,5 @@ optics
 .. toctree::
    :hidden:
 
-   statistics/index
    beams/index
+   statistics/index

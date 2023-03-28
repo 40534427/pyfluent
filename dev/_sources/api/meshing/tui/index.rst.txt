@@ -15,17 +15,17 @@ main_menu
    :hidden:
 
    boundary/index
-   reference_frames/index
-   material_point/index
-   parallel/index
-   diagnostics/index
-   file/index
-   openmp_controls/index
-   display/index
-   size_functions/index
-   report/index
    objects/index
-   preferences/index
+   material_point/index
+   report/index
+   display/index
    cad_assemblies/index
-   scoped_sizing/index
+   file/index
    mesh/index
+   reference_frames/index
+   scoped_sizing/index
+   size_functions/index
+   preferences/index
+   parallel/index
+   openmp_controls/index
+   diagnostics/index

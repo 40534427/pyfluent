@@ -1,7 +1,7 @@
 .. _ref_meshing_datamodel_PMFileManagement:
 
-Root
-====
+meshing.datamodel.PMFileManagement
+==================================
 
 .. autoclass:: ansys.fluent.core.datamodel_231.PMFileManagement.Root
    :members:

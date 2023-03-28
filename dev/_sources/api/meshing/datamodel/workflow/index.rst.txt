@@ -1,7 +1,7 @@
 .. _ref_meshing_datamodel_workflow:
 
-Root
-====
+meshing.datamodel.workflow
+==========================
 
 .. autoclass:: ansys.fluent.core.datamodel_231.workflow.Root
    :members:

@@ -15,9 +15,9 @@ expert
    :hidden:
 
    non_reflecting_boundary_treatment/index
-   secondary_gradient_limiting/index
-   previous_defaults/index
    high_speed_numerics/index
+   previous_defaults/index
+   divergence_prevention/index
+   secondary_gradient_limiting/index
    poor_mesh_numerics/index
    open_channel_wave_options/index
-   divergence_prevention/index

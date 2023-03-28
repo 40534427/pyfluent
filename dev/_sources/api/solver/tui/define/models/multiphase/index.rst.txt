@@ -15,9 +15,9 @@ multiphase
    :hidden:
 
    flow_regime_modeling/index
+   hybrid_models/index
+   sub_models/index
+   phases/index
    population_balance/index
    wet_steam/index
    explicit_expert_options/index
-   sub_models/index
-   phases/index
-   hybrid_models/index

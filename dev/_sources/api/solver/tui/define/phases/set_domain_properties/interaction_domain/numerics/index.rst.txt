@@ -15,8 +15,8 @@ numerics
    :hidden:
 
    lift/index
-   cavitation/index
-   virtual_mass/index
    interphase_discretization/index
    surface_tension/index
+   virtual_mass/index
    interphase_viscous_dissipation/index
+   cavitation/index

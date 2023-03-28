@@ -14,7 +14,7 @@ heat_mass_transfer
 .. toctree::
    :hidden:
 
-   boiling/index
-   cavitation/index
    evaporation_condensation/index
    area_density/index
+   boiling/index
+   cavitation/index
