@@ -16,5 +16,5 @@ meshing.tui.cad\_assemblies
 
    labels/index
    draw_options/index
-   manage_state/index
    update_options/index
+   manage_state/index

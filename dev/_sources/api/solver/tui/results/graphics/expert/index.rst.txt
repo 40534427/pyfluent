@@ -15,7 +15,7 @@ solver.tui.results.graphics.expert
    :hidden:
 
    pdf_data/index
-   path_lines/index
-   flamelet_data/index
-   set/index
    particle_tracks/index
+   set/index
+   flamelet_data/index
+   path_lines/index
