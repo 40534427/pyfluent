@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_flicing_Case_App_Airflow_Fensap:
 
-solver.datamodel.flicing.Case.App.Airflow.Fensap
-================================================
+Fensap
+======
 
 .. autoclass:: ansys.fluent.core.datamodel_231.flicing.Root.Case.App.Airflow.Fensap
    :members:

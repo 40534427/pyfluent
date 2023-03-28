@@ -1,7 +1,7 @@
 .. _ref_meshing_tui_preferences_turbo_workflow_face_zone_settings:
 
-meshing.tui.preferences.turbo\_workflow.face\_zone\_settings
-============================================================
+face_zone_settings
+==================
 
 .. autoclass:: ansys.fluent.core.meshing.tui_231.main_menu.preferences.turbo_workflow.face_zone_settings
    :members:

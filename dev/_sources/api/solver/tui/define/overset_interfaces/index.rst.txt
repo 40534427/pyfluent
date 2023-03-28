@@ -1,7 +1,7 @@
 .. _ref_solver_tui_define_overset_interfaces:
 
-solver.tui.define.overset\_interfaces
-=====================================
+overset_interfaces
+==================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.define.overset_interfaces
    :members:
@@ -14,6 +14,6 @@ solver.tui.define.overset\_interfaces
 .. toctree::
    :hidden:
 
-   cut_control/index
    options/index
    adapt/index
+   cut_control/index

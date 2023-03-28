@@ -1,7 +1,7 @@
 .. _ref_solver_tui_mesh_polyhedra:
 
-solver.tui.mesh.polyhedra
-=========================
+polyhedra
+=========
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.mesh.polyhedra
    :members:

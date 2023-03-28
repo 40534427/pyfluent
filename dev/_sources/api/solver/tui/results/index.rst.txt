@@ -1,7 +1,7 @@
 .. _ref_solver_tui_results:
 
-solver.tui.results
-==================
+results
+=======
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.results
    :members:
@@ -14,9 +14,9 @@ solver.tui.results
 .. toctree::
    :hidden:
 
-   graphics/index
    animate/index
+   graphics/index
+   surface/index
    plot/index
    graphics_window/index
-   surface/index
    report/index

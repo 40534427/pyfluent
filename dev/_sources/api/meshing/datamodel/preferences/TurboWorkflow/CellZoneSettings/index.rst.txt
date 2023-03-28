@@ -1,7 +1,7 @@
 .. _ref_meshing_datamodel_preferences_TurboWorkflow_CellZoneSettings:
 
-meshing.datamodel.preferences.TurboWorkflow.CellZoneSettings
-============================================================
+CellZoneSettings
+================
 
 .. autoclass:: ansys.fluent.core.datamodel_231.preferences.Root.TurboWorkflow.CellZoneSettings
    :members:

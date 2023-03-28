@@ -1,7 +1,7 @@
 .. _ref_solver_tui_results_graphics_expert_set_colors:
 
-solver.tui.results.graphics.expert.set.colors
-=============================================
+colors
+======
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.results.graphics.expert.set.colors
    :members:
@@ -14,5 +14,5 @@ solver.tui.results.graphics.expert.set.colors
 .. toctree::
    :hidden:
 
-   by_surface/index
    by_type/index
+   by_surface/index

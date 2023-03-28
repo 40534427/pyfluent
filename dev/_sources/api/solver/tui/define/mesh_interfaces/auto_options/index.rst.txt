@@ -1,7 +1,7 @@
 .. _ref_solver_tui_define_mesh_interfaces_auto_options:
 
-solver.tui.define.mesh\_interfaces.auto\_options
-================================================
+auto_options
+============
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.define.mesh_interfaces.auto_options
    :members:

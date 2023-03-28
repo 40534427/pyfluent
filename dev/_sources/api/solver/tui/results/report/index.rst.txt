@@ -1,7 +1,7 @@
 .. _ref_solver_tui_results_report:
 
-solver.tui.results.report
-=========================
+report
+======
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.results.report
    :members:
@@ -14,13 +14,13 @@ solver.tui.results.report
 .. toctree::
    :hidden:
 
-   population_balance/index
    heat_exchanger/index
-   modified_setting/index
-   forces/index
-   dpm_histogram/index
-   icing/index
+   population_balance/index
    simulation_reports/index
-   reference_values/index
    fluxes/index
+   icing/index
+   forces/index
+   modified_setting/index
+   dpm_histogram/index
+   reference_values/index
    system/index

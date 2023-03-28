@@ -1,0 +1,6 @@
+start\_transcript
+=================
+
+.. currentmodule:: ansys.fluent.core.fluent_connection
+
+.. automethod:: FluentConnection.start_transcript

@@ -1,7 +1,7 @@
 .. _ref_meshing_datamodel_preferences_Graphics_Transparency:
 
-meshing.datamodel.preferences.Graphics.Transparency
-===================================================
+Transparency
+============
 
 .. autoclass:: ansys.fluent.core.datamodel_231.preferences.Root.Graphics.Transparency
    :members:

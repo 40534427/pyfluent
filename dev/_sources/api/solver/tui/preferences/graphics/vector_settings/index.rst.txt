@@ -1,7 +1,7 @@
 .. _ref_solver_tui_preferences_graphics_vector_settings:
 
-solver.tui.preferences.graphics.vector\_settings
-================================================
+vector_settings
+===============
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.preferences.graphics.vector_settings
    :members:

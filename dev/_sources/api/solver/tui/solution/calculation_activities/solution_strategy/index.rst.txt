@@ -1,7 +1,7 @@
 .. _ref_solver_tui_solution_calculation_activities_solution_strategy:
 
-solver.tui.solution.calculation\_activities.solution\_strategy
-==============================================================
+solution_strategy
+=================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.solution.calculation_activities.solution_strategy
    :members:

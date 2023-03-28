@@ -1,7 +1,7 @@
 .. _ref_solver_tui_solve_set_overset:
 
-solver.tui.solve.set.overset
-============================
+overset
+=======
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.solve.set.overset
    :members:

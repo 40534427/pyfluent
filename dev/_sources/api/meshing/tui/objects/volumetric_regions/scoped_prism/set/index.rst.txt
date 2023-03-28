@@ -1,7 +1,7 @@
 .. _ref_meshing_tui_objects_volumetric_regions_scoped_prism_set:
 
-meshing.tui.objects.volumetric\_regions.scoped\_prism.set
-=========================================================
+set
+===
 
 .. autoclass:: ansys.fluent.core.meshing.tui_231.main_menu.objects.volumetric_regions.scoped_prism.set
    :members:

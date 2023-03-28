@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_preferences_Graphics_ManageHoopsMemory:
 
-solver.datamodel.preferences.Graphics.ManageHoopsMemory
-=======================================================
+ManageHoopsMemory
+=================
 
 .. autoclass:: ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ManageHoopsMemory
    :members:

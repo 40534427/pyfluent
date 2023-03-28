@@ -1,7 +1,7 @@
 .. _ref_solver_tui_results_graphics_expert_set_particle_tracks_sphere_settings:
 
-solver.tui.results.graphics.expert.set.particle\_tracks.sphere\_settings
-========================================================================
+sphere_settings
+===============
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.results.graphics.expert.set.particle_tracks.sphere_settings
    :members:

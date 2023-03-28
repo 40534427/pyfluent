@@ -1,7 +1,7 @@
 .. _ref_meshing_tui_mesh:
 
-meshing.tui.mesh
-================
+mesh
+====
 
 .. autoclass:: ansys.fluent.core.meshing.tui_231.main_menu.mesh
    :members:
@@ -14,21 +14,21 @@ meshing.tui.mesh
 .. toctree::
    :hidden:
 
-   separate/index
-   thin_volume_mesh/index
-   non_conformals/index
    poly_hexcore/index
-   auto_mesh_controls/index
-   cartesian/index
    poly/index
-   hexcore/index
+   non_conformals/index
+   cell_zone_conditions/index
+   auto_mesh_controls/index
+   manage/index
    pyramid/index
+   rapid_octree/index
+   hexcore/index
+   domains/index
    modify/index
+   prism/index
+   cartesian/index
    scoped_prisms/index
+   thin_volume_mesh/index
    tet/index
    cavity/index
-   domains/index
-   cell_zone_conditions/index
-   rapid_octree/index
-   manage/index
-   prism/index
+   separate/index

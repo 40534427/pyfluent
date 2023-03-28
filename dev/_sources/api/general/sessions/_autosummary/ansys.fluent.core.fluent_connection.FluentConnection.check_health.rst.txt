@@ -1,0 +1,6 @@
+check\_health
+=============
+
+.. currentmodule:: ansys.fluent.core.fluent_connection
+
+.. automethod:: FluentConnection.check_health

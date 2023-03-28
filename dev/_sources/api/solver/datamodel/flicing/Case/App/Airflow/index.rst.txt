@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_flicing_Case_App_Airflow:
 
-solver.datamodel.flicing.Case.App.Airflow
-=========================================
+Airflow
+=======
 
 .. autoclass:: ansys.fluent.core.datamodel_231.flicing.Root.Case.App.Airflow
    :members:

@@ -1,7 +1,7 @@
 .. _ref_solver_tui_solve_set_acoustics_wave_equation_controls_expert:
 
-solver.tui.solve.set.acoustics\_wave\_equation\_controls.expert
-===============================================================
+expert
+======
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.solve.set.acoustics_wave_equation_controls.expert
    :members:

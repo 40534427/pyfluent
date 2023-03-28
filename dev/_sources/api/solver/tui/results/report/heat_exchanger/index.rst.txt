@@ -1,7 +1,7 @@
 .. _ref_solver_tui_results_report_heat_exchanger:
 
-solver.tui.results.report.heat\_exchanger
-=========================================
+heat_exchanger
+==============
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.results.report.heat_exchanger
    :members:

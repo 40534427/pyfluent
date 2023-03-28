@@ -1,7 +1,7 @@
 .. _ref_solver_tui_surface:
 
-solver.tui.surface
-==================
+surface
+=======
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.surface
    :members:

@@ -1,7 +1,7 @@
 .. _ref_meshing_tui_file:
 
-meshing.tui.file
-================
+file
+====
 
 .. autoclass:: ansys.fluent.core.meshing.tui_231.main_menu.file
    :members:
@@ -14,7 +14,7 @@ meshing.tui.file
 .. toctree::
    :hidden:
 
-   checkpoint/index
    project/index
    import_/index
    export/index
+   checkpoint/index

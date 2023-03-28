@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_flicing_Case_Solution_Monitors:
 
-solver.datamodel.flicing.Case.Solution.Monitors
-===============================================
+Monitors
+========
 
 .. autoclass:: ansys.fluent.core.datamodel_231.flicing.Root.Case.Solution.Monitors
    :members:

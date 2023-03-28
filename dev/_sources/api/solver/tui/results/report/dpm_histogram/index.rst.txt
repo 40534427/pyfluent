@@ -1,7 +1,7 @@
 .. _ref_solver_tui_results_report_dpm_histogram:
 
-solver.tui.results.report.dpm\_histogram
-========================================
+dpm_histogram
+=============
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.results.report.dpm_histogram
    :members:
@@ -14,5 +14,5 @@ solver.tui.results.report.dpm\_histogram
 .. toctree::
    :hidden:
 
-   setup_reduction/index
    set/index
+   setup_reduction/index

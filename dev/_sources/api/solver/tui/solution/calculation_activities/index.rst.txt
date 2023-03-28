@@ -1,7 +1,7 @@
 .. _ref_solver_tui_solution_calculation_activities:
 
-solver.tui.solution.calculation\_activities
-===========================================
+calculation_activities
+======================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.solution.calculation_activities
    :members:
@@ -14,8 +14,8 @@ solver.tui.solution.calculation\_activities
 .. toctree::
    :hidden:
 
-   solution_strategy/index
    auto_save/index
-   cell_register_operations/index
+   solution_strategy/index
    animate/index
    execute_commands/index
+   cell_register_operations/index

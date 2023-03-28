@@ -1,7 +1,7 @@
 .. _ref_meshing_tui_objects_volumetric_regions_tet_set:
 
-meshing.tui.objects.volumetric\_regions.tet.set
-===============================================
+set
+===
 
 .. autoclass:: ansys.fluent.core.meshing.tui_231.main_menu.objects.volumetric_regions.tet.set
    :members:
@@ -14,7 +14,7 @@ meshing.tui.objects.volumetric\_regions.tet.set
 .. toctree::
    :hidden:
 
-   remove_slivers/index
-   tet_improve/index
    improve_mesh/index
+   tet_improve/index
    adv_front_method/index
+   remove_slivers/index

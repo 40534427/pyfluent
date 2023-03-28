@@ -1,0 +1,6 @@
+download
+========
+
+.. currentmodule:: ansys.fluent.core.session
+
+.. automethod:: BaseSession.download

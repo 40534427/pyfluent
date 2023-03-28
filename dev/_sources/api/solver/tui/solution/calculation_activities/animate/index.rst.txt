@@ -1,7 +1,7 @@
 .. _ref_solver_tui_solution_calculation_activities_animate:
 
-solver.tui.solution.calculation\_activities.animate
-===================================================
+animate
+=======
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.solution.calculation_activities.animate
    :members:
@@ -14,5 +14,5 @@ solver.tui.solution.calculation\_activities.animate
 .. toctree::
    :hidden:
 
-   objects/index
    define/index
+   objects/index

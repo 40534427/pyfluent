@@ -1,7 +1,7 @@
 .. _ref_meshing_tui_display:
 
-meshing.tui.display
-===================
+display
+=======
 
 .. autoclass:: ansys.fluent.core.meshing.tui_231.main_menu.display
    :members:
@@ -14,11 +14,11 @@ meshing.tui.display
 .. toctree::
    :hidden:
 
-   update_scene/index
-   zones/index
    objects/index
-   set/index
-   set_grid/index
+   update_scene/index
    display_states/index
+   zones/index
+   set/index
    xy_plot/index
    advanced_rendering/index
+   set_grid/index

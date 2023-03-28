@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_flicing_Case_App_Solution_AirflowRun_FluentInitSettings:
 
-solver.datamodel.flicing.Case.App.Solution.AirflowRun.FluentInitSettings
-========================================================================
+FluentInitSettings
+==================
 
 .. autoclass:: ansys.fluent.core.datamodel_231.flicing.Root.Case.App.Solution.AirflowRun.FluentInitSettings
    :members:

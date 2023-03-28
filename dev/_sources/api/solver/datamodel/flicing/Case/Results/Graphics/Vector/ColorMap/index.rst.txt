@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_flicing_Case_Results_Graphics_Vector_ColorMap:
 
-solver.datamodel.flicing.Case.Results.Graphics.Vector.ColorMap
-==============================================================
+ColorMap
+========
 
 .. autoclass:: ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.Vector._Vector.ColorMap
    :members:

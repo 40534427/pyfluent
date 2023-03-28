@@ -1,7 +1,7 @@
 .. _ref_meshing_tui_mesh_prism_controls:
 
-meshing.tui.mesh.prism.controls
-===============================
+controls
+========
 
 .. autoclass:: ansys.fluent.core.meshing.tui_231.main_menu.mesh.prism.controls
    :members:
@@ -15,10 +15,10 @@ meshing.tui.mesh.prism.controls
    :hidden:
 
    zone_specific_growth/index
-   proximity/index
-   improve/index
-   normal/index
    morph/index
    post_ignore/index
-   offset/index
+   normal/index
+   proximity/index
+   improve/index
    adjacent_zone/index
+   offset/index

@@ -1,7 +1,7 @@
 .. _ref_meshing_datamodel_preferences_ParametricStudy:
 
-meshing.datamodel.preferences.ParametricStudy
-=============================================
+ParametricStudy
+===============
 
 .. autoclass:: ansys.fluent.core.datamodel_231.preferences.Root.ParametricStudy
    :members:

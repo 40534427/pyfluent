@@ -1,7 +1,7 @@
 .. _ref_solver_tui_setup:
 
-solver.tui.setup
-================
+setup
+=====
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.setup
    :members:
@@ -14,17 +14,17 @@ solver.tui.setup
 .. toctree::
    :hidden:
 
-   mesh_interfaces/index
-   overset_interfaces/index
-   mixing_planes/index
-   gap_model/index
    materials/index
-   dynamic_mesh/index
-   named_expressions/index
-   models/index
    reference_values/index
    operating_conditions/index
-   boundary_conditions/index
-   reference_frames/index
-   expert/index
    turbo_model/index
+   mixing_planes/index
+   models/index
+   overset_interfaces/index
+   mesh_interfaces/index
+   reference_frames/index
+   boundary_conditions/index
+   named_expressions/index
+   dynamic_mesh/index
+   gap_model/index
+   expert/index

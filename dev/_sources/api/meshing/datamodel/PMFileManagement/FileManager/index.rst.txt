@@ -1,7 +1,7 @@
 .. _ref_meshing_datamodel_PMFileManagement_FileManager:
 
-meshing.datamodel.PMFileManagement.FileManager
-==============================================
+FileManager
+===========
 
 .. autoclass:: ansys.fluent.core.datamodel_231.PMFileManagement.Root.FileManager
    :members:

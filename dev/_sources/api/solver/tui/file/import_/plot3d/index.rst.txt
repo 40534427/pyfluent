@@ -1,7 +1,7 @@
 .. _ref_solver_tui_file_import_plot3d:
 
-solver.tui.file.import\_.plot3d
-===============================
+plot3d
+======
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.file.import_.plot3d
    :members:

@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_flicing_Case_App_Adaptation_Boundaries:
 
-solver.datamodel.flicing.Case.App.Adaptation.Boundaries
-=======================================================
+Boundaries
+==========
 
 .. autoclass:: ansys.fluent.core.datamodel_231.flicing.Root.Case.App.Adaptation.Boundaries
    :members:

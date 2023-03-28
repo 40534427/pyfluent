@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_flicing_Case_Setup_Boundary_Turbulence:
 
-solver.datamodel.flicing.Case.Setup.Boundary.Turbulence
-=======================================================
+Turbulence
+==========
 
 .. autoclass:: ansys.fluent.core.datamodel_231.flicing.Root.Case.Setup.Boundary._Boundary.Turbulence
    :members:

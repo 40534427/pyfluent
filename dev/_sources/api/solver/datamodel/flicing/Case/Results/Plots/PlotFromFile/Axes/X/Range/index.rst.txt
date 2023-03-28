@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_flicing_Case_Results_Plots_PlotFromFile_Axes_X_Range:
 
-solver.datamodel.flicing.Case.Results.Plots.PlotFromFile.Axes.X.Range
-=====================================================================
+Range
+=====
 
 .. autoclass:: ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Plots.PlotFromFile.Axes.X.Range
    :members:

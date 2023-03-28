@@ -1,7 +1,7 @@
 .. _ref_meshing_tui_display_set_picture:
 
-meshing.tui.display.set.picture
-===============================
+picture
+=======
 
 .. autoclass:: ansys.fluent.core.meshing.tui_231.main_menu.display.set.picture
    :members:
@@ -14,5 +14,5 @@ meshing.tui.display.set.picture
 .. toctree::
    :hidden:
 
-   color_mode/index
    driver/index
+   color_mode/index

@@ -1,7 +1,7 @@
 .. _ref_solver_tui_define_models_heat_exchanger:
 
-solver.tui.define.models.heat\_exchanger
-========================================
+heat_exchanger
+==============
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.define.models.heat_exchanger
    :members:
@@ -14,5 +14,5 @@ solver.tui.define.models.heat\_exchanger
 .. toctree::
    :hidden:
 
-   macro_model/index
    dual_cell_model/index
+   macro_model/index

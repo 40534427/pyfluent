@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_solverworkflow_GlobalSettings:
 
-solver.datamodel.solverworkflow.GlobalSettings
-==============================================
+GlobalSettings
+==============
 
 .. autoclass:: ansys.fluent.core.datamodel_231.solverworkflow.Root.GlobalSettings
    :members:

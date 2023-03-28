@@ -1,7 +1,7 @@
 .. _ref_solver_tui_define_models_system_coupling_settings_htc_unsteady_statistics:
 
-solver.tui.define.models.system\_coupling\_settings.htc.unsteady\_statistics
-============================================================================
+unsteady_statistics
+===================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.define.models.system_coupling_settings.htc.unsteady_statistics
    :members:

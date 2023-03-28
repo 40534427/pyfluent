@@ -1,7 +1,7 @@
 .. _ref_solver_tui_define_models_multiphase:
 
-solver.tui.define.models.multiphase
-===================================
+multiphase
+==========
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.define.models.multiphase
    :members:
@@ -14,10 +14,10 @@ solver.tui.define.models.multiphase
 .. toctree::
    :hidden:
 
-   phases/index
    flow_regime_modeling/index
-   hybrid_models/index
    population_balance/index
-   sub_models/index
-   explicit_expert_options/index
    wet_steam/index
+   explicit_expert_options/index
+   sub_models/index
+   phases/index
+   hybrid_models/index

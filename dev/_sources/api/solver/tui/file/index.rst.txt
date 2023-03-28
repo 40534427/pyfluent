@@ -1,7 +1,7 @@
 .. _ref_solver_tui_file:
 
-solver.tui.file
-===============
+file
+====
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.file
    :members:
@@ -14,15 +14,15 @@ solver.tui.file
 .. toctree::
    :hidden:
 
-   cffio_options/index
-   interpolate/index
    auto_save/index
-   import_/index
-   parametric_project/index
-   export/index
+   interpolate/index
    fsi/index
-   solution_files/index
+   export/index
    em_mapping/index
-   table_manager/index
+   import_/index
    transient_export/index
    project/index
+   solution_files/index
+   parametric_project/index
+   table_manager/index
+   cffio_options/index

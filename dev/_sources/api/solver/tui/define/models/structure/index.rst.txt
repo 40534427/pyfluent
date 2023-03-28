@@ -1,7 +1,7 @@
 .. _ref_solver_tui_define_models_structure:
 
-solver.tui.define.models.structure
-==================================
+structure
+=========
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.define.models.structure
    :members:
@@ -14,5 +14,5 @@ solver.tui.define.models.structure
 .. toctree::
    :hidden:
 
-   expert/index
    controls/index
+   expert/index

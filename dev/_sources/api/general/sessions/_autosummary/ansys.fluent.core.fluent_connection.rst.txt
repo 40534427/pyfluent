@@ -19,6 +19,7 @@
       :toctree:
       :template: flobject-class-template.rst
    
+      FluentConnection
       MonitorThread
    
    

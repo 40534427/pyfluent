@@ -1,0 +1,36 @@
+ansys.fluent.core.fluent\_connection.FluentConnection
+=====================================================
+
+.. currentmodule:: ansys.fluent.core.fluent_connection
+
+.. autoclass:: FluentConnection
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      ~FluentConnection.__init__
+      ~FluentConnection.check_health
+      ~FluentConnection.exit
+      ~FluentConnection.get_current_fluent_mode
+      ~FluentConnection.get_fluent_version
+      ~FluentConnection.start_journal
+      ~FluentConnection.start_transcript
+      ~FluentConnection.stop_journal
+      ~FluentConnection.stop_transcript
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~FluentConnection.id
+   
+   

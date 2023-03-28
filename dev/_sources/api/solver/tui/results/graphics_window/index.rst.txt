@@ -1,7 +1,7 @@
 .. _ref_solver_tui_results_graphics_window:
 
-solver.tui.results.graphics\_window
-===================================
+graphics_window
+===============
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.results.graphics_window
    :members:
@@ -14,10 +14,10 @@ solver.tui.results.graphics\_window
 .. toctree::
    :hidden:
 
-   windows/index
-   views/index
-   view_sync/index
-   display_states/index
    titles/index
-   embedded_windows/index
    picture/index
+   embedded_windows/index
+   views/index
+   display_states/index
+   view_sync/index
+   windows/index

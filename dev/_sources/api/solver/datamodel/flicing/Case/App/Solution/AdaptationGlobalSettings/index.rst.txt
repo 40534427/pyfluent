@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_flicing_Case_App_Solution_AdaptationGlobalSettings:
 
-solver.datamodel.flicing.Case.App.Solution.AdaptationGlobalSettings
-===================================================================
+AdaptationGlobalSettings
+========================
 
 .. autoclass:: ansys.fluent.core.datamodel_231.flicing.Root.Case.App.Solution.AdaptationGlobalSettings
    :members:

@@ -1,7 +1,7 @@
 .. _ref_meshing_tui_boundary:
 
-meshing.tui.boundary
-====================
+boundary
+========
 
 .. autoclass:: ansys.fluent.core.meshing.tui_231.main_menu.boundary
    :members:
@@ -14,12 +14,12 @@ meshing.tui.boundary
 .. toctree::
    :hidden:
 
-   boundary_conditions/index
-   separate/index
-   modify/index
-   refine/index
-   shell_boundary_layer/index
-   improve/index
    manage/index
-   feature/index
+   improve/index
+   modify/index
    remesh/index
+   refine/index
+   boundary_conditions/index
+   feature/index
+   shell_boundary_layer/index
+   separate/index

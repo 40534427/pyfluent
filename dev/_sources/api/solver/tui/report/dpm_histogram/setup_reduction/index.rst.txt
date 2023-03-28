@@ -1,7 +1,7 @@
 .. _ref_solver_tui_report_dpm_histogram_setup_reduction:
 
-solver.tui.report.dpm\_histogram.setup\_reduction
-=================================================
+setup_reduction
+===============
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.report.dpm_histogram.setup_reduction
    :members:

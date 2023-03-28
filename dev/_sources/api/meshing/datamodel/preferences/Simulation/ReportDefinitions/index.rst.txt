@@ -1,7 +1,7 @@
 .. _ref_meshing_datamodel_preferences_Simulation_ReportDefinitions:
 
-meshing.datamodel.preferences.Simulation.ReportDefinitions
-==========================================================
+ReportDefinitions
+=================
 
 .. autoclass:: ansys.fluent.core.datamodel_231.preferences.Root.Simulation.ReportDefinitions
    :members:

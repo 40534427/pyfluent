@@ -1,7 +1,7 @@
 .. _ref_meshing_tui_objects_fix_holes_advanced:
 
-meshing.tui.objects.fix\_holes.advanced
-=======================================
+advanced
+========
 
 .. autoclass:: ansys.fluent.core.meshing.tui_231.main_menu.objects.fix_holes.advanced
    :members:

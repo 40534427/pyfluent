@@ -1,7 +1,7 @@
 .. _ref_solver_tui_preferences_graphics_performance_minimum_frame_rate:
 
-solver.tui.preferences.graphics.performance.minimum\_frame\_rate
-================================================================
+minimum_frame_rate
+==================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.preferences.graphics.performance.minimum_frame_rate
    :members:

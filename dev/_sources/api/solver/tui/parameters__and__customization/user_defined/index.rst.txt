@@ -1,7 +1,7 @@
 .. _ref_solver_tui_parameters__and__customization_user_defined:
 
-solver.tui.parameters\_\_and\_\_customization.user\_defined
-===========================================================
+user_defined
+============
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.parameters__and__customization.user_defined
    :members:

@@ -1,7 +1,7 @@
 .. _ref_meshing_tui_material_point:
 
-meshing.tui.material\_point
-===========================
+material_point
+==============
 
 .. autoclass:: ansys.fluent.core.meshing.tui_231.main_menu.material_point
    :members:

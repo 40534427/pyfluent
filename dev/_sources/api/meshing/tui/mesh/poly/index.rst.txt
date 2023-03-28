@@ -1,7 +1,7 @@
 .. _ref_meshing_tui_mesh_poly:
 
-meshing.tui.mesh.poly
-=====================
+poly
+====
 
 .. autoclass:: ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly
    :members:
@@ -14,5 +14,5 @@ meshing.tui.mesh.poly
 .. toctree::
    :hidden:
 
-   local_regions/index
    controls/index
+   local_regions/index

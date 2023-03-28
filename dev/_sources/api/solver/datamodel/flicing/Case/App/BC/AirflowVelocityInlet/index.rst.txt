@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_flicing_Case_App_BC_AirflowVelocityInlet:
 
-solver.datamodel.flicing.Case.App.BC.AirflowVelocityInlet
-=========================================================
+AirflowVelocityInlet
+====================
 
 .. autoclass:: ansys.fluent.core.datamodel_231.flicing.Root.Case.App.BC._BC.AirflowVelocityInlet
    :members:

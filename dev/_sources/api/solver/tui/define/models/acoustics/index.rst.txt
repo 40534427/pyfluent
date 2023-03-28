@@ -1,7 +1,7 @@
 .. _ref_solver_tui_define_models_acoustics:
 
-solver.tui.define.models.acoustics
-==================================
+acoustics
+=========
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.define.models.acoustics
    :members:
@@ -15,6 +15,6 @@ solver.tui.define.models.acoustics
    :hidden:
 
    sponge_layers/index
+   far_field_parameters/index
    sources_fft/index
    wave_equation_options/index
-   far_field_parameters/index

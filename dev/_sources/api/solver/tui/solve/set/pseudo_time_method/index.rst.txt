@@ -1,7 +1,7 @@
 .. _ref_solver_tui_solve_set_pseudo_time_method:
 
-solver.tui.solve.set.pseudo\_time\_method
-=========================================
+pseudo_time_method
+==================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.solve.set.pseudo_time_method
    :members:

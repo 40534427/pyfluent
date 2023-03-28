@@ -1,7 +1,7 @@
 .. _ref_solver_tui_solution:
 
-solver.tui.solution
-===================
+solution
+========
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.solution
    :members:
@@ -14,12 +14,12 @@ solver.tui.solution
 .. toctree::
    :hidden:
 
-   report_definitions/index
-   controls/index
-   calculation_activities/index
-   initialize/index
-   cell_registers/index
-   run_calculation/index
    expert/index
-   monitors/index
+   run_calculation/index
    methods/index
+   cell_registers/index
+   controls/index
+   initialize/index
+   monitors/index
+   report_definitions/index
+   calculation_activities/index

@@ -1,7 +1,7 @@
 .. _ref_solver_tui_solve_set_multiphase_numerics_heat_mass_transfer_evaporation_condensation:
 
-solver.tui.solve.set.multiphase\_numerics.heat\_mass\_transfer.evaporation\_condensation
-========================================================================================
+evaporation_condensation
+========================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.solve.set.multiphase_numerics.heat_mass_transfer.evaporation_condensation
    :members:

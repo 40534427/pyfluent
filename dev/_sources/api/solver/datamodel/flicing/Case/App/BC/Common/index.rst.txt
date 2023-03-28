@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_flicing_Case_App_BC_Common:
 
-solver.datamodel.flicing.Case.App.BC.Common
-===========================================
+Common
+======
 
 .. autoclass:: ansys.fluent.core.datamodel_231.flicing.Root.Case.App.BC._BC.Common
    :members:

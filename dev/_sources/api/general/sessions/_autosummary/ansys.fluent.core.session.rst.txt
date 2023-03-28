@@ -9,16 +9,17 @@
 
    
    
-   .. rubric:: Functions
+   
+
+   
+   
+   .. rubric:: Classes
 
    .. autosummary::
       :toctree:
+      :template: flobject-class-template.rst
    
-      parse_server_info_file
-   
-   
-
-   
+      BaseSession
    
    
 

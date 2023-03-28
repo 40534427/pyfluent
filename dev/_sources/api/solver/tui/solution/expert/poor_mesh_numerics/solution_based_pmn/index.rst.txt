@@ -1,7 +1,7 @@
 .. _ref_solver_tui_solution_expert_poor_mesh_numerics_solution_based_pmn:
 
-solver.tui.solution.expert.poor\_mesh\_numerics.solution\_based\_pmn
-====================================================================
+solution_based_pmn
+==================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.solution.expert.poor_mesh_numerics.solution_based_pmn
    :members:

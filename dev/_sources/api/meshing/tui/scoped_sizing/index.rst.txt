@@ -1,7 +1,7 @@
 .. _ref_meshing_tui_scoped_sizing:
 
-meshing.tui.scoped\_sizing
-==========================
+scoped_sizing
+=============
 
 .. autoclass:: ansys.fluent.core.meshing.tui_231.main_menu.scoped_sizing
    :members:

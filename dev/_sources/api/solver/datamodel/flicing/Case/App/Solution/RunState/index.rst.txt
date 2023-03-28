@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_flicing_Case_App_Solution_RunState:
 
-solver.datamodel.flicing.Case.App.Solution.RunState
-===================================================
+RunState
+========
 
 .. autoclass:: ansys.fluent.core.datamodel_231.flicing.Root.Case.App.Solution.RunState
    :members:

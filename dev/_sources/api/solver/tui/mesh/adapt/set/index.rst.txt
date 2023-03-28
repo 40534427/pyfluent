@@ -1,7 +1,7 @@
 .. _ref_solver_tui_mesh_adapt_set:
 
-solver.tui.mesh.adapt.set
-=========================
+set
+===
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.mesh.adapt.set
    :members:

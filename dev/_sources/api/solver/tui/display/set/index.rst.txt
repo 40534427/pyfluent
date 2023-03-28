@@ -1,7 +1,7 @@
 .. _ref_solver_tui_display_set:
 
-solver.tui.display.set
-======================
+set
+===
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.display.set
    :members:
@@ -14,13 +14,13 @@ solver.tui.display.set
 .. toctree::
    :hidden:
 
-   rendering_options/index
-   titles/index
-   path_lines/index
+   lights/index
    windows/index
    particle_tracks/index
    velocity_vectors/index
+   rendering_options/index
+   titles/index
    contours/index
-   lights/index
-   picture/index
    colors/index
+   path_lines/index
+   picture/index

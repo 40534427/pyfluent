@@ -1,7 +1,7 @@
 .. _ref_meshing_tui_mesh_hexcore:
 
-meshing.tui.mesh.hexcore
-========================
+hexcore
+=======
 
 .. autoclass:: ansys.fluent.core.meshing.tui_231.main_menu.mesh.hexcore
    :members:
