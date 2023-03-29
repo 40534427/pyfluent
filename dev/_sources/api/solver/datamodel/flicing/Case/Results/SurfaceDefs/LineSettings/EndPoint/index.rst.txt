@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_flicing_Case_Results_SurfaceDefs_LineSettings_EndPoint:
 
-EndPoint
-========
+solver.datamodel.flicing.Case.Results.SurfaceDefs.LineSettings.EndPoint
+=======================================================================
 
 .. autoclass:: ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.SurfaceDefs._SurfaceDefs.LineSettings.EndPoint
    :members:

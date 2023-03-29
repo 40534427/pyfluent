@@ -1,7 +1,7 @@
 .. _ref_solver_tui_define_models:
 
-models
-======
+solver.tui.define.models
+========================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.define.models
    :members:
@@ -14,21 +14,21 @@ models
 .. toctree::
    :hidden:
 
-   species/index
    soot_parameters/index
-   eulerian_wallfilm/index
-   nox_parameters/index
    cht/index
+   dpm/index
+   viscous/index
+   structure/index
+   eulerian_wallfilm/index
+   heat_exchanger/index
+   species/index
+   shell_conduction/index
    radiation/index
+   solver/index
+   nox_parameters/index
+   electrolysis/index
    two_temperature/index
    acoustics/index
-   shell_conduction/index
-   viscous/index
-   heat_exchanger/index
-   dpm/index
    system_coupling_settings/index
    optics/index
-   structure/index
-   electrolysis/index
-   solver/index
    multiphase/index

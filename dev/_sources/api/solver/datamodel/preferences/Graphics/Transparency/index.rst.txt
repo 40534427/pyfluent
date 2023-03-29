@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_preferences_Graphics_Transparency:
 
-Transparency
-============
+solver.datamodel.preferences.Graphics.Transparency
+==================================================
 
 .. autoclass:: ansys.fluent.core.datamodel_231.preferences.Root.Graphics.Transparency
    :members:

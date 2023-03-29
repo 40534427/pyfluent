@@ -1,7 +1,7 @@
 .. _ref_solver_tui_define_boundary_conditions_impedance_data_fitting:
 
-impedance_data_fitting
-======================
+solver.tui.define.boundary\_conditions.impedance\_data\_fitting
+===============================================================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.define.boundary_conditions.impedance_data_fitting
    :members:

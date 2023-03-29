@@ -1,7 +1,7 @@
 .. _ref_meshing_tui_display_set_picture_driver_post_format:
 
-post_format
-===========
+meshing.tui.display.set.picture.driver.post\_format
+===================================================
 
 .. autoclass:: ansys.fluent.core.meshing.tui_231.main_menu.display.set.picture.driver.post_format
    :members:

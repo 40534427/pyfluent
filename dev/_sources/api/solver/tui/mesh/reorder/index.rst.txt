@@ -1,7 +1,7 @@
 .. _ref_solver_tui_mesh_reorder:
 
-reorder
-=======
+solver.tui.mesh.reorder
+=======================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.mesh.reorder
    :members:

@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_flicing_Case_Results_ResultsExternalInfo:
 
-ResultsExternalInfo
-===================
+solver.datamodel.flicing.Case.Results.ResultsExternalInfo
+=========================================================
 
 .. autoclass:: ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.ResultsExternalInfo
    :members:

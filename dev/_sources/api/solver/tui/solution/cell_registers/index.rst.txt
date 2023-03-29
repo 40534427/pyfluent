@@ -1,7 +1,7 @@
 .. _ref_solver_tui_solution_cell_registers:
 
-cell_registers
-==============
+solver.tui.solution.cell\_registers
+===================================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.solution.cell_registers
    :members:

@@ -1,7 +1,7 @@
 .. _ref_solver_tui_preferences_appearance_selections:
 
-selections
-==========
+solver.tui.preferences.appearance.selections
+============================================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.preferences.appearance.selections
    :members:

@@ -1,7 +1,7 @@
 .. _ref_meshing_tui_size_functions_controls:
 
-controls
-========
+meshing.tui.size\_functions.controls
+====================================
 
 .. autoclass:: ansys.fluent.core.meshing.tui_231.main_menu.size_functions.controls
    :members:

@@ -1,7 +1,7 @@
 .. _ref_solver_tui_solution_controls_contact_solution_controls:
 
-contact_solution_controls
-=========================
+solver.tui.solution.controls.contact\_solution\_controls
+========================================================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.solution.controls.contact_solution_controls
    :members:
@@ -14,10 +14,10 @@ contact_solution_controls
 .. toctree::
    :hidden:
 
-   transient/index
    models/index
+   parameters/index
+   spatial/index
+   amg/index
+   transient/index
    miscellaneous/index
    methods/index
-   amg/index
-   spatial/index
-   parameters/index

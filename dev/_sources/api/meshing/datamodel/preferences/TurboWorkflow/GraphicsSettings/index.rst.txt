@@ -1,7 +1,7 @@
 .. _ref_meshing_datamodel_preferences_TurboWorkflow_GraphicsSettings:
 
-GraphicsSettings
-================
+meshing.datamodel.preferences.TurboWorkflow.GraphicsSettings
+============================================================
 
 .. autoclass:: ansys.fluent.core.datamodel_231.preferences.Root.TurboWorkflow.GraphicsSettings
    :members:

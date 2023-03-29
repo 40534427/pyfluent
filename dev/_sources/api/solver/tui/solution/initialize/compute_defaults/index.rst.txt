@@ -1,7 +1,7 @@
 .. _ref_solver_tui_solution_initialize_compute_defaults:
 
-compute_defaults
-================
+solver.tui.solution.initialize.compute\_defaults
+================================================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.solution.initialize.compute_defaults
    :members:

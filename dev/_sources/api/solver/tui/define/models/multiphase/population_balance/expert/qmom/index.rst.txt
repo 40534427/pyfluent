@@ -1,7 +1,7 @@
 .. _ref_solver_tui_define_models_multiphase_population_balance_expert_qmom:
 
-qmom
-====
+solver.tui.define.models.multiphase.population\_balance.expert.qmom
+===================================================================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.define.models.multiphase.population_balance.expert.qmom
    :members:

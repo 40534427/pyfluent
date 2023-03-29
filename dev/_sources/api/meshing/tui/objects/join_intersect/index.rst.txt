@@ -1,7 +1,7 @@
 .. _ref_meshing_tui_objects_join_intersect:
 
-join_intersect
-==============
+meshing.tui.objects.join\_intersect
+===================================
 
 .. autoclass:: ansys.fluent.core.meshing.tui_231.main_menu.objects.join_intersect
    :members:

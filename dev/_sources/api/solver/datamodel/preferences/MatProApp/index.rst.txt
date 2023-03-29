@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_preferences_MatProApp:
 
-MatProApp
-=========
+solver.datamodel.preferences.MatProApp
+======================================
 
 .. autoclass:: ansys.fluent.core.datamodel_231.preferences.Root.MatProApp
    :members:

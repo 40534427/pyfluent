@@ -1,7 +1,7 @@
 .. _ref_solver_tui_file_import:
 
-import_
-=======
+solver.tui.file.import\_
+========================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.file.import_
    :members:
@@ -14,13 +14,13 @@ import_
 .. toctree::
    :hidden:
 
-   lstc/index
-   cfx/index
-   mechanical_apdl/index
-   patran/index
-   plot3d/index
-   nastran/index
-   partition/index
-   tecplot/index
-   cgns/index
    abaqus/index
+   cfx/index
+   lstc/index
+   patran/index
+   tecplot/index
+   nastran/index
+   cgns/index
+   mechanical_apdl/index
+   plot3d/index
+   partition/index

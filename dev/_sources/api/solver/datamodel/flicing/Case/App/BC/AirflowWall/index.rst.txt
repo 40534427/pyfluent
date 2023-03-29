@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_flicing_Case_App_BC_AirflowWall:
 
-AirflowWall
-===========
+solver.datamodel.flicing.Case.App.BC.AirflowWall
+================================================
 
 .. autoclass:: ansys.fluent.core.datamodel_231.flicing.Root.Case.App.BC._BC.AirflowWall
    :members:

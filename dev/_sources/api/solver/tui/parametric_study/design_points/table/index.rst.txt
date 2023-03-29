@@ -1,7 +1,7 @@
 .. _ref_solver_tui_parametric_study_design_points_table:
 
-table
-=====
+solver.tui.parametric\_study.design\_points.table
+=================================================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.parametric_study.design_points.table
    :members:

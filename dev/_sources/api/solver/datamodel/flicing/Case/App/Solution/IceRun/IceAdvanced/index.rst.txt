@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_flicing_Case_App_Solution_IceRun_IceAdvanced:
 
-IceAdvanced
-===========
+solver.datamodel.flicing.Case.App.Solution.IceRun.IceAdvanced
+=============================================================
 
 .. autoclass:: ansys.fluent.core.datamodel_231.flicing.Root.Case.App.Solution.IceRun.IceAdvanced
    :members:

@@ -1,7 +1,7 @@
 .. _ref_solver_tui_preferences_graphics_lighting:
 
-lighting
-========
+solver.tui.preferences.graphics.lighting
+========================================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.preferences.graphics.lighting
    :members:

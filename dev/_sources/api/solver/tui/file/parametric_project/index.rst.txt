@@ -1,7 +1,7 @@
 .. _ref_solver_tui_file_parametric_project:
 
-parametric_project
-==================
+solver.tui.file.parametric\_project
+===================================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.file.parametric_project
    :members:

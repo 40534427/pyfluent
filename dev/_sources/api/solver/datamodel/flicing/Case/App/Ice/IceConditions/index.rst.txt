@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_flicing_Case_App_Ice_IceConditions:
 
-IceConditions
-=============
+solver.datamodel.flicing.Case.App.Ice.IceConditions
+===================================================
 
 .. autoclass:: ansys.fluent.core.datamodel_231.flicing.Root.Case.App.Ice.IceConditions
    :members:

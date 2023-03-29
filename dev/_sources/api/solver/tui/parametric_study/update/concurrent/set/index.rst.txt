@@ -1,7 +1,7 @@
 .. _ref_solver_tui_parametric_study_update_concurrent_set:
 
-set
-===
+solver.tui.parametric\_study.update.concurrent.set
+==================================================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.parametric_study.update.concurrent.set
    :members:

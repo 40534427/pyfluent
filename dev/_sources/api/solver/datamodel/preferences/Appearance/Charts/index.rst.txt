@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_preferences_Appearance_Charts:
 
-Charts
-======
+solver.datamodel.preferences.Appearance.Charts
+==============================================
 
 .. autoclass:: ansys.fluent.core.datamodel_231.preferences.Root.Appearance.Charts
    :members:

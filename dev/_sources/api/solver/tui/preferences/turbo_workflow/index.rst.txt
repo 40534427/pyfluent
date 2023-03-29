@@ -1,7 +1,7 @@
 .. _ref_solver_tui_preferences_turbo_workflow:
 
-turbo_workflow
-==============
+solver.tui.preferences.turbo\_workflow
+======================================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.preferences.turbo_workflow
    :members:

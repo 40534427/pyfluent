@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_flicing_Case_App_Airflow_AirDirection:
 
-AirDirection
-============
+solver.datamodel.flicing.Case.App.Airflow.AirDirection
+======================================================
 
 .. autoclass:: ansys.fluent.core.datamodel_231.flicing.Root.Case.App.Airflow.AirDirection
    :members:

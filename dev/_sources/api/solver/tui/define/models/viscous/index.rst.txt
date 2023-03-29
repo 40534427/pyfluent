@@ -1,7 +1,7 @@
 .. _ref_solver_tui_define_models_viscous:
 
-viscous
-=======
+solver.tui.define.models.viscous
+================================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.define.models.viscous
    :members:
@@ -14,8 +14,8 @@ viscous
 .. toctree::
    :hidden:
 
-   turbulence_expert/index
    geko_options/index
+   transition_model_options/index
+   turbulence_expert/index
    near_wall_treatment/index
    multiphase_turbulence/index
-   transition_model_options/index

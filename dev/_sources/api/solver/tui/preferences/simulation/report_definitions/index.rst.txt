@@ -1,7 +1,7 @@
 .. _ref_solver_tui_preferences_simulation_report_definitions:
 
-report_definitions
-==================
+solver.tui.preferences.simulation.report\_definitions
+=====================================================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.preferences.simulation.report_definitions
    :members:

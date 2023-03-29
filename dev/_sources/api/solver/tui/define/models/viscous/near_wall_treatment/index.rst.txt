@@ -1,7 +1,7 @@
 .. _ref_solver_tui_define_models_viscous_near_wall_treatment:
 
-near_wall_treatment
-===================
+solver.tui.define.models.viscous.near\_wall\_treatment
+======================================================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.define.models.viscous.near_wall_treatment
    :members:

@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_preferences_Graphics:
 
-Graphics
-========
+solver.datamodel.preferences.Graphics
+=====================================
 
 .. autoclass:: ansys.fluent.core.datamodel_231.preferences.Root.Graphics
    :members:

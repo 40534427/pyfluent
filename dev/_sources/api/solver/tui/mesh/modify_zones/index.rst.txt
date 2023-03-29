@@ -1,7 +1,7 @@
 .. _ref_solver_tui_mesh_modify_zones:
 
-modify_zones
-============
+solver.tui.mesh.modify\_zones
+=============================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.mesh.modify_zones
    :members:

@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_preferences_Graphics_ColormapSettings:
 
-ColormapSettings
-================
+solver.datamodel.preferences.Graphics.ColormapSettings
+======================================================
 
 .. autoclass:: ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings
    :members:

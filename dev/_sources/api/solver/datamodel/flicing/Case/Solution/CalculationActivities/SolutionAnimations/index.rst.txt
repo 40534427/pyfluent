@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_flicing_Case_Solution_CalculationActivities_SolutionAnimations:
 
-_SolutionAnimations
-===================
+solver.datamodel.flicing.Case.Solution.CalculationActivities.SolutionAnimations
+===============================================================================
 
 .. autoclass:: ansys.fluent.core.datamodel_231.flicing.Root.Case.Solution.CalculationActivities.SolutionAnimations._SolutionAnimations
    :members:

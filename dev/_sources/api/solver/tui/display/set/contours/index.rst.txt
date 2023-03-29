@@ -1,7 +1,7 @@
 .. _ref_solver_tui_display_set_contours:
 
-contours
-========
+solver.tui.display.set.contours
+===============================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.display.set.contours
    :members:

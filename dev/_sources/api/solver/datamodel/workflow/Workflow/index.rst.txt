@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_workflow_Workflow:
 
-Workflow
-========
+solver.datamodel.workflow.Workflow
+==================================
 
 .. autoclass:: ansys.fluent.core.datamodel_231.workflow.Root.Workflow
    :members:

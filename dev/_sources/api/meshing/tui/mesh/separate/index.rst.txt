@@ -1,7 +1,7 @@
 .. _ref_meshing_tui_mesh_separate:
 
-separate
-========
+meshing.tui.mesh.separate
+=========================
 
 .. autoclass:: ansys.fluent.core.meshing.tui_231.main_menu.mesh.separate
    :members:

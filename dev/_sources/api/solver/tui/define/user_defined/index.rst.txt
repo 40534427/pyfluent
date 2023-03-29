@@ -1,7 +1,7 @@
 .. _ref_solver_tui_define_user_defined:
 
-user_defined
-============
+solver.tui.define.user\_defined
+===============================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.define.user_defined
    :members:

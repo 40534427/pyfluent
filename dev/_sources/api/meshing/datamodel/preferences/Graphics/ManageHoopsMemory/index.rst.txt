@@ -1,7 +1,7 @@
 .. _ref_meshing_datamodel_preferences_Graphics_ManageHoopsMemory:
 
-ManageHoopsMemory
-=================
+meshing.datamodel.preferences.Graphics.ManageHoopsMemory
+========================================================
 
 .. autoclass:: ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ManageHoopsMemory
    :members:

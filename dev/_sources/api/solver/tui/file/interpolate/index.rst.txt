@@ -1,7 +1,7 @@
 .. _ref_solver_tui_file_interpolate:
 
-interpolate
-===========
+solver.tui.file.interpolate
+===========================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.file.interpolate
    :members:

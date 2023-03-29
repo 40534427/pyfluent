@@ -1,7 +1,7 @@
 .. _ref_solver_tui_preferences_graphics:
 
-graphics
-========
+solver.tui.preferences.graphics
+===============================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.preferences.graphics
    :members:
@@ -14,16 +14,16 @@ graphics
 .. toctree::
    :hidden:
 
-   hardcopy_settings/index
-   manage_hoops_memory/index
-   lighting/index
-   material_effects/index
-   meshing_mode/index
-   performance/index
-   boundary_markers/index
-   vector_settings/index
-   embedded_windows/index
    export_video_settings/index
-   transparency/index
+   hardcopy_settings/index
+   performance/index
+   material_effects/index
    graphics_effects/index
+   meshing_mode/index
+   manage_hoops_memory/index
+   vector_settings/index
+   transparency/index
+   boundary_markers/index
+   embedded_windows/index
+   lighting/index
    colormap_settings/index

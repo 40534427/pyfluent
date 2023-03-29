@@ -1,7 +1,7 @@
 .. _ref_meshing_datamodel_meshing_GlobalSettings_FTMRegionData:
 
-FTMRegionData
-=============
+meshing.datamodel.meshing.GlobalSettings.FTMRegionData
+======================================================
 
 .. autoclass:: ansys.fluent.core.datamodel_231.meshing.Root.GlobalSettings.FTMRegionData
    :members:

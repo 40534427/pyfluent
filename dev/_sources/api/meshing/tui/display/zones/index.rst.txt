@@ -1,7 +1,7 @@
 .. _ref_meshing_tui_display_zones:
 
-zones
-=====
+meshing.tui.display.zones
+=========================
 
 .. autoclass:: ansys.fluent.core.meshing.tui_231.main_menu.display.zones
    :members:

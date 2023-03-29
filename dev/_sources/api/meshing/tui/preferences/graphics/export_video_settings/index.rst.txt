@@ -1,7 +1,7 @@
 .. _ref_meshing_tui_preferences_graphics_export_video_settings:
 
-export_video_settings
-=====================
+meshing.tui.preferences.graphics.export\_video\_settings
+========================================================
 
 .. autoclass:: ansys.fluent.core.meshing.tui_231.main_menu.preferences.graphics.export_video_settings
    :members:

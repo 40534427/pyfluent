@@ -1,7 +1,7 @@
 .. _ref_solver_tui_solution_initialize_set_fmg_options:
 
-set_fmg_options
-===============
+solver.tui.solution.initialize.set\_fmg\_options
+================================================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.solution.initialize.set_fmg_options
    :members:

@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_flicing_Case_Setup_Material_CpSpecificHeat:
 
-CpSpecificHeat
-==============
+solver.datamodel.flicing.Case.Setup.Material.CpSpecificHeat
+===========================================================
 
 .. autoclass:: ansys.fluent.core.datamodel_231.flicing.Root.Case.Setup.Material._Material.CpSpecificHeat
    :members:

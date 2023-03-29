@@ -1,7 +1,7 @@
 .. _ref_meshing_datamodel_PartManagement_ObjectSetting:
 
-_ObjectSetting
-==============
+meshing.datamodel.PartManagement.ObjectSetting
+==============================================
 
 .. autoclass:: ansys.fluent.core.datamodel_231.PartManagement.Root.ObjectSetting._ObjectSetting
    :members:

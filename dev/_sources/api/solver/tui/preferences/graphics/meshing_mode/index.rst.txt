@@ -1,7 +1,7 @@
 .. _ref_solver_tui_preferences_graphics_meshing_mode:
 
-meshing_mode
-============
+solver.tui.preferences.graphics.meshing\_mode
+=============================================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.preferences.graphics.meshing_mode
    :members:

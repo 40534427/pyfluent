@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_preferences_Graphics_ExportVideoSettings_AdvancedVideoQualityOptions:
 
-AdvancedVideoQualityOptions
-===========================
+solver.datamodel.preferences.Graphics.ExportVideoSettings.AdvancedVideoQualityOptions
+=====================================================================================
 
 .. autoclass:: ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ExportVideoSettings.AdvancedVideoQualityOptions
    :members:

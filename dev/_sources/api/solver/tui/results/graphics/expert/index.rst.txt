@@ -1,7 +1,7 @@
 .. _ref_solver_tui_results_graphics_expert:
 
-expert
-======
+solver.tui.results.graphics.expert
+==================================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.results.graphics.expert
    :members:
@@ -15,7 +15,7 @@ expert
    :hidden:
 
    flamelet_data/index
-   path_lines/index
-   particle_tracks/index
    set/index
+   path_lines/index
    pdf_data/index
+   particle_tracks/index

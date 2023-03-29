@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_preferences_Graphics_HardcopySettings:
 
-HardcopySettings
-================
+solver.datamodel.preferences.Graphics.HardcopySettings
+======================================================
 
 .. autoclass:: ansys.fluent.core.datamodel_231.preferences.Root.Graphics.HardcopySettings
    :members:

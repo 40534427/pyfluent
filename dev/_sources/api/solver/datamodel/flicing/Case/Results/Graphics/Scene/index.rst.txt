@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_flicing_Case_Results_Graphics_Scene:
 
-_Scene
-======
+solver.datamodel.flicing.Case.Results.Graphics.Scene
+====================================================
 
 .. autoclass:: ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.Scene._Scene
    :members:

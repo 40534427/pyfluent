@@ -1,6 +1,0 @@
-get\_current\_fluent\_mode
-==========================
-
-.. currentmodule:: ansys.fluent.core.fluent_connection
-
-.. automethod:: FluentConnection.get_current_fluent_mode

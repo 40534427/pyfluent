@@ -1,7 +1,7 @@
 .. _ref_solver_tui_setup_boundary_conditions_bc_settings:
 
-bc_settings
-===========
+solver.tui.setup.boundary\_conditions.bc\_settings
+==================================================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.setup.boundary_conditions.bc_settings
    :members:

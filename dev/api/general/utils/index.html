@@ -55,7 +55,7 @@
     <link rel="shortcut icon" href="../../../_static/ansys-favicon.png"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Sessions" href="../sessions/index.html" />
+    <link rel="next" title="async_execution" href="_autosummary/ansys.fluent.core.utils.async_execution.html" />
     <link rel="prev" title="Launcher" href="../launcher/index.html" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="docsearch:language" content="en">
@@ -315,10 +315,22 @@ function checkPageExistsAndRedirect(event) {
      Launcher
     </a>
    </li>
-   <li class="toctree-l2 current active">
+   <li class="toctree-l2 current active has-children">
     <a class="current reference internal" href="#">
      Asynchronous execution
     </a>
+    <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+    <label for="toctree-checkbox-2">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="_autosummary/ansys.fluent.core.utils.async_execution.html">
+       async_execution
+      </a>
+     </li>
+    </ul>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../sessions/index.html">
@@ -410,23 +422,9 @@ function checkPageExistsAndRedirect(event) {
     
     <div class="toc-item">
       
-<div class="tocsection onthispage mt-5 pt-1 pb-3">
-    <i class="fas fa-list"></i> On this page
-</div>
 
 <nav id="bd-toc-nav">
-    <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#ansys.fluent.core.utils.async_execution.asynchronous">
-   <code class="docutils literal notranslate">
-    <span class="pre">
-     asynchronous()
-    </span>
-   </code>
-  </a>
- </li>
-</ul>
-
+    
 </nav>
     </div>
     
@@ -444,47 +442,15 @@ function checkPageExistsAndRedirect(event) {
               
               <article class="bd-article" role="main">
                 
-  <section id="module-ansys.fluent.core.utils.async_execution">
-<span id="asynchronous-execution"></span><span id="ref-utils"></span><h1>Asynchronous execution<a class="headerlink" href="#module-ansys.fluent.core.utils.async_execution" title="Permalink to this heading">#</a></h1>
-<p>Module providing asynchronous execution functionality.</p>
-<p><strong>Functions:</strong></p>
+  <section id="asynchronous-execution">
+<span id="ref-utils"></span><h1>Asynchronous execution<a class="headerlink" href="#asynchronous-execution" title="Permalink to this heading">#</a></h1>
 <table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#ansys.fluent.core.utils.async_execution.asynchronous" title="ansys.fluent.core.utils.async_execution.asynchronous"><code class="xref py py-obj docutils literal notranslate"><span class="pre">asynchronous</span></code></a>(f)</p></td>
-<td><p>Use for decorating functions that are to execute asynchronously.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/ansys.fluent.core.utils.async_execution.html#module-ansys.fluent.core.utils.async_execution" title="ansys.fluent.core.utils.async_execution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">async_execution</span></code></a></p></td>
+<td><p>Module providing asynchronous execution functionality.</p></td>
 </tr>
 </tbody>
 </table>
-<dl class="py function">
-<dt class="sig sig-object py" id="ansys.fluent.core.utils.async_execution.asynchronous">
-<span class="sig-prename descclassname"><span class="pre">ansys.fluent.core.utils.async_execution.</span></span><span class="sig-name descname"><span class="pre">asynchronous</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.fluent.core.utils.async_execution.asynchronous" title="Permalink to this definition">#</a></dt>
-<dd><p>Use for decorating functions that are to execute asynchronously. The
-decorated function returns a <a class="reference external" href="https://docs.python.org/3/library/asyncio-future.html#future-object#noqa:E501">future</a> object. Calling <a class="reference external" href="https://docs.python.org/3/library/asyncio-future.html#asyncio.Future.result#noqa:E501">result()</a> on the
-future object synchronizes the function execution.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/dev/library/typing.html#typing.Callable" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a></p>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># asynchronous execution using @asynchronous decorator</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nd">@asynchronous</span>
-<span class="gp">... </span><span class="k">def</span> <span class="nf">asynchronous_solve</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">number_of_iterations</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="n">session</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">tui</span><span class="o">.</span><span class="n">solve</span><span class="o">.</span><span class="n">iterate</span><span class="p">(</span><span class="n">number_of_iterations</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">asynchronous_solve</span><span class="p">(</span><span class="n">session1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># using the asynchronous function directly</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">asynchronous</span><span class="p">(</span><span class="n">session2</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">tui</span><span class="o">.</span><span class="n">solve</span><span class="o">.</span><span class="n">iterate</span><span class="p">)(</span><span class="mi">100</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># synchronous execution of above 2 calls</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">asynchronous_solve</span><span class="p">(</span><span class="n">session1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">asynchronous</span><span class="p">(</span><span class="n">session2</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">tui</span><span class="o">.</span><span class="n">solve</span><span class="o">.</span><span class="n">iterate</span><span class="p">)(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
-</pre></div>
-</div>
-</dd></dl>
-
 </section>
 
 

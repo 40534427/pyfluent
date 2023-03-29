@@ -1,6 +1,0 @@
-execute\_tui
-============
-
-.. currentmodule:: ansys.fluent.core.session
-
-.. automethod:: BaseSession.execute_tui

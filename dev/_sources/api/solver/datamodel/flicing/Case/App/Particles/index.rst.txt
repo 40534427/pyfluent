@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_flicing_Case_App_Particles:
 
-Particles
-=========
+solver.datamodel.flicing.Case.App.Particles
+===========================================
 
 .. autoclass:: ansys.fluent.core.datamodel_231.flicing.Root.Case.App.Particles
    :members:

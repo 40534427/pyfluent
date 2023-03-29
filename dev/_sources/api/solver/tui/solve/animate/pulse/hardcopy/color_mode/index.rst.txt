@@ -1,7 +1,7 @@
 .. _ref_solver_tui_solve_animate_pulse_hardcopy_color_mode:
 
-color_mode
-==========
+solver.tui.solve.animate.pulse.hardcopy.color\_mode
+===================================================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.solve.animate.pulse.hardcopy.color_mode
    :members:

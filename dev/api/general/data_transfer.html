@@ -420,35 +420,6 @@ function checkPageExistsAndRedirect(event) {
   <a class="reference internal nav-link" href="#sample-usage">
    Sample usage
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#ansys.fluent.core.utils.data_transfer.read_case_into">
-     <code class="docutils literal notranslate">
-      <span class="pre">
-       read_case_into()
-      </span>
-     </code>
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#ansys.fluent.core.utils.data_transfer.read_case_into_each">
-     <code class="docutils literal notranslate">
-      <span class="pre">
-       read_case_into_each()
-      </span>
-     </code>
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#ansys.fluent.core.utils.data_transfer.transfer_case">
-     <code class="docutils literal notranslate">
-      <span class="pre">
-       transfer_case()
-      </span>
-     </code>
-    </a>
-   </li>
-  </ul>
  </li>
 </ul>
 
@@ -504,61 +475,6 @@ pure meshing session and transfer it to a solver session.</p>
 </div>
 <p>Similarly, you can use the <code class="docutils literal notranslate"><span class="pre">transfer_case</span></code> method to transfer a case file from one instance of Fluent
 to another.</p>
-<span class="target" id="module-ansys.fluent.core.utils.data_transfer"></span><p><strong>Functions:</strong></p>
-<table class="autosummary longtable table autosummary">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#ansys.fluent.core.utils.data_transfer.read_case_into" title="ansys.fluent.core.utils.data_transfer.read_case_into"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_case_into</span></code></a>(solver, file_type, file_name)</p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#ansys.fluent.core.utils.data_transfer.read_case_into_each" title="ansys.fluent.core.utils.data_transfer.read_case_into_each"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_case_into_each</span></code></a>(solvers, file_type, ...)</p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#ansys.fluent.core.utils.data_transfer.transfer_case" title="ansys.fluent.core.utils.data_transfer.transfer_case"><code class="xref py py-obj docutils literal notranslate"><span class="pre">transfer_case</span></code></a>(source_instance, solvers, ...)</p></td>
-<td><p>Transfer case between instances.</p></td>
-</tr>
-</tbody>
-</table>
-<dl class="py function">
-<dt class="sig sig-object py" id="ansys.fluent.core.utils.data_transfer.read_case_into">
-<span class="sig-prename descclassname"><span class="pre">ansys.fluent.core.utils.data_transfer.</span></span><span class="sig-name descname"><span class="pre">read_case_into</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">solver</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.fluent.core.utils.data_transfer.read_case_into" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="ansys.fluent.core.utils.data_transfer.read_case_into_each">
-<span class="sig-prename descclassname"><span class="pre">ansys.fluent.core.utils.data_transfer.</span></span><span class="sig-name descname"><span class="pre">read_case_into_each</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">solvers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.fluent.core.utils.data_transfer.read_case_into_each" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="ansys.fluent.core.utils.data_transfer.transfer_case">
-<span class="sig-prename descclassname"><span class="pre">ansys.fluent.core.utils.data_transfer.</span></span><span class="sig-name descname"><span class="pre">transfer_case</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_instance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solvers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_name_stem</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_files_to_try</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clean_up_temp_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite_previous</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.fluent.core.utils.data_transfer.transfer_case" title="Permalink to this definition">#</a></dt>
-<dd><p>Transfer case between instances.</p>
-<dl class="field-list">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl>
-<dt><strong>source_instance</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/dev/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">object</span></code></a></span></dt><dd><p>Fluent instance (tested for meshing instance)</p>
-</dd>
-<dt><strong>solvers</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/dev/glossary.html#term-iterable" title="(in Python v3.12)"><span>iterable</span></a></span></dt><dd><p>Sequence of solver instances</p>
-</dd>
-<dt><strong>file_type</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/dev/library/stdtypes.html#str" title="(in Python v3.12)"><code class="docutils literal notranslate"><span class="pre">str</span></code></a></span></dt><dd><p>“case” or “mesh”</p>
-</dd>
-<dt><strong>file_name_stem</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/dev/library/stdtypes.html#str" title="(in Python v3.12)"><code class="docutils literal notranslate"><span class="pre">str</span></code></a></span></dt><dd><p>Optional file name stem</p>
-</dd>
-<dt><strong>num_files_to_try</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/dev/library/functions.html#int" title="(in Python v3.12)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></span></dt><dd><p>Optional number of files to try to write,
-each with a different generated name.
-Defaults to 1</p>
-</dd>
-<dt><strong>clean_up_mesh_file: bool</strong></dt><dd><p>Whether to remove the file at the end</p>
-</dd>
-<dt><strong>overwrite_previous: bool</strong></dt><dd><p>Whether to overwrite the file if it already exists</p>
-</dd>
-<dt><strong>Returns</strong></dt><dd></dd>
-<dt><strong>——-</strong></dt><dd></dd>
-<dt><strong>None</strong></dt><dd></dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
 </section>
 </section>
 

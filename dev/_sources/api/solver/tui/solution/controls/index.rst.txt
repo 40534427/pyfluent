@@ -1,7 +1,7 @@
 .. _ref_solver_tui_solution_controls:
 
-controls
-========
+solver.tui.solution.controls
+============================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.solution.controls
    :members:
@@ -15,6 +15,6 @@ controls
    :hidden:
 
    query/index
-   acoustics_wave_equation_controls/index
    contact_solution_controls/index
+   acoustics_wave_equation_controls/index
    advanced/index

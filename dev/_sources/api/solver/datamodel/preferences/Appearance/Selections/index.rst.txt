@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_preferences_Appearance_Selections:
 
-Selections
-==========
+solver.datamodel.preferences.Appearance.Selections
+==================================================
 
 .. autoclass:: ansys.fluent.core.datamodel_231.preferences.Root.Appearance.Selections
    :members:

@@ -1,7 +1,7 @@
 .. _ref_solver_tui_display_set_colors_by_type:
 
-by_type
-=======
+solver.tui.display.set.colors.by\_type
+======================================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.display.set.colors.by_type
    :members:

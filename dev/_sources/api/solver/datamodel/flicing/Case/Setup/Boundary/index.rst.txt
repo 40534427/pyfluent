@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_flicing_Case_Setup_Boundary:
 
-_Boundary
-=========
+solver.datamodel.flicing.Case.Setup.Boundary
+============================================
 
 .. autoclass:: ansys.fluent.core.datamodel_231.flicing.Root.Case.Setup.Boundary._Boundary
    :members:

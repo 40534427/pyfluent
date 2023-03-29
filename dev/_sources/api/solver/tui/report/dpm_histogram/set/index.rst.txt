@@ -1,7 +1,7 @@
 .. _ref_solver_tui_report_dpm_histogram_set:
 
-set
-===
+solver.tui.report.dpm\_histogram.set
+====================================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.report.dpm_histogram.set
    :members:

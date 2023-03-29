@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_preferences_TurboWorkflow_CellZoneSettings:
 
-CellZoneSettings
-================
+solver.datamodel.preferences.TurboWorkflow.CellZoneSettings
+===========================================================
 
 .. autoclass:: ansys.fluent.core.datamodel_231.preferences.Root.TurboWorkflow.CellZoneSettings
    :members:

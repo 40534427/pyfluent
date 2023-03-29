@@ -1,7 +1,7 @@
 .. _ref_solver_tui_server:
 
-server
-======
+solver.tui.server
+=================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.server
    :members:

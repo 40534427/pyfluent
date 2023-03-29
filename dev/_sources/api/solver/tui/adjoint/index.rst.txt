@@ -1,7 +1,7 @@
 .. _ref_solver_tui_adjoint:
 
-adjoint
-=======
+solver.tui.adjoint
+==================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.adjoint
    :members:

@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_flicing_Case_Solution_Methods_DiscretizationSchemes:
 
-_DiscretizationSchemes
-======================
+solver.datamodel.flicing.Case.Solution.Methods.DiscretizationSchemes
+====================================================================
 
 .. autoclass:: ansys.fluent.core.datamodel_231.flicing.Root.Case.Solution.Methods.DiscretizationSchemes._DiscretizationSchemes
    :members:

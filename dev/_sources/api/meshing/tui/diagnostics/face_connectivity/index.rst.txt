@@ -1,7 +1,7 @@
 .. _ref_meshing_tui_diagnostics_face_connectivity:
 
-face_connectivity
-=================
+meshing.tui.diagnostics.face\_connectivity
+==========================================
 
 .. autoclass:: ansys.fluent.core.meshing.tui_231.main_menu.diagnostics.face_connectivity
    :members:

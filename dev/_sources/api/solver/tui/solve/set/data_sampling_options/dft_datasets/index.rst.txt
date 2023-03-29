@@ -1,7 +1,7 @@
 .. _ref_solver_tui_solve_set_data_sampling_options_dft_datasets:
 
-dft_datasets
-============
+solver.tui.solve.set.data\_sampling\_options.dft\_datasets
+==========================================================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.solve.set.data_sampling_options.dft_datasets
    :members:

@@ -1,7 +1,7 @@
 .. _ref_meshing_tui_mesh_prism_controls_improve:
 
-improve
-=======
+meshing.tui.mesh.prism.controls.improve
+=======================================
 
 .. autoclass:: ansys.fluent.core.meshing.tui_231.main_menu.mesh.prism.controls.improve
    :members:

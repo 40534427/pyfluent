@@ -1,7 +1,7 @@
 .. _ref_solver_tui_results_animate:
 
-animate
-=======
+solver.tui.results.animate
+==========================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.results.animate
    :members:

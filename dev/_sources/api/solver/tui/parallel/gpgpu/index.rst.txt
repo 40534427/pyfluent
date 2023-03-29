@@ -1,7 +1,7 @@
 .. _ref_solver_tui_parallel_gpgpu:
 
-gpgpu
-=====
+solver.tui.parallel.gpgpu
+=========================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.parallel.gpgpu
    :members:

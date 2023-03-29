@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_flicing_Case_MeshInfo:
 
-MeshInfo
-========
+solver.datamodel.flicing.Case.MeshInfo
+======================================
 
 .. autoclass:: ansys.fluent.core.datamodel_231.flicing.Root.Case.MeshInfo
    :members:

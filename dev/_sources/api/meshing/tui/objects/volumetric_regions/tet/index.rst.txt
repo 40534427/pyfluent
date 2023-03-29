@@ -1,7 +1,7 @@
 .. _ref_meshing_tui_objects_volumetric_regions_tet:
 
-tet
-===
+meshing.tui.objects.volumetric\_regions.tet
+===========================================
 
 .. autoclass:: ansys.fluent.core.meshing.tui_231.main_menu.objects.volumetric_regions.tet
    :members:

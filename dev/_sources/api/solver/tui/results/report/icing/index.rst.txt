@@ -1,7 +1,7 @@
 .. _ref_solver_tui_results_report_icing:
 
-icing
-=====
+solver.tui.results.report.icing
+===============================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.results.report.icing
    :members:

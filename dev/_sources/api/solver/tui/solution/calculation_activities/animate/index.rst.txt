@@ -1,7 +1,7 @@
 .. _ref_solver_tui_solution_calculation_activities_animate:
 
-animate
-=======
+solver.tui.solution.calculation\_activities.animate
+===================================================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.solution.calculation_activities.animate
    :members:

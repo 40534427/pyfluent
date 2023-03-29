@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_flicing_Case_App_Airflow_Fluent_Materials:
 
-Materials
-=========
+solver.datamodel.flicing.Case.App.Airflow.Fluent.Materials
+==========================================================
 
 .. autoclass:: ansys.fluent.core.datamodel_231.flicing.Root.Case.App.Airflow.Fluent.Materials
    :members:

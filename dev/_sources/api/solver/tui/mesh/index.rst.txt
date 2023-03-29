@@ -1,7 +1,7 @@
 .. _ref_solver_tui_mesh:
 
-mesh
-====
+solver.tui.mesh
+===============
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.mesh
    :members:
@@ -14,10 +14,10 @@ mesh
 .. toctree::
    :hidden:
 
-   geometry/index
-   modify_zones/index
-   reorder/index
-   surface_mesh/index
-   polyhedra/index
    adapt/index
+   modify_zones/index
+   surface_mesh/index
+   geometry/index
+   polyhedra/index
    repair_improve/index
+   reorder/index

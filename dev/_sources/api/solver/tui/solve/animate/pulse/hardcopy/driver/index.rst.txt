@@ -1,7 +1,7 @@
 .. _ref_solver_tui_solve_animate_pulse_hardcopy_driver:
 
-driver
-======
+solver.tui.solve.animate.pulse.hardcopy.driver
+==============================================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.solve.animate.pulse.hardcopy.driver
    :members:

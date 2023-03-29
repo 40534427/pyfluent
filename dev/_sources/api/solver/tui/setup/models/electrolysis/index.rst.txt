@@ -1,7 +1,7 @@
 .. _ref_solver_tui_setup_models_electrolysis:
 
-electrolysis
-============
+solver.tui.setup.models.electrolysis
+====================================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.setup.models.electrolysis
    :members:
@@ -14,6 +14,6 @@ electrolysis
 .. toctree::
    :hidden:
 
-   anode_setup/index
-   membrane_setup/index
    cathode_setup/index
+   membrane_setup/index
+   anode_setup/index

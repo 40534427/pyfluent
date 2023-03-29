@@ -1,7 +1,7 @@
 .. _ref_solver_tui_solve_set_previous_defaults:
 
-previous_defaults
-=================
+solver.tui.solve.set.previous\_defaults
+=======================================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.solve.set.previous_defaults
    :members:

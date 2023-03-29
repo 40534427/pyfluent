@@ -1,7 +1,7 @@
 .. _ref_solver_tui_display_inverse_dft:
 
-inverse_dft
-===========
+solver.tui.display.inverse\_dft
+===============================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.display.inverse_dft
    :members:

@@ -1,7 +1,7 @@
 .. _ref_meshing_tui_mesh_prism:
 
-prism
-=====
+meshing.tui.mesh.prism
+======================
 
 .. autoclass:: ansys.fluent.core.meshing.tui_231.main_menu.mesh.prism
    :members:
@@ -14,7 +14,7 @@ prism
 .. toctree::
    :hidden:
 
+   controls/index
+   split/index
    improve/index
    post_ignore/index
-   split/index
-   controls/index

@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_flicing_Case_Results_View_Camera_UpVector:
 
-UpVector
-========
+solver.datamodel.flicing.Case.Results.View.Camera.UpVector
+==========================================================
 
 .. autoclass:: ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.View._View.Camera.UpVector
    :members:

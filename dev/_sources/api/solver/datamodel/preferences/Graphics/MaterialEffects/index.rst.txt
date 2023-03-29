@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_preferences_Graphics_MaterialEffects:
 
-MaterialEffects
-===============
+solver.datamodel.preferences.Graphics.MaterialEffects
+=====================================================
 
 .. autoclass:: ansys.fluent.core.datamodel_231.preferences.Root.Graphics.MaterialEffects
    :members:

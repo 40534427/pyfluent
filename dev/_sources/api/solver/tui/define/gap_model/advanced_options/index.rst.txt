@@ -1,7 +1,7 @@
 .. _ref_solver_tui_define_gap_model_advanced_options:
 
-advanced_options
-================
+solver.tui.define.gap\_model.advanced\_options
+==============================================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.define.gap_model.advanced_options
    :members:

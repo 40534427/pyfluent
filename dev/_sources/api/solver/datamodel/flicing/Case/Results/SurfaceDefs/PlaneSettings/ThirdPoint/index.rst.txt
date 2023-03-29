@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_flicing_Case_Results_SurfaceDefs_PlaneSettings_ThirdPoint:
 
-ThirdPoint
-==========
+solver.datamodel.flicing.Case.Results.SurfaceDefs.PlaneSettings.ThirdPoint
+==========================================================================
 
 .. autoclass:: ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.SurfaceDefs._SurfaceDefs.PlaneSettings.ThirdPoint
    :members:

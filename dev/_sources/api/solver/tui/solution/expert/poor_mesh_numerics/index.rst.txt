@@ -1,7 +1,7 @@
 .. _ref_solver_tui_solution_expert_poor_mesh_numerics:
 
-poor_mesh_numerics
-==================
+solver.tui.solution.expert.poor\_mesh\_numerics
+===============================================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.solution.expert.poor_mesh_numerics
    :members:

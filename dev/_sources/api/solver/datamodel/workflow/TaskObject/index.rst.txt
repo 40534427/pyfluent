@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_workflow_TaskObject:
 
-_TaskObject
-===========
+solver.datamodel.workflow.TaskObject
+====================================
 
 .. autoclass:: ansys.fluent.core.datamodel_231.workflow.Root.TaskObject._TaskObject
    :members:

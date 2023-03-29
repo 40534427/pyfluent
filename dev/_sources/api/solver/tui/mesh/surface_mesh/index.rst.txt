@@ -1,7 +1,7 @@
 .. _ref_solver_tui_mesh_surface_mesh:
 
-surface_mesh
-============
+solver.tui.mesh.surface\_mesh
+=============================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.mesh.surface_mesh
    :members:

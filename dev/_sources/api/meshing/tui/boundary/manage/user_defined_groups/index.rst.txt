@@ -1,7 +1,7 @@
 .. _ref_meshing_tui_boundary_manage_user_defined_groups:
 
-user_defined_groups
-===================
+meshing.tui.boundary.manage.user\_defined\_groups
+=================================================
 
 .. autoclass:: ansys.fluent.core.meshing.tui_231.main_menu.boundary.manage.user_defined_groups
    :members:

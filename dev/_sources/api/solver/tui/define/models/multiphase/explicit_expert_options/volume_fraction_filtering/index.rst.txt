@@ -1,7 +1,7 @@
 .. _ref_solver_tui_define_models_multiphase_explicit_expert_options_volume_fraction_filtering:
 
-volume_fraction_filtering
-=========================
+solver.tui.define.models.multiphase.explicit\_expert\_options.volume\_fraction\_filtering
+=========================================================================================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.define.models.multiphase.explicit_expert_options.volume_fraction_filtering
    :members:

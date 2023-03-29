@@ -1,7 +1,7 @@
 .. _ref_meshing_tui_preferences_graphics_performance_minimum_frame_rate:
 
-minimum_frame_rate
-==================
+meshing.tui.preferences.graphics.performance.minimum\_frame\_rate
+=================================================================
 
 .. autoclass:: ansys.fluent.core.meshing.tui_231.main_menu.preferences.graphics.performance.minimum_frame_rate
    :members:

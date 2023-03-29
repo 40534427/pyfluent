@@ -1,7 +1,7 @@
 .. _ref_solver_tui_define_boundary_conditions:
 
-boundary_conditions
-===================
+solver.tui.define.boundary\_conditions
+======================================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.define.boundary_conditions
    :members:
@@ -14,11 +14,11 @@ boundary_conditions
 .. toctree::
    :hidden:
 
-   perforated_walls/index
-   advanced/index
-   bc_settings/index
-   modify_zones/index
-   rename_zone/index
    non_reflecting_bc/index
-   set/index
+   perforated_walls/index
+   bc_settings/index
    impedance_data_fitting/index
+   modify_zones/index
+   advanced/index
+   rename_zone/index
+   set/index

@@ -1,7 +1,7 @@
 .. _ref_solver_tui_mesh_adapt_geometry:
 
-geometry
-========
+solver.tui.mesh.adapt.geometry
+==============================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.mesh.adapt.geometry
    :members:

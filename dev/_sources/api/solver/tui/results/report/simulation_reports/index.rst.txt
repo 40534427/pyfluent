@@ -1,7 +1,7 @@
 .. _ref_solver_tui_results_report_simulation_reports:
 
-simulation_reports
-==================
+solver.tui.results.report.simulation\_reports
+=============================================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.results.report.simulation_reports
    :members:

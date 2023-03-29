@@ -1,7 +1,7 @@
 .. _ref_solver_tui_solve_animate_playback:
 
-playback
-========
+solver.tui.solve.animate.playback
+=================================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.solve.animate.playback
    :members:

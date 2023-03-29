@@ -1,7 +1,7 @@
 .. _ref_meshing_tui_preferences:
 
-preferences
-===========
+meshing.tui.preferences
+=======================
 
 .. autoclass:: ansys.fluent.core.meshing.tui_231.main_menu.preferences
    :members:
@@ -14,13 +14,13 @@ preferences
 .. toctree::
    :hidden:
 
-   graphics/index
-   turbo_workflow/index
-   navigation/index
-   appearance/index
-   parametric_study/index
    gpuapp/index
+   appearance/index
    simulation/index
-   meshing_workflow/index
-   mat_pro_app/index
    general/index
+   graphics/index
+   meshing_workflow/index
+   parametric_study/index
+   navigation/index
+   mat_pro_app/index
+   turbo_workflow/index

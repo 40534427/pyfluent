@@ -1,7 +1,7 @@
 .. _ref_meshing_tui_display_objects:
 
-objects
-=======
+meshing.tui.display.objects
+===========================
 
 .. autoclass:: ansys.fluent.core.meshing.tui_231.main_menu.display.objects
    :members:

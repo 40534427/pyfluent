@@ -1,7 +1,7 @@
 .. _ref_meshing_datamodel_preferences_GPUApp:
 
-GPUApp
-======
+meshing.datamodel.preferences.GPUApp
+====================================
 
 .. autoclass:: ansys.fluent.core.datamodel_231.preferences.Root.GPUApp
    :members:

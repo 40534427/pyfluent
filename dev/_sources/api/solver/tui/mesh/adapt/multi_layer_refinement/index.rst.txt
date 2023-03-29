@@ -1,7 +1,7 @@
 .. _ref_solver_tui_mesh_adapt_multi_layer_refinement:
 
-multi_layer_refinement
-======================
+solver.tui.mesh.adapt.multi\_layer\_refinement
+==============================================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.mesh.adapt.multi_layer_refinement
    :members:

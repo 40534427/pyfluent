@@ -1,7 +1,7 @@
 .. _ref_solver_tui_setup_boundary_conditions:
 
-boundary_conditions
-===================
+solver.tui.setup.boundary\_conditions
+=====================================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.setup.boundary_conditions
    :members:
@@ -15,9 +15,9 @@ boundary_conditions
    :hidden:
 
    profiles/index
-   modify_zones/index
-   rename_zone/index
-   query/index
-   bc_settings/index
    set/index
    expert/index
+   query/index
+   bc_settings/index
+   modify_zones/index
+   rename_zone/index

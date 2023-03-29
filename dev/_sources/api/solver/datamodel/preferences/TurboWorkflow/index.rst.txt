@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_preferences_TurboWorkflow:
 
-TurboWorkflow
-=============
+solver.datamodel.preferences.TurboWorkflow
+==========================================
 
 .. autoclass:: ansys.fluent.core.datamodel_231.preferences.Root.TurboWorkflow
    :members:

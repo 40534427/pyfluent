@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_flicing_Case_Setup_Material_Viscosity:
 
-Viscosity
-=========
+solver.datamodel.flicing.Case.Setup.Material.Viscosity
+======================================================
 
 .. autoclass:: ansys.fluent.core.datamodel_231.flicing.Root.Case.Setup.Material._Material.Viscosity
    :members:

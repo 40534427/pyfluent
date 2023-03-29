@@ -1,7 +1,7 @@
 .. _ref_solver_tui_file_export:
 
-export
-======
+solver.tui.file.export
+======================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.file.export
    :members:

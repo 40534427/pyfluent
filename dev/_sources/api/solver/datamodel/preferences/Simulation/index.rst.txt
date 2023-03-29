@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_preferences_Simulation:
 
-Simulation
-==========
+solver.datamodel.preferences.Simulation
+=======================================
 
 .. autoclass:: ansys.fluent.core.datamodel_231.preferences.Root.Simulation
    :members:

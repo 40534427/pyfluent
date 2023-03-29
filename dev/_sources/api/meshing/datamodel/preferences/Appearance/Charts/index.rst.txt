@@ -1,7 +1,7 @@
 .. _ref_meshing_datamodel_preferences_Appearance_Charts:
 
-Charts
-======
+meshing.datamodel.preferences.Appearance.Charts
+===============================================
 
 .. autoclass:: ansys.fluent.core.datamodel_231.preferences.Root.Appearance.Charts
    :members:

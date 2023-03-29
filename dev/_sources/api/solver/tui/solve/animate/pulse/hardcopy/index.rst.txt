@@ -1,7 +1,7 @@
 .. _ref_solver_tui_solve_animate_pulse_hardcopy:
 
-hardcopy
-========
+solver.tui.solve.animate.pulse.hardcopy
+=======================================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.solve.animate.pulse.hardcopy
    :members:

@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_preferences_TurboWorkflow_FaceZoneSettings:
 
-FaceZoneSettings
-================
+solver.datamodel.preferences.TurboWorkflow.FaceZoneSettings
+===========================================================
 
 .. autoclass:: ansys.fluent.core.datamodel_231.preferences.Root.TurboWorkflow.FaceZoneSettings
    :members:

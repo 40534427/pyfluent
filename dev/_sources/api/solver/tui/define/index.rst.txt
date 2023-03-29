@@ -1,7 +1,7 @@
 .. _ref_solver_tui_define:
 
-define
-======
+solver.tui.define
+=================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.define
    :members:
@@ -14,25 +14,25 @@ define
 .. toctree::
    :hidden:
 
-   named_expressions/index
-   phases/index
-   curvilinear_coordinate_system/index
-   parameters/index
-   operating_conditions/index
-   profiles/index
-   turbo_model/index
-   gap_model/index
-   reference_frames/index
-   solution_strategy/index
-   spectral/index
-   mesh_interfaces/index
-   models/index
-   user_defined/index
-   dynamic_mesh/index
-   boundary_conditions/index
    virtual_boundary/index
    custom_field_functions/index
-   overset_interfaces/index
-   mixing_planes/index
-   materials/index
    periodic_conditions/index
+   operating_conditions/index
+   curvilinear_coordinate_system/index
+   solution_strategy/index
+   turbo_model/index
+   profiles/index
+   phases/index
+   overset_interfaces/index
+   models/index
+   parameters/index
+   mesh_interfaces/index
+   user_defined/index
+   gap_model/index
+   dynamic_mesh/index
+   materials/index
+   mixing_planes/index
+   spectral/index
+   reference_frames/index
+   boundary_conditions/index
+   named_expressions/index

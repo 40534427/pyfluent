@@ -1,7 +1,7 @@
 .. _ref_solver_tui_preferences_graphics_graphics_effects:
 
-graphics_effects
-================
+solver.tui.preferences.graphics.graphics\_effects
+=================================================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.preferences.graphics.graphics_effects
    :members:

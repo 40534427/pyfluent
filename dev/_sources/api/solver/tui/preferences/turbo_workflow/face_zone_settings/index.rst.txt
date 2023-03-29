@@ -1,7 +1,7 @@
 .. _ref_solver_tui_preferences_turbo_workflow_face_zone_settings:
 
-face_zone_settings
-==================
+solver.tui.preferences.turbo\_workflow.face\_zone\_settings
+===========================================================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.preferences.turbo_workflow.face_zone_settings
    :members:

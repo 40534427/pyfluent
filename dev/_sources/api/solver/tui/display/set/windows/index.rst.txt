@@ -1,7 +1,7 @@
 .. _ref_solver_tui_display_set_windows:
 
-windows
-=======
+solver.tui.display.set.windows
+==============================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.display.set.windows
    :members:
@@ -16,7 +16,7 @@ windows
 
    axes/index
    scale/index
-   text/index
-   video/index
    main/index
+   video/index
+   text/index
    xy/index

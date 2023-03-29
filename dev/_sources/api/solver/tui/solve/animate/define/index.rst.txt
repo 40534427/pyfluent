@@ -1,7 +1,7 @@
 .. _ref_solver_tui_solve_animate_define:
 
-define
-======
+solver.tui.solve.animate.define
+===============================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.solve.animate.define
    :members:

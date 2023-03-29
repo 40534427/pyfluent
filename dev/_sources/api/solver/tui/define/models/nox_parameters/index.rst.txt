@@ -1,7 +1,7 @@
 .. _ref_solver_tui_define_models_nox_parameters:
 
-nox_parameters
-==============
+solver.tui.define.models.nox\_parameters
+========================================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.define.models.nox_parameters
    :members:

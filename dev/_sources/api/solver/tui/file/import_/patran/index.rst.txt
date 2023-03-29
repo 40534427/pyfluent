@@ -1,7 +1,7 @@
 .. _ref_solver_tui_file_import_patran:
 
-patran
-======
+solver.tui.file.import\_.patran
+===============================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.file.import_.patran
    :members:

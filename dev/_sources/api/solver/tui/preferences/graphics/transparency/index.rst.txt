@@ -1,7 +1,7 @@
 .. _ref_solver_tui_preferences_graphics_transparency:
 
-transparency
-============
+solver.tui.preferences.graphics.transparency
+============================================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.preferences.graphics.transparency
    :members:

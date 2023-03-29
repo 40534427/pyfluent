@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>ansys.fluent.core.session.BaseSession &#8212; PyFluent</title>
+    <title>async_execution &#8212; PyFluent</title>
     
 <script>
   document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
@@ -55,8 +55,8 @@
     <link rel="shortcut icon" href="../../../../_static/ansys-favicon.png"/>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="next" title="__init__" href="ansys.fluent.core.session.BaseSession.__init__.html" />
-    <link rel="prev" title="session" href="ansys.fluent.core.session.html" />
+    <link rel="next" title="asynchronous" href="ansys.fluent.core.utils.async_execution.asynchronous.html" />
+    <link rel="prev" title="Asynchronous execution" href="../index.html" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="docsearch:language" content="en">
   </head>
@@ -152,14 +152,14 @@
 
 <!-- NOTE: this JS must live here (not in our global JS file) because it relies
      on being processed by Jinja before it is run (specifically for replacing
-     variables api/general/sessions/_autosummary/ansys.fluent.core.session.BaseSession and {'json_url': 'https://fluent.docs.pyansys.com/release/versions.json', 'version_match': '0.13'}.
+     variables api/general/utils/_autosummary/ansys.fluent.core.utils.async_execution and {'json_url': 'https://fluent.docs.pyansys.com/release/versions.json', 'version_match': '0.13'}.
 -->
 
 <script type="text/javascript">
 // Check if corresponding page path exists in other version of docs
 // and, if so, go there instead of the homepage of the other docs version
 function checkPageExistsAndRedirect(event) {
-    const currentFilePath = "api/general/sessions/_autosummary/ansys.fluent.core.session.BaseSession.html",
+    const currentFilePath = "api/general/utils/_autosummary/ansys.fluent.core.utils.async_execution.html",
           tryUrl = event.target.getAttribute("href");
     let otherDocsHomepage = tryUrl.replace(currentFilePath, "");
     $.ajax({
@@ -180,7 +180,7 @@ function checkPageExistsAndRedirect(event) {
 // Populate the version switcher from the JSON config file
 (function () {
     $.getJSON("https://fluent.docs.pyansys.com/release/versions.json", function(data, textStatus, jqXHR) {
-        const currentFilePath = "api/general/sessions/_autosummary/ansys.fluent.core.session.BaseSession.html";
+        const currentFilePath = "api/general/utils/_autosummary/ansys.fluent.core.utils.async_execution.html";
         let btn = document.getElementById("version_switcher_button");
         // Set empty strings by default so that these attributes exist and can be used in CSS selectors
         btn.dataset["activeVersionName"] = "";
@@ -279,9 +279,8 @@ function checkPageExistsAndRedirect(event) {
 
           <li class="nav-item nav-item-1"><a href="../../../index.html" >API reference</a> » </li>
           <li class="nav-item nav-item-2"><a href="../../index.html" >General</a> » </li>
-          <li class="nav-item nav-item-3"><a href="../index.html" >Sessions</a> » </li>
-          <li class="nav-item nav-item-4"><a href="ansys.fluent.core.session.html" accesskey="U">session</a> » </li>
-        <li class="nav-item nav-item-this"><a href="">ansys.fluent.core.session.BaseSession</a></li> 
+          <li class="nav-item nav-item-3"><a href="../index.html" accesskey="U">Asynchronous execution</a> » </li>
+        <li class="nav-item nav-item-this"><a href="">async_execution</a></li> 
       </ul>
     </div>
         </div>
@@ -317,14 +316,9 @@ function checkPageExistsAndRedirect(event) {
      Launcher
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../utils/index.html">
-     Asynchronous execution
-    </a>
-   </li>
    <li class="toctree-l2 current active has-children">
     <a class="reference internal" href="../index.html">
-     Sessions
+     Asynchronous execution
     </a>
     <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
     <label for="toctree-checkbox-2">
@@ -333,95 +327,28 @@ function checkPageExistsAndRedirect(event) {
     </label>
     <ul class="current">
      <li class="toctree-l3 current active has-children">
-      <a class="reference internal" href="ansys.fluent.core.session.html">
-       session
+      <a class="current reference internal" href="#">
+       async_execution
       </a>
       <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
       <label for="toctree-checkbox-3">
        <i class="fas fa-chevron-down">
        </i>
       </label>
-      <ul class="current">
-       <li class="toctree-l4 current active has-children">
-        <a class="current reference internal" href="#">
-         ansys.fluent.core.session.BaseSession
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.fluent.core.utils.async_execution.asynchronous.html">
+         asynchronous
         </a>
-        <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
-        <label for="toctree-checkbox-4">
-         <i class="fas fa-chevron-down">
-         </i>
-        </label>
-        <ul>
-         <li class="toctree-l5">
-          <a class="reference internal" href="ansys.fluent.core.session.BaseSession.__init__.html">
-           __init__
-          </a>
-         </li>
-         <li class="toctree-l5">
-          <a class="reference internal" href="ansys.fluent.core.session.BaseSession.build_from_fluent_connection.html">
-           build_from_fluent_connection
-          </a>
-         </li>
-         <li class="toctree-l5">
-          <a class="reference internal" href="ansys.fluent.core.session.BaseSession.create_from_server_info_file.html">
-           create_from_server_info_file
-          </a>
-         </li>
-         <li class="toctree-l5">
-          <a class="reference internal" href="ansys.fluent.core.session.BaseSession.download.html">
-           download
-          </a>
-         </li>
-         <li class="toctree-l5">
-          <a class="reference internal" href="ansys.fluent.core.session.BaseSession.execute_tui.html">
-           execute_tui
-          </a>
-         </li>
-         <li class="toctree-l5">
-          <a class="reference internal" href="ansys.fluent.core.session.BaseSession.upload.html">
-           upload
-          </a>
-         </li>
-        </ul>
        </li>
       </ul>
      </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="ansys.fluent.core.fluent_connection.html">
-       fluent_connection
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="ansys.fluent.core.session_meshing.html">
-       session_meshing
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="ansys.fluent.core.session_base_meshing.html">
-       session_base_meshing
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="ansys.fluent.core.session_pure_meshing.html">
-       session_pure_meshing
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="ansys.fluent.core.session_solver.html">
-       session_solver
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="ansys.fluent.core.session_solver_icing.html">
-       session_solver_icing
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="ansys.fluent.core.session_solver_lite.html">
-       session_solver_lite
-      </a>
-     </li>
     </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../sessions/index.html">
+     Sessions
+    </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../services/index.html">
@@ -508,23 +435,9 @@ function checkPageExistsAndRedirect(event) {
     
     <div class="toc-item">
       
-<div class="tocsection onthispage mt-5 pt-1 pb-3">
-    <i class="fas fa-list"></i> On this page
-</div>
 
 <nav id="bd-toc-nav">
-    <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#ansys.fluent.core.session.BaseSession">
-   <code class="docutils literal notranslate">
-    <span class="pre">
-     BaseSession
-    </span>
-   </code>
-  </a>
- </li>
-</ul>
-
+    
 </nav>
     </div>
     
@@ -542,57 +455,17 @@ function checkPageExistsAndRedirect(event) {
               
               <article class="bd-article" role="main">
                 
-  <section id="ansys-fluent-core-session-basesession">
-<h1>ansys.fluent.core.session.BaseSession<a class="headerlink" href="#ansys-fluent-core-session-basesession" title="Permalink to this heading">#</a></h1>
-<dl class="py class">
-<dt class="sig sig-object py" id="ansys.fluent.core.session.BaseSession">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ansys.fluent.core.session.</span></span><span class="sig-name descname"><span class="pre">BaseSession</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fluent_connection</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.fluent.core.session.BaseSession" title="Permalink to this definition">#</a></dt>
-<dd><p>Instantiates a Fluent connection.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Attributes<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>scheme_eval: SchemeEval</strong></dt><dd><p>Instance of SchemeEval on which Fluent’s scheme code can be
-executed.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<p class="rubric">Methods</p>
-<table class="table">
-<tbody>
-<tr class="row-odd"><td><p><strong>create_from_server_info_file(</strong></p></td>
-<td><p>server_info_filepath, cleanup_on_exit, start_transcript ) Create a Session instance from server-info file</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>exit()</strong></p></td>
-<td><p>Close the Fluent connection and exit Fluent.</p></td>
-</tr>
-</tbody>
-</table>
-<p class="rubric">Methods</p>
+  <section id="module-ansys.fluent.core.utils.async_execution">
+<span id="async-execution"></span><h1>async_execution<a class="headerlink" href="#module-ansys.fluent.core.utils.async_execution" title="Permalink to this heading">#</a></h1>
+<p>Module providing asynchronous execution functionality.</p>
+<p class="rubric">Functions</p>
 <table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="ansys.fluent.core.session.BaseSession.__init__.html#ansys.fluent.core.session.BaseSession.__init__" title="ansys.fluent.core.session.BaseSession.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(fluent_connection)</p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="ansys.fluent.core.session.BaseSession.build_from_fluent_connection.html#ansys.fluent.core.session.BaseSession.build_from_fluent_connection" title="ansys.fluent.core.session.BaseSession.build_from_fluent_connection"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_from_fluent_connection</span></code></a>(fluent_connection)</p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="ansys.fluent.core.session.BaseSession.create_from_server_info_file.html#ansys.fluent.core.session.BaseSession.create_from_server_info_file" title="ansys.fluent.core.session.BaseSession.create_from_server_info_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_from_server_info_file</span></code></a>(...[, ...])</p></td>
-<td><p>Create a Session instance from server-info file.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="ansys.fluent.core.session.BaseSession.download.html#ansys.fluent.core.session.BaseSession.download" title="ansys.fluent.core.session.BaseSession.download"><code class="xref py py-obj docutils literal notranslate"><span class="pre">download</span></code></a>(file_name[, local_file_path])</p></td>
-<td><p>Downloads a file from the server.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="ansys.fluent.core.session.BaseSession.execute_tui.html#ansys.fluent.core.session.BaseSession.execute_tui" title="ansys.fluent.core.session.BaseSession.execute_tui"><code class="xref py py-obj docutils literal notranslate"><span class="pre">execute_tui</span></code></a>(command)</p></td>
-<td><p>Executes a tui command.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="ansys.fluent.core.session.BaseSession.upload.html#ansys.fluent.core.session.BaseSession.upload" title="ansys.fluent.core.session.BaseSession.upload"><code class="xref py py-obj docutils literal notranslate"><span class="pre">upload</span></code></a>(file_path[, remote_file_name])</p></td>
-<td><p>Uploads a file on the server.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.fluent.core.utils.async_execution.asynchronous.html#ansys.fluent.core.utils.async_execution.asynchronous" title="ansys.fluent.core.utils.async_execution.asynchronous"><code class="xref py py-obj docutils literal notranslate"><span class="pre">asynchronous</span></code></a>(f)</p></td>
+<td><p>Use for decorating functions that are to execute asynchronously.</p></td>
 </tr>
 </tbody>
 </table>
-</dd></dl>
-
 </section>
 
 

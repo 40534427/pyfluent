@@ -1,7 +1,7 @@
 .. _ref_solver_tui_define_models_eulerian_wallfilm_implicit_options:
 
-implicit_options
-================
+solver.tui.define.models.eulerian\_wallfilm.implicit\_options
+=============================================================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.define.models.eulerian_wallfilm.implicit_options
    :members:

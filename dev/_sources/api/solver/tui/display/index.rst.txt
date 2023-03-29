@@ -1,7 +1,7 @@
 .. _ref_solver_tui_display:
 
-display
-=======
+solver.tui.display
+==================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.display
    :members:
@@ -14,17 +14,17 @@ display
 .. toctree::
    :hidden:
 
-   flamelet_data/index
-   surface/index
-   update_scene/index
-   define/index
-   pdf_data/index
-   embedded_windows/index
-   display_states/index
-   path_lines/index
-   views/index
-   view_sync/index
-   objects/index
-   inverse_dft/index
    set/index
+   pdf_data/index
+   path_lines/index
+   surface/index
+   display_states/index
+   view_sync/index
+   inverse_dft/index
+   define/index
+   update_scene/index
+   embedded_windows/index
+   objects/index
+   flamelet_data/index
    particle_tracks/index
+   views/index

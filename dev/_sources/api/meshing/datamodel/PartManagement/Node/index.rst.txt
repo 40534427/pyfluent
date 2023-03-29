@@ -1,7 +1,7 @@
 .. _ref_meshing_datamodel_PartManagement_Node:
 
-_Node
-=====
+meshing.datamodel.PartManagement.Node
+=====================================
 
 .. autoclass:: ansys.fluent.core.datamodel_231.PartManagement.Root.Node._Node
    :members:

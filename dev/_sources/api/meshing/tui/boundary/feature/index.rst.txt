@@ -1,7 +1,7 @@
 .. _ref_meshing_tui_boundary_feature:
 
-feature
-=======
+meshing.tui.boundary.feature
+============================
 
 .. autoclass:: ansys.fluent.core.meshing.tui_231.main_menu.boundary.feature
    :members:

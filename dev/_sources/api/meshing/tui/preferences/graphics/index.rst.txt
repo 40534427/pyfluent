@@ -1,7 +1,7 @@
 .. _ref_meshing_tui_preferences_graphics:
 
-graphics
-========
+meshing.tui.preferences.graphics
+================================
 
 .. autoclass:: ansys.fluent.core.meshing.tui_231.main_menu.preferences.graphics
    :members:
@@ -14,16 +14,16 @@ graphics
 .. toctree::
    :hidden:
 
+   lighting/index
+   material_effects/index
    colormap_settings/index
+   export_video_settings/index
+   hardcopy_settings/index
+   transparency/index
+   performance/index
    graphics_effects/index
    manage_hoops_memory/index
-   hardcopy_settings/index
-   lighting/index
+   vector_settings/index
+   boundary_markers/index
    meshing_mode/index
    embedded_windows/index
-   material_effects/index
-   boundary_markers/index
-   transparency/index
-   export_video_settings/index
-   vector_settings/index
-   performance/index

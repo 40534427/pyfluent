@@ -1,7 +1,7 @@
 .. _ref_solver_tui_solution_expert_open_channel_wave_options:
 
-open_channel_wave_options
-=========================
+solver.tui.solution.expert.open\_channel\_wave\_options
+=======================================================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.solution.expert.open_channel_wave_options
    :members:

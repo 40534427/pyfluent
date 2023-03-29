@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_flicing_Case_Solution_Controls_UnderRelaxationFactors:
 
-_UnderRelaxationFactors
-=======================
+solver.datamodel.flicing.Case.Solution.Controls.UnderRelaxationFactors
+======================================================================
 
 .. autoclass:: ansys.fluent.core.datamodel_231.flicing.Root.Case.Solution.Controls.UnderRelaxationFactors._UnderRelaxationFactors
    :members:

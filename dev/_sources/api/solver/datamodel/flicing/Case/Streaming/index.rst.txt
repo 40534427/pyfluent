@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_flicing_Case_Streaming:
 
-Streaming
-=========
+solver.datamodel.flicing.Case.Streaming
+=======================================
 
 .. autoclass:: ansys.fluent.core.datamodel_231.flicing.Root.Case.Streaming
    :members:

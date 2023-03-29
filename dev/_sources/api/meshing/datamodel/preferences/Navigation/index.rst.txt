@@ -1,7 +1,7 @@
 .. _ref_meshing_datamodel_preferences_Navigation:
 
-Navigation
-==========
+meshing.datamodel.preferences.Navigation
+========================================
 
 .. autoclass:: ansys.fluent.core.datamodel_231.preferences.Root.Navigation
    :members:

@@ -1,7 +1,7 @@
 .. _ref_solver_tui_define_mixing_planes:
 
-mixing_planes
-=============
+solver.tui.define.mixing\_planes
+================================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.define.mixing_planes
    :members:

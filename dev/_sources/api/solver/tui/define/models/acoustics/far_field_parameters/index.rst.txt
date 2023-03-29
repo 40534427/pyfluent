@@ -1,7 +1,7 @@
 .. _ref_solver_tui_define_models_acoustics_far_field_parameters:
 
-far_field_parameters
-====================
+solver.tui.define.models.acoustics.far\_field\_parameters
+=========================================================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.define.models.acoustics.far_field_parameters
    :members:

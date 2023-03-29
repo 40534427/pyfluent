@@ -1,7 +1,7 @@
 .. _ref_meshing_datamodel_preferences_Graphics_BoundaryMarkers:
 
-BoundaryMarkers
-===============
+meshing.datamodel.preferences.Graphics.BoundaryMarkers
+======================================================
 
 .. autoclass:: ansys.fluent.core.datamodel_231.preferences.Root.Graphics.BoundaryMarkers
    :members:

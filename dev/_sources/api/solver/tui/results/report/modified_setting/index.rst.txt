@@ -1,7 +1,7 @@
 .. _ref_solver_tui_results_report_modified_setting:
 
-modified_setting
-================
+solver.tui.results.report.modified\_setting
+===========================================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.results.report.modified_setting
    :members:

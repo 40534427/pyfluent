@@ -1,7 +1,7 @@
 .. _ref_solver_tui_solution_controls_contact_solution_controls_models:
 
-models
-======
+solver.tui.solution.controls.contact\_solution\_controls.models
+===============================================================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.solution.controls.contact_solution_controls.models
    :members:

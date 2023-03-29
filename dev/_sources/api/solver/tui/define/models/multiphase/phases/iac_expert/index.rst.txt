@@ -1,7 +1,7 @@
 .. _ref_solver_tui_define_models_multiphase_phases_iac_expert:
 
-iac_expert
-==========
+solver.tui.define.models.multiphase.phases.iac\_expert
+======================================================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.define.models.multiphase.phases.iac_expert
    :members:

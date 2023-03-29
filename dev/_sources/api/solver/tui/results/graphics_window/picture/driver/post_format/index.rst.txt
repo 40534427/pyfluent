@@ -1,7 +1,7 @@
 .. _ref_solver_tui_results_graphics_window_picture_driver_post_format:
 
-post_format
-===========
+solver.tui.results.graphics\_window.picture.driver.post\_format
+===============================================================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.results.graphics_window.picture.driver.post_format
    :members:
