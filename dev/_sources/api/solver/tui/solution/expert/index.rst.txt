@@ -14,10 +14,10 @@ expert
 .. toctree::
    :hidden:
 
-   non_reflecting_boundary_treatment/index
-   high_speed_numerics/index
    previous_defaults/index
-   divergence_prevention/index
+   non_reflecting_boundary_treatment/index
    secondary_gradient_limiting/index
-   poor_mesh_numerics/index
+   high_speed_numerics/index
    open_channel_wave_options/index
+   divergence_prevention/index
+   poor_mesh_numerics/index

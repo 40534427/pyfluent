@@ -15,10 +15,10 @@ methods
    :hidden:
 
    warped_face_gradient_correction/index
-   expert/index
-   multiphase_numerics/index
-   pseudo_time_method/index
-   high_order_term_relaxation/index
-   overset/index
-   nita_expert_controls/index
    query/index
+   overset/index
+   multiphase_numerics/index
+   high_order_term_relaxation/index
+   pseudo_time_method/index
+   expert/index
+   nita_expert_controls/index

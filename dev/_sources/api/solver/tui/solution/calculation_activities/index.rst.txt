@@ -14,8 +14,8 @@ calculation_activities
 .. toctree::
    :hidden:
 
-   execute_commands/index
-   animate/index
    cell_register_operations/index
    auto_save/index
    solution_strategy/index
+   animate/index
+   execute_commands/index

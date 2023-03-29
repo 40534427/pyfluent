@@ -1,7 +1,7 @@
 .. _ref_meshing_tui:
 
-main_menu
-=========
+meshing.tui
+===========
 
 .. autoclass:: ansys.fluent.core.meshing.tui_231.main_menu
    :members:
@@ -14,18 +14,18 @@ main_menu
 .. toctree::
    :hidden:
 
-   boundary/index
-   objects/index
-   material_point/index
-   report/index
-   display/index
-   cad_assemblies/index
-   file/index
-   mesh/index
-   reference_frames/index
-   scoped_sizing/index
-   size_functions/index
-   preferences/index
-   parallel/index
    openmp_controls/index
+   report/index
+   reference_frames/index
+   boundary/index
+   cad_assemblies/index
+   display/index
+   material_point/index
+   parallel/index
+   mesh/index
+   file/index
+   size_functions/index
+   scoped_sizing/index
+   objects/index
    diagnostics/index
+   preferences/index

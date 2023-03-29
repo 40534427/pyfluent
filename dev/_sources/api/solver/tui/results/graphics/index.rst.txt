@@ -16,6 +16,6 @@ graphics
 
    rendering_options/index
    update_scene/index
-   lights/index
    expert/index
    objects/index
+   lights/index

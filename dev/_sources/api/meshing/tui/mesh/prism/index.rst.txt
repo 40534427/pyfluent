@@ -14,7 +14,7 @@ prism
 .. toctree::
    :hidden:
 
-   controls/index
-   post_ignore/index
    improve/index
+   post_ignore/index
    split/index
+   controls/index

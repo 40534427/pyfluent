@@ -15,11 +15,11 @@ solution
    :hidden:
 
    methods/index
-   initialize/index
-   cell_registers/index
-   controls/index
-   run_calculation/index
-   report_definitions/index
    monitors/index
-   expert/index
    calculation_activities/index
+   expert/index
+   run_calculation/index
+   initialize/index
+   controls/index
+   report_definitions/index
+   cell_registers/index

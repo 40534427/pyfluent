@@ -1,7 +1,7 @@
 .. _ref_solver_tui:
 
-main_menu
-=========
+solver.tui
+==========
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu
    :members:
@@ -14,25 +14,25 @@ main_menu
 .. toctree::
    :hidden:
 
-   parametric_study/index
-   parallel/index
-   file/index
-   icing/index
-   views/index
-   solution/index
    surface/index
-   mesh/index
-   turbo_workflow/index
-   define/index
-   setup/index
-   preferences/index
-   turbo_post/index
-   solve/index
    results/index
-   parameters__and__customization/index
-   server/index
-   adjoint/index
-   simulation_reports/index
+   parametric_study/index
    report/index
+   turbo_workflow/index
    plot/index
+   adjoint/index
+   parallel/index
+   views/index
+   define/index
+   turbo_post/index
+   mesh/index
+   simulation_reports/index
+   parameters__and__customization/index
    display/index
+   file/index
+   preferences/index
+   solve/index
+   server/index
+   icing/index
+   solution/index
+   setup/index

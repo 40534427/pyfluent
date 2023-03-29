@@ -14,6 +14,6 @@ p_v_coupling
 .. toctree::
    :hidden:
 
+   coupled_vof/index
    rhie_chow_flux/index
    skewness_correction/index
-   coupled_vof/index

@@ -14,15 +14,15 @@ file
 .. toctree::
    :hidden:
 
-   interpolate/index
-   project/index
-   cffio_options/index
-   export/index
-   auto_save/index
    em_mapping/index
-   transient_export/index
    table_manager/index
+   cffio_options/index
    fsi/index
-   import_/index
+   interpolate/index
    parametric_project/index
+   transient_export/index
+   auto_save/index
    solution_files/index
+   export/index
+   project/index
+   import_/index

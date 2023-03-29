@@ -14,11 +14,11 @@ controls
 .. toctree::
    :hidden:
 
-   adjacent_zone/index
-   improve/index
    zone_specific_growth/index
-   proximity/index
-   offset/index
-   morph/index
+   adjacent_zone/index
    post_ignore/index
+   improve/index
+   proximity/index
+   morph/index
+   offset/index
    normal/index

@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>main_menu &#8212; PyFluent</title>
+    <title>solver.tui &#8212; PyFluent</title>
     
 <script>
   document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
@@ -55,7 +55,7 @@
     <link rel="shortcut icon" href="../../../_static/ansys-favicon.png"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="parametric_study" href="parametric_study/index.html" />
+    <link rel="next" title="surface" href="surface/index.html" />
     <link rel="prev" title="Solver TUI commands" href="../tuicommands.html" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="docsearch:language" content="en">
@@ -280,7 +280,7 @@ function checkPageExistsAndRedirect(event) {
           <li class="nav-item nav-item-1"><a href="../../index.html" >API reference</a> » </li>
           <li class="nav-item nav-item-2"><a href="../index.html" >Solver</a> » </li>
           <li class="nav-item nav-item-3"><a href="../tuicommands.html" accesskey="U">Solver TUI commands</a> » </li>
-        <li class="nav-item nav-item-this"><a href="">main_menu</a></li> 
+        <li class="nav-item nav-item-this"><a href="">solver.tui</a></li> 
       </ul>
     </div>
         </div>
@@ -338,7 +338,7 @@ function checkPageExistsAndRedirect(event) {
     <ul class="current">
      <li class="toctree-l3 current active has-children">
       <a class="current reference internal" href="#">
-       main_menu
+       solver.tui
       </a>
       <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
       <label for="toctree-checkbox-3">
@@ -347,73 +347,8 @@ function checkPageExistsAndRedirect(event) {
       </label>
       <ul>
        <li class="toctree-l4">
-        <a class="reference internal" href="parametric_study/index.html">
-         parametric_study
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="parallel/index.html">
-         parallel
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="file/index.html">
-         file
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="icing/index.html">
-         icing
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="views/index.html">
-         views
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="solution/index.html">
-         solution
-        </a>
-       </li>
-       <li class="toctree-l4">
         <a class="reference internal" href="surface/index.html">
          surface
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="mesh/index.html">
-         mesh
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="turbo_workflow/index.html">
-         turbo_workflow
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="define/index.html">
-         define
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="setup/index.html">
-         setup
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="preferences/index.html">
-         preferences
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="turbo_post/index.html">
-         turbo_post
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="solve/index.html">
-         solve
         </a>
        </li>
        <li class="toctree-l4">
@@ -422,23 +357,8 @@ function checkPageExistsAndRedirect(event) {
         </a>
        </li>
        <li class="toctree-l4">
-        <a class="reference internal" href="parameters__and__customization/index.html">
-         parameters__and__customization
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="server/index.html">
-         server
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="adjoint/index.html">
-         adjoint
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="simulation_reports/index.html">
-         simulation_reports
+        <a class="reference internal" href="parametric_study/index.html">
+         parametric_study
         </a>
        </li>
        <li class="toctree-l4">
@@ -447,13 +367,93 @@ function checkPageExistsAndRedirect(event) {
         </a>
        </li>
        <li class="toctree-l4">
+        <a class="reference internal" href="turbo_workflow/index.html">
+         turbo_workflow
+        </a>
+       </li>
+       <li class="toctree-l4">
         <a class="reference internal" href="plot/index.html">
          plot
         </a>
        </li>
        <li class="toctree-l4">
+        <a class="reference internal" href="adjoint/index.html">
+         adjoint
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="parallel/index.html">
+         parallel
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="views/index.html">
+         views
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="define/index.html">
+         define
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="turbo_post/index.html">
+         turbo_post
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="mesh/index.html">
+         mesh
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="simulation_reports/index.html">
+         simulation_reports
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="parameters__and__customization/index.html">
+         parameters__and__customization
+        </a>
+       </li>
+       <li class="toctree-l4">
         <a class="reference internal" href="display/index.html">
          display
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="file/index.html">
+         file
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="preferences/index.html">
+         preferences
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="solve/index.html">
+         solve
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="server/index.html">
+         server
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="icing/index.html">
+         icing
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="solution/index.html">
+         solution
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="setup/index.html">
+         setup
         </a>
        </li>
       </ul>
@@ -75354,8 +75354,8 @@ function checkPageExistsAndRedirect(event) {
               
               <article class="bd-article" role="main">
                 
-  <section id="main-menu">
-<span id="ref-solver-tui"></span><h1>main_menu<a class="headerlink" href="#main-menu" title="Permalink to this heading">#</a></h1>
+  <section id="solver-tui">
+<span id="ref-solver-tui"></span><h1>solver.tui<a class="headerlink" href="#solver-tui" title="Permalink to this heading">#</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="ansys.fluent.core.solver.tui_231.main_menu">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ansys.fluent.core.solver.tui_231.</span></span><span class="sig-name descname"><span class="pre">main_menu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">service</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.fluent.core.solver.tui_231.main_menu" title="Permalink to this definition">#</a></dt>

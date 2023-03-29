@@ -15,5 +15,5 @@ particle_tracks
    :hidden:
 
    filter_settings/index
-   sphere_settings/index
    vector_settings/index
+   sphere_settings/index

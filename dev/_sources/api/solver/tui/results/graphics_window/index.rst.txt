@@ -14,10 +14,10 @@ graphics_window
 .. toctree::
    :hidden:
 
-   display_states/index
-   view_sync/index
-   titles/index
    embedded_windows/index
-   picture/index
-   views/index
+   display_states/index
    windows/index
+   picture/index
+   titles/index
+   views/index
+   view_sync/index

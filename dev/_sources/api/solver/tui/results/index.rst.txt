@@ -14,9 +14,9 @@ results
 .. toctree::
    :hidden:
 
-   graphics_window/index
-   graphics/index
    surface/index
+   graphics_window/index
+   animate/index
+   graphics/index
    report/index
    plot/index
-   animate/index

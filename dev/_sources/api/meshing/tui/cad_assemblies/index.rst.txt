@@ -16,5 +16,5 @@ cad_assemblies
 
    draw_options/index
    manage_state/index
-   update_options/index
    labels/index
+   update_options/index

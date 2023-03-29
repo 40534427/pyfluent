@@ -15,9 +15,9 @@ contact_solution_controls
    :hidden:
 
    miscellaneous/index
-   transient/index
-   amg/index
-   methods/index
    spatial/index
    parameters/index
+   amg/index
+   methods/index
+   transient/index
    models/index
