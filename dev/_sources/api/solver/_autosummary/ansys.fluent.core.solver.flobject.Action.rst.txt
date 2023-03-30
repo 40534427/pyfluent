@@ -17,6 +17,7 @@ ansys.fluent.core.solver.flobject.Action
       ~Action.arguments
       ~Action.get_attr
       ~Action.get_attrs
+      ~Action.get_completer_info
       ~Action.is_active
       ~Action.is_read_only
       ~Action.set_flproxy

@@ -24,6 +24,7 @@ ansys.fluent.core.services.settings.SettingsService
       ~SettingsService.get_static_info
       ~SettingsService.get_var
       ~SettingsService.has_wildcard
+      ~SettingsService.is_interactive_mode
       ~SettingsService.rename
       ~SettingsService.resize_list_object
       ~SettingsService.set_var

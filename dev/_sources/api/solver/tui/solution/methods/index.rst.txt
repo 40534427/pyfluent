@@ -15,10 +15,10 @@ solver.tui.solution.methods
    :hidden:
 
    multiphase_numerics/index
-   expert/index
    nita_expert_controls/index
-   overset/index
-   high_order_term_relaxation/index
-   query/index
-   warped_face_gradient_correction/index
    pseudo_time_method/index
+   high_order_term_relaxation/index
+   expert/index
+   overset/index
+   warped_face_gradient_correction/index
+   query/index

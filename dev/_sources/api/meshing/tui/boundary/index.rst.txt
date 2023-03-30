@@ -15,11 +15,11 @@ meshing.tui.boundary
    :hidden:
 
    boundary_conditions/index
-   refine/index
-   modify/index
-   feature/index
-   remesh/index
    shell_boundary_layer/index
-   improve/index
-   manage/index
+   feature/index
    separate/index
+   refine/index
+   improve/index
+   modify/index
+   manage/index
+   remesh/index

@@ -19,6 +19,7 @@ ansys.fluent.core.solver.flobject.Group
       ~Group.get_active_query_names
       ~Group.get_attr
       ~Group.get_attrs
+      ~Group.get_completer_info
       ~Group.get_state
       ~Group.is_active
       ~Group.is_read_only

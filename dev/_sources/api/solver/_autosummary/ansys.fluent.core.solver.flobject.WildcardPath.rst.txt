@@ -19,6 +19,7 @@ ansys.fluent.core.solver.flobject.WildcardPath
       ~WildcardPath.get_active_query_names
       ~WildcardPath.get_attr
       ~WildcardPath.get_attrs
+      ~WildcardPath.get_completer_info
       ~WildcardPath.get_state
       ~WildcardPath.is_active
       ~WildcardPath.is_read_only

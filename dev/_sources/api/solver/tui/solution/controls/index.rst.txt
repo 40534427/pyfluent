@@ -15,6 +15,6 @@ solver.tui.solution.controls
    :hidden:
 
    query/index
+   advanced/index
    contact_solution_controls/index
    acoustics_wave_equation_controls/index
-   advanced/index

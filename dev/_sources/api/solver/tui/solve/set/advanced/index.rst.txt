@@ -15,5 +15,5 @@ solver.tui.solve.set.advanced
    :hidden:
 
    turbomachinery_specific_numerics/index
-   non_reflecting_boundary_treatment/index
    secondary_gradient_limiting/index
+   non_reflecting_boundary_treatment/index

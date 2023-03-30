@@ -501,12 +501,30 @@ function checkPageExistsAndRedirect(event) {
 <h1>ansys.fluent.core.post_objects.post_objects_container.Container<a class="headerlink" href="#ansys-fluent-core-post-objects-post-objects-container-container" title="Permalink to this heading">#</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="ansys.fluent.core.post_objects.post_objects_container.Container">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ansys.fluent.core.post_objects.post_objects_container.</span></span><span class="sig-name descname"><span class="pre">Container</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">child</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">post_api_helper</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_surfaces_provider</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.fluent.core.post_objects.post_objects_container.Container" title="Permalink to this definition">#</a></dt>
-<dd><p class="rubric">Methods</p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ansys.fluent.core.post_objects.post_objects_container.</span></span><span class="sig-name descname"><span class="pre">Container</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">container_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">post_api_helper</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_surfaces_provider</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.fluent.core.post_objects.post_objects_container.Container" title="Permalink to this definition">#</a></dt>
+<dd><p>Base class for containers, e.g. Plots, Graphics.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>session</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/dev/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">object</span></code></a></span></dt><dd><p>Session object.</p>
+</dd>
+<dt><strong>container_type: object</strong></dt><dd><p>Container type (e.g. Plots, Graphics)</p>
+</dd>
+<dt><strong>module: object</strong></dt><dd><p>Python module containing post definitions</p>
+</dd>
+<dt><strong>post_api_helper: object</strong></dt><dd><p>Provides helper APIs for post-processing</p>
+</dd>
+<dt><strong>local_surfaces_provider</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/dev/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">object</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Object providing local surfaces so that user can access surfaces
+created in other modules, such as PyVista. The default is <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
 <table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="ansys.fluent.core.post_objects.post_objects_container.Container.__init__.html#ansys.fluent.core.post_objects.post_objects_container.Container.__init__" title="ansys.fluent.core.post_objects.post_objects_container.Container.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(session, child, module, post_api_helper)</p></td>
-<td><p>Instantiate Plots, container of plot objects.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.fluent.core.post_objects.post_objects_container.Container.__init__.html#ansys.fluent.core.post_objects.post_objects_container.Container.__init__" title="ansys.fluent.core.post_objects.post_objects_container.Container.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(session, container_type, module, ...)</p></td>
+<td><p></p></td>
 </tr>
 </tbody>
 </table>

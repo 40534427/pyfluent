@@ -16,9 +16,9 @@ meshing.tui.display
 
    objects/index
    set_grid/index
-   zones/index
+   set/index
    advanced_rendering/index
+   zones/index
+   update_scene/index
    xy_plot/index
    display_states/index
-   set/index
-   update_scene/index
