@@ -1,7 +1,7 @@
 .. _ref_solver_tui_define_gap_model:
 
-solver.tui.define.gap\_model
-============================
+gap_model
+=========
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.define.gap_model
    :members:

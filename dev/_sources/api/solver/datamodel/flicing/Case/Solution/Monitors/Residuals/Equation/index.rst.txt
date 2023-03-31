@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_flicing_Case_Solution_Monitors_Residuals_Equation:
 
-solver.datamodel.flicing.Case.Solution.Monitors.Residuals.Equation
-==================================================================
+_Equation
+=========
 
 .. autoclass:: ansys.fluent.core.datamodel_231.flicing.Root.Case.Solution.Monitors.Residuals.Equation._Equation
    :members:

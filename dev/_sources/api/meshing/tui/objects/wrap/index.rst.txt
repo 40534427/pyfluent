@@ -1,7 +1,7 @@
 .. _ref_meshing_tui_objects_wrap:
 
-meshing.tui.objects.wrap
-========================
+wrap
+====
 
 .. autoclass:: ansys.fluent.core.meshing.tui_231.main_menu.objects.wrap
    :members:

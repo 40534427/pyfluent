@@ -1,7 +1,7 @@
 .. _ref_meshing_tui_file_import:
 
-meshing.tui.file.import\_
-=========================
+import_
+=======
 
 .. autoclass:: ansys.fluent.core.meshing.tui_231.main_menu.file.import_
    :members:

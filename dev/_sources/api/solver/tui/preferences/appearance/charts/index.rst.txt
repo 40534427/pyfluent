@@ -1,7 +1,7 @@
 .. _ref_solver_tui_preferences_appearance_charts:
 
-solver.tui.preferences.appearance.charts
-========================================
+charts
+======
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.preferences.appearance.charts
    :members:

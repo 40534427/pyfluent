@@ -1,7 +1,7 @@
 .. _ref_solver_tui_solve_set_amg_options:
 
-solver.tui.solve.set.amg\_options
-=================================
+amg_options
+===========
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.solve.set.amg_options
    :members:

@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_preferences_Appearance_Charts_TextColor:
 
-solver.datamodel.preferences.Appearance.Charts.TextColor
-========================================================
+TextColor
+=========
 
 .. autoclass:: ansys.fluent.core.datamodel_231.preferences.Root.Appearance.Charts.TextColor
    :members:

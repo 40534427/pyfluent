@@ -1,7 +1,7 @@
 .. _ref_meshing_tui_mesh_tet_controls_remove_slivers:
 
-meshing.tui.mesh.tet.controls.remove\_slivers
-=============================================
+remove_slivers
+==============
 
 .. autoclass:: ansys.fluent.core.meshing.tui_231.main_menu.mesh.tet.controls.remove_slivers
    :members:

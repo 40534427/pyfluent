@@ -1,7 +1,7 @@
 .. _ref_solver_tui_preferences_general:
 
-solver.tui.preferences.general
-==============================
+general
+=======
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.preferences.general
    :members:

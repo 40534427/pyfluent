@@ -1,7 +1,7 @@
 .. _ref_solver_tui_define_spectral:
 
-solver.tui.define.spectral
-==========================
+spectral
+========
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.define.spectral
    :members:

@@ -1,7 +1,7 @@
 .. _ref_meshing_tui_cad_assemblies:
 
-meshing.tui.cad\_assemblies
-===========================
+cad_assemblies
+==============
 
 .. autoclass:: ansys.fluent.core.meshing.tui_231.main_menu.cad_assemblies
    :members:
@@ -14,7 +14,7 @@ meshing.tui.cad\_assemblies
 .. toctree::
    :hidden:
 
-   update_options/index
-   labels/index
-   manage_state/index
    draw_options/index
+   update_options/index
+   manage_state/index
+   labels/index

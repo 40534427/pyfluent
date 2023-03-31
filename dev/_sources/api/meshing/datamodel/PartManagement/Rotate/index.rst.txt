@@ -1,7 +1,7 @@
 .. _ref_meshing_datamodel_PartManagement_Rotate:
 
-meshing.datamodel.PartManagement.Rotate
-=======================================
+_Rotate
+=======
 
 .. autoclass:: ansys.fluent.core.datamodel_231.PartManagement.Root.Rotate._Rotate
    :members:

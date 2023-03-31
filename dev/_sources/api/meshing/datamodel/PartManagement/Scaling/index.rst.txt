@@ -1,7 +1,7 @@
 .. _ref_meshing_datamodel_PartManagement_Scaling:
 
-meshing.datamodel.PartManagement.Scaling
-========================================
+_Scaling
+========
 
 .. autoclass:: ansys.fluent.core.datamodel_231.PartManagement.Root.Scaling._Scaling
    :members:

@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_preferences_Graphics_Performance:
 
-solver.datamodel.preferences.Graphics.Performance
-=================================================
+Performance
+===========
 
 .. autoclass:: ansys.fluent.core.datamodel_231.preferences.Root.Graphics.Performance
    :members:

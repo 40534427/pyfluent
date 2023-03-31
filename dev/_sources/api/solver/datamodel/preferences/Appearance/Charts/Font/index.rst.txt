@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_preferences_Appearance_Charts_Font:
 
-solver.datamodel.preferences.Appearance.Charts.Font
-===================================================
+Font
+====
 
 .. autoclass:: ansys.fluent.core.datamodel_231.preferences.Root.Appearance.Charts.Font
    :members:

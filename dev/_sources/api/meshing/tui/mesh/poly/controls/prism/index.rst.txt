@@ -1,7 +1,7 @@
 .. _ref_meshing_tui_mesh_poly_controls_prism:
 
-meshing.tui.mesh.poly.controls.prism
-====================================
+prism
+=====
 
 .. autoclass:: ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.prism
    :members:

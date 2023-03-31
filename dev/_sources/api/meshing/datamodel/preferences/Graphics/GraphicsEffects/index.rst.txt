@@ -1,7 +1,7 @@
 .. _ref_meshing_datamodel_preferences_Graphics_GraphicsEffects:
 
-meshing.datamodel.preferences.Graphics.GraphicsEffects
-======================================================
+GraphicsEffects
+===============
 
 .. autoclass:: ansys.fluent.core.datamodel_231.preferences.Root.Graphics.GraphicsEffects
    :members:

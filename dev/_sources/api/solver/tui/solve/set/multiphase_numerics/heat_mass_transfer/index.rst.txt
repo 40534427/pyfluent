@@ -1,7 +1,7 @@
 .. _ref_solver_tui_solve_set_multiphase_numerics_heat_mass_transfer:
 
-solver.tui.solve.set.multiphase\_numerics.heat\_mass\_transfer
-==============================================================
+heat_mass_transfer
+==================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.solve.set.multiphase_numerics.heat_mass_transfer
    :members:
@@ -15,6 +15,6 @@ solver.tui.solve.set.multiphase\_numerics.heat\_mass\_transfer
    :hidden:
 
    cavitation/index
-   area_density/index
    boiling/index
    evaporation_condensation/index
+   area_density/index

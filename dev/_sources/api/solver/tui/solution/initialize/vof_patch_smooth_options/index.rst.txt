@@ -1,7 +1,7 @@
 .. _ref_solver_tui_solution_initialize_vof_patch_smooth_options:
 
-solver.tui.solution.initialize.vof\_patch\_smooth\_options
-==========================================================
+vof_patch_smooth_options
+========================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.solution.initialize.vof_patch_smooth_options
    :members:

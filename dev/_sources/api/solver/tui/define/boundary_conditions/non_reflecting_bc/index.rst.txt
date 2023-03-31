@@ -1,7 +1,7 @@
 .. _ref_solver_tui_define_boundary_conditions_non_reflecting_bc:
 
-solver.tui.define.boundary\_conditions.non\_reflecting\_bc
-==========================================================
+non_reflecting_bc
+=================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.define.boundary_conditions.non_reflecting_bc
    :members:
@@ -14,5 +14,5 @@ solver.tui.define.boundary\_conditions.non\_reflecting\_bc
 .. toctree::
    :hidden:
 
-   general_nrbc/index
    turbo_specific_nrbc/index
+   general_nrbc/index

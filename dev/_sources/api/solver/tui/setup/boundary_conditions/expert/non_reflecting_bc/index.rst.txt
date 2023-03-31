@@ -1,7 +1,7 @@
 .. _ref_solver_tui_setup_boundary_conditions_expert_non_reflecting_bc:
 
-solver.tui.setup.boundary\_conditions.expert.non\_reflecting\_bc
-================================================================
+non_reflecting_bc
+=================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.setup.boundary_conditions.expert.non_reflecting_bc
    :members:

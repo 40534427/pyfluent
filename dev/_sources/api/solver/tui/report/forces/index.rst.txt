@@ -1,7 +1,7 @@
 .. _ref_solver_tui_report_forces:
 
-solver.tui.report.forces
-========================
+forces
+======
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.report.forces
    :members:

@@ -1,7 +1,7 @@
 .. _ref_solver_tui_display_surface:
 
-solver.tui.display.surface
-==========================
+surface
+=======
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.display.surface
    :members:
@@ -14,5 +14,5 @@ solver.tui.display.surface
 .. toctree::
    :hidden:
 
-   query/index
    post_processing_volume/index
+   query/index

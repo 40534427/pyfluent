@@ -1,7 +1,7 @@
 .. _ref_solver_tui_define_models_dpm:
 
-solver.tui.define.models.dpm
-============================
+dpm
+===
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.define.models.dpm
    :members:
@@ -14,11 +14,11 @@ solver.tui.define.models.dpm
 .. toctree::
    :hidden:
 
-   collisions/index
-   stripping_options/index
+   numerics/index
    parallel/index
    erosion_dynamic_mesh/index
    interaction/index
-   numerics/index
-   splash_options/index
+   stripping_options/index
    options/index
+   splash_options/index
+   collisions/index

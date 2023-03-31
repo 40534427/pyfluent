@@ -1,7 +1,7 @@
 .. _ref_solver_tui_preferences_gpuapp:
 
-solver.tui.preferences.gpuapp
-=============================
+gpuapp
+======
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.preferences.gpuapp
    :members:

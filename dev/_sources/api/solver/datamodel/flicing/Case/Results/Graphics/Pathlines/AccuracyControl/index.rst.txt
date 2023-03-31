@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_flicing_Case_Results_Graphics_Pathlines_AccuracyControl:
 
-solver.datamodel.flicing.Case.Results.Graphics.Pathlines.AccuracyControl
-========================================================================
+AccuracyControl
+===============
 
 .. autoclass:: ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.Pathlines._Pathlines.AccuracyControl
    :members:

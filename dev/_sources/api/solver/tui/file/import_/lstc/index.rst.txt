@@ -1,7 +1,7 @@
 .. _ref_solver_tui_file_import_lstc:
 
-solver.tui.file.import\_.lstc
-=============================
+lstc
+====
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.file.import_.lstc
    :members:

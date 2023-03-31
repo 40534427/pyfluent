@@ -1,7 +1,7 @@
 .. _ref_solver_tui_define_models_multiphase_flow_regime_modeling:
 
-solver.tui.define.models.multiphase.flow\_regime\_modeling
-==========================================================
+flow_regime_modeling
+====================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.define.models.multiphase.flow_regime_modeling
    :members:

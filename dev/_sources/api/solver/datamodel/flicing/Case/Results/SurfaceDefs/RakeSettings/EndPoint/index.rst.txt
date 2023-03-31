@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_flicing_Case_Results_SurfaceDefs_RakeSettings_EndPoint:
 
-solver.datamodel.flicing.Case.Results.SurfaceDefs.RakeSettings.EndPoint
-=======================================================================
+EndPoint
+========
 
 .. autoclass:: ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.SurfaceDefs._SurfaceDefs.RakeSettings.EndPoint
    :members:

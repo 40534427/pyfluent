@@ -1,7 +1,7 @@
 .. _ref_solver_tui_surface_query:
 
-solver.tui.surface.query
-========================
+query
+=====
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.surface.query
    :members:

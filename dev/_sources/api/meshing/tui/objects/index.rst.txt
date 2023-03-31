@@ -1,7 +1,7 @@
 .. _ref_meshing_tui_objects:
 
-meshing.tui.objects
-===================
+objects
+=======
 
 .. autoclass:: ansys.fluent.core.meshing.tui_231.main_menu.objects
    :members:
@@ -14,13 +14,13 @@ meshing.tui.objects
 .. toctree::
    :hidden:
 
-   cad_association/index
-   create_new_mesh_object/index
-   remove_gaps/index
+   fix_holes/index
+   volumetric_regions/index
    join_intersect/index
    wrap/index
-   labels/index
-   deprecated/index
-   volumetric_regions/index
-   fix_holes/index
+   create_new_mesh_object/index
    set/index
+   cad_association/index
+   remove_gaps/index
+   deprecated/index
+   labels/index

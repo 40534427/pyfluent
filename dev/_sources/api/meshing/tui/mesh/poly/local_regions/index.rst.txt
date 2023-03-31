@@ -1,7 +1,7 @@
 .. _ref_meshing_tui_mesh_poly_local_regions:
 
-meshing.tui.mesh.poly.local\_regions
-====================================
+local_regions
+=============
 
 .. autoclass:: ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.local_regions
    :members:

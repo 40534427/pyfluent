@@ -1,7 +1,7 @@
 .. _ref_solver_tui_define_models_multiphase_wet_steam:
 
-solver.tui.define.models.multiphase.wet\_steam
-==============================================
+wet_steam
+=========
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.define.models.multiphase.wet_steam
    :members:

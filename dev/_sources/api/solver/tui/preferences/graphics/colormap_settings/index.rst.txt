@@ -1,7 +1,7 @@
 .. _ref_solver_tui_preferences_graphics_colormap_settings:
 
-solver.tui.preferences.graphics.colormap\_settings
-==================================================
+colormap_settings
+=================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.preferences.graphics.colormap_settings
    :members:

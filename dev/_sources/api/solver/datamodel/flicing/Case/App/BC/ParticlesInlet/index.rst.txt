@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_flicing_Case_App_BC_ParticlesInlet:
 
-solver.datamodel.flicing.Case.App.BC.ParticlesInlet
-===================================================
+ParticlesInlet
+==============
 
 .. autoclass:: ansys.fluent.core.datamodel_231.flicing.Root.Case.App.BC._BC.ParticlesInlet
    :members:

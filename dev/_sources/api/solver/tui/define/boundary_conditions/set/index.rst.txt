@@ -1,7 +1,7 @@
 .. _ref_solver_tui_define_boundary_conditions_set:
 
-solver.tui.define.boundary\_conditions.set
-==========================================
+set
+===
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.define.boundary_conditions.set
    :members:

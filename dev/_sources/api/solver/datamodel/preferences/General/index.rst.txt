@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_preferences_General:
 
-solver.datamodel.preferences.General
-====================================
+General
+=======
 
 .. autoclass:: ansys.fluent.core.datamodel_231.preferences.Root.General
    :members:

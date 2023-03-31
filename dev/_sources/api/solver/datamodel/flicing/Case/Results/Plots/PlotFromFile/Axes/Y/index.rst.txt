@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_flicing_Case_Results_Plots_PlotFromFile_Axes_Y:
 
-solver.datamodel.flicing.Case.Results.Plots.PlotFromFile.Axes.Y
-===============================================================
+Y
+=
 
 .. autoclass:: ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Plots.PlotFromFile.Axes.Y
    :members:

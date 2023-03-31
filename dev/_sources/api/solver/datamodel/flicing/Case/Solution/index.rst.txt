@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_flicing_Case_Solution:
 
-solver.datamodel.flicing.Case.Solution
-======================================
+Solution
+========
 
 .. autoclass:: ansys.fluent.core.datamodel_231.flicing.Root.Case.Solution
    :members:

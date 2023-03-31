@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_preferences_Graphics_VectorSettings:
 
-solver.datamodel.preferences.Graphics.VectorSettings
-====================================================
+VectorSettings
+==============
 
 .. autoclass:: ansys.fluent.core.datamodel_231.preferences.Root.Graphics.VectorSettings
    :members:

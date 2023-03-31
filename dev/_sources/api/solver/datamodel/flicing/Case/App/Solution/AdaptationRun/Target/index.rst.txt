@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_flicing_Case_App_Solution_AdaptationRun_Target:
 
-solver.datamodel.flicing.Case.App.Solution.AdaptationRun.Target
-===============================================================
+Target
+======
 
 .. autoclass:: ansys.fluent.core.datamodel_231.flicing.Root.Case.App.Solution.AdaptationRun.Target
    :members:

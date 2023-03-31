@@ -1,7 +1,7 @@
 .. _ref_solver_tui_solution_calculation_activities_solution_strategy_automatic_case_modification:
 
-solver.tui.solution.calculation\_activities.solution\_strategy.automatic\_case\_modification
-============================================================================================
+automatic_case_modification
+===========================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.solution.calculation_activities.solution_strategy.automatic_case_modification
    :members:

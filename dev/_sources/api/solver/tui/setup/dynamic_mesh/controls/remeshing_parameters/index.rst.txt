@@ -1,7 +1,7 @@
 .. _ref_solver_tui_setup_dynamic_mesh_controls_remeshing_parameters:
 
-solver.tui.setup.dynamic\_mesh.controls.remeshing\_parameters
-=============================================================
+remeshing_parameters
+====================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.setup.dynamic_mesh.controls.remeshing_parameters
    :members:
@@ -14,6 +14,6 @@ solver.tui.setup.dynamic\_mesh.controls.remeshing\_parameters
 .. toctree::
    :hidden:
 
-   prism_controls/index
    prism_layer_parameters/index
    sizing_controls/index
+   prism_controls/index

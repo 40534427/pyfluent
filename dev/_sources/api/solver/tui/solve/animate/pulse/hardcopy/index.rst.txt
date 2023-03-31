@@ -1,7 +1,7 @@
 .. _ref_solver_tui_solve_animate_pulse_hardcopy:
 
-solver.tui.solve.animate.pulse.hardcopy
-=======================================
+hardcopy
+========
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.solve.animate.pulse.hardcopy
    :members:
@@ -14,5 +14,5 @@ solver.tui.solve.animate.pulse.hardcopy
 .. toctree::
    :hidden:
 
-   driver/index
    color_mode/index
+   driver/index

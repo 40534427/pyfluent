@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>meshing.tui.mesh.rapid_octree.boundary_layer_mesh_configuration &#8212; PyFluent</title>
+    <title>boundary_layer_mesh_configuration &#8212; PyFluent</title>
     
 <script>
   document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
@@ -55,8 +55,8 @@
     <link rel="shortcut icon" href="../../../../../../_static/ansys-favicon.png"/>
     <link rel="index" title="Index" href="../../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../../search.html" />
-    <link rel="next" title="meshing.tui.mesh.rapid_octree.advanced_meshing_options" href="../advanced_meshing_options/index.html" />
-    <link rel="prev" title="meshing.tui.mesh.rapid_octree.mesh_sizing" href="../mesh_sizing/index.html" />
+    <link rel="next" title="refinement_regions" href="../refinement_regions/index.html" />
+    <link rel="prev" title="mesh_sizing" href="../mesh_sizing/index.html" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="docsearch:language" content="en">
   </head>
@@ -280,9 +280,9 @@ function checkPageExistsAndRedirect(event) {
           <li class="nav-item nav-item-1"><a href="../../../../../index.html" >API reference</a> » </li>
           <li class="nav-item nav-item-2"><a href="../../../../index.html" >Meshing</a> » </li>
           <li class="nav-item nav-item-3"><a href="../../../index.html" >meshing.tui</a> » </li>
-          <li class="nav-item nav-item-4"><a href="../../index.html" >meshing.tui.mesh</a> » </li>
-          <li class="nav-item nav-item-5"><a href="../index.html" accesskey="U">meshing.tui.mesh.rapid_octree</a> » </li>
-        <li class="nav-item nav-item-this"><a href="">meshing.tui.mesh.rapid_octree.boundary_layer_mesh_configuration</a></li> 
+          <li class="nav-item nav-item-4"><a href="../../index.html" >mesh</a> » </li>
+          <li class="nav-item nav-item-5"><a href="../index.html" accesskey="U">rapid_octree</a> » </li>
+        <li class="nav-item nav-item-this"><a href="">boundary_layer_mesh_configuration</a></li> 
       </ul>
     </div>
         </div>
@@ -334,13 +334,18 @@ function checkPageExistsAndRedirect(event) {
     </label>
     <ul class="current">
      <li class="toctree-l3">
-      <a class="reference internal" href="../../../file/index.html">
-       meshing.tui.file
+      <a class="reference internal" href="../../../material_point/index.html">
+       material_point
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../diagnostics/index.html">
+       diagnostics
       </a>
      </li>
      <li class="toctree-l3 current active has-children">
       <a class="reference internal" href="../../index.html">
-       meshing.tui.mesh
+       mesh
       </a>
       <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
       <label for="toctree-checkbox-3">
@@ -349,68 +354,53 @@ function checkPageExistsAndRedirect(event) {
       </label>
       <ul class="current">
        <li class="toctree-l4">
-        <a class="reference internal" href="../../modify/index.html">
-         meshing.tui.mesh.modify
-        </a>
-       </li>
-       <li class="toctree-l4">
         <a class="reference internal" href="../../non_conformals/index.html">
-         meshing.tui.mesh.non_conformals
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../../separate/index.html">
-         meshing.tui.mesh.separate
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../../cavity/index.html">
-         meshing.tui.mesh.cavity
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../../thin_volume_mesh/index.html">
-         meshing.tui.mesh.thin_volume_mesh
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../../prism/index.html">
-         meshing.tui.mesh.prism
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../../auto_mesh_controls/index.html">
-         meshing.tui.mesh.auto_mesh_controls
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../../pyramid/index.html">
-         meshing.tui.mesh.pyramid
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../../hexcore/index.html">
-         meshing.tui.mesh.hexcore
+         non_conformals
         </a>
        </li>
        <li class="toctree-l4">
         <a class="reference internal" href="../../cartesian/index.html">
-         meshing.tui.mesh.cartesian
+         cartesian
         </a>
        </li>
        <li class="toctree-l4">
         <a class="reference internal" href="../../cell_zone_conditions/index.html">
-         meshing.tui.mesh.cell_zone_conditions
+         cell_zone_conditions
         </a>
        </li>
        <li class="toctree-l4">
-        <a class="reference internal" href="../../scoped_prisms/index.html">
-         meshing.tui.mesh.scoped_prisms
+        <a class="reference internal" href="../../modify/index.html">
+         modify
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../cavity/index.html">
+         cavity
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../manage/index.html">
+         manage
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../thin_volume_mesh/index.html">
+         thin_volume_mesh
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../poly_hexcore/index.html">
+         poly_hexcore
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../auto_mesh_controls/index.html">
+         auto_mesh_controls
         </a>
        </li>
        <li class="toctree-l4 current active has-children">
         <a class="reference internal" href="../index.html">
-         meshing.tui.mesh.rapid_octree
+         rapid_octree
         </a>
         <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
         <label for="toctree-checkbox-4">
@@ -419,117 +409,127 @@ function checkPageExistsAndRedirect(event) {
         </label>
         <ul class="current">
          <li class="toctree-l5">
-          <a class="reference internal" href="../refinement_regions/index.html">
-           meshing.tui.mesh.rapid_octree.refinement_regions
-          </a>
-         </li>
-         <li class="toctree-l5">
           <a class="reference internal" href="../mesh_sizing/index.html">
-           meshing.tui.mesh.rapid_octree.mesh_sizing
+           mesh_sizing
           </a>
          </li>
          <li class="toctree-l5 current active">
           <a class="current reference internal" href="#">
-           meshing.tui.mesh.rapid_octree.boundary_layer_mesh_configuration
+           boundary_layer_mesh_configuration
+          </a>
+         </li>
+         <li class="toctree-l5">
+          <a class="reference internal" href="../refinement_regions/index.html">
+           refinement_regions
           </a>
          </li>
          <li class="toctree-l5">
           <a class="reference internal" href="../advanced_meshing_options/index.html">
-           meshing.tui.mesh.rapid_octree.advanced_meshing_options
+           advanced_meshing_options
           </a>
          </li>
         </ul>
        </li>
        <li class="toctree-l4">
-        <a class="reference internal" href="../../domains/index.html">
-         meshing.tui.mesh.domains
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../../poly_hexcore/index.html">
-         meshing.tui.mesh.poly_hexcore
+        <a class="reference internal" href="../../pyramid/index.html">
+         pyramid
         </a>
        </li>
        <li class="toctree-l4">
         <a class="reference internal" href="../../poly/index.html">
-         meshing.tui.mesh.poly
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../../manage/index.html">
-         meshing.tui.mesh.manage
+         poly
         </a>
        </li>
        <li class="toctree-l4">
         <a class="reference internal" href="../../tet/index.html">
-         meshing.tui.mesh.tet
+         tet
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../prism/index.html">
+         prism
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../domains/index.html">
+         domains
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../separate/index.html">
+         separate
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../hexcore/index.html">
+         hexcore
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../scoped_prisms/index.html">
+         scoped_prisms
         </a>
        </li>
       </ul>
      </li>
      <li class="toctree-l3">
-      <a class="reference internal" href="../../../reference_frames/index.html">
-       meshing.tui.reference_frames
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="../../../preferences/index.html">
-       meshing.tui.preferences
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="../../../material_point/index.html">
-       meshing.tui.material_point
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="../../../diagnostics/index.html">
-       meshing.tui.diagnostics
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="../../../scoped_sizing/index.html">
-       meshing.tui.scoped_sizing
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="../../../boundary/index.html">
-       meshing.tui.boundary
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="../../../display/index.html">
-       meshing.tui.display
-      </a>
-     </li>
-     <li class="toctree-l3">
       <a class="reference internal" href="../../../cad_assemblies/index.html">
-       meshing.tui.cad_assemblies
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="../../../parallel/index.html">
-       meshing.tui.parallel
+       cad_assemblies
       </a>
      </li>
      <li class="toctree-l3">
       <a class="reference internal" href="../../../size_functions/index.html">
-       meshing.tui.size_functions
+       size_functions
       </a>
      </li>
      <li class="toctree-l3">
-      <a class="reference internal" href="../../../objects/index.html">
-       meshing.tui.objects
+      <a class="reference internal" href="../../../file/index.html">
+       file
       </a>
      </li>
      <li class="toctree-l3">
-      <a class="reference internal" href="../../../openmp_controls/index.html">
-       meshing.tui.openmp_controls
+      <a class="reference internal" href="../../../display/index.html">
+       display
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../boundary/index.html">
+       boundary
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../parallel/index.html">
+       parallel
       </a>
      </li>
      <li class="toctree-l3">
       <a class="reference internal" href="../../../report/index.html">
-       meshing.tui.report
+       report
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../preferences/index.html">
+       preferences
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../scoped_sizing/index.html">
+       scoped_sizing
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../reference_frames/index.html">
+       reference_frames
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../openmp_controls/index.html">
+       openmp_controls
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../objects/index.html">
+       objects
       </a>
      </li>
     </ul>
@@ -645,8 +645,8 @@ function checkPageExistsAndRedirect(event) {
               
               <article class="bd-article" role="main">
                 
-  <section id="meshing-tui-mesh-rapid-octree-boundary-layer-mesh-configuration">
-<span id="ref-meshing-tui-mesh-rapid-octree-boundary-layer-mesh-configuration"></span><h1>meshing.tui.mesh.rapid_octree.boundary_layer_mesh_configuration<a class="headerlink" href="#meshing-tui-mesh-rapid-octree-boundary-layer-mesh-configuration" title="Permalink to this heading">#</a></h1>
+  <section id="boundary-layer-mesh-configuration">
+<span id="ref-meshing-tui-mesh-rapid-octree-boundary-layer-mesh-configuration"></span><h1>boundary_layer_mesh_configuration<a class="headerlink" href="#boundary-layer-mesh-configuration" title="Permalink to this heading">#</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="ansys.fluent.core.meshing.tui_231.main_menu.mesh.rapid_octree.boundary_layer_mesh_configuration">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ansys.fluent.core.meshing.tui_231.main_menu.mesh.rapid_octree.</span></span><span class="sig-name descname"><span class="pre">boundary_layer_mesh_configuration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">service</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.fluent.core.meshing.tui_231.main_menu.mesh.rapid_octree.boundary_layer_mesh_configuration" title="Permalink to this definition">#</a></dt>
@@ -655,19 +655,19 @@ function checkPageExistsAndRedirect(event) {
 <p><strong>Methods:</strong></p>
 <table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.rapid_octree.boundary_layer_mesh_configuration.add" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.rapid_octree.boundary_layer_mesh_configuration.add"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add</span></code></a>(*args, **kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.rapid_octree.boundary_layer_mesh_configuration.add" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.rapid_octree.boundary_layer_mesh_configuration.add"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add</span></code></a>(*args, **kwargs)</p></td>
 <td><p>Add a boudnary layer definition.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.rapid_octree.boundary_layer_mesh_configuration.delete" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.rapid_octree.boundary_layer_mesh_configuration.delete"><code class="xref py py-obj docutils literal notranslate"><span class="pre">delete</span></code></a>(*args, **kwargs)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.rapid_octree.boundary_layer_mesh_configuration.delete" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.rapid_octree.boundary_layer_mesh_configuration.delete"><code class="xref py py-obj docutils literal notranslate"><span class="pre">delete</span></code></a>(*args, **kwargs)</p></td>
 <td><p>Specify the number of prismatic layers for surface zones.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.rapid_octree.boundary_layer_mesh_configuration.delete_all" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.rapid_octree.boundary_layer_mesh_configuration.delete_all"><code class="xref py py-obj docutils literal notranslate"><span class="pre">delete_all</span></code></a>(*args, **kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.rapid_octree.boundary_layer_mesh_configuration.delete_all" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.rapid_octree.boundary_layer_mesh_configuration.delete_all"><code class="xref py py-obj docutils literal notranslate"><span class="pre">delete_all</span></code></a>(*args, **kwargs)</p></td>
 <td><p>Specify the number of prismatic layers for surface zones.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.rapid_octree.boundary_layer_mesh_configuration.edit" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.rapid_octree.boundary_layer_mesh_configuration.edit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">edit</span></code></a>(*args, **kwargs)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.rapid_octree.boundary_layer_mesh_configuration.edit" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.rapid_octree.boundary_layer_mesh_configuration.edit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">edit</span></code></a>(*args, **kwargs)</p></td>
 <td><p>Specify the number of prismatic layers for surface zones.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.rapid_octree.boundary_layer_mesh_configuration.list" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.rapid_octree.boundary_layer_mesh_configuration.list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a>(*args, **kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.rapid_octree.boundary_layer_mesh_configuration.list" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.rapid_octree.boundary_layer_mesh_configuration.list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a>(*args, **kwargs)</p></td>
 <td><p>Specify the number of prismatic layers for surface zones.</p></td>
 </tr>
 </tbody>

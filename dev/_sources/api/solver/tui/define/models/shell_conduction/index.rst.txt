@@ -1,7 +1,7 @@
 .. _ref_solver_tui_define_models_shell_conduction:
 
-solver.tui.define.models.shell\_conduction
-==========================================
+shell_conduction
+================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.define.models.shell_conduction
    :members:

@@ -1,7 +1,7 @@
 .. _ref_solver_tui_solve_execute_commands:
 
-solver.tui.solve.execute\_commands
-==================================
+execute_commands
+================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.solve.execute_commands
    :members:

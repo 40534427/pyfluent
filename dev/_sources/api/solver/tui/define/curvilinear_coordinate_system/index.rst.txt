@@ -1,7 +1,7 @@
 .. _ref_solver_tui_define_curvilinear_coordinate_system:
 
-solver.tui.define.curvilinear\_coordinate\_system
-=================================================
+curvilinear_coordinate_system
+=============================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.define.curvilinear_coordinate_system
    :members:

@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_flicing_Case_ResultsInfo_DPMInjections:
 
-solver.datamodel.flicing.Case.ResultsInfo.DPMInjections
-=======================================================
+_DPMInjections
+==============
 
 .. autoclass:: ansys.fluent.core.datamodel_231.flicing.Root.Case.ResultsInfo.DPMInjections._DPMInjections
    :members:

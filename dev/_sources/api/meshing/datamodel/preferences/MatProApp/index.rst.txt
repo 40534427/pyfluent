@@ -1,7 +1,7 @@
 .. _ref_meshing_datamodel_preferences_MatProApp:
 
-meshing.datamodel.preferences.MatProApp
-=======================================
+MatProApp
+=========
 
 .. autoclass:: ansys.fluent.core.datamodel_231.preferences.Root.MatProApp
    :members:

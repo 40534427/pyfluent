@@ -1,7 +1,7 @@
 .. _ref_meshing_tui_mesh_rapid_octree_advanced_meshing_options:
 
-meshing.tui.mesh.rapid\_octree.advanced\_meshing\_options
-=========================================================
+advanced_meshing_options
+========================
 
 .. autoclass:: ansys.fluent.core.meshing.tui_231.main_menu.mesh.rapid_octree.advanced_meshing_options
    :members:

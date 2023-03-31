@@ -1,7 +1,7 @@
 .. _ref_solver_tui_solution_report_definitions:
 
-solver.tui.solution.report\_definitions
-=======================================
+report_definitions
+==================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.solution.report_definitions
    :members:

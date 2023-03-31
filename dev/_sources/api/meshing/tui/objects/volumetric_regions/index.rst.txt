@@ -1,7 +1,7 @@
 .. _ref_meshing_tui_objects_volumetric_regions:
 
-meshing.tui.objects.volumetric\_regions
-=======================================
+volumetric_regions
+==================
 
 .. autoclass:: ansys.fluent.core.meshing.tui_231.main_menu.objects.volumetric_regions
    :members:
@@ -15,5 +15,5 @@ meshing.tui.objects.volumetric\_regions
    :hidden:
 
    hexcore/index
-   tet/index
    scoped_prism/index
+   tet/index

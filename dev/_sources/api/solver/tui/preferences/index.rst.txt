@@ -1,7 +1,7 @@
 .. _ref_solver_tui_preferences:
 
-solver.tui.preferences
-======================
+preferences
+===========
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.preferences
    :members:
@@ -14,13 +14,13 @@ solver.tui.preferences
 .. toctree::
    :hidden:
 
-   graphics/index
-   gpuapp/index
-   navigation/index
-   appearance/index
-   mat_pro_app/index
-   meshing_workflow/index
-   general/index
-   simulation/index
-   parametric_study/index
    turbo_workflow/index
+   simulation/index
+   general/index
+   graphics/index
+   mat_pro_app/index
+   gpuapp/index
+   appearance/index
+   navigation/index
+   meshing_workflow/index
+   parametric_study/index

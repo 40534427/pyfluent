@@ -1,7 +1,7 @@
 .. _ref_meshing_tui_mesh_tet_controls:
 
-meshing.tui.mesh.tet.controls
-=============================
+controls
+========
 
 .. autoclass:: ansys.fluent.core.meshing.tui_231.main_menu.mesh.tet.controls
    :members:
@@ -14,7 +14,7 @@ meshing.tui.mesh.tet.controls
 .. toctree::
    :hidden:
 
-   improve_mesh/index
    tet_improve/index
-   adv_front_method/index
    remove_slivers/index
+   adv_front_method/index
+   improve_mesh/index

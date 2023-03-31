@@ -1,7 +1,7 @@
 .. _ref_meshing_tui_preferences_gpuapp:
 
-meshing.tui.preferences.gpuapp
-==============================
+gpuapp
+======
 
 .. autoclass:: ansys.fluent.core.meshing.tui_231.main_menu.preferences.gpuapp
    :members:

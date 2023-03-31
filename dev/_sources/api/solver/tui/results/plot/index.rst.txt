@@ -1,7 +1,7 @@
 .. _ref_solver_tui_results_plot:
 
-solver.tui.results.plot
-=======================
+plot
+====
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.results.plot
    :members:
@@ -14,6 +14,6 @@ solver.tui.results.plot
 .. toctree::
    :hidden:
 
-   ansys_sound_analysis/index
    flamelet_curves/index
+   ansys_sound_analysis/index
    cumulative_plot/index

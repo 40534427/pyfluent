@@ -1,7 +1,7 @@
 .. _ref_solver_tui_file_solution_files:
 
-solver.tui.file.solution\_files
-===============================
+solution_files
+==============
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.file.solution_files
    :members:

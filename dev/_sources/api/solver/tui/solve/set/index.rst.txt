@@ -1,7 +1,7 @@
 .. _ref_solver_tui_solve_set:
 
-solver.tui.solve.set
-====================
+set
+===
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.solve.set
    :members:
@@ -14,22 +14,22 @@ solver.tui.solve.set
 .. toctree::
    :hidden:
 
-   previous_defaults/index
-   acoustics_wave_equation_controls/index
-   multiphase_numerics/index
-   data_sampling_options/index
-   nita_expert_controls/index
+   poor_mesh_numerics/index
    transient_controls/index
+   high_speed_numerics/index
+   acoustics_wave_equation_controls/index
    amg_options/index
-   open_channel_wave_options/index
-   contact_solution_controls/index
-   high_order_term_relaxation/index
+   data_sampling_options/index
+   fast_transient_settings/index
    overset/index
    enhanced_les_numerics/index
+   high_order_term_relaxation/index
    pseudo_time_method/index
-   poor_mesh_numerics/index
-   advanced/index
-   warped_face_gradient_correction/index
-   fast_transient_settings/index
+   previous_defaults/index
+   nita_expert_controls/index
+   open_channel_wave_options/index
    divergence_prevention/index
-   high_speed_numerics/index
+   warped_face_gradient_correction/index
+   multiphase_numerics/index
+   advanced/index
+   contact_solution_controls/index

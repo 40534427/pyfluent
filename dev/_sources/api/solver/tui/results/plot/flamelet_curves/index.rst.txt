@@ -1,7 +1,7 @@
 .. _ref_solver_tui_results_plot_flamelet_curves:
 
-solver.tui.results.plot.flamelet\_curves
-========================================
+flamelet_curves
+===============
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.results.plot.flamelet_curves
    :members:

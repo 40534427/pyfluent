@@ -1,7 +1,7 @@
 .. _ref_solver_tui_results_plot_ansys_sound_analysis:
 
-solver.tui.results.plot.ansys\_sound\_analysis
-==============================================
+ansys_sound_analysis
+====================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.results.plot.ansys_sound_analysis
    :members:

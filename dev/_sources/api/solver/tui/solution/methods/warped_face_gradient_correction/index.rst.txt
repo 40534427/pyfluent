@@ -1,7 +1,7 @@
 .. _ref_solver_tui_solution_methods_warped_face_gradient_correction:
 
-solver.tui.solution.methods.warped\_face\_gradient\_correction
-==============================================================
+warped_face_gradient_correction
+===============================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.solution.methods.warped_face_gradient_correction
    :members:

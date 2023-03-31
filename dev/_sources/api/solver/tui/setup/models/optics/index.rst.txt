@@ -1,7 +1,7 @@
 .. _ref_solver_tui_setup_models_optics:
 
-solver.tui.setup.models.optics
-==============================
+optics
+======
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.setup.models.optics
    :members:
@@ -14,5 +14,5 @@ solver.tui.setup.models.optics
 .. toctree::
    :hidden:
 
-   statistics/index
    beams/index
+   statistics/index

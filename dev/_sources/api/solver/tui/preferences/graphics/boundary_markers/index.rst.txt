@@ -1,7 +1,7 @@
 .. _ref_solver_tui_preferences_graphics_boundary_markers:
 
-solver.tui.preferences.graphics.boundary\_markers
-=================================================
+boundary_markers
+================
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.preferences.graphics.boundary_markers
    :members:

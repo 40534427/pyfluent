@@ -1,7 +1,7 @@
 .. _ref_solver_tui_results_report_system:
 
-solver.tui.results.report.system
-================================
+system
+======
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.results.report.system
    :members:

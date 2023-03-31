@@ -1,7 +1,7 @@
 .. _ref_solver_tui_define_boundary_conditions_modify_zones:
 
-solver.tui.define.boundary\_conditions.modify\_zones
-====================================================
+modify_zones
+============
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.define.boundary_conditions.modify_zones
    :members:

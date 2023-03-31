@@ -1,7 +1,7 @@
 .. _ref_solver_tui_define_overset_interfaces_adapt:
 
-solver.tui.define.overset\_interfaces.adapt
-===========================================
+adapt
+=====
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.define.overset_interfaces.adapt
    :members:

@@ -1,7 +1,7 @@
 .. _ref_solver_datamodel_flicing_Case_AppLocal:
 
-solver.datamodel.flicing.Case.AppLocal
-======================================
+AppLocal
+========
 
 .. autoclass:: ansys.fluent.core.datamodel_231.flicing.Root.Case.AppLocal
    :members:

@@ -1,7 +1,7 @@
 .. _ref_meshing_tui_file_import_cad_options:
 
-meshing.tui.file.import\_.cad\_options
-======================================
+cad_options
+===========
 
 .. autoclass:: ansys.fluent.core.meshing.tui_231.main_menu.file.import_.cad_options
    :members:

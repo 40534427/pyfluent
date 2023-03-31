@@ -1,7 +1,7 @@
 .. _ref_solver_tui_define_models_radiation_s2s_parameters:
 
-solver.tui.define.models.radiation.s2s\_parameters
-==================================================
+s2s_parameters
+==============
 
 .. autoclass:: ansys.fluent.core.solver.tui_231.main_menu.define.models.radiation.s2s_parameters
    :members:
