@@ -16,8 +16,8 @@ contact_solution_controls
 
    spatial/index
    miscellaneous/index
-   parameters/index
-   models/index
    transient/index
-   amg/index
    methods/index
+   parameters/index
+   amg/index
+   models/index

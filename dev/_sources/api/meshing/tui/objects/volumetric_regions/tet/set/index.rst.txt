@@ -16,5 +16,5 @@ set
 
    adv_front_method/index
    remove_slivers/index
-   tet_improve/index
    improve_mesh/index
+   tet_improve/index

@@ -15,6 +15,6 @@ file
    :hidden:
 
    checkpoint/index
-   project/index
    import_/index
+   project/index
    export/index

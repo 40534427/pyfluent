@@ -207,7 +207,7 @@ function checkPageExistsAndRedirect(event) {
 
             $("#version_switcher_menu").append(node);
             // replace dropdown button text with the preferred display name of
-            // this version, rather than using sphinx's 0.13.dev3 variable.
+            // this version, rather than using sphinx's 0.13.dev4 variable.
             // also highlight the dropdown entry for the currently-viewed
             // version's entry
             if (entry.version == "0.13") {
@@ -659,7 +659,7 @@ function checkPageExistsAndRedirect(event) {
 <tr class="row-even"><td><p><a class="reference internal" href="#ansys.fluent.core.fluent_connection.FluentConnection.start_journal" title="ansys.fluent.core.fluent_connection.FluentConnection.start_journal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">start_journal</span></code></a>(file_path)</p></td>
 <td><p>Executes tui command to start journal.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#ansys.fluent.core.fluent_connection.FluentConnection.start_transcript" title="ansys.fluent.core.fluent_connection.FluentConnection.start_transcript"><code class="xref py py-obj docutils literal notranslate"><span class="pre">start_transcript</span></code></a>([file_path, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ansys.fluent.core.fluent_connection.FluentConnection.start_transcript" title="ansys.fluent.core.fluent_connection.FluentConnection.start_transcript"><code class="xref py py-obj docutils literal notranslate"><span class="pre">start_transcript</span></code></a>([file_path, write_to_stdout])</p></td>
 <td><p>Start streaming of Fluent transcript.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#ansys.fluent.core.fluent_connection.FluentConnection.stop_journal" title="ansys.fluent.core.fluent_connection.FluentConnection.stop_journal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stop_journal</span></code></a>()</p></td>
@@ -769,7 +769,7 @@ solver).</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ansys.fluent.core.fluent_connection.FluentConnection.start_transcript">
-<span class="sig-name descname"><span class="pre">start_transcript</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">write_to_interpreter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.fluent.core.fluent_connection.FluentConnection.start_transcript" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">start_transcript</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">write_to_stdout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.fluent.core.fluent_connection.FluentConnection.start_transcript" title="Permalink to this definition">#</a></dt>
 <dd><p>Start streaming of Fluent transcript.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>

@@ -14,8 +14,8 @@ set
 .. toctree::
    :hidden:
 
-   rendering_options/index
-   styles/index
-   colors/index
    picture/index
    lights/index
+   colors/index
+   styles/index
+   rendering_options/index

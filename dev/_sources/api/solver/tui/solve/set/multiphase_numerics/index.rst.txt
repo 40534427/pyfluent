@@ -14,12 +14,12 @@ multiphase_numerics
 .. toctree::
    :hidden:
 
+   solution_stabilization/index
    face_pressure_controls/index
-   viscous_flow/index
-   default_controls/index
    porous_media/index
+   compressible_flow/index
+   default_controls/index
    heat_mass_transfer/index
    boiling_parameters/index
-   solution_stabilization/index
-   compressible_flow/index
+   viscous_flow/index
    advanced_stability_controls/index

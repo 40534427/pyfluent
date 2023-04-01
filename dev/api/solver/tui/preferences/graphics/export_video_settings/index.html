@@ -207,7 +207,7 @@ function checkPageExistsAndRedirect(event) {
 
             $("#version_switcher_menu").append(node);
             // replace dropdown button text with the preferred display name of
-            // this version, rather than using sphinx's 0.13.dev3 variable.
+            // this version, rather than using sphinx's 0.13.dev4 variable.
             // also highlight the dropdown entry for the currently-viewed
             // version's entry
             if (entry.version == "0.13") {
@@ -350,13 +350,23 @@ function checkPageExistsAndRedirect(event) {
       </label>
       <ul class="current">
        <li class="toctree-l4">
-        <a class="reference internal" href="../../../mesh/index.html">
-         mesh
+        <a class="reference internal" href="../../../simulation_reports/index.html">
+         simulation_reports
         </a>
        </li>
        <li class="toctree-l4">
-        <a class="reference internal" href="../../../server/index.html">
-         server
+        <a class="reference internal" href="../../../adjoint/index.html">
+         adjoint
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../icing/index.html">
+         icing
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../mesh/index.html">
+         mesh
         </a>
        </li>
        <li class="toctree-l4">
@@ -370,73 +380,8 @@ function checkPageExistsAndRedirect(event) {
         </a>
        </li>
        <li class="toctree-l4">
-        <a class="reference internal" href="../../../setup/index.html">
-         setup
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../../../display/index.html">
-         display
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../../../solve/index.html">
-         solve
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../../../report/index.html">
-         report
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../../../parallel/index.html">
-         parallel
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../../../adjoint/index.html">
-         adjoint
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../../../views/index.html">
-         views
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../../../surface/index.html">
-         surface
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../../../file/index.html">
-         file
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../../../plot/index.html">
-         plot
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../../../parametric_study/index.html">
-         parametric_study
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../../../icing/index.html">
-         icing
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../../../simulation_reports/index.html">
-         simulation_reports
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../../../turbo_post/index.html">
-         turbo_post
+        <a class="reference internal" href="../../../parameters__and__customization/index.html">
+         parameters__and__customization
         </a>
        </li>
        <li class="toctree-l4">
@@ -445,8 +390,18 @@ function checkPageExistsAndRedirect(event) {
         </a>
        </li>
        <li class="toctree-l4">
-        <a class="reference internal" href="../../../turbo_workflow/index.html">
-         turbo_workflow
+        <a class="reference internal" href="../../../turbo_post/index.html">
+         turbo_post
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../parallel/index.html">
+         parallel
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../server/index.html">
+         server
         </a>
        </li>
        <li class="toctree-l4 current active has-children">
@@ -460,8 +415,13 @@ function checkPageExistsAndRedirect(event) {
         </label>
         <ul class="current">
          <li class="toctree-l5">
-          <a class="reference internal" href="../../turbo_workflow/index.html">
-           turbo_workflow
+          <a class="reference internal" href="../../appearance/index.html">
+           appearance
+          </a>
+         </li>
+         <li class="toctree-l5">
+          <a class="reference internal" href="../../gpuapp/index.html">
+           gpuapp
           </a>
          </li>
          <li class="toctree-l5">
@@ -470,8 +430,18 @@ function checkPageExistsAndRedirect(event) {
           </a>
          </li>
          <li class="toctree-l5">
-          <a class="reference internal" href="../../general/index.html">
-           general
+          <a class="reference internal" href="../../mat_pro_app/index.html">
+           mat_pro_app
+          </a>
+         </li>
+         <li class="toctree-l5">
+          <a class="reference internal" href="../../navigation/index.html">
+           navigation
+          </a>
+         </li>
+         <li class="toctree-l5">
+          <a class="reference internal" href="../../meshing_workflow/index.html">
+           meshing_workflow
           </a>
          </li>
          <li class="toctree-l5 current active has-children">
@@ -485,8 +455,18 @@ function checkPageExistsAndRedirect(event) {
           </label>
           <ul class="current">
            <li class="toctree-l6">
-            <a class="reference internal" href="../manage_hoops_memory/index.html">
-             manage_hoops_memory
+            <a class="reference internal" href="../embedded_windows/index.html">
+             embedded_windows
+            </a>
+           </li>
+           <li class="toctree-l6">
+            <a class="reference internal" href="../hardcopy_settings/index.html">
+             hardcopy_settings
+            </a>
+           </li>
+           <li class="toctree-l6">
+            <a class="reference internal" href="../meshing_mode/index.html">
+             meshing_mode
             </a>
            </li>
            <li class="toctree-l6">
@@ -512,18 +492,8 @@ function checkPageExistsAndRedirect(event) {
             </ul>
            </li>
            <li class="toctree-l6">
-            <a class="reference internal" href="../transparency/index.html">
-             transparency
-            </a>
-           </li>
-           <li class="toctree-l6">
             <a class="reference internal" href="../vector_settings/index.html">
              vector_settings
-            </a>
-           </li>
-           <li class="toctree-l6">
-            <a class="reference internal" href="../boundary_markers/index.html">
-             boundary_markers
             </a>
            </li>
            <li class="toctree-l6">
@@ -532,23 +502,18 @@ function checkPageExistsAndRedirect(event) {
             </a>
            </li>
            <li class="toctree-l6">
-            <a class="reference internal" href="../embedded_windows/index.html">
-             embedded_windows
+            <a class="reference internal" href="../boundary_markers/index.html">
+             boundary_markers
             </a>
            </li>
            <li class="toctree-l6">
-            <a class="reference internal" href="../meshing_mode/index.html">
-             meshing_mode
+            <a class="reference internal" href="../graphics_effects/index.html">
+             graphics_effects
             </a>
            </li>
            <li class="toctree-l6">
-            <a class="reference internal" href="../hardcopy_settings/index.html">
-             hardcopy_settings
-            </a>
-           </li>
-           <li class="toctree-l6">
-            <a class="reference internal" href="../colormap_settings/index.html">
-             colormap_settings
+            <a class="reference internal" href="../manage_hoops_memory/index.html">
+             manage_hoops_memory
             </a>
            </li>
            <li class="toctree-l6">
@@ -557,35 +522,20 @@ function checkPageExistsAndRedirect(event) {
             </a>
            </li>
            <li class="toctree-l6">
-            <a class="reference internal" href="../graphics_effects/index.html">
-             graphics_effects
+            <a class="reference internal" href="../colormap_settings/index.html">
+             colormap_settings
+            </a>
+           </li>
+           <li class="toctree-l6">
+            <a class="reference internal" href="../transparency/index.html">
+             transparency
             </a>
            </li>
           </ul>
          </li>
          <li class="toctree-l5">
-          <a class="reference internal" href="../../mat_pro_app/index.html">
-           mat_pro_app
-          </a>
-         </li>
-         <li class="toctree-l5">
-          <a class="reference internal" href="../../gpuapp/index.html">
-           gpuapp
-          </a>
-         </li>
-         <li class="toctree-l5">
-          <a class="reference internal" href="../../appearance/index.html">
-           appearance
-          </a>
-         </li>
-         <li class="toctree-l5">
-          <a class="reference internal" href="../../navigation/index.html">
-           navigation
-          </a>
-         </li>
-         <li class="toctree-l5">
-          <a class="reference internal" href="../../meshing_workflow/index.html">
-           meshing_workflow
+          <a class="reference internal" href="../../general/index.html">
+           general
           </a>
          </li>
          <li class="toctree-l5">
@@ -593,11 +543,61 @@ function checkPageExistsAndRedirect(event) {
            parametric_study
           </a>
          </li>
+         <li class="toctree-l5">
+          <a class="reference internal" href="../../turbo_workflow/index.html">
+           turbo_workflow
+          </a>
+         </li>
         </ul>
        </li>
        <li class="toctree-l4">
-        <a class="reference internal" href="../../../parameters__and__customization/index.html">
-         parameters__and__customization
+        <a class="reference internal" href="../../../solve/index.html">
+         solve
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../surface/index.html">
+         surface
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../parametric_study/index.html">
+         parametric_study
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../views/index.html">
+         views
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../report/index.html">
+         report
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../setup/index.html">
+         setup
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../display/index.html">
+         display
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../plot/index.html">
+         plot
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../file/index.html">
+         file
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../turbo_workflow/index.html">
+         turbo_workflow
         </a>
        </li>
       </ul>

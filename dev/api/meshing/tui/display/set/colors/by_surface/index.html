@@ -207,7 +207,7 @@ function checkPageExistsAndRedirect(event) {
 
             $("#version_switcher_menu").append(node);
             // replace dropdown button text with the preferred display name of
-            // this version, rather than using sphinx's 0.13.dev3 variable.
+            // this version, rather than using sphinx's 0.13.dev4 variable.
             // also highlight the dropdown entry for the currently-viewed
             // version's entry
             if (entry.version == "0.13") {
@@ -335,23 +335,13 @@ function checkPageExistsAndRedirect(event) {
     </label>
     <ul class="current">
      <li class="toctree-l3">
-      <a class="reference internal" href="../../../../material_point/index.html">
-       material_point
+      <a class="reference internal" href="../../../../report/index.html">
+       report
       </a>
      </li>
      <li class="toctree-l3">
-      <a class="reference internal" href="../../../../diagnostics/index.html">
-       diagnostics
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="../../../../mesh/index.html">
-       mesh
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="../../../../cad_assemblies/index.html">
-       cad_assemblies
+      <a class="reference internal" href="../../../../openmp_controls/index.html">
+       openmp_controls
       </a>
      </li>
      <li class="toctree-l3">
@@ -360,8 +350,8 @@ function checkPageExistsAndRedirect(event) {
       </a>
      </li>
      <li class="toctree-l3">
-      <a class="reference internal" href="../../../../file/index.html">
-       file
+      <a class="reference internal" href="../../../../diagnostics/index.html">
+       diagnostics
       </a>
      </li>
      <li class="toctree-l3 current active has-children">
@@ -375,23 +365,8 @@ function checkPageExistsAndRedirect(event) {
       </label>
       <ul class="current">
        <li class="toctree-l4">
-        <a class="reference internal" href="../../../objects/index.html">
-         objects
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../../../zones/index.html">
-         zones
-        </a>
-       </li>
-       <li class="toctree-l4">
         <a class="reference internal" href="../../../set_grid/index.html">
          set_grid
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../../../advanced_rendering/index.html">
-         advanced_rendering
         </a>
        </li>
        <li class="toctree-l4 current active has-children">
@@ -405,13 +380,13 @@ function checkPageExistsAndRedirect(event) {
         </label>
         <ul class="current">
          <li class="toctree-l5">
-          <a class="reference internal" href="../../rendering_options/index.html">
-           rendering_options
+          <a class="reference internal" href="../../picture/index.html">
+           picture
           </a>
          </li>
          <li class="toctree-l5">
-          <a class="reference internal" href="../../styles/index.html">
-           styles
+          <a class="reference internal" href="../../lights/index.html">
+           lights
           </a>
          </li>
          <li class="toctree-l5 current active has-children">
@@ -437,20 +412,30 @@ function checkPageExistsAndRedirect(event) {
           </ul>
          </li>
          <li class="toctree-l5">
-          <a class="reference internal" href="../../picture/index.html">
-           picture
+          <a class="reference internal" href="../../styles/index.html">
+           styles
           </a>
          </li>
          <li class="toctree-l5">
-          <a class="reference internal" href="../../lights/index.html">
-           lights
+          <a class="reference internal" href="../../rendering_options/index.html">
+           rendering_options
           </a>
          </li>
         </ul>
        </li>
        <li class="toctree-l4">
+        <a class="reference internal" href="../../../update_scene/index.html">
+         update_scene
+        </a>
+       </li>
+       <li class="toctree-l4">
         <a class="reference internal" href="../../../xy_plot/index.html">
          xy_plot
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../zones/index.html">
+         zones
         </a>
        </li>
        <li class="toctree-l4">
@@ -459,30 +444,25 @@ function checkPageExistsAndRedirect(event) {
         </a>
        </li>
        <li class="toctree-l4">
-        <a class="reference internal" href="../../../update_scene/index.html">
-         update_scene
+        <a class="reference internal" href="../../../advanced_rendering/index.html">
+         advanced_rendering
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../objects/index.html">
+         objects
         </a>
        </li>
       </ul>
      </li>
      <li class="toctree-l3">
-      <a class="reference internal" href="../../../../boundary/index.html">
-       boundary
+      <a class="reference internal" href="../../../../mesh/index.html">
+       mesh
       </a>
      </li>
      <li class="toctree-l3">
-      <a class="reference internal" href="../../../../parallel/index.html">
-       parallel
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="../../../../report/index.html">
-       report
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="../../../../preferences/index.html">
-       preferences
+      <a class="reference internal" href="../../../../material_point/index.html">
+       material_point
       </a>
      </li>
      <li class="toctree-l3">
@@ -491,18 +471,38 @@ function checkPageExistsAndRedirect(event) {
       </a>
      </li>
      <li class="toctree-l3">
+      <a class="reference internal" href="../../../../file/index.html">
+       file
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../../parallel/index.html">
+       parallel
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../../boundary/index.html">
+       boundary
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../../preferences/index.html">
+       preferences
+      </a>
+     </li>
+     <li class="toctree-l3">
       <a class="reference internal" href="../../../../reference_frames/index.html">
        reference_frames
       </a>
      </li>
      <li class="toctree-l3">
-      <a class="reference internal" href="../../../../openmp_controls/index.html">
-       openmp_controls
+      <a class="reference internal" href="../../../../objects/index.html">
+       objects
       </a>
      </li>
      <li class="toctree-l3">
-      <a class="reference internal" href="../../../../objects/index.html">
-       objects
+      <a class="reference internal" href="../../../../cad_assemblies/index.html">
+       cad_assemblies
       </a>
      </li>
     </ul>

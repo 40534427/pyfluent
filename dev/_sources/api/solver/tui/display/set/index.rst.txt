@@ -14,13 +14,13 @@ set
 .. toctree::
    :hidden:
 
-   windows/index
-   contours/index
    rendering_options/index
-   picture/index
+   windows/index
    lights/index
-   particle_tracks/index
-   path_lines/index
+   contours/index
    colors/index
-   titles/index
    velocity_vectors/index
+   path_lines/index
+   picture/index
+   particle_tracks/index
+   titles/index

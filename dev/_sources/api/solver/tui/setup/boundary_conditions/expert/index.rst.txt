@@ -14,7 +14,7 @@ expert
 .. toctree::
    :hidden:
 
-   periodic_conditions/index
    perforated_walls/index
    impedance_data_fitting/index
+   periodic_conditions/index
    non_reflecting_bc/index
