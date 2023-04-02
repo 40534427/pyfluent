@@ -15,10 +15,10 @@ dpm
    :hidden:
 
    collisions/index
-   stripping_options/index
-   interaction/index
-   parallel/index
-   numerics/index
-   splash_options/index
-   options/index
    erosion_dynamic_mesh/index
+   interaction/index
+   numerics/index
+   options/index
+   parallel/index
+   splash_options/index
+   stripping_options/index

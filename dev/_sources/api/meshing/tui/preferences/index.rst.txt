@@ -14,13 +14,13 @@ preferences
 .. toctree::
    :hidden:
 
-   general/index
+   appearance/index
+   meshing_workflow/index
+   gpuapp/index
+   simulation/index
    mat_pro_app/index
+   navigation/index
+   general/index
    turbo_workflow/index
    parametric_study/index
-   gpuapp/index
    graphics/index
-   navigation/index
-   meshing_workflow/index
-   simulation/index
-   appearance/index

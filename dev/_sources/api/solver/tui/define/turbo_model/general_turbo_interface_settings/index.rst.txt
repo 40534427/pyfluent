@@ -15,3 +15,4 @@ general_turbo_interface_settings
    :hidden:
 
    mixing_plane_model_settings/index
+   expert/index

@@ -14,12 +14,12 @@ solution
 .. toctree::
    :hidden:
 
-   expert/index
-   methods/index
-   cell_registers/index
-   initialize/index
-   run_calculation/index
-   controls/index
-   report_definitions/index
-   monitors/index
    calculation_activities/index
+   cell_registers/index
+   controls/index
+   expert/index
+   initialize/index
+   methods/index
+   monitors/index
+   report_definitions/index
+   run_calculation/index

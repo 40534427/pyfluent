@@ -15,5 +15,5 @@ volumetric_regions
    :hidden:
 
    hexcore/index
-   scoped_prism/index
    tet/index
+   scoped_prism/index
