@@ -14,5 +14,5 @@ views
 .. toctree::
    :hidden:
 
-   camera/index
    display_states/index
+   camera/index

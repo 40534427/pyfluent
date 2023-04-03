@@ -14,5 +14,5 @@ set
 .. toctree::
    :hidden:
 
-   conserve_swirl/index
    conserve_total_enthalpy/index
+   conserve_swirl/index

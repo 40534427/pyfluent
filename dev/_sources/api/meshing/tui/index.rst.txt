@@ -14,18 +14,18 @@ meshing.tui
 .. toctree::
    :hidden:
 
-   cad_assemblies/index
-   parallel/index
-   preferences/index
-   material_point/index
-   file/index
-   openmp_controls/index
-   reference_frames/index
-   scoped_sizing/index
    display/index
-   size_functions/index
-   report/index
+   openmp_controls/index
    mesh/index
-   diagnostics/index
-   objects/index
    boundary/index
+   diagnostics/index
+   parallel/index
+   size_functions/index
+   file/index
+   report/index
+   preferences/index
+   cad_assemblies/index
+   objects/index
+   scoped_sizing/index
+   material_point/index
+   reference_frames/index

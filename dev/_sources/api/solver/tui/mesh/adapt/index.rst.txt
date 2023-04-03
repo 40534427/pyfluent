@@ -15,8 +15,8 @@ adapt
    :hidden:
 
    set/index
-   profile/index
-   cell_registers/index
-   manage_criteria/index
    multi_layer_refinement/index
+   cell_registers/index
+   profile/index
    geometry/index
+   manage_criteria/index
