@@ -14,8 +14,8 @@ graphics
 .. toctree::
    :hidden:
 
-   objects/index
-   update_scene/index
-   lights/index
    expert/index
+   update_scene/index
    rendering_options/index
+   objects/index
+   lights/index

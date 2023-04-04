@@ -15,5 +15,5 @@ plot
    :hidden:
 
    cumulative_plot/index
-   ansys_sound_analysis/index
    flamelet_curves/index
+   ansys_sound_analysis/index

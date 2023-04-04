@@ -14,25 +14,25 @@ solver.tui
 .. toctree::
    :hidden:
 
-   plot/index
-   report/index
-   surface/index
-   setup/index
-   mesh/index
-   server/index
-   solve/index
-   simulation_reports/index
-   display/index
-   icing/index
-   define/index
-   solution/index
-   turbo_post/index
-   views/index
-   file/index
    parallel/index
+   turbo_post/index
+   solve/index
+   server/index
+   define/index
+   turbo_workflow/index
+   solution/index
+   setup/index
+   plot/index
+   simulation_reports/index
+   file/index
+   display/index
+   preferences/index
+   icing/index
+   mesh/index
+   parametric_study/index
+   adjoint/index
+   views/index
+   surface/index
+   report/index
    parameters__and__customization/index
    results/index
-   adjoint/index
-   preferences/index
-   parametric_study/index
-   turbo_workflow/index

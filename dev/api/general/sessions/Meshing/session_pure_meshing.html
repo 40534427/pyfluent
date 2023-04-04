@@ -393,7 +393,7 @@ function checkPageExistsAndRedirect(event) {
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../case_reader.html">
-     Case reader
+     CaseFile
     </a>
    </li>
    <li class="toctree-l2">
@@ -594,7 +594,6 @@ function checkPageExistsAndRedirect(event) {
   <section id="module-ansys.fluent.core.session_pure_meshing">
 <span id="session-pure-meshing"></span><span id="ref-session-pure-meshing"></span><h1>session_pure_meshing<a class="headerlink" href="#module-ansys.fluent.core.session_pure_meshing" title="Permalink to this heading">#</a></h1>
 <p>Module containing class encapsulating Fluent connection.</p>
-<p><strong>********PRESENTLY SAME AS MESHING WITHOUT THE SWITCH TO SOLVER*********</strong></p>
 <p><strong>Classes:</strong></p>
 <table class="autosummary longtable table autosummary">
 <tbody>
@@ -648,7 +647,7 @@ in this mode.</p>
 <table class="autosummary longtable table autosummary">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#ansys.fluent.core.session_pure_meshing.PureMeshing.__init__" title="ansys.fluent.core.session_pure_meshing.PureMeshing.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(fluent_connection)</p></td>
-<td><p></p></td>
+<td><p>PureMeshing session.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#ansys.fluent.core.session_pure_meshing.PureMeshing.transfer_mesh_to_solvers" title="ansys.fluent.core.session_pure_meshing.PureMeshing.transfer_mesh_to_solvers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">transfer_mesh_to_solvers</span></code></a>(solvers[, ...])</p></td>
 <td><p>Transfer mesh to Fluent solver instances.</p></td>
@@ -670,7 +669,12 @@ in this mode.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="ansys.fluent.core.session_pure_meshing.PureMeshing.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fluent_connection</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.fluent.core.session_pure_meshing.PureMeshing.__init__" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>PureMeshing session.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>fluent_connection (<a class="reference internal" href="../Session/fluent_connection.html#ref-fluent-connection"><span class="std std-ref">fluent_connection</span></a>): Encapsulates a Fluent connection.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="ansys.fluent.core.session_pure_meshing.PureMeshing.meshing">

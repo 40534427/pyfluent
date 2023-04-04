@@ -14,8 +14,8 @@ design_points
 .. toctree::
    :hidden:
 
-   concurrent/index
-   set/index
-   auto_create/index
-   table/index
    print_to_console/index
+   auto_create/index
+   concurrent/index
+   table/index
+   set/index

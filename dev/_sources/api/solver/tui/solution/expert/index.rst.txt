@@ -18,6 +18,6 @@ expert
    previous_defaults/index
    divergence_prevention/index
    secondary_gradient_limiting/index
+   non_reflecting_boundary_treatment/index
    poor_mesh_numerics/index
    high_speed_numerics/index
-   non_reflecting_boundary_treatment/index

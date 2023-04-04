@@ -15,10 +15,10 @@ boundary_conditions
    :hidden:
 
    set/index
-   non_reflecting_bc/index
    advanced/index
    impedance_data_fitting/index
    bc_settings/index
-   modify_zones/index
    perforated_walls/index
+   modify_zones/index
+   non_reflecting_bc/index
    rename_zone/index

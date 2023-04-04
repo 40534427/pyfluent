@@ -16,6 +16,6 @@ expert
 
    set/index
    path_lines/index
+   flamelet_data/index
    pdf_data/index
    particle_tracks/index
-   flamelet_data/index

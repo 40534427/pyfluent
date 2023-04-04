@@ -393,7 +393,7 @@ function checkPageExistsAndRedirect(event) {
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../case_reader.html">
-     Case reader
+     CaseFile
     </a>
    </li>
    <li class="toctree-l2">
@@ -617,7 +617,7 @@ function checkPageExistsAndRedirect(event) {
 <table class="autosummary longtable table autosummary">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#ansys.fluent.core.session_base_meshing.BaseMeshing.__init__" title="ansys.fluent.core.session_base_meshing.BaseMeshing.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(session_execute_tui, fluent_connection)</p></td>
-<td><p></p></td>
+<td><p>BaseMeshing session.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#ansys.fluent.core.session_base_meshing.BaseMeshing.get_fluent_version" title="ansys.fluent.core.session_base_meshing.BaseMeshing.get_fluent_version"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_fluent_version</span></code></a>()</p></td>
 <td><p>Gets and returns the fluent version.</p></td>
@@ -639,7 +639,13 @@ function checkPageExistsAndRedirect(event) {
 <dl class="py method">
 <dt class="sig sig-object py" id="ansys.fluent.core.session_base_meshing.BaseMeshing.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_execute_tui</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fluent_connection</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.fluent.core.session_base_meshing.BaseMeshing.__init__" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>BaseMeshing session.</p>
+<dl>
+<dt>Args:</dt><dd><p>session_execute_tui (_type_): Executes Fluent’s SolverTUI methods.</p>
+<p>fluent_connection (<a class="reference internal" href="../Session/fluent_connection.html#ref-fluent-connection"><span class="std std-ref">fluent_connection</span></a>): Encapsulates a Fluent connection.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ansys.fluent.core.session_base_meshing.BaseMeshing.get_fluent_version">
