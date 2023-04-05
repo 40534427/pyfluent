@@ -14,5 +14,5 @@ pulse
 .. toctree::
    :hidden:
 
-   hardcopy/index
    video/index
+   hardcopy/index

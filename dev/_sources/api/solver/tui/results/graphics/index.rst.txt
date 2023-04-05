@@ -15,7 +15,7 @@ graphics
    :hidden:
 
    expert/index
-   update_scene/index
-   rendering_options/index
-   objects/index
    lights/index
+   objects/index
+   rendering_options/index
+   update_scene/index

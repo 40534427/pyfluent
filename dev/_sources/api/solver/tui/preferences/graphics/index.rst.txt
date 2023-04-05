@@ -15,15 +15,15 @@ graphics
    :hidden:
 
    boundary_markers/index
-   manage_hoops_memory/index
    colormap_settings/index
-   performance/index
-   vector_settings/index
+   embedded_windows/index
    export_video_settings/index
    graphics_effects/index
-   meshing_mode/index
-   lighting/index
-   embedded_windows/index
-   material_effects/index
-   transparency/index
    hardcopy_settings/index
+   lighting/index
+   manage_hoops_memory/index
+   material_effects/index
+   meshing_mode/index
+   performance/index
+   transparency/index
+   vector_settings/index
