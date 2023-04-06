@@ -14,7 +14,7 @@ file
 .. toctree::
    :hidden:
 
-   checkpoint/index
-   export/index
-   import_/index
    project/index
+   checkpoint/index
+   import_/index
+   export/index

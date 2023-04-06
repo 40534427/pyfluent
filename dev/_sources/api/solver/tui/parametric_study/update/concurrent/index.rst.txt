@@ -15,5 +15,5 @@ concurrent
    :hidden:
 
    print_to_console/index
-   set/index
    licensing/index
+   set/index
