@@ -15,5 +15,5 @@ electrolysis
    :hidden:
 
    membrane_setup/index
-   anode_setup/index
    cathode_setup/index
+   anode_setup/index

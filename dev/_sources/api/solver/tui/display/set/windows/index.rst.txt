@@ -15,8 +15,8 @@ windows
    :hidden:
 
    main/index
-   xy/index
    video/index
-   axes/index
+   xy/index
    scale/index
    text/index
+   axes/index

@@ -11,3 +11,7 @@ modify
    :special-members: " __init__"
    :autosummary:
 
+.. toctree::
+   :hidden:
+
+   patch_options/index

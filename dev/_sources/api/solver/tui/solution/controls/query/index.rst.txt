@@ -14,5 +14,5 @@ query
 .. toctree::
    :hidden:
 
-   advanced/index
    acoustics_wave_equation_controls/index
+   advanced/index

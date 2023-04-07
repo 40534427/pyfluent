@@ -15,12 +15,12 @@ set
    :hidden:
 
    velocity_vectors/index
-   titles/index
-   windows/index
-   rendering_options/index
-   path_lines/index
-   picture/index
-   colors/index
    particle_tracks/index
-   contours/index
+   titles/index
+   path_lines/index
    lights/index
+   rendering_options/index
+   contours/index
+   picture/index
+   windows/index
+   colors/index

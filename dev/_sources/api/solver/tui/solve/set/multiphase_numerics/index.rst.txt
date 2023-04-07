@@ -15,11 +15,11 @@ multiphase_numerics
    :hidden:
 
    advanced_stability_controls/index
-   boiling_parameters/index
-   face_pressure_controls/index
-   solution_stabilization/index
-   viscous_flow/index
-   compressible_flow/index
    heat_mass_transfer/index
-   porous_media/index
+   viscous_flow/index
    default_controls/index
+   boiling_parameters/index
+   solution_stabilization/index
+   compressible_flow/index
+   porous_media/index
+   face_pressure_controls/index

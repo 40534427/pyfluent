@@ -14,5 +14,5 @@ run_calculation
 .. toctree::
    :hidden:
 
-   data_sampling_options/index
    transient_controls/index
+   data_sampling_options/index

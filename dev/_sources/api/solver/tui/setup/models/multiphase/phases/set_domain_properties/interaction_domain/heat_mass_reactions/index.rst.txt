@@ -16,7 +16,7 @@ heat_mass_reactions
 
    interphase_viscous_dissipation/index
    lift/index
-   virtual_mass/index
-   cavitation/index
-   interphase_discretization/index
    surface_tension/index
+   virtual_mass/index
+   interphase_discretization/index
+   cavitation/index

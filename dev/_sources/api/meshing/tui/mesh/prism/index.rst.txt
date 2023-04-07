@@ -15,6 +15,6 @@ prism
    :hidden:
 
    improve/index
-   controls/index
    post_ignore/index
    split/index
+   controls/index
