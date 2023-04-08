@@ -15,16 +15,16 @@ display
    :hidden:
 
    inverse_dft/index
-   views/index
    objects/index
+   views/index
    particle_tracks/index
    set/index
-   flamelet_data/index
-   display_states/index
    view_sync/index
+   display_states/index
+   embedded_windows/index
+   flamelet_data/index
+   define/index
+   update_scene/index
    pdf_data/index
    path_lines/index
-   embedded_windows/index
-   update_scene/index
-   define/index
    surface/index

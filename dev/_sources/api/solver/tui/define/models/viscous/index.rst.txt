@@ -16,6 +16,6 @@ viscous
 
    transition_model_options/index
    multiphase_turbulence/index
-   geko_options/index
    near_wall_treatment/index
    turbulence_expert/index
+   geko_options/index

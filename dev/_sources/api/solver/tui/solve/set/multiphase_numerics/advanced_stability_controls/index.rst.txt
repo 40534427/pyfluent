@@ -15,8 +15,8 @@ advanced_stability_controls
    :hidden:
 
    pseudo_time/index
-   p_v_coupling/index
-   anti_diffusion/index
-   hybrid_nita/index
    num_ventilation/index
+   hybrid_nita/index
+   anti_diffusion/index
    equation_order/index
+   p_v_coupling/index

@@ -14,12 +14,12 @@ boundary
 .. toctree::
    :hidden:
 
-   feature/index
+   separate/index
+   boundary_conditions/index
+   manage/index
    modify/index
-   refine/index
    remesh/index
    improve/index
-   separate/index
-   manage/index
    shell_boundary_layer/index
-   boundary_conditions/index
+   feature/index
+   refine/index

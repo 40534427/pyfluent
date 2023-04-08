@@ -14,11 +14,11 @@ dpm
 .. toctree::
    :hidden:
 
-   stripping_options/index
-   collisions/index
-   parallel/index
-   interaction/index
-   erosion_dynamic_mesh/index
-   numerics/index
-   splash_options/index
    options/index
+   erosion_dynamic_mesh/index
+   interaction/index
+   splash_options/index
+   parallel/index
+   collisions/index
+   numerics/index
+   stripping_options/index
