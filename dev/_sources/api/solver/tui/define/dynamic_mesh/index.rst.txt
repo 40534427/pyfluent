@@ -16,6 +16,6 @@ dynamic_mesh
 
    actions/index
    transient_settings/index
-   events/index
    controls/index
+   events/index
    zones/index

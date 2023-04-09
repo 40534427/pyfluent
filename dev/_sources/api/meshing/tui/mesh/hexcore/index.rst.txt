@@ -14,5 +14,5 @@ hexcore
 .. toctree::
    :hidden:
 
-   controls/index
    local_regions/index
+   controls/index

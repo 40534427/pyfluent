@@ -15,12 +15,12 @@ preferences
    :hidden:
 
    appearance/index
-   mat_pro_app/index
-   simulation/index
-   gpuapp/index
-   meshing_workflow/index
-   parametric_study/index
-   turbo_workflow/index
    general/index
    navigation/index
    graphics/index
+   meshing_workflow/index
+   turbo_workflow/index
+   gpuapp/index
+   simulation/index
+   mat_pro_app/index
+   parametric_study/index

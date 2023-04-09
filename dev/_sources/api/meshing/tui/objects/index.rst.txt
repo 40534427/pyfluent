@@ -15,12 +15,12 @@ objects
    :hidden:
 
    create_new_mesh_object/index
-   remove_gaps/index
-   set/index
-   cad_association/index
-   join_intersect/index
-   wrap/index
    labels/index
+   wrap/index
    deprecated/index
    volumetric_regions/index
+   remove_gaps/index
+   join_intersect/index
+   cad_association/index
+   set/index
    fix_holes/index

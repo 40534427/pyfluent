@@ -16,5 +16,5 @@ prism
 
    controls/index
    improve/index
-   post_ignore/index
    split/index
+   post_ignore/index

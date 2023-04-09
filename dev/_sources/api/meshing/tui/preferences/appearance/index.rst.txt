@@ -14,6 +14,6 @@ appearance
 .. toctree::
    :hidden:
 
+   selections/index
    charts/index
    ansys_logo/index
-   selections/index
