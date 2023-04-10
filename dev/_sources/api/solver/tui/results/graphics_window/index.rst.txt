@@ -15,9 +15,9 @@ graphics_window
    :hidden:
 
    embedded_windows/index
-   display_states/index
    picture/index
-   view_sync/index
-   views/index
    windows/index
    titles/index
+   views/index
+   display_states/index
+   view_sync/index

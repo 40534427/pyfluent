@@ -16,14 +16,14 @@ graphics
 
    material_effects/index
    vector_settings/index
-   export_video_settings/index
-   boundary_markers/index
-   graphics_effects/index
-   manage_hoops_memory/index
-   transparency/index
-   colormap_settings/index
    lighting/index
-   performance/index
-   hardcopy_settings/index
+   export_video_settings/index
+   transparency/index
    meshing_mode/index
    embedded_windows/index
+   graphics_effects/index
+   colormap_settings/index
+   manage_hoops_memory/index
+   boundary_markers/index
+   hardcopy_settings/index
+   performance/index

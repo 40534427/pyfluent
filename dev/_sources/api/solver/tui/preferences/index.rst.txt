@@ -16,11 +16,11 @@ preferences
 
    appearance/index
    general/index
-   navigation/index
-   mat_pro_app/index
-   turbo_workflow/index
-   meshing_workflow/index
-   parametric_study/index
    gpuapp/index
    graphics/index
+   mat_pro_app/index
+   meshing_workflow/index
+   navigation/index
+   parametric_study/index
    simulation/index
+   turbo_workflow/index
