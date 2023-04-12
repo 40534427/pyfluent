@@ -14,17 +14,17 @@ setup
 .. toctree::
    :hidden:
 
+   named_expressions/index
+   reference_values/index
+   models/index
+   gap_model/index
+   reference_frames/index
+   mesh_interfaces/index
+   turbo_model/index
+   operating_conditions/index
    boundary_conditions/index
+   overset_interfaces/index
    dynamic_mesh/index
    expert/index
-   gap_model/index
-   materials/index
-   mesh_interfaces/index
    mixing_planes/index
-   models/index
-   named_expressions/index
-   operating_conditions/index
-   overset_interfaces/index
-   reference_frames/index
-   reference_values/index
-   turbo_model/index
+   materials/index

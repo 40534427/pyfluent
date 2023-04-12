@@ -15,24 +15,24 @@ solver.tui
    :hidden:
 
    adjoint/index
-   display/index
-   define/index
+   server/index
+   setup/index
+   report/index
+   parametric_study/index
    file/index
-   icing/index
+   preferences/index
+   turbo_workflow/index
+   simulation_reports/index
+   views/index
+   plot/index
+   solution/index
+   display/index
    mesh/index
+   define/index
+   results/index
+   turbo_post/index
+   surface/index
+   solve/index
+   icing/index
    parameters__and__customization/index
    parallel/index
-   plot/index
-   preferences/index
-   report/index
-   results/index
-   solve/index
-   solution/index
-   setup/index
-   surface/index
-   simulation_reports/index
-   server/index
-   turbo_post/index
-   views/index
-   parametric_study/index
-   turbo_workflow/index

@@ -16,6 +16,6 @@ calculation_activities
 
    animate/index
    auto_save/index
+   solution_strategy/index
    cell_register_operations/index
    execute_commands/index
-   solution_strategy/index

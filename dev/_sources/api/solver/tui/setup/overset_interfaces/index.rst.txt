@@ -15,5 +15,5 @@ overset_interfaces
    :hidden:
 
    options/index
-   cut_control/index
    adapt/index
+   cut_control/index
