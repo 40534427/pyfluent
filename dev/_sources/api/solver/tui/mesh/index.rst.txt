@@ -15,9 +15,9 @@ mesh
    :hidden:
 
    adapt/index
-   reorder/index
+   geometry/index
    modify_zones/index
    polyhedra/index
-   surface_mesh/index
+   reorder/index
    repair_improve/index
-   geometry/index
+   surface_mesh/index

@@ -14,9 +14,9 @@ adapt
 .. toctree::
    :hidden:
 
-   manage_criteria/index
-   geometry/index
-   cell_registers/index
    set/index
-   multi_layer_refinement/index
    profile/index
+   cell_registers/index
+   manage_criteria/index
+   multi_layer_refinement/index
+   geometry/index

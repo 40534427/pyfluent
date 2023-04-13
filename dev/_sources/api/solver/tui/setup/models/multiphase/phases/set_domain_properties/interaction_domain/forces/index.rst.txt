@@ -15,8 +15,8 @@ forces
    :hidden:
 
    cavitation/index
-   virtual_mass/index
-   lift/index
    interphase_discretization/index
    interphase_viscous_dissipation/index
+   lift/index
    surface_tension/index
+   virtual_mass/index

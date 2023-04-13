@@ -14,5 +14,5 @@ non_reflecting_bc
 .. toctree::
    :hidden:
 
-   turbo_specific_nrbc/index
    general_nrbc/index
+   turbo_specific_nrbc/index

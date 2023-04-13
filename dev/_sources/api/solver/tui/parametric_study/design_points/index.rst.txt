@@ -15,7 +15,7 @@ design_points
    :hidden:
 
    print_to_console/index
-   concurrent/index
+   set/index
    table/index
    auto_create/index
-   set/index
+   concurrent/index

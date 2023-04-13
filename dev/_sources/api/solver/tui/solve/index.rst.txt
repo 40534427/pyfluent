@@ -14,13 +14,13 @@ solve
 .. toctree::
    :hidden:
 
-   cell_register_operations/index
-   report_files/index
-   cell_registers/index
    animate/index
-   report_plots/index
-   monitors/index
    initialize/index
+   monitors/index
+   report_files/index
+   report_definitions/index
+   report_plots/index
+   cell_registers/index
+   cell_register_operations/index
    set/index
    execute_commands/index
-   report_definitions/index
