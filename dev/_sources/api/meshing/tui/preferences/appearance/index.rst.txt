@@ -15,5 +15,5 @@ appearance
    :hidden:
 
    charts/index
-   ansys_logo/index
    selections/index
+   ansys_logo/index

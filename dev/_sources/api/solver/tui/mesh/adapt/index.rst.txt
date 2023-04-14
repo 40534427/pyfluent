@@ -16,7 +16,7 @@ adapt
 
    set/index
    profile/index
-   cell_registers/index
    manage_criteria/index
+   cell_registers/index
    multi_layer_refinement/index
    geometry/index

@@ -11,7 +11,3 @@ mixing_plane_model_settings
    :special-members: " __init__"
    :autosummary:
 
-.. toctree::
-   :hidden:
-
-   number_of_bands/index

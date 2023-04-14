@@ -14,5 +14,5 @@ structure
 .. toctree::
    :hidden:
 
-   controls/index
    expert/index
+   controls/index

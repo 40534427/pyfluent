@@ -55,8 +55,8 @@
     <link rel="shortcut icon" href="../../../../../_static/ansys-favicon.png"/>
     <link rel="index" title="Index" href="../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../search.html" />
-    <link rel="next" title="local_regions" href="local_regions/index.html" />
-    <link rel="prev" title="domains" href="../domains/index.html" />
+    <link rel="next" title="controls" href="controls/index.html" />
+    <link rel="prev" title="controls" href="../non_conformals/controls/index.html" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="docsearch:language" content="en">
   </head>
@@ -207,7 +207,7 @@ function checkPageExistsAndRedirect(event) {
 
             $("#version_switcher_menu").append(node);
             // replace dropdown button text with the preferred display name of
-            // this version, rather than using sphinx's 0.13.dev4 variable.
+            // this version, rather than using sphinx's 0.13.dev5 variable.
             // also highlight the dropdown entry for the currently-viewed
             // version's entry
             if (entry.version == "0.13") {
@@ -333,8 +333,13 @@ function checkPageExistsAndRedirect(event) {
     </label>
     <ul class="current">
      <li class="toctree-l3">
-      <a class="reference internal" href="../../preferences/index.html">
-       preferences
+      <a class="reference internal" href="../../size_functions/index.html">
+       size_functions
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../scoped_sizing/index.html">
+       scoped_sizing
       </a>
      </li>
      <li class="toctree-l3">
@@ -343,38 +348,13 @@ function checkPageExistsAndRedirect(event) {
       </a>
      </li>
      <li class="toctree-l3">
-      <a class="reference internal" href="../../report/index.html">
-       report
+      <a class="reference internal" href="../../preferences/index.html">
+       preferences
       </a>
      </li>
      <li class="toctree-l3">
-      <a class="reference internal" href="../../openmp_controls/index.html">
-       openmp_controls
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="../../reference_frames/index.html">
-       reference_frames
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="../../size_functions/index.html">
-       size_functions
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="../../boundary/index.html">
-       boundary
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="../../cad_assemblies/index.html">
-       cad_assemblies
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="../../parallel/index.html">
-       parallel
+      <a class="reference internal" href="../../display/index.html">
+       display
       </a>
      </li>
      <li class="toctree-l3 current active has-children">
@@ -393,6 +373,21 @@ function checkPageExistsAndRedirect(event) {
         </a>
        </li>
        <li class="toctree-l4">
+        <a class="reference internal" href="../separate/index.html">
+         separate
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../hexcore/index.html">
+         hexcore
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../domains/index.html">
+         domains
+        </a>
+       </li>
+       <li class="toctree-l4">
         <a class="reference internal" href="../tet/index.html">
          tet
         </a>
@@ -408,48 +403,8 @@ function checkPageExistsAndRedirect(event) {
         </a>
        </li>
        <li class="toctree-l4">
-        <a class="reference internal" href="../auto_mesh_controls/index.html">
-         auto_mesh_controls
-        </a>
-       </li>
-       <li class="toctree-l4">
         <a class="reference internal" href="../cartesian/index.html">
          cartesian
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../scoped_prisms/index.html">
-         scoped_prisms
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../prism/index.html">
-         prism
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../non_conformals/index.html">
-         non_conformals
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../hexcore/index.html">
-         hexcore
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../manage/index.html">
-         manage
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../separate/index.html">
-         separate
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../modify/index.html">
-         modify
         </a>
        </li>
        <li class="toctree-l4">
@@ -458,8 +413,33 @@ function checkPageExistsAndRedirect(event) {
         </a>
        </li>
        <li class="toctree-l4">
-        <a class="reference internal" href="../domains/index.html">
-         domains
+        <a class="reference internal" href="../prism/index.html">
+         prism
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../auto_mesh_controls/index.html">
+         auto_mesh_controls
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../manage/index.html">
+         manage
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../scoped_prisms/index.html">
+         scoped_prisms
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../modify/index.html">
+         modify
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../non_conformals/index.html">
+         non_conformals
         </a>
        </li>
        <li class="toctree-l4 current active has-children">
@@ -473,13 +453,13 @@ function checkPageExistsAndRedirect(event) {
         </label>
         <ul>
          <li class="toctree-l5">
-          <a class="reference internal" href="local_regions/index.html">
-           local_regions
+          <a class="reference internal" href="controls/index.html">
+           controls
           </a>
          </li>
          <li class="toctree-l5">
-          <a class="reference internal" href="controls/index.html">
-           controls
+          <a class="reference internal" href="local_regions/index.html">
+           local_regions
           </a>
          </li>
         </ul>
@@ -497,13 +477,8 @@ function checkPageExistsAndRedirect(event) {
       </ul>
      </li>
      <li class="toctree-l3">
-      <a class="reference internal" href="../../material_point/index.html">
-       material_point
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="../../file/index.html">
-       file
+      <a class="reference internal" href="../../boundary/index.html">
+       boundary
       </a>
      </li>
      <li class="toctree-l3">
@@ -512,13 +487,38 @@ function checkPageExistsAndRedirect(event) {
       </a>
      </li>
      <li class="toctree-l3">
-      <a class="reference internal" href="../../scoped_sizing/index.html">
-       scoped_sizing
+      <a class="reference internal" href="../../cad_assemblies/index.html">
+       cad_assemblies
       </a>
      </li>
      <li class="toctree-l3">
-      <a class="reference internal" href="../../display/index.html">
-       display
+      <a class="reference internal" href="../../reference_frames/index.html">
+       reference_frames
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../material_point/index.html">
+       material_point
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../parallel/index.html">
+       parallel
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../report/index.html">
+       report
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../file/index.html">
+       file
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../openmp_controls/index.html">
+       openmp_controls
       </a>
      </li>
     </ul>
@@ -940,16 +940,16 @@ function checkPageExistsAndRedirect(event) {
 <p><strong>Methods:</strong></p>
 <table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.collapse" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.collapse"><code class="xref py py-obj docutils literal notranslate"><span class="pre">collapse</span></code></a>(*args, **kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.collapse" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.collapse"><code class="xref py py-obj docutils literal notranslate"><span class="pre">collapse</span></code></a>(*args, **kwargs)</p></td>
 <td><p>Merge nodes to remove short edges and small faces.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.improve" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.improve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">improve</span></code></a>(*args, **kwargs)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.improve" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.improve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">improve</span></code></a>(*args, **kwargs)</p></td>
 <td><p>Allows you to improve the polyhedral mesh quality based on the  quality-method.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.quality_method" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.quality_method"><code class="xref py py-obj docutils literal notranslate"><span class="pre">quality_method</span></code></a>(*args, **kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.quality_method" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.quality_method"><code class="xref py py-obj docutils literal notranslate"><span class="pre">quality_method</span></code></a>(*args, **kwargs)</p></td>
 <td><p>Asks you to choose from internal-default,  orthoskew or squish quality measure for mesh improvement.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.remesh" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.remesh"><code class="xref py py-obj docutils literal notranslate"><span class="pre">remesh</span></code></a>(*args, **kwargs)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.remesh" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.remesh"><code class="xref py py-obj docutils literal notranslate"><span class="pre">remesh</span></code></a>(*args, **kwargs)</p></td>
 <td><p>Improves the quality in a local region based on the minimum skewness threshold.</p></td>
 </tr>
 </tbody>
@@ -957,10 +957,10 @@ function checkPageExistsAndRedirect(event) {
 <p><strong>Classes:</strong></p>
 <table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls"><code class="xref py py-obj docutils literal notranslate"><span class="pre">controls</span></code></a>(path, service)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls"><code class="xref py py-obj docutils literal notranslate"><span class="pre">controls</span></code></a>(path, service)</p></td>
 <td><p>Enters the controls menu for setting poly parameters.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="local_regions/index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.local_regions" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.local_regions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">local_regions</span></code></a>(path, service)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.local_regions" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.local_regions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">local_regions</span></code></a>(path, service)</p></td>
 <td><p>Enters the local refinement menu.</p></td>
 </tr>
 </tbody>
@@ -979,31 +979,31 @@ function checkPageExistsAndRedirect(event) {
 <p><strong>Methods:</strong></p>
 <table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.cell_sizing" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.cell_sizing"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cell_sizing</span></code></a>(*args, **kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.cell_sizing" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.cell_sizing"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cell_sizing</span></code></a>(*args, **kwargs)</p></td>
 <td><p>Sets cell volume distribution function as geometric, linear, or size-field.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.edge_size_ratio" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.edge_size_ratio"><code class="xref py py-obj docutils literal notranslate"><span class="pre">edge_size_ratio</span></code></a>(*args, **kwargs)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.edge_size_ratio" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.edge_size_ratio"><code class="xref py py-obj docutils literal notranslate"><span class="pre">edge_size_ratio</span></code></a>(*args, **kwargs)</p></td>
 <td><p>Sets the threshold for the size ratio of two connected edges.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.face_size_ratio" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.face_size_ratio"><code class="xref py py-obj docutils literal notranslate"><span class="pre">face_size_ratio</span></code></a>(*args, **kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.face_size_ratio" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.face_size_ratio"><code class="xref py py-obj docutils literal notranslate"><span class="pre">face_size_ratio</span></code></a>(*args, **kwargs)</p></td>
 <td><p>Sets the threshold for the size ratio of two faces on one cell.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.feature_angle" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.feature_angle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">feature_angle</span></code></a>(*args, **kwargs)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.feature_angle" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.feature_angle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">feature_angle</span></code></a>(*args, **kwargs)</p></td>
 <td><p>Sets the minimum threshold that should be preserved as a feature.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.improve" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.improve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">improve</span></code></a>(*args, **kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.improve" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.improve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">improve</span></code></a>(*args, **kwargs)</p></td>
 <td><p>Enables poly mesh improvement by smoothing based on the smooth-controls.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.merge_skew" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.merge_skew"><code class="xref py py-obj docutils literal notranslate"><span class="pre">merge_skew</span></code></a>(*args, **kwargs)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.merge_skew" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.merge_skew"><code class="xref py py-obj docutils literal notranslate"><span class="pre">merge_skew</span></code></a>(*args, **kwargs)</p></td>
 <td><p>Sets the minimum skewness threshold for cell merge.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.non_fluid_type" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.non_fluid_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">non_fluid_type</span></code></a>(*args, **kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.non_fluid_type" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.non_fluid_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">non_fluid_type</span></code></a>(*args, **kwargs)</p></td>
 <td><p>Selects the default type for non-fluid zones.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.remesh_skew" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.remesh_skew"><code class="xref py py-obj docutils literal notranslate"><span class="pre">remesh_skew</span></code></a>(*args, **kwargs)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.remesh_skew" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.remesh_skew"><code class="xref py py-obj docutils literal notranslate"><span class="pre">remesh_skew</span></code></a>(*args, **kwargs)</p></td>
 <td><p>Sets the target skewness when remeshing.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.sliver_cell_area_fraction" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.sliver_cell_area_fraction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sliver_cell_area_fraction</span></code></a>(*args, **kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.sliver_cell_area_fraction" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.sliver_cell_area_fraction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sliver_cell_area_fraction</span></code></a>(*args, **kwargs)</p></td>
 <td><p>Sets the threshold for the area of a single face to the cell surface area.</p></td>
 </tr>
 </tbody>
@@ -1011,10 +1011,10 @@ function checkPageExistsAndRedirect(event) {
 <p><strong>Classes:</strong></p>
 <table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.prism" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.prism"><code class="xref py py-obj docutils literal notranslate"><span class="pre">prism</span></code></a>(path, service)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.prism" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.prism"><code class="xref py py-obj docutils literal notranslate"><span class="pre">prism</span></code></a>(path, service)</p></td>
 <td><p>Poly prism transition controls.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.smooth_controls" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.smooth_controls"><code class="xref py py-obj docutils literal notranslate"><span class="pre">smooth_controls</span></code></a>(path, service)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.smooth_controls" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.smooth_controls"><code class="xref py py-obj docutils literal notranslate"><span class="pre">smooth_controls</span></code></a>(path, service)</p></td>
 <td><p>Enters the menu for setting smoothing parameters for poly mesh.</p></td>
 </tr>
 </tbody>
@@ -1069,13 +1069,13 @@ function checkPageExistsAndRedirect(event) {
 <p><strong>Methods:</strong></p>
 <table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.prism.apply_growth" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.prism.apply_growth"><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply_growth</span></code></a>(*args, **kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.prism.apply_growth" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.prism.apply_growth"><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply_growth</span></code></a>(*args, **kwargs)</p></td>
 <td><p>Apply growth settings.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.prism.clear_growth" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.prism.clear_growth"><code class="xref py py-obj docutils literal notranslate"><span class="pre">clear_growth</span></code></a>(*args, **kwargs)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.prism.clear_growth" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.prism.clear_growth"><code class="xref py py-obj docutils literal notranslate"><span class="pre">clear_growth</span></code></a>(*args, **kwargs)</p></td>
 <td><p>Clear growth settings.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.prism.list_growth" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.prism.list_growth"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list_growth</span></code></a>(*args, **kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.prism.list_growth" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.prism.list_growth"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list_growth</span></code></a>(*args, **kwargs)</p></td>
 <td><p>List growth settings.</p></td>
 </tr>
 </tbody>
@@ -1120,28 +1120,28 @@ function checkPageExistsAndRedirect(event) {
 <p><strong>Methods:</strong></p>
 <table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.smooth_controls.centroid_smooth_iterations" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.smooth_controls.centroid_smooth_iterations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">centroid_smooth_iterations</span></code></a>(*args, **kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.smooth_controls.centroid_smooth_iterations" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.smooth_controls.centroid_smooth_iterations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">centroid_smooth_iterations</span></code></a>(*args, **kwargs)</p></td>
 <td><p>Sets the number of passes for tet-cell centroid smoothing during the poly mesh generation phase.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.smooth_controls.edge_smooth_iterations" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.smooth_controls.edge_smooth_iterations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">edge_smooth_iterations</span></code></a>(*args, **kwargs)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.smooth_controls.edge_smooth_iterations" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.smooth_controls.edge_smooth_iterations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">edge_smooth_iterations</span></code></a>(*args, **kwargs)</p></td>
 <td><p>Sets the number of passes for tet-cell edge smoothing during the poly mesh generation phase.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.smooth_controls.laplace_smooth_iterations" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.smooth_controls.laplace_smooth_iterations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">laplace_smooth_iterations</span></code></a>(*args, **kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.smooth_controls.laplace_smooth_iterations" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.smooth_controls.laplace_smooth_iterations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">laplace_smooth_iterations</span></code></a>(*args, **kwargs)</p></td>
 <td><p>Sets the number of passes for tet-cell Laplace smoothing during the poly mesh generation phase.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.smooth_controls.smooth_attempts" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.smooth_controls.smooth_attempts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">smooth_attempts</span></code></a>(*args, **kwargs)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.smooth_controls.smooth_attempts" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.smooth_controls.smooth_attempts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">smooth_attempts</span></code></a>(*args, **kwargs)</p></td>
 <td><p>Sets the maximum number of movements for a single node during poly mesh smoothing.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.smooth_controls.smooth_boundary" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.smooth_controls.smooth_boundary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">smooth_boundary</span></code></a>(*args, **kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.smooth_controls.smooth_boundary" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.smooth_controls.smooth_boundary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">smooth_boundary</span></code></a>(*args, **kwargs)</p></td>
 <td><p>Enables boundary smoothing as part of poly cell smoothing.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.smooth_controls.smooth_iterations" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.smooth_controls.smooth_iterations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">smooth_iterations</span></code></a>(*args, **kwargs)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.smooth_controls.smooth_iterations" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.smooth_controls.smooth_iterations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">smooth_iterations</span></code></a>(*args, **kwargs)</p></td>
 <td><p>Sets the number of improvement passes over the full poly mesh.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.smooth_controls.smooth_on_layer" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.smooth_controls.smooth_on_layer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">smooth_on_layer</span></code></a>(*args, **kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.smooth_controls.smooth_on_layer" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.smooth_controls.smooth_on_layer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">smooth_on_layer</span></code></a>(*args, **kwargs)</p></td>
 <td><p>Constrains movement of nodes to maintain layering during poly mesh smoothing.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.smooth_controls.smooth_skew" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.smooth_controls.smooth_skew"><code class="xref py py-obj docutils literal notranslate"><span class="pre">smooth_skew</span></code></a>(*args, **kwargs)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.smooth_controls.smooth_skew" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.controls.smooth_controls.smooth_skew"><code class="xref py py-obj docutils literal notranslate"><span class="pre">smooth_skew</span></code></a>(*args, **kwargs)</p></td>
 <td><p>Sets the minimum skewness threshold for poly mesh smoothing.</p></td>
 </tr>
 </tbody>
@@ -1212,31 +1212,31 @@ function checkPageExistsAndRedirect(event) {
 <p><strong>Methods:</strong></p>
 <table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="local_regions/index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.local_regions.activate" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.local_regions.activate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">activate</span></code></a>(*args, **kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.local_regions.activate" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.local_regions.activate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">activate</span></code></a>(*args, **kwargs)</p></td>
 <td><p>Activates the specified regions for refinement.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="local_regions/index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.local_regions.deactivate" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.local_regions.deactivate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">deactivate</span></code></a>(*args, **kwargs)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.local_regions.deactivate" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.local_regions.deactivate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">deactivate</span></code></a>(*args, **kwargs)</p></td>
 <td><p>Deactivates the specified regions for refinement.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="local_regions/index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.local_regions.define" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.local_regions.define"><code class="xref py py-obj docutils literal notranslate"><span class="pre">define</span></code></a>(*args, **kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.local_regions.define" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.local_regions.define"><code class="xref py py-obj docutils literal notranslate"><span class="pre">define</span></code></a>(*args, **kwargs)</p></td>
 <td><p>Defines the refinement region according to the specified parameters.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="local_regions/index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.local_regions.delete" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.local_regions.delete"><code class="xref py py-obj docutils literal notranslate"><span class="pre">delete</span></code></a>(*args, **kwargs)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.local_regions.delete" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.local_regions.delete"><code class="xref py py-obj docutils literal notranslate"><span class="pre">delete</span></code></a>(*args, **kwargs)</p></td>
 <td><p>Deletes the specified refinement region.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="local_regions/index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.local_regions.ideal_area" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.local_regions.ideal_area"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ideal_area</span></code></a>(*args, **kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.local_regions.ideal_area" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.local_regions.ideal_area"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ideal_area</span></code></a>(*args, **kwargs)</p></td>
 <td><p>Ideal triangle area for given edge length.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="local_regions/index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.local_regions.ideal_vol" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.local_regions.ideal_vol"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ideal_vol</span></code></a>(*args, **kwargs)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.local_regions.ideal_vol" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.local_regions.ideal_vol"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ideal_vol</span></code></a>(*args, **kwargs)</p></td>
 <td><p>Reports the volume of an ideal tetrahedron for the edge length specified.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="local_regions/index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.local_regions.init" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.local_regions.init"><code class="xref py py-obj docutils literal notranslate"><span class="pre">init</span></code></a>(*args, **kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.local_regions.init" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.local_regions.init"><code class="xref py py-obj docutils literal notranslate"><span class="pre">init</span></code></a>(*args, **kwargs)</p></td>
 <td><p>Defines the default refinement region encompassing the entire geometry.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="local_regions/index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.local_regions.list_all_regions" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.local_regions.list_all_regions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list_all_regions</span></code></a>(*args, **kwargs)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.local_regions.list_all_regions" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.local_regions.list_all_regions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list_all_regions</span></code></a>(*args, **kwargs)</p></td>
 <td><p>Lists all refinement region parameters and the activated regions in the console.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="local_regions/index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.local_regions.refine" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.local_regions.refine"><code class="xref py py-obj docutils literal notranslate"><span class="pre">refine</span></code></a>(*args, **kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.local_regions.refine" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.poly.local_regions.refine"><code class="xref py py-obj docutils literal notranslate"><span class="pre">refine</span></code></a>(*args, **kwargs)</p></td>
 <td><p>Refines the active cells inside the selected region based on the specified refinement parameters.</p></td>
 </tr>
 </tbody>

@@ -15,20 +15,20 @@ mesh
    :hidden:
 
    cavity/index
+   separate/index
+   hexcore/index
+   domains/index
    tet/index
    pyramid/index
    thin_volume_mesh/index
-   auto_mesh_controls/index
    cartesian/index
-   scoped_prisms/index
-   prism/index
-   non_conformals/index
-   hexcore/index
-   manage/index
-   separate/index
-   modify/index
    rapid_octree/index
-   domains/index
+   prism/index
+   auto_mesh_controls/index
+   manage/index
+   scoped_prisms/index
+   modify/index
+   non_conformals/index
    poly/index
    poly_hexcore/index
    cell_zone_conditions/index
