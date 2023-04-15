@@ -15,12 +15,12 @@ report
    :hidden:
 
    dpm_histogram/index
-   reference_values/index
-   simulation_reports/index
-   modified_setting/index
-   system/index
-   icing/index
    fluxes/index
-   population_balance/index
    forces/index
+   icing/index
+   reference_values/index
+   modified_setting/index
+   population_balance/index
    heat_exchanger/index
+   system/index
+   simulation_reports/index

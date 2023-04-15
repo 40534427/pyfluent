@@ -15,6 +15,6 @@ rapid_octree
    :hidden:
 
    advanced_meshing_options/index
-   refinement_regions/index
    mesh_sizing/index
    boundary_layer_mesh_configuration/index
+   refinement_regions/index

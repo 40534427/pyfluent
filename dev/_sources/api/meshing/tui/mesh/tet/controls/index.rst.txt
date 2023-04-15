@@ -15,6 +15,6 @@ controls
    :hidden:
 
    tet_improve/index
-   remove_slivers/index
    adv_front_method/index
+   remove_slivers/index
    improve_mesh/index

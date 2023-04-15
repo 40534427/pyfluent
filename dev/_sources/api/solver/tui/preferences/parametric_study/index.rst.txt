@@ -14,5 +14,5 @@ parametric_study
 .. toctree::
    :hidden:
 
-   update_options/index
    layout_options/index
+   update_options/index
