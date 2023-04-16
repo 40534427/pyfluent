@@ -15,6 +15,6 @@ cad_assemblies
    :hidden:
 
    labels/index
-   update_options/index
    manage_state/index
    draw_options/index
+   update_options/index

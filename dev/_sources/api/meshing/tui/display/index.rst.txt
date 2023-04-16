@@ -15,10 +15,10 @@ display
    :hidden:
 
    set/index
-   update_scene/index
-   zones/index
    display_states/index
    xy_plot/index
    advanced_rendering/index
-   set_grid/index
+   zones/index
    objects/index
+   update_scene/index
+   set_grid/index

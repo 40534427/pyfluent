@@ -16,5 +16,5 @@ file
 
    export/index
    import_/index
-   project/index
    checkpoint/index
+   project/index

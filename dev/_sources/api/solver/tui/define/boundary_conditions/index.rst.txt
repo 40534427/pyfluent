@@ -14,11 +14,11 @@ boundary_conditions
 .. toctree::
    :hidden:
 
+   set/index
+   rename_zone/index
+   non_reflecting_bc/index
+   impedance_data_fitting/index
    advanced/index
    modify_zones/index
-   non_reflecting_bc/index
-   rename_zone/index
-   bc_settings/index
    perforated_walls/index
-   set/index
-   impedance_data_fitting/index
+   bc_settings/index

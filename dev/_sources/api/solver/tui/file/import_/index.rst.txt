@@ -15,14 +15,12 @@ import_
    :hidden:
 
    mechanical_apdl/index
-   abaqus/index
-   cfx/index
-   cgns/index
-   lstc/index
-   nastran/index
    partition/index
+   abaqus/index
    patran/index
    plot3d/index
+   lstc/index
    tecplot/index
-   fmu_file/index
-   flamelet/index
+   cfx/index
+   cgns/index
+   nastran/index
