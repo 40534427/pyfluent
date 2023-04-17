@@ -14,10 +14,10 @@ mesh
 .. toctree::
    :hidden:
 
-   surface_mesh/index
-   adapt/index
-   geometry/index
-   modify_zones/index
-   polyhedra/index
    repair_improve/index
+   modify_zones/index
+   geometry/index
+   polyhedra/index
+   surface_mesh/index
    reorder/index
+   adapt/index

@@ -14,9 +14,9 @@ interfacial_area
 .. toctree::
    :hidden:
 
-   interphase_viscous_dissipation/index
    lift/index
-   interphase_discretization/index
-   cavitation/index
    surface_tension/index
    virtual_mass/index
+   interphase_viscous_dissipation/index
+   cavitation/index
+   interphase_discretization/index

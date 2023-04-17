@@ -14,17 +14,17 @@ display
 .. toctree::
    :hidden:
 
-   embedded_windows/index
-   view_sync/index
-   path_lines/index
    set/index
-   define/index
-   surface/index
+   path_lines/index
+   embedded_windows/index
    update_scene/index
-   display_states/index
    particle_tracks/index
-   flamelet_data/index
+   display_states/index
    inverse_dft/index
-   pdf_data/index
    views/index
    objects/index
+   surface/index
+   define/index
+   pdf_data/index
+   flamelet_data/index
+   view_sync/index

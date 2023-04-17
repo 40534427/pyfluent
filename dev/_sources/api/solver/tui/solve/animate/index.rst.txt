@@ -14,7 +14,7 @@ animate
 .. toctree::
    :hidden:
 
-   objects/index
-   pulse/index
-   playback/index
    define/index
+   objects/index
+   playback/index
+   pulse/index
