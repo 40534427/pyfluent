@@ -15,6 +15,6 @@ acoustics
    :hidden:
 
    sources_fft/index
+   wave_equation_options/index
    far_field_parameters/index
    sponge_layers/index
-   wave_equation_options/index

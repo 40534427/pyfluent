@@ -14,7 +14,7 @@ set
 .. toctree::
    :hidden:
 
-   tet_improve/index
    improve_mesh/index
    remove_slivers/index
+   tet_improve/index
    adv_front_method/index

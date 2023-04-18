@@ -15,5 +15,5 @@ radiation
    :hidden:
 
    dtrm_parameters/index
-   s2s_parameters/index
    solar_parameters/index
+   s2s_parameters/index

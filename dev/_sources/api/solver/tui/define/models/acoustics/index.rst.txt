@@ -14,7 +14,7 @@ acoustics
 .. toctree::
    :hidden:
 
-   sponge_layers/index
    sources_fft/index
    far_field_parameters/index
    wave_equation_options/index
+   sponge_layers/index

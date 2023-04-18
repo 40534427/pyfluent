@@ -15,12 +15,12 @@ set
    :hidden:
 
    rendering_options/index
-   path_lines/index
-   windows/index
-   lights/index
-   picture/index
    particle_tracks/index
+   lights/index
    velocity_vectors/index
+   picture/index
+   windows/index
    colors/index
-   contours/index
    titles/index
+   contours/index
+   path_lines/index

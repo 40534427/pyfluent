@@ -14,8 +14,8 @@ dynamic_mesh
 .. toctree::
    :hidden:
 
-   controls/index
    transient_settings/index
-   actions/index
+   controls/index
    events/index
+   actions/index
    zones/index

@@ -16,5 +16,5 @@ controls
 
    contact_solution_controls/index
    query/index
-   acoustics_wave_equation_controls/index
    advanced/index
+   acoustics_wave_equation_controls/index

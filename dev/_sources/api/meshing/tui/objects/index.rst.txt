@@ -14,13 +14,13 @@ objects
 .. toctree::
    :hidden:
 
-   remove_gaps/index
-   wrap/index
-   volumetric_regions/index
-   set/index
-   fix_holes/index
-   labels/index
    cad_association/index
-   join_intersect/index
+   remove_gaps/index
+   volumetric_regions/index
+   fix_holes/index
+   set/index
    deprecated/index
+   labels/index
+   join_intersect/index
    create_new_mesh_object/index
+   wrap/index

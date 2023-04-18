@@ -16,9 +16,9 @@ controls
 
    six_dof_parameters/index
    implicit_update_parameters/index
-   remeshing_parameters/index
    smoothing_parameters/index
-   layering_parameters/index
-   contact_parameters/index
+   remeshing_parameters/index
    periodic_displacement_parameters/index
    in_cylinder_parameters/index
+   layering_parameters/index
+   contact_parameters/index
