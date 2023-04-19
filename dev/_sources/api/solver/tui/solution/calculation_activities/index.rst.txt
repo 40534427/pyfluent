@@ -15,7 +15,7 @@ calculation_activities
    :hidden:
 
    auto_save/index
-   solution_strategy/index
    animate/index
+   solution_strategy/index
    execute_commands/index
    cell_register_operations/index

@@ -14,8 +14,8 @@ interaction_domain
 .. toctree::
    :hidden:
 
-   forces/index
    interfacial_area/index
-   heat_mass_reactions/index
    numerics/index
    model_transition/index
+   forces/index
+   heat_mass_reactions/index

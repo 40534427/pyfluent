@@ -14,8 +14,8 @@ viscous
 .. toctree::
    :hidden:
 
-   near_wall_treatment/index
    multiphase_turbulence/index
-   geko_options/index
-   transition_model_options/index
    turbulence_expert/index
+   transition_model_options/index
+   geko_options/index
+   near_wall_treatment/index

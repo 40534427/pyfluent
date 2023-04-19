@@ -14,22 +14,22 @@ set
 .. toctree::
    :hidden:
 
-   acoustics_wave_equation_controls/index
-   amg_options/index
-   high_speed_numerics/index
+   warped_face_gradient_correction/index
    data_sampling_options/index
+   contact_solution_controls/index
+   fast_transient_settings/index
    previous_defaults/index
+   nita_expert_controls/index
+   poor_mesh_numerics/index
+   multiphase_numerics/index
+   high_speed_numerics/index
+   acoustics_wave_equation_controls/index
+   enhanced_les_numerics/index
    transient_controls/index
+   open_channel_wave_options/index
    high_order_term_relaxation/index
    advanced/index
-   nita_expert_controls/index
-   fast_transient_settings/index
-   multiphase_numerics/index
-   poor_mesh_numerics/index
-   overset/index
-   enhanced_les_numerics/index
-   pseudo_time_method/index
-   open_channel_wave_options/index
-   contact_solution_controls/index
+   amg_options/index
    divergence_prevention/index
-   warped_face_gradient_correction/index
+   overset/index
+   pseudo_time_method/index

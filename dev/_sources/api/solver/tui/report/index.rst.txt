@@ -15,12 +15,12 @@ report
    :hidden:
 
    heat_exchanger/index
+   reference_values/index
+   simulation_reports/index
    dpm_histogram/index
    forces/index
+   fluxes/index
    modified_setting/index
    population_balance/index
-   reference_values/index
-   icing/index
-   simulation_reports/index
-   fluxes/index
    system/index
+   icing/index

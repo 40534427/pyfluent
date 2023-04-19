@@ -14,5 +14,5 @@ animate
 .. toctree::
    :hidden:
 
-   define/index
    objects/index
+   define/index

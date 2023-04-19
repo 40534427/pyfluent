@@ -14,11 +14,11 @@ methods
 .. toctree::
    :hidden:
 
-   query/index
-   pseudo_time_method/index
-   overset/index
-   multiphase_numerics/index
    high_order_term_relaxation/index
+   pseudo_time_method/index
+   query/index
+   overset/index
    nita_expert_controls/index
-   warped_face_gradient_correction/index
+   multiphase_numerics/index
    expert/index
+   warped_face_gradient_correction/index

@@ -14,10 +14,10 @@ boundary_conditions
 .. toctree::
    :hidden:
 
-   rename_zone/index
-   profiles/index
-   expert/index
-   bc_settings/index
    query/index
-   set/index
+   expert/index
+   profiles/index
+   bc_settings/index
    modify_zones/index
+   set/index
+   rename_zone/index

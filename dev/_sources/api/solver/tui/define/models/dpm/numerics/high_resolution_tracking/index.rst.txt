@@ -14,5 +14,5 @@ high_resolution_tracking
 .. toctree::
    :hidden:
 
-   barycentric_interpolation/index
    particle_relocation/index
+   barycentric_interpolation/index
