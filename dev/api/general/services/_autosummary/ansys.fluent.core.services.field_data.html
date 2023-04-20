@@ -142,7 +142,7 @@
       <div class="navbar-end-item">
         <div class="dropdown" id="version_switcher">
     <button type="button" class="btn btn-sm navbar-btn dropdown-toggle" id="version_switcher_button" data-toggle="dropdown">
-        0.13  <!-- this text may get changed later by javascript -->
+        dev  <!-- this text may get changed later by javascript -->
         <span class="caret"></span>
     </button>
     <div id="version_switcher_menu" class="dropdown-menu list-group-flush py-0" aria-labelledby="version_switcher_button">
@@ -152,7 +152,7 @@
 
 <!-- NOTE: this JS must live here (not in our global JS file) because it relies
      on being processed by Jinja before it is run (specifically for replacing
-     variables api/general/services/_autosummary/ansys.fluent.core.services.field_data and {'json_url': 'https://fluent.docs.pyansys.com/release/versions.json', 'version_match': '0.13'}.
+     variables api/general/services/_autosummary/ansys.fluent.core.services.field_data and {'json_url': 'https://fluent.docs.pyansys.com/release/versions.json', 'version_match': 'dev'}.
 -->
 
 <script type="text/javascript">
@@ -207,10 +207,10 @@ function checkPageExistsAndRedirect(event) {
 
             $("#version_switcher_menu").append(node);
             // replace dropdown button text with the preferred display name of
-            // this version, rather than using sphinx's 0.13.dev5 variable.
+            // this version, rather than using sphinx's 0.14.dev0 variable.
             // also highlight the dropdown entry for the currently-viewed
             // version's entry
-            if (entry.version == "0.13") {
+            if (entry.version == "dev") {
                 node.classList.add("active");
                 btn.innerText = btn.dataset["activeVersionName"] = entry.name;
                 btn.dataset["activeVersion"] = entry.version;
@@ -382,6 +382,26 @@ function checkPageExistsAndRedirect(event) {
         </a>
        </li>
        <li class="toctree-l4">
+        <a class="reference internal" href="ansys.fluent.core.services.field_data.BaseFieldData.html">
+         ansys.fluent.core.services.field_data.BaseFieldData
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.fluent.core.services.field_data.FacesCentroid.html">
+         ansys.fluent.core.services.field_data.FacesCentroid
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.fluent.core.services.field_data.FacesConnectivity.html">
+         ansys.fluent.core.services.field_data.FacesConnectivity
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.fluent.core.services.field_data.FacesNormal.html">
+         ansys.fluent.core.services.field_data.FacesNormal
+        </a>
+       </li>
+       <li class="toctree-l4">
         <a class="reference internal" href="ansys.fluent.core.services.field_data.FieldData.html">
          ansys.fluent.core.services.field_data.FieldData
         </a>
@@ -402,8 +422,28 @@ function checkPageExistsAndRedirect(event) {
         </a>
        </li>
        <li class="toctree-l4">
+        <a class="reference internal" href="ansys.fluent.core.services.field_data.ScalarFieldData.html">
+         ansys.fluent.core.services.field_data.ScalarFieldData
+        </a>
+       </li>
+       <li class="toctree-l4">
         <a class="reference internal" href="ansys.fluent.core.services.field_data.SurfaceDataType.html">
          ansys.fluent.core.services.field_data.SurfaceDataType
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.fluent.core.services.field_data.Vector.html">
+         ansys.fluent.core.services.field_data.Vector
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.fluent.core.services.field_data.VectorFieldData.html">
+         ansys.fluent.core.services.field_data.VectorFieldData
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.fluent.core.services.field_data.Vertices.html">
+         ansys.fluent.core.services.field_data.Vertices
         </a>
        </li>
       </ul>
@@ -568,6 +608,18 @@ function checkPageExistsAndRedirect(event) {
 <p class="rubric">Classes</p>
 <table class="autosummary longtable table autosummary">
 <tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.fluent.core.services.field_data.BaseFieldData.html#ansys.fluent.core.services.field_data.BaseFieldData" title="ansys.fluent.core.services.field_data.BaseFieldData"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BaseFieldData</span></code></a>(i_d, data)</p></td>
+<td><p>Contains common properties required by all field data types.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.fluent.core.services.field_data.FacesCentroid.html#ansys.fluent.core.services.field_data.FacesCentroid" title="ansys.fluent.core.services.field_data.FacesCentroid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FacesCentroid</span></code></a>(i_d, data)</p></td>
+<td><p>Provides the container for the face centroid data.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.fluent.core.services.field_data.FacesConnectivity.html#ansys.fluent.core.services.field_data.FacesConnectivity" title="ansys.fluent.core.services.field_data.FacesConnectivity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FacesConnectivity</span></code></a>(i_d, data)</p></td>
+<td><p>Provides the container for the face connectivity data.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.fluent.core.services.field_data.FacesNormal.html#ansys.fluent.core.services.field_data.FacesNormal" title="ansys.fluent.core.services.field_data.FacesNormal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FacesNormal</span></code></a>(i_d, data)</p></td>
+<td><p>Provides the container for the face normal data.</p></td>
+</tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="../../../solver/_autosummary/ansys.fluent.core.services.field_data.FieldData.html#ansys.fluent.core.services.field_data.FieldData" title="ansys.fluent.core.services.field_data.FieldData"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FieldData</span></code></a>(service, field_info, is_data_valid)</p></td>
 <td><p>Provides access to Fluent field data on surfaces.</p></td>
 </tr>
@@ -580,8 +632,20 @@ function checkPageExistsAndRedirect(event) {
 <tr class="row-even"><td><p><a class="reference internal" href="../../../solver/_autosummary/ansys.fluent.core.services.field_data.FieldTransaction.html#ansys.fluent.core.services.field_data.FieldTransaction" title="ansys.fluent.core.services.field_data.FieldTransaction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FieldTransaction</span></code></a>(service, field_info, ...)</p></td>
 <td><p>Populates Fluent field data on surfaces.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="ansys.fluent.core.services.field_data.SurfaceDataType.html#ansys.fluent.core.services.field_data.SurfaceDataType" title="ansys.fluent.core.services.field_data.SurfaceDataType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SurfaceDataType</span></code></a>(value)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.fluent.core.services.field_data.ScalarFieldData.html#ansys.fluent.core.services.field_data.ScalarFieldData" title="ansys.fluent.core.services.field_data.ScalarFieldData"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ScalarFieldData</span></code></a>(i_d, data)</p></td>
+<td><p>Contains scalar field data.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.fluent.core.services.field_data.SurfaceDataType.html#ansys.fluent.core.services.field_data.SurfaceDataType" title="ansys.fluent.core.services.field_data.SurfaceDataType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SurfaceDataType</span></code></a>(value)</p></td>
 <td><p>Provides surface data types.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.fluent.core.services.field_data.Vector.html#ansys.fluent.core.services.field_data.Vector" title="ansys.fluent.core.services.field_data.Vector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Vector</span></code></a>(x, y, z)</p></td>
+<td><p>Stores the data as a vector <code class="docutils literal notranslate"><span class="pre">(x,</span> <span class="pre">y,</span> <span class="pre">z)</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.fluent.core.services.field_data.VectorFieldData.html#ansys.fluent.core.services.field_data.VectorFieldData" title="ansys.fluent.core.services.field_data.VectorFieldData"><code class="xref py py-obj docutils literal notranslate"><span class="pre">VectorFieldData</span></code></a>(i_d, data, scale)</p></td>
+<td><p>Provides a container for vector field data.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.fluent.core.services.field_data.Vertices.html#ansys.fluent.core.services.field_data.Vertices" title="ansys.fluent.core.services.field_data.Vertices"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Vertices</span></code></a>(i_d, data)</p></td>
+<td><p>Provides a container for the vertex data.</p></td>
 </tr>
 </tbody>
 </table>

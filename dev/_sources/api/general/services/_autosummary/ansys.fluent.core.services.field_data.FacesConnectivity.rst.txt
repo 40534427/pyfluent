@@ -1,0 +1,30 @@
+ansys.fluent.core.services.field\_data.FacesConnectivity
+========================================================
+
+.. currentmodule:: ansys.fluent.core.services.field_data
+
+.. autoclass:: FacesConnectivity
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      ~FacesConnectivity.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~FacesConnectivity.data
+      ~FacesConnectivity.size
+      ~FacesConnectivity.surface_id
+   
+   

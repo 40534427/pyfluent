@@ -142,7 +142,7 @@
       <div class="navbar-end-item">
         <div class="dropdown" id="version_switcher">
     <button type="button" class="btn btn-sm navbar-btn dropdown-toggle" id="version_switcher_button" data-toggle="dropdown">
-        0.13  <!-- this text may get changed later by javascript -->
+        dev  <!-- this text may get changed later by javascript -->
         <span class="caret"></span>
     </button>
     <div id="version_switcher_menu" class="dropdown-menu list-group-flush py-0" aria-labelledby="version_switcher_button">
@@ -152,7 +152,7 @@
 
 <!-- NOTE: this JS must live here (not in our global JS file) because it relies
      on being processed by Jinja before it is run (specifically for replacing
-     variables api/solver/fielddata and {'json_url': 'https://fluent.docs.pyansys.com/release/versions.json', 'version_match': '0.13'}.
+     variables api/solver/fielddata and {'json_url': 'https://fluent.docs.pyansys.com/release/versions.json', 'version_match': 'dev'}.
 -->
 
 <script type="text/javascript">
@@ -207,10 +207,10 @@ function checkPageExistsAndRedirect(event) {
 
             $("#version_switcher_menu").append(node);
             // replace dropdown button text with the preferred display name of
-            // this version, rather than using sphinx's 0.13.dev5 variable.
+            // this version, rather than using sphinx's 0.14.dev0 variable.
             // also highlight the dropdown entry for the currently-viewed
             // version's entry
-            if (entry.version == "0.13") {
+            if (entry.version == "dev") {
                 node.classList.add("active");
                 btn.innerText = btn.dataset["activeVersionName"] = entry.name;
                 btn.dataset["activeVersion"] = entry.version;
@@ -527,8 +527,10 @@ pathlines data.</p>
 <p>In order to access field data, launch the fluent solver, and make field data
 available (for example, by reading case and data files):</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">ansys.fluent.core</span> <span class="k">as</span> <span class="nn">pyfluent</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ansys.fluent.core</span> <span class="kn">import</span> <span class="n">examples</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">import_filename</span> <span class="o">=</span> <span class="n">examples</span><span class="o">.</span><span class="n">download_file</span><span class="p">(</span><span class="s2">&quot;mixing_elbow.msh.h5&quot;</span><span class="p">,</span> <span class="s2">&quot;pyfluent/mixing_elbow&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">solver</span> <span class="o">=</span> <span class="n">pyfluent</span><span class="o">.</span><span class="n">launch_fluent</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;solver&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">solver</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">file_type</span><span class="o">=</span><span class="s2">&quot;case-dats&quot;</span><span class="p">,</span> <span class="n">file_name</span><span class="o">=</span><span class="n">mixing_elbow_case_path</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">solver</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">file_type</span><span class="o">=</span><span class="s2">&quot;case&quot;</span><span class="p">,</span> <span class="n">file_name</span><span class="o">=</span><span class="n">import_filename</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The field data object is an attribute of the solver object:</p>
@@ -551,57 +553,89 @@ available (for example, by reading case and data files):</p>
 the <code class="docutils literal notranslate"><span class="pre">get_surface_data</span></code> method and specifying <code class="docutils literal notranslate"><span class="pre">Vertices</span></code> for <code class="docutils literal notranslate"><span class="pre">data_type</span></code>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ansys.fluent.core.services.field_data</span> <span class="kn">import</span> <span class="n">SurfaceDataType</span>
 
-<span class="gp">&gt;&gt;&gt; </span><span class="n">field_data</span><span class="o">.</span><span class="n">get_surface_data</span><span class="p">(</span><span class="n">surface_name</span><span class="o">=</span><span class="s2">&quot;inlet&quot;</span><span class="p">,</span> <span class="n">data_type</span><span class="o">=</span><span class="n">SurfaceDataType</span><span class="o">.</span><span class="n">Vertices</span><span class="p">)</span>
-<span class="go">{4: array([-0.34760258,  0.        , -0.04240644, ..., -0.2953132 ,</span>
-<span class="go">      0.        , -0.06207064], dtype=float32)}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vertices_data</span> <span class="o">=</span> <span class="n">field_data</span><span class="o">.</span><span class="n">get_surface_data</span><span class="p">(</span><span class="n">surface_name</span><span class="o">=</span><span class="s2">&quot;cold-inlet&quot;</span><span class="p">,</span> <span class="n">data_type</span><span class="o">=</span><span class="n">SurfaceDataType</span><span class="o">.</span><span class="n">Vertices</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vertices_data</span><span class="o">.</span><span class="n">size</span>
+<span class="go">241</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vertices_data</span><span class="o">.</span><span class="n">surface_id</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vertices_data</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">x</span>
+<span class="go">-0.2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vertices_data</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">y</span>
+<span class="go">-0.10167995</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vertices_data</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">z</span>
+<span class="go">0.0036200774</span>
 </pre></div>
 </div>
-<p>You can call the same method to get the corresponding surface face connectivity, normals, and centroids
-by specifying <code class="docutils literal notranslate"><span class="pre">FacesConnectivity</span></code>, <code class="docutils literal notranslate"><span class="pre">FacesNormal</span></code> and <code class="docutils literal notranslate"><span class="pre">FacesCentroid</span></code> respectively for <code class="docutils literal notranslate"><span class="pre">data_type</span></code>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">field_data</span><span class="o">.</span><span class="n">get_surface_data</span><span class="p">(</span><span class="n">surface_name</span><span class="o">=</span><span class="s2">&quot;inlet&quot;</span><span class="p">,</span> <span class="n">data_type</span><span class="o">=</span><span class="n">SurfaceDataType</span><span class="o">.</span><span class="n">FacesConnectivity</span><span class="p">)</span>
-<span class="go">{4: array([  4,   3,   2, ..., 379, 382, 388])}</span>
+<p>You can call the same method to get the corresponding surface face normals and centroids.
+For <code class="docutils literal notranslate"><span class="pre">data_type</span></code>, specifying <code class="docutils literal notranslate"><span class="pre">FacesNormal</span></code> and <code class="docutils literal notranslate"><span class="pre">FacesCentroid</span></code> respectively.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">faces_normal_data</span> <span class="o">=</span> <span class="n">field_data</span><span class="o">.</span><span class="n">get_surface_data</span><span class="p">(</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">data_type</span><span class="o">=</span><span class="n">SurfaceDataType</span><span class="o">.</span><span class="n">FacesNormal</span><span class="p">,</span> <span class="n">surface_name</span><span class="o">=</span><span class="s2">&quot;cold-inlet&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">)</span>
 
-<span class="gp">&gt;&gt;&gt; </span><span class="n">field_data</span><span class="o">.</span><span class="n">get_surface_data</span><span class="p">(</span><span class="n">surface_name</span><span class="o">=</span><span class="s2">&quot;inlet&quot;</span><span class="p">,</span> <span class="n">data_type</span><span class="o">=</span><span class="n">SurfaceDataType</span><span class="o">.</span><span class="n">FacesNormal</span><span class="p">)</span>
-<span class="go">{4: array([ 0.0000000e+00,  2.5835081e-06,  ...,</span>
-<span class="go">        2.7459005e-06,  0.0000000e+00,  0.0000000e+00,  3.0340884e-06], dtype=float32)}</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="n">field_data</span><span class="o">.</span><span class="n">get_surface_data</span><span class="p">(</span><span class="n">surface_name</span><span class="o">=</span><span class="s2">&quot;inlet&quot;</span><span class="p">,</span> <span class="n">data_type</span><span class="o">=</span><span class="n">SurfaceDataType</span><span class="o">.</span><span class="n">FacesCentroid</span><span class="p">)</span>
-<span class="go">{4: array([-0.34724122,  0.        , -0.0442204 , -0.34724477, ...,</span>
-<span class="go">       -0.04050309, -0.34645557,  0.        , -0.04421487, -0.34646705], dtype=float32)}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">faces_centroid_data</span> <span class="o">=</span> <span class="n">field_data</span><span class="o">.</span><span class="n">get_surface_data</span><span class="p">(</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">data_type</span><span class="o">=</span><span class="n">SurfaceDataType</span><span class="o">.</span><span class="n">FacesCentroid</span><span class="p">,</span> <span class="n">surface_name</span><span class="o">=</span><span class="s2">&quot;cold-inlet&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Response contains a dictionary of surface IDs to numpy array of the requested field.</p>
+<p>You can request face connectivity data for a given <code class="docutils literal notranslate"><span class="pre">surface_name</span></code> by calling
+the <code class="docutils literal notranslate"><span class="pre">get_surface_data</span></code> method and specifying <code class="docutils literal notranslate"><span class="pre">FacesConnectivity</span></code> for <code class="docutils literal notranslate"><span class="pre">data_type</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">faces_connectivity_data</span> <span class="o">=</span> <span class="n">field_data</span><span class="o">.</span><span class="n">get_surface_data</span><span class="p">(</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">data_type</span><span class="o">=</span><span class="n">SurfaceDataType</span><span class="o">.</span><span class="n">FacesConnectivity</span><span class="p">,</span> <span class="n">surface_name</span><span class="o">=</span><span class="s2">&quot;cold-inlet&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">faces_connectivity_data</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">node_count</span>
+<span class="go">4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">faces_connectivity_data</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">node_indices</span>
+<span class="go">[12, 13, 17, 16]</span>
+</pre></div>
+</div>
+<p>If a surface name is provided as input, the response contains face vertices, connectivity data, and normal or centroid data.
+If surface IDs are provided as input, the response is a dictionary containing a map of surface IDs to face
+vertices, connectivity data, and normal or centroid data.</p>
 </section>
 <section id="get-scalar-field-data">
 <h3>Get scalar field data<a class="headerlink" href="#get-scalar-field-data" title="Permalink to this heading">#</a></h3>
-<p>You can call the <code class="docutils literal notranslate"><span class="pre">get_scalar_field_data</span></code> method to get scalar field data, such as temperature:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">field_data</span><span class="o">.</span><span class="n">get_scalar_field_data</span><span class="p">(</span><span class="n">surface_name</span><span class="o">=</span><span class="s2">&quot;inlet&quot;</span><span class="p">,</span> <span class="n">field_name</span><span class="o">=</span><span class="s2">&quot;temperature&quot;</span><span class="p">)</span>
-<span class="go">{4: array([922.6778 , 923.7954 , 923.791  , 922.67017, 922.88135,  ...,</span>
-<span class="go">       924.94556, 924.9451 , 924.9536 , 923.87366, 922.8334 , 922.82434], dtype=float32)}</span>
+<p>You can call the <code class="docutils literal notranslate"><span class="pre">get_scalar_field_data</span></code> method to get scalar field data, such as absolute pressure:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abs_press_data</span> <span class="o">=</span> <span class="n">field_data</span><span class="o">.</span><span class="n">get_scalar_field_data</span><span class="p">(</span><span class="n">field_name</span><span class="o">=</span><span class="s2">&quot;absolute-pressure&quot;</span><span class="p">,</span> <span class="n">surface_name</span><span class="o">=</span><span class="s2">&quot;cold-inlet&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abs_press_data</span><span class="o">.</span><span class="n">size</span>
+<span class="go">241</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abs_press_data</span><span class="p">[</span><span class="mi">120</span><span class="p">]</span><span class="o">.</span><span class="n">scalar_data</span>
+<span class="go">101325.0</span>
 </pre></div>
 </div>
-<p>The response contains a dictionary of surface IDs to a numpy array of the requested field.</p>
+<p>If a surface name is provided as input, scalar field data is returned.
+If surface IDs are provided as input, a dictionary containing a map of surface IDs to scalar field data is returned.</p>
 </section>
 <section id="get-vector-field-data">
 <h3>Get vector field data<a class="headerlink" href="#get-vector-field-data" title="Permalink to this heading">#</a></h3>
 <p>You can call the <code class="docutils literal notranslate"><span class="pre">get_vector_field_data</span></code> method to get vector field data.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">field_data</span><span class="o">.</span><span class="n">get_vector_field_data</span><span class="p">(</span><span class="n">surface_name</span><span class="o">=</span><span class="s2">&quot;inlet&quot;</span><span class="p">,</span> <span class="n">vector_field</span><span class="o">=</span><span class="s2">&quot;velocity&quot;</span><span class="p">)</span>
-<span class="go">{4: (array([ 5.81938386e-01, -1.01187916e+01,  3.14891455e-03,  ...,</span>
-<span class="go">      -6.49216697e-02,  1.44923580e+00, -1.04387817e+01], dtype=float32), 0.00012235096)}</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">velocity_vector_data</span> <span class="o">=</span> <span class="n">field_data</span><span class="o">.</span><span class="n">get_vector_field_data</span><span class="p">(</span><span class="n">field_name</span><span class="o">=</span><span class="s2">&quot;velocity&quot;</span><span class="p">,</span> <span class="n">surface_name</span><span class="o">=</span><span class="s2">&quot;cold-inlet&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">velocity_vector_data</span><span class="o">.</span><span class="n">size</span>
+<span class="go">152</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">velocity_vector_data</span><span class="o">.</span><span class="n">scale</span>
+<span class="go">1.0</span>
 </pre></div>
 </div>
-<p>Response is a dictionary of surface IDs to a tuple containing a numpy array of <code class="docutils literal notranslate"><span class="pre">vector</span> <span class="pre">field</span></code> and <code class="docutils literal notranslate"><span class="pre">vector-scale</span></code>.</p>
+<p>If a surface name is provided as input, vector field data is returned.
+If surface IDs are provided as input, a dictionary containing a map of surface IDs to vector field data is returned.</p>
 </section>
 <section id="get-pathlines-field-data">
 <h3>Get pathlines field data<a class="headerlink" href="#get-pathlines-field-data" title="Permalink to this heading">#</a></h3>
 <p>You can call the <code class="docutils literal notranslate"><span class="pre">get_pathlines_field_data</span></code> method to get pathlines field data.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">field_data</span><span class="o">.</span><span class="n">get_pathlines_field_data</span><span class="p">(</span><span class="n">surface_name</span><span class="o">=</span><span class="s2">&quot;inlet&quot;</span><span class="p">,</span> <span class="n">field_name</span><span class="o">=</span><span class="s2">&quot;temperature&quot;</span><span class="p">)</span>
-<span class="go">{4: {&#39;vertices&#39;: array([-0.34724122,  0.        , -0.0442204 , ..., -0.20095952, -0.1250188 , -0.0317937 ], dtype=float32),</span>
-<span class="go">    &#39;lines&#39;: array([    2,     0,     1, ...,     2, 29581, 29582]), &#39;temperature&#39;: array([879.1005 , 831.87085, 861.82495, ..., 899.1867 , 892.27   ,</span>
-<span class="go">     896.4489 ], dtype=float32), &#39;pathlines-count&#39;: array([90])}}</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">path_lines_data</span> <span class="o">=</span> <span class="n">field_data</span><span class="o">.</span><span class="n">get_pathlines_field_data</span><span class="p">(</span><span class="n">field_name</span><span class="o">=</span><span class="s2">&quot;velocity&quot;</span><span class="p">,</span> <span class="n">surface_name</span><span class="o">=</span><span class="s2">&quot;cold-inlet&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">path_lines_data</span><span class="p">[</span><span class="s2">&quot;vertices&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">size</span>
+<span class="go">76152</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">path_lines_data</span><span class="p">[</span><span class="s2">&quot;lines&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">size</span>
+<span class="go">76000</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">path_lines_data</span><span class="p">[</span><span class="s2">&quot;velocity&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">size</span>
+<span class="go">76152</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">path_lines_data</span><span class="p">[</span><span class="s2">&quot;lines&quot;</span><span class="p">][</span><span class="mi">100</span><span class="p">]</span><span class="o">.</span><span class="n">node_count</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">path_lines_data</span><span class="p">[</span><span class="s2">&quot;lines&quot;</span><span class="p">][</span><span class="mi">100</span><span class="p">]</span><span class="o">.</span><span class="n">node_data</span>
+<span class="go">[100, 101]</span>
 </pre></div>
 </div>
-<p>Pathlines data is returned as line surface. So response is a dictionary of surface IDs to a information about line surface.</p>
+<p>Dictionary containing a map of surface IDs to the path-line data is returned.
+or example, pathlines connectivity, vertices, and field.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>In Fluent, a surface name can be associated with multiple surface IDs.

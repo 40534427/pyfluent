@@ -15,11 +15,11 @@ boundary
    :hidden:
 
    modify/index
-   refine/index
-   boundary_conditions/index
-   separate/index
-   feature/index
-   improve/index
-   shell_boundary_layer/index
    manage/index
+   separate/index
+   improve/index
+   refine/index
    remesh/index
+   boundary_conditions/index
+   shell_boundary_layer/index
+   feature/index

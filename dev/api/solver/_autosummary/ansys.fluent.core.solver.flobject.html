@@ -140,7 +140,7 @@
       <div class="navbar-end-item">
         <div class="dropdown" id="version_switcher">
     <button type="button" class="btn btn-sm navbar-btn dropdown-toggle" id="version_switcher_button" data-toggle="dropdown">
-        0.13  <!-- this text may get changed later by javascript -->
+        dev  <!-- this text may get changed later by javascript -->
         <span class="caret"></span>
     </button>
     <div id="version_switcher_menu" class="dropdown-menu list-group-flush py-0" aria-labelledby="version_switcher_button">
@@ -150,7 +150,7 @@
 
 <!-- NOTE: this JS must live here (not in our global JS file) because it relies
      on being processed by Jinja before it is run (specifically for replacing
-     variables api/solver/_autosummary/ansys.fluent.core.solver.flobject and {'json_url': 'https://fluent.docs.pyansys.com/release/versions.json', 'version_match': '0.13'}.
+     variables api/solver/_autosummary/ansys.fluent.core.solver.flobject and {'json_url': 'https://fluent.docs.pyansys.com/release/versions.json', 'version_match': 'dev'}.
 -->
 
 <script type="text/javascript">
@@ -205,10 +205,10 @@ function checkPageExistsAndRedirect(event) {
 
             $("#version_switcher_menu").append(node);
             // replace dropdown button text with the preferred display name of
-            // this version, rather than using sphinx's 0.13.dev5 variable.
+            // this version, rather than using sphinx's 0.14.dev0 variable.
             // also highlight the dropdown entry for the currently-viewed
             // version's entry
-            if (entry.version == "0.13") {
+            if (entry.version == "dev") {
                 node.classList.add("active");
                 btn.innerText = btn.dataset["activeVersionName"] = entry.name;
                 btn.dataset["activeVersion"] = entry.version;
@@ -296,6 +296,11 @@ function checkPageExistsAndRedirect(event) {
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
   <div class="bd-toc-item active">
     <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="ansys.fluent.core.solver.flobject.find_children.html">
+   find_children
+  </a>
+ </li>
  <li class="toctree-l1">
   <a class="reference internal" href="ansys.fluent.core.solver.flobject.get_cls.html">
    get_cls
@@ -504,13 +509,16 @@ r.boundary_conditions.velocity_inlet[‘inlet’].vmag.constant = 20</p>
 <p class="rubric">Functions</p>
 <table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="ansys.fluent.core.solver.flobject.get_cls.html#ansys.fluent.core.solver.flobject.get_cls" title="ansys.fluent.core.solver.flobject.get_cls"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_cls</span></code></a>(name, info[, parent, version])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.fluent.core.solver.flobject.find_children.html#ansys.fluent.core.solver.flobject.find_children" title="ansys.fluent.core.solver.flobject.find_children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_children</span></code></a>(obj[, identifier])</p></td>
+<td><p>Returns path of all the child objects matching an identifier.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.fluent.core.solver.flobject.get_cls.html#ansys.fluent.core.solver.flobject.get_cls" title="ansys.fluent.core.solver.flobject.get_cls"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_cls</span></code></a>(name, info[, parent, version])</p></td>
 <td><p>Create a class for the object identified by &quot;path&quot;.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="ansys.fluent.core.solver.flobject.get_root.html#ansys.fluent.core.solver.flobject.get_root" title="ansys.fluent.core.solver.flobject.get_root"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_root</span></code></a>(flproxy[, version])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.fluent.core.solver.flobject.get_root.html#ansys.fluent.core.solver.flobject.get_root" title="ansys.fluent.core.solver.flobject.get_root"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_root</span></code></a>(flproxy[, version])</p></td>
 <td><p>Get the root settings object.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="ansys.fluent.core.solver.flobject.to_python_name.html#ansys.fluent.core.solver.flobject.to_python_name" title="ansys.fluent.core.solver.flobject.to_python_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_python_name</span></code></a>(fluent_name)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.fluent.core.solver.flobject.to_python_name.html#ansys.fluent.core.solver.flobject.to_python_name" title="ansys.fluent.core.solver.flobject.to_python_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_python_name</span></code></a>(fluent_name)</p></td>
 <td><p>Convert a scheme string to a Python variable name.</p></td>
 </tr>
 </tbody>

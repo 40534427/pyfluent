@@ -142,7 +142,7 @@
       <div class="navbar-end-item">
         <div class="dropdown" id="version_switcher">
     <button type="button" class="btn btn-sm navbar-btn dropdown-toggle" id="version_switcher_button" data-toggle="dropdown">
-        0.13  <!-- this text may get changed later by javascript -->
+        dev  <!-- this text may get changed later by javascript -->
         <span class="caret"></span>
     </button>
     <div id="version_switcher_menu" class="dropdown-menu list-group-flush py-0" aria-labelledby="version_switcher_button">
@@ -152,7 +152,7 @@
 
 <!-- NOTE: this JS must live here (not in our global JS file) because it relies
      on being processed by Jinja before it is run (specifically for replacing
-     variables api/general/services/_autosummary/ansys.fluent.core.services.field_data.FieldTransaction and {'json_url': 'https://fluent.docs.pyansys.com/release/versions.json', 'version_match': '0.13'}.
+     variables api/general/services/_autosummary/ansys.fluent.core.services.field_data.FieldTransaction and {'json_url': 'https://fluent.docs.pyansys.com/release/versions.json', 'version_match': 'dev'}.
 -->
 
 <script type="text/javascript">
@@ -207,10 +207,10 @@ function checkPageExistsAndRedirect(event) {
 
             $("#version_switcher_menu").append(node);
             // replace dropdown button text with the preferred display name of
-            // this version, rather than using sphinx's 0.13.dev5 variable.
+            // this version, rather than using sphinx's 0.14.dev0 variable.
             // also highlight the dropdown entry for the currently-viewed
             // version's entry
-            if (entry.version == "0.13") {
+            if (entry.version == "dev") {
                 node.classList.add("active");
                 btn.innerText = btn.dataset["activeVersionName"] = entry.name;
                 btn.dataset["activeVersion"] = entry.version;
@@ -383,6 +383,26 @@ function checkPageExistsAndRedirect(event) {
         </a>
        </li>
        <li class="toctree-l4">
+        <a class="reference internal" href="ansys.fluent.core.services.field_data.BaseFieldData.html">
+         ansys.fluent.core.services.field_data.BaseFieldData
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.fluent.core.services.field_data.FacesCentroid.html">
+         ansys.fluent.core.services.field_data.FacesCentroid
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.fluent.core.services.field_data.FacesConnectivity.html">
+         ansys.fluent.core.services.field_data.FacesConnectivity
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.fluent.core.services.field_data.FacesNormal.html">
+         ansys.fluent.core.services.field_data.FacesNormal
+        </a>
+       </li>
+       <li class="toctree-l4">
         <a class="reference internal" href="ansys.fluent.core.services.field_data.FieldData.html">
          ansys.fluent.core.services.field_data.FieldData
         </a>
@@ -440,8 +460,28 @@ function checkPageExistsAndRedirect(event) {
         </ul>
        </li>
        <li class="toctree-l4">
+        <a class="reference internal" href="ansys.fluent.core.services.field_data.ScalarFieldData.html">
+         ansys.fluent.core.services.field_data.ScalarFieldData
+        </a>
+       </li>
+       <li class="toctree-l4">
         <a class="reference internal" href="ansys.fluent.core.services.field_data.SurfaceDataType.html">
          ansys.fluent.core.services.field_data.SurfaceDataType
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.fluent.core.services.field_data.Vector.html">
+         ansys.fluent.core.services.field_data.Vector
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.fluent.core.services.field_data.VectorFieldData.html">
+         ansys.fluent.core.services.field_data.VectorFieldData
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.fluent.core.services.field_data.Vertices.html">
+         ansys.fluent.core.services.field_data.Vertices
         </a>
        </li>
       </ul>

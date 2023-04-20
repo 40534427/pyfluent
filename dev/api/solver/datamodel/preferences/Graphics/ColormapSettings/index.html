@@ -142,7 +142,7 @@
       <div class="navbar-end-item">
         <div class="dropdown" id="version_switcher">
     <button type="button" class="btn btn-sm navbar-btn dropdown-toggle" id="version_switcher_button" data-toggle="dropdown">
-        0.13  <!-- this text may get changed later by javascript -->
+        dev  <!-- this text may get changed later by javascript -->
         <span class="caret"></span>
     </button>
     <div id="version_switcher_menu" class="dropdown-menu list-group-flush py-0" aria-labelledby="version_switcher_button">
@@ -152,7 +152,7 @@
 
 <!-- NOTE: this JS must live here (not in our global JS file) because it relies
      on being processed by Jinja before it is run (specifically for replacing
-     variables api/solver/datamodel/preferences/Graphics/ColormapSettings/index and {'json_url': 'https://fluent.docs.pyansys.com/release/versions.json', 'version_match': '0.13'}.
+     variables api/solver/datamodel/preferences/Graphics/ColormapSettings/index and {'json_url': 'https://fluent.docs.pyansys.com/release/versions.json', 'version_match': 'dev'}.
 -->
 
 <script type="text/javascript">
@@ -207,10 +207,10 @@ function checkPageExistsAndRedirect(event) {
 
             $("#version_switcher_menu").append(node);
             // replace dropdown button text with the preferred display name of
-            // this version, rather than using sphinx's 0.13.dev5 variable.
+            // this version, rather than using sphinx's 0.14.dev0 variable.
             // also highlight the dropdown entry for the currently-viewed
             // version's entry
-            if (entry.version == "0.13") {
+            if (entry.version == "dev") {
                 node.classList.add("active");
                 btn.innerText = btn.dataset["activeVersionName"] = entry.name;
                 btn.dataset["activeVersion"] = entry.version;
@@ -905,109 +905,109 @@ function checkPageExistsAndRedirect(event) {
 <p><strong>Classes:</strong></p>
 <table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.Alignment" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.Alignment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Alignment</span></code></a>(service, rules[, path])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.Alignment" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.Alignment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Alignment</span></code></a>(service, rules[, path])</p></td>
 <td><p>Parameter Alignment of value type str.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.AspectRatioWhenHorizontal" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.AspectRatioWhenHorizontal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AspectRatioWhenHorizontal</span></code></a>(service, rules[, path])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.AspectRatioWhenHorizontal" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.AspectRatioWhenHorizontal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AspectRatioWhenHorizontal</span></code></a>(service, rules[, path])</p></td>
 <td><p>Parameter AspectRatioWhenHorizontal of value type float.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.AspectRatioWhenVertical" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.AspectRatioWhenVertical"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AspectRatioWhenVertical</span></code></a>(service, rules[, path])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.AspectRatioWhenVertical" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.AspectRatioWhenVertical"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AspectRatioWhenVertical</span></code></a>(service, rules[, path])</p></td>
 <td><p>Parameter AspectRatioWhenVertical of value type float.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.AutoRefitOnResize" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.AutoRefitOnResize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AutoRefitOnResize</span></code></a>(service, rules[, path])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.AutoRefitOnResize" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.AutoRefitOnResize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AutoRefitOnResize</span></code></a>(service, rules[, path])</p></td>
 <td><p>Parameter AutoRefitOnResize of value type bool.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.AutomaticResize" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.AutomaticResize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AutomaticResize</span></code></a>(service, rules[, path])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.AutomaticResize" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.AutomaticResize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AutomaticResize</span></code></a>(service, rules[, path])</p></td>
 <td><p>Parameter AutomaticResize of value type bool.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.BorderStyle" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.BorderStyle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BorderStyle</span></code></a>(service, rules[, path])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.BorderStyle" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.BorderStyle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BorderStyle</span></code></a>(service, rules[, path])</p></td>
 <td><p>Parameter BorderStyle of value type str.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.Colormap" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.Colormap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Colormap</span></code></a>(service, rules[, path])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.Colormap" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.Colormap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Colormap</span></code></a>(service, rules[, path])</p></td>
 <td><p>Parameter Colormap of value type str.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.IsolinesPositionOffset" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.IsolinesPositionOffset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IsolinesPositionOffset</span></code></a>(service, rules[, path])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.IsolinesPositionOffset" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.IsolinesPositionOffset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IsolinesPositionOffset</span></code></a>(service, rules[, path])</p></td>
 <td><p>Parameter IsolinesPositionOffset of value type float.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.Labels" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.Labels"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Labels</span></code></a>(service, rules[, path])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.Labels" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.Labels"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Labels</span></code></a>(service, rules[, path])</p></td>
 <td><p>Parameter Labels of value type bool.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.Levels" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.Levels"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Levels</span></code></a>(service, rules[, path])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.Levels" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.Levels"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Levels</span></code></a>(service, rules[, path])</p></td>
 <td><p>Parameter Levels of value type int.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.LogScale" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.LogScale"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LogScale</span></code></a>(service, rules[, path])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.LogScale" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.LogScale"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LogScale</span></code></a>(service, rules[, path])</p></td>
 <td><p>Parameter LogScale of value type bool.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.MajorLengthToScreenRatioWhenHorizontal" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.MajorLengthToScreenRatioWhenHorizontal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MajorLengthToScreenRatioWhenHorizontal</span></code></a>(...)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.MajorLengthToScreenRatioWhenHorizontal" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.MajorLengthToScreenRatioWhenHorizontal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MajorLengthToScreenRatioWhenHorizontal</span></code></a>(...)</p></td>
 <td><p>Parameter MajorLengthToScreenRatioWhenHorizontal of value type float.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.MajorLengthToScreenRatioWhenVertical" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.MajorLengthToScreenRatioWhenVertical"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MajorLengthToScreenRatioWhenVertical</span></code></a>(...[, path])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.MajorLengthToScreenRatioWhenVertical" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.MajorLengthToScreenRatioWhenVertical"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MajorLengthToScreenRatioWhenVertical</span></code></a>(...[, path])</p></td>
 <td><p>Parameter MajorLengthToScreenRatioWhenVertical of value type float.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.MarginFromEdgeToScreenRatio" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.MarginFromEdgeToScreenRatio"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MarginFromEdgeToScreenRatio</span></code></a>(service, rules)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.MarginFromEdgeToScreenRatio" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.MarginFromEdgeToScreenRatio"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MarginFromEdgeToScreenRatio</span></code></a>(service, rules)</p></td>
 <td><p>Parameter MarginFromEdgeToScreenRatio of value type float.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.MaxSizeScaleFactor" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.MaxSizeScaleFactor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MaxSizeScaleFactor</span></code></a>(service, rules[, path])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.MaxSizeScaleFactor" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.MaxSizeScaleFactor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MaxSizeScaleFactor</span></code></a>(service, rules[, path])</p></td>
 <td><p>Parameter MaxSizeScaleFactor of value type float.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.MinSizeScaleFactor" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.MinSizeScaleFactor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MinSizeScaleFactor</span></code></a>(service, rules[, path])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.MinSizeScaleFactor" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.MinSizeScaleFactor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MinSizeScaleFactor</span></code></a>(service, rules[, path])</p></td>
 <td><p>Parameter MinSizeScaleFactor of value type float.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.NumberFormatPrecision" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.NumberFormatPrecision"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NumberFormatPrecision</span></code></a>(service, rules[, path])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.NumberFormatPrecision" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.NumberFormatPrecision"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NumberFormatPrecision</span></code></a>(service, rules[, path])</p></td>
 <td><p>Parameter NumberFormatPrecision of value type int.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.NumberFormatType" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.NumberFormatType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NumberFormatType</span></code></a>(service, rules[, path])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.NumberFormatType" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.NumberFormatType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NumberFormatType</span></code></a>(service, rules[, path])</p></td>
 <td><p>Parameter NumberFormatType of value type str.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.PreserveAspectRatioForHardcopy" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.PreserveAspectRatioForHardcopy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PreserveAspectRatioForHardcopy</span></code></a>(service, rules)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.PreserveAspectRatioForHardcopy" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.PreserveAspectRatioForHardcopy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PreserveAspectRatioForHardcopy</span></code></a>(service, rules)</p></td>
 <td><p>Parameter PreserveAspectRatioForHardcopy of value type bool.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.ShowColormap" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.ShowColormap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ShowColormap</span></code></a>(service, rules[, path])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.ShowColormap" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.ShowColormap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ShowColormap</span></code></a>(service, rules[, path])</p></td>
 <td><p>Parameter ShowColormap of value type bool.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.SkipValue" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.SkipValue"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SkipValue</span></code></a>(service, rules[, path])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.SkipValue" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.SkipValue"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SkipValue</span></code></a>(service, rules[, path])</p></td>
 <td><p>Parameter SkipValue of value type int.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.TextBehavior" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.TextBehavior"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TextBehavior</span></code></a>(service, rules[, path])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.TextBehavior" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.TextBehavior"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TextBehavior</span></code></a>(service, rules[, path])</p></td>
 <td><p>Parameter TextBehavior of value type str.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.TextFontAutomaticHorizontalSize" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.TextFontAutomaticHorizontalSize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TextFontAutomaticHorizontalSize</span></code></a>(service, rules)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.TextFontAutomaticHorizontalSize" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.TextFontAutomaticHorizontalSize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TextFontAutomaticHorizontalSize</span></code></a>(service, rules)</p></td>
 <td><p>Parameter TextFontAutomaticHorizontalSize of value type float.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.TextFontAutomaticSize" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.TextFontAutomaticSize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TextFontAutomaticSize</span></code></a>(service, rules[, path])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.TextFontAutomaticSize" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.TextFontAutomaticSize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TextFontAutomaticSize</span></code></a>(service, rules[, path])</p></td>
 <td><p>Parameter TextFontAutomaticSize of value type float.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.TextFontAutomaticUnits" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.TextFontAutomaticUnits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TextFontAutomaticUnits</span></code></a>(service, rules[, path])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.TextFontAutomaticUnits" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.TextFontAutomaticUnits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TextFontAutomaticUnits</span></code></a>(service, rules[, path])</p></td>
 <td><p>Parameter TextFontAutomaticUnits of value type str.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.TextFontAutomaticVerticalSize" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.TextFontAutomaticVerticalSize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TextFontAutomaticVerticalSize</span></code></a>(service, rules)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.TextFontAutomaticVerticalSize" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.TextFontAutomaticVerticalSize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TextFontAutomaticVerticalSize</span></code></a>(service, rules)</p></td>
 <td><p>Parameter TextFontAutomaticVerticalSize of value type float.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.TextFontFixedHorizontalSize" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.TextFontFixedHorizontalSize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TextFontFixedHorizontalSize</span></code></a>(service, rules)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.TextFontFixedHorizontalSize" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.TextFontFixedHorizontalSize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TextFontFixedHorizontalSize</span></code></a>(service, rules)</p></td>
 <td><p>Parameter TextFontFixedHorizontalSize of value type int.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.TextFontFixedSize" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.TextFontFixedSize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TextFontFixedSize</span></code></a>(service, rules[, path])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.TextFontFixedSize" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.TextFontFixedSize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TextFontFixedSize</span></code></a>(service, rules[, path])</p></td>
 <td><p>Parameter TextFontFixedSize of value type int.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.TextFontFixedUnits" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.TextFontFixedUnits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TextFontFixedUnits</span></code></a>(service, rules[, path])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.TextFontFixedUnits" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.TextFontFixedUnits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TextFontFixedUnits</span></code></a>(service, rules[, path])</p></td>
 <td><p>Parameter TextFontFixedUnits of value type str.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.TextFontFixedVerticalSize" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.TextFontFixedVerticalSize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TextFontFixedVerticalSize</span></code></a>(service, rules[, path])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.TextFontFixedVerticalSize" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.TextFontFixedVerticalSize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TextFontFixedVerticalSize</span></code></a>(service, rules[, path])</p></td>
 <td><p>Parameter TextFontFixedVerticalSize of value type int.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.TextFontName" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.TextFontName"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TextFontName</span></code></a>(service, rules[, path])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.TextFontName" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.TextFontName"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TextFontName</span></code></a>(service, rules[, path])</p></td>
 <td><p>Parameter TextFontName of value type str.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.TextTruncationLimitForHorizontalColormaps" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.TextTruncationLimitForHorizontalColormaps"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TextTruncationLimitForHorizontalColormaps</span></code></a>(...)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.TextTruncationLimitForHorizontalColormaps" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.TextTruncationLimitForHorizontalColormaps"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TextTruncationLimitForHorizontalColormaps</span></code></a>(...)</p></td>
 <td><p>Parameter TextTruncationLimitForHorizontalColormaps of value type int.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.TextTruncationLimitForVerticalColormaps" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.TextTruncationLimitForVerticalColormaps"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TextTruncationLimitForVerticalColormaps</span></code></a>(...)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.TextTruncationLimitForVerticalColormaps" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.TextTruncationLimitForVerticalColormaps"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TextTruncationLimitForVerticalColormaps</span></code></a>(...)</p></td>
 <td><p>Parameter TextTruncationLimitForVerticalColormaps of value type int.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.Type" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.Type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Type</span></code></a>(service, rules[, path])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.Type" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.Type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Type</span></code></a>(service, rules[, path])</p></td>
 <td><p>Parameter Type of value type str.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.UseNoSubWindows" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.UseNoSubWindows"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UseNoSubWindows</span></code></a>(service, rules[, path])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.UseNoSubWindows" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.ColormapSettings.UseNoSubWindows"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UseNoSubWindows</span></code></a>(service, rules[, path])</p></td>
 <td><p>Parameter UseNoSubWindows of value type bool.</p></td>
 </tr>
 </tbody>

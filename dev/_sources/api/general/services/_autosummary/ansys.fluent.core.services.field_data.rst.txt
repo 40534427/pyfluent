@@ -29,11 +29,19 @@
       :toctree:
       :template: flobject-class-template.rst
    
+      BaseFieldData
+      FacesCentroid
+      FacesConnectivity
+      FacesNormal
       FieldData
       FieldDataService
       FieldInfo
       FieldTransaction
+      ScalarFieldData
       SurfaceDataType
+      Vector
+      VectorFieldData
+      Vertices
    
    
 

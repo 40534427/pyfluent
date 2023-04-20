@@ -1,0 +1,30 @@
+ansys.fluent.core.services.field\_data.ScalarFieldData
+======================================================
+
+.. currentmodule:: ansys.fluent.core.services.field_data
+
+.. autoclass:: ScalarFieldData
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      ~ScalarFieldData.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~ScalarFieldData.data
+      ~ScalarFieldData.size
+      ~ScalarFieldData.surface_id
+   
+   

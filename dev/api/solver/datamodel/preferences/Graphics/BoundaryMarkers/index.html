@@ -142,7 +142,7 @@
       <div class="navbar-end-item">
         <div class="dropdown" id="version_switcher">
     <button type="button" class="btn btn-sm navbar-btn dropdown-toggle" id="version_switcher_button" data-toggle="dropdown">
-        0.13  <!-- this text may get changed later by javascript -->
+        dev  <!-- this text may get changed later by javascript -->
         <span class="caret"></span>
     </button>
     <div id="version_switcher_menu" class="dropdown-menu list-group-flush py-0" aria-labelledby="version_switcher_button">
@@ -152,7 +152,7 @@
 
 <!-- NOTE: this JS must live here (not in our global JS file) because it relies
      on being processed by Jinja before it is run (specifically for replacing
-     variables api/solver/datamodel/preferences/Graphics/BoundaryMarkers/index and {'json_url': 'https://fluent.docs.pyansys.com/release/versions.json', 'version_match': '0.13'}.
+     variables api/solver/datamodel/preferences/Graphics/BoundaryMarkers/index and {'json_url': 'https://fluent.docs.pyansys.com/release/versions.json', 'version_match': 'dev'}.
 -->
 
 <script type="text/javascript">
@@ -207,10 +207,10 @@ function checkPageExistsAndRedirect(event) {
 
             $("#version_switcher_menu").append(node);
             // replace dropdown button text with the preferred display name of
-            // this version, rather than using sphinx's 0.13.dev5 variable.
+            // this version, rather than using sphinx's 0.14.dev0 variable.
             // also highlight the dropdown entry for the currently-viewed
             // version's entry
-            if (entry.version == "0.13") {
+            if (entry.version == "dev") {
                 node.classList.add("active");
                 btn.innerText = btn.dataset["activeVersionName"] = entry.name;
                 btn.dataset["activeVersion"] = entry.version;
@@ -689,37 +689,37 @@ function checkPageExistsAndRedirect(event) {
 <p><strong>Classes:</strong></p>
 <table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.BoundaryMarkers.ColorOption" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.BoundaryMarkers.ColorOption"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ColorOption</span></code></a>(service, rules[, path])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.BoundaryMarkers.ColorOption" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.BoundaryMarkers.ColorOption"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ColorOption</span></code></a>(service, rules[, path])</p></td>
 <td><p>Parameter ColorOption of value type str.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.BoundaryMarkers.Enabled" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.BoundaryMarkers.Enabled"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Enabled</span></code></a>(service, rules[, path])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.BoundaryMarkers.Enabled" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.BoundaryMarkers.Enabled"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Enabled</span></code></a>(service, rules[, path])</p></td>
 <td><p>Parameter Enabled of value type bool.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.BoundaryMarkers.ExcludeFromBounding" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.BoundaryMarkers.ExcludeFromBounding"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ExcludeFromBounding</span></code></a>(service, rules[, path])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.BoundaryMarkers.ExcludeFromBounding" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.BoundaryMarkers.ExcludeFromBounding"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ExcludeFromBounding</span></code></a>(service, rules[, path])</p></td>
 <td><p>Parameter ExcludeFromBounding of value type bool.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.BoundaryMarkers.InletColor" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.BoundaryMarkers.InletColor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">InletColor</span></code></a>(service, rules[, path])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.BoundaryMarkers.InletColor" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.BoundaryMarkers.InletColor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">InletColor</span></code></a>(service, rules[, path])</p></td>
 <td><p>Parameter InletColor of value type str.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.BoundaryMarkers.MarkerFraction" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.BoundaryMarkers.MarkerFraction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MarkerFraction</span></code></a>(service, rules[, path])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.BoundaryMarkers.MarkerFraction" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.BoundaryMarkers.MarkerFraction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MarkerFraction</span></code></a>(service, rules[, path])</p></td>
 <td><p>Parameter MarkerFraction of value type float.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.BoundaryMarkers.MarkerSizeLimitingScaleMultiplier" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.BoundaryMarkers.MarkerSizeLimitingScaleMultiplier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MarkerSizeLimitingScaleMultiplier</span></code></a>(service, rules)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.BoundaryMarkers.MarkerSizeLimitingScaleMultiplier" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.BoundaryMarkers.MarkerSizeLimitingScaleMultiplier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MarkerSizeLimitingScaleMultiplier</span></code></a>(service, rules)</p></td>
 <td><p>Parameter MarkerSizeLimitingScaleMultiplier of value type float.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.BoundaryMarkers.MarkersLimit" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.BoundaryMarkers.MarkersLimit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MarkersLimit</span></code></a>(service, rules[, path])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.BoundaryMarkers.MarkersLimit" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.BoundaryMarkers.MarkersLimit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MarkersLimit</span></code></a>(service, rules[, path])</p></td>
 <td><p>Parameter MarkersLimit of value type int.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.BoundaryMarkers.OutletColor" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.BoundaryMarkers.OutletColor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OutletColor</span></code></a>(service, rules[, path])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.BoundaryMarkers.OutletColor" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.BoundaryMarkers.OutletColor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OutletColor</span></code></a>(service, rules[, path])</p></td>
 <td><p>Parameter OutletColor of value type str.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.BoundaryMarkers.ScaleMarker" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.BoundaryMarkers.ScaleMarker"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ScaleMarker</span></code></a>(service, rules[, path])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.BoundaryMarkers.ScaleMarker" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.BoundaryMarkers.ScaleMarker"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ScaleMarker</span></code></a>(service, rules[, path])</p></td>
 <td><p>Parameter ScaleMarker of value type float.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.BoundaryMarkers.ShowInletMarkers" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.BoundaryMarkers.ShowInletMarkers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ShowInletMarkers</span></code></a>(service, rules[, path])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.BoundaryMarkers.ShowInletMarkers" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.BoundaryMarkers.ShowInletMarkers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ShowInletMarkers</span></code></a>(service, rules[, path])</p></td>
 <td><p>Parameter ShowInletMarkers of value type bool.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.BoundaryMarkers.ShowOutletMarkers" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.BoundaryMarkers.ShowOutletMarkers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ShowOutletMarkers</span></code></a>(service, rules[, path])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.preferences.Root.Graphics.BoundaryMarkers.ShowOutletMarkers" title="ansys.fluent.core.datamodel_231.preferences.Root.Graphics.BoundaryMarkers.ShowOutletMarkers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ShowOutletMarkers</span></code></a>(service, rules[, path])</p></td>
 <td><p>Parameter ShowOutletMarkers of value type bool.</p></td>
 </tr>
 </tbody>

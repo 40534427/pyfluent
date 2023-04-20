@@ -142,7 +142,7 @@
       <div class="navbar-end-item">
         <div class="dropdown" id="version_switcher">
     <button type="button" class="btn btn-sm navbar-btn dropdown-toggle" id="version_switcher_button" data-toggle="dropdown">
-        0.13  <!-- this text may get changed later by javascript -->
+        dev  <!-- this text may get changed later by javascript -->
         <span class="caret"></span>
     </button>
     <div id="version_switcher_menu" class="dropdown-menu list-group-flush py-0" aria-labelledby="version_switcher_button">
@@ -152,7 +152,7 @@
 
 <!-- NOTE: this JS must live here (not in our global JS file) because it relies
      on being processed by Jinja before it is run (specifically for replacing
-     variables api/solver/datamodel/flicing/Case/Results/Graphics/ParticleTracks/Style/index and {'json_url': 'https://fluent.docs.pyansys.com/release/versions.json', 'version_match': '0.13'}.
+     variables api/solver/datamodel/flicing/Case/Results/Graphics/ParticleTracks/Style/index and {'json_url': 'https://fluent.docs.pyansys.com/release/versions.json', 'version_match': 'dev'}.
 -->
 
 <script type="text/javascript">
@@ -207,10 +207,10 @@ function checkPageExistsAndRedirect(event) {
 
             $("#version_switcher_menu").append(node);
             // replace dropdown button text with the preferred display name of
-            // this version, rather than using sphinx's 0.13.dev5 variable.
+            // this version, rather than using sphinx's 0.14.dev0 variable.
             // also highlight the dropdown entry for the currently-viewed
             // version's entry
-            if (entry.version == "0.13") {
+            if (entry.version == "dev") {
                 node.classList.add("active");
                 btn.innerText = btn.dataset["activeVersionName"] = entry.name;
                 btn.dataset["activeVersion"] = entry.version;
@@ -883,10 +883,10 @@ function checkPageExistsAndRedirect(event) {
 <tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Radius" title="ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Radius"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Radius</span></code></a>(service, rules[, path])</p></td>
 <td><p>Parameter Radius of value type float.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Ribbon" title="ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Ribbon"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Ribbon</span></code></a>(service, rules, path)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="Ribbon/index.html#ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Ribbon" title="ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Ribbon"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Ribbon</span></code></a>(service, rules, path)</p></td>
 <td><p>Singleton Ribbon.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Sphere" title="ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Sphere"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Sphere</span></code></a>(service, rules, path)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="Sphere/index.html#ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Sphere" title="ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Sphere"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Sphere</span></code></a>(service, rules, path)</p></td>
 <td><p>Singleton Sphere.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Style" title="ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Style"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Style</span></code></a>(service, rules[, path])</p></td>
@@ -937,10 +937,10 @@ function checkPageExistsAndRedirect(event) {
 <p><strong>Classes:</strong></p>
 <table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Ribbon.Field" title="ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Ribbon.Field"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Field</span></code></a>(service, rules[, path])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="Ribbon/index.html#ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Ribbon.Field" title="ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Ribbon.Field"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Field</span></code></a>(service, rules[, path])</p></td>
 <td><p>Parameter Field of value type str.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Ribbon.ScaleFactor" title="ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Ribbon.ScaleFactor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ScaleFactor</span></code></a>(service, rules[, path])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="Ribbon/index.html#ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Ribbon.ScaleFactor" title="ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Ribbon.ScaleFactor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ScaleFactor</span></code></a>(service, rules[, path])</p></td>
 <td><p>Parameter ScaleFactor of value type float.</p></td>
 </tr>
 </tbody>
@@ -969,22 +969,22 @@ function checkPageExistsAndRedirect(event) {
 <p><strong>Classes:</strong></p>
 <table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Sphere.Range" title="ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Sphere.Range"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Range</span></code></a>(service, rules, path)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="Sphere/index.html#ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Sphere.Range" title="ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Sphere.Range"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Range</span></code></a>(service, rules, path)</p></td>
 <td><p>Singleton Range.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Sphere.ScaleFactor" title="ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Sphere.ScaleFactor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ScaleFactor</span></code></a>(service, rules[, path])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="Sphere/index.html#ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Sphere.ScaleFactor" title="ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Sphere.ScaleFactor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ScaleFactor</span></code></a>(service, rules[, path])</p></td>
 <td><p>Parameter ScaleFactor of value type float.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Sphere.SphereField" title="ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Sphere.SphereField"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SphereField</span></code></a>(service, rules[, path])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="Sphere/index.html#ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Sphere.SphereField" title="ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Sphere.SphereField"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SphereField</span></code></a>(service, rules[, path])</p></td>
 <td><p>Parameter SphereField of value type str.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Sphere.SphereLod" title="ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Sphere.SphereLod"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SphereLod</span></code></a>(service, rules[, path])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="Sphere/index.html#ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Sphere.SphereLod" title="ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Sphere.SphereLod"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SphereLod</span></code></a>(service, rules[, path])</p></td>
 <td><p>Parameter SphereLod of value type int.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Sphere.SphereSize" title="ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Sphere.SphereSize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SphereSize</span></code></a>(service, rules[, path])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="Sphere/index.html#ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Sphere.SphereSize" title="ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Sphere.SphereSize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SphereSize</span></code></a>(service, rules[, path])</p></td>
 <td><p>Parameter SphereSize of value type float.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Sphere.VariableSize" title="ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Sphere.VariableSize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">VariableSize</span></code></a>(service, rules[, path])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="Sphere/index.html#ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Sphere.VariableSize" title="ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Sphere.VariableSize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">VariableSize</span></code></a>(service, rules[, path])</p></td>
 <td><p>Parameter VariableSize of value type bool.</p></td>
 </tr>
 </tbody>
@@ -997,13 +997,13 @@ function checkPageExistsAndRedirect(event) {
 <p><strong>Classes:</strong></p>
 <table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Sphere.Range.AutoRange" title="ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Sphere.Range.AutoRange"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AutoRange</span></code></a>(service, rules[, path])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="Sphere/index.html#ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Sphere.Range.AutoRange" title="ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Sphere.Range.AutoRange"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AutoRange</span></code></a>(service, rules[, path])</p></td>
 <td><p>Parameter AutoRange of value type bool.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Sphere.Range.MaxValue" title="ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Sphere.Range.MaxValue"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MaxValue</span></code></a>(service, rules[, path])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="Sphere/index.html#ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Sphere.Range.MaxValue" title="ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Sphere.Range.MaxValue"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MaxValue</span></code></a>(service, rules[, path])</p></td>
 <td><p>Parameter MaxValue of value type float.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../index.html#ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Sphere.Range.MinValue" title="ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Sphere.Range.MinValue"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MinValue</span></code></a>(service, rules[, path])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="Sphere/index.html#ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Sphere.Range.MinValue" title="ansys.fluent.core.datamodel_231.flicing.Root.Case.Results.Graphics.ParticleTracks._ParticleTracks.Style.Sphere.Range.MinValue"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MinValue</span></code></a>(service, rules[, path])</p></td>
 <td><p>Parameter MinValue of value type float.</p></td>
 </tr>
 </tbody>

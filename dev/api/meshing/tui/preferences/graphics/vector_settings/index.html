@@ -55,8 +55,8 @@
     <link rel="shortcut icon" href="../../../../../../_static/ansys-favicon.png"/>
     <link rel="index" title="Index" href="../../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../../search.html" />
-    <link rel="next" title="performance" href="../performance/index.html" />
-    <link rel="prev" title="colormap_settings" href="../colormap_settings/index.html" />
+    <link rel="next" title="lighting" href="../lighting/index.html" />
+    <link rel="prev" title="advanced_video_quality_options" href="../export_video_settings/advanced_video_quality_options/index.html" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="docsearch:language" content="en">
   </head>
@@ -142,7 +142,7 @@
       <div class="navbar-end-item">
         <div class="dropdown" id="version_switcher">
     <button type="button" class="btn btn-sm navbar-btn dropdown-toggle" id="version_switcher_button" data-toggle="dropdown">
-        0.13  <!-- this text may get changed later by javascript -->
+        dev  <!-- this text may get changed later by javascript -->
         <span class="caret"></span>
     </button>
     <div id="version_switcher_menu" class="dropdown-menu list-group-flush py-0" aria-labelledby="version_switcher_button">
@@ -152,7 +152,7 @@
 
 <!-- NOTE: this JS must live here (not in our global JS file) because it relies
      on being processed by Jinja before it is run (specifically for replacing
-     variables api/meshing/tui/preferences/graphics/vector_settings/index and {'json_url': 'https://fluent.docs.pyansys.com/release/versions.json', 'version_match': '0.13'}.
+     variables api/meshing/tui/preferences/graphics/vector_settings/index and {'json_url': 'https://fluent.docs.pyansys.com/release/versions.json', 'version_match': 'dev'}.
 -->
 
 <script type="text/javascript">
@@ -207,10 +207,10 @@ function checkPageExistsAndRedirect(event) {
 
             $("#version_switcher_menu").append(node);
             // replace dropdown button text with the preferred display name of
-            // this version, rather than using sphinx's 0.13.dev5 variable.
+            // this version, rather than using sphinx's 0.14.dev0 variable.
             // also highlight the dropdown entry for the currently-viewed
             // version's entry
-            if (entry.version == "0.13") {
+            if (entry.version == "dev") {
                 node.classList.add("active");
                 btn.innerText = btn.dataset["activeVersionName"] = entry.name;
                 btn.dataset["activeVersion"] = entry.version;
@@ -334,8 +334,18 @@ function checkPageExistsAndRedirect(event) {
     </label>
     <ul class="current">
      <li class="toctree-l3">
+      <a class="reference internal" href="../../../display/index.html">
+       display
+      </a>
+     </li>
+     <li class="toctree-l3">
       <a class="reference internal" href="../../../file/index.html">
        file
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../report/index.html">
+       report
       </a>
      </li>
      <li class="toctree-l3">
@@ -346,61 +356,6 @@ function checkPageExistsAndRedirect(event) {
      <li class="toctree-l3">
       <a class="reference internal" href="../../../mesh/index.html">
        mesh
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="../../../display/index.html">
-       display
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="../../../diagnostics/index.html">
-       diagnostics
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="../../../boundary/index.html">
-       boundary
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="../../../parallel/index.html">
-       parallel
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="../../../report/index.html">
-       report
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="../../../objects/index.html">
-       objects
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="../../../cad_assemblies/index.html">
-       cad_assemblies
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="../../../scoped_sizing/index.html">
-       scoped_sizing
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="../../../openmp_controls/index.html">
-       openmp_controls
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="../../../reference_frames/index.html">
-       reference_frames
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="../../../material_point/index.html">
-       material_point
       </a>
      </li>
      <li class="toctree-l3 current active has-children">
@@ -414,18 +369,13 @@ function checkPageExistsAndRedirect(event) {
       </label>
       <ul class="current">
        <li class="toctree-l4">
+        <a class="reference internal" href="../../mat_pro_app/index.html">
+         mat_pro_app
+        </a>
+       </li>
+       <li class="toctree-l4">
         <a class="reference internal" href="../../appearance/index.html">
          appearance
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../../turbo_workflow/index.html">
-         turbo_workflow
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../../navigation/index.html">
-         navigation
         </a>
        </li>
        <li class="toctree-l4">
@@ -434,8 +384,18 @@ function checkPageExistsAndRedirect(event) {
         </a>
        </li>
        <li class="toctree-l4">
-        <a class="reference internal" href="../../mat_pro_app/index.html">
-         mat_pro_app
+        <a class="reference internal" href="../../navigation/index.html">
+         navigation
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../general/index.html">
+         general
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../turbo_workflow/index.html">
+         turbo_workflow
         </a>
        </li>
        <li class="toctree-l4 current active has-children">
@@ -449,18 +409,8 @@ function checkPageExistsAndRedirect(event) {
         </label>
         <ul class="current">
          <li class="toctree-l5">
-          <a class="reference internal" href="../graphics_effects/index.html">
-           graphics_effects
-          </a>
-         </li>
-         <li class="toctree-l5">
-          <a class="reference internal" href="../hardcopy_settings/index.html">
-           hardcopy_settings
-          </a>
-         </li>
-         <li class="toctree-l5">
-          <a class="reference internal" href="../export_video_settings/index.html">
-           export_video_settings
+          <a class="reference internal" href="../manage_hoops_memory/index.html">
+           manage_hoops_memory
           </a>
          </li>
          <li class="toctree-l5">
@@ -469,28 +419,8 @@ function checkPageExistsAndRedirect(event) {
           </a>
          </li>
          <li class="toctree-l5">
-          <a class="reference internal" href="../manage_hoops_memory/index.html">
-           manage_hoops_memory
-          </a>
-         </li>
-         <li class="toctree-l5">
           <a class="reference internal" href="../colormap_settings/index.html">
            colormap_settings
-          </a>
-         </li>
-         <li class="toctree-l5 current active">
-          <a class="current reference internal" href="#">
-           vector_settings
-          </a>
-         </li>
-         <li class="toctree-l5">
-          <a class="reference internal" href="../performance/index.html">
-           performance
-          </a>
-         </li>
-         <li class="toctree-l5">
-          <a class="reference internal" href="../boundary_markers/index.html">
-           boundary_markers
           </a>
          </li>
          <li class="toctree-l5">
@@ -499,13 +429,43 @@ function checkPageExistsAndRedirect(event) {
           </a>
          </li>
          <li class="toctree-l5">
-          <a class="reference internal" href="../material_effects/index.html">
-           material_effects
+          <a class="reference internal" href="../boundary_markers/index.html">
+           boundary_markers
           </a>
          </li>
          <li class="toctree-l5">
           <a class="reference internal" href="../embedded_windows/index.html">
            embedded_windows
+          </a>
+         </li>
+         <li class="toctree-l5">
+          <a class="reference internal" href="../performance/index.html">
+           performance
+          </a>
+         </li>
+         <li class="toctree-l5">
+          <a class="reference internal" href="../hardcopy_settings/index.html">
+           hardcopy_settings
+          </a>
+         </li>
+         <li class="toctree-l5">
+          <a class="reference internal" href="../graphics_effects/index.html">
+           graphics_effects
+          </a>
+         </li>
+         <li class="toctree-l5">
+          <a class="reference internal" href="../material_effects/index.html">
+           material_effects
+          </a>
+         </li>
+         <li class="toctree-l5">
+          <a class="reference internal" href="../export_video_settings/index.html">
+           export_video_settings
+          </a>
+         </li>
+         <li class="toctree-l5 current active">
+          <a class="current reference internal" href="#">
+           vector_settings
           </a>
          </li>
          <li class="toctree-l5">
@@ -516,8 +476,8 @@ function checkPageExistsAndRedirect(event) {
         </ul>
        </li>
        <li class="toctree-l4">
-        <a class="reference internal" href="../../parametric_study/index.html">
-         parametric_study
+        <a class="reference internal" href="../../meshing_workflow/index.html">
+         meshing_workflow
         </a>
        </li>
        <li class="toctree-l4">
@@ -526,16 +486,56 @@ function checkPageExistsAndRedirect(event) {
         </a>
        </li>
        <li class="toctree-l4">
-        <a class="reference internal" href="../../general/index.html">
-         general
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../../meshing_workflow/index.html">
-         meshing_workflow
+        <a class="reference internal" href="../../parametric_study/index.html">
+         parametric_study
         </a>
        </li>
       </ul>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../openmp_controls/index.html">
+       openmp_controls
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../cad_assemblies/index.html">
+       cad_assemblies
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../diagnostics/index.html">
+       diagnostics
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../reference_frames/index.html">
+       reference_frames
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../material_point/index.html">
+       material_point
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../scoped_sizing/index.html">
+       scoped_sizing
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../objects/index.html">
+       objects
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../boundary/index.html">
+       boundary
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../parallel/index.html">
+       parallel
+      </a>
      </li>
     </ul>
    </li>

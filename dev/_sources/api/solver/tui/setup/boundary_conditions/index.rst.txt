@@ -16,8 +16,8 @@ boundary_conditions
 
    query/index
    expert/index
-   profiles/index
-   bc_settings/index
    modify_zones/index
-   set/index
+   profiles/index
    rename_zone/index
+   set/index
+   bc_settings/index

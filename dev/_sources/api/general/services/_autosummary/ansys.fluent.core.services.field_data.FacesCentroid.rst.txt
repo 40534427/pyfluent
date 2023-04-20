@@ -1,0 +1,30 @@
+ansys.fluent.core.services.field\_data.FacesCentroid
+====================================================
+
+.. currentmodule:: ansys.fluent.core.services.field_data
+
+.. autoclass:: FacesCentroid
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      ~FacesCentroid.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~FacesCentroid.data
+      ~FacesCentroid.size
+      ~FacesCentroid.surface_id
+   
+   

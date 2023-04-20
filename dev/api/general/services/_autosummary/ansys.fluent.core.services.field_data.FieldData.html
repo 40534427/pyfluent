@@ -56,7 +56,7 @@
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
     <link rel="next" title="__init__" href="ansys.fluent.core.services.field_data.FieldData.__init__.html" />
-    <link rel="prev" title="unavailable_field_error_message" href="ansys.fluent.core.services.field_data.unavailable_field_error_message.html" />
+    <link rel="prev" title="__init__" href="ansys.fluent.core.services.field_data.FacesNormal.__init__.html" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="docsearch:language" content="en">
   </head>
@@ -142,7 +142,7 @@
       <div class="navbar-end-item">
         <div class="dropdown" id="version_switcher">
     <button type="button" class="btn btn-sm navbar-btn dropdown-toggle" id="version_switcher_button" data-toggle="dropdown">
-        0.13  <!-- this text may get changed later by javascript -->
+        dev  <!-- this text may get changed later by javascript -->
         <span class="caret"></span>
     </button>
     <div id="version_switcher_menu" class="dropdown-menu list-group-flush py-0" aria-labelledby="version_switcher_button">
@@ -152,7 +152,7 @@
 
 <!-- NOTE: this JS must live here (not in our global JS file) because it relies
      on being processed by Jinja before it is run (specifically for replacing
-     variables api/general/services/_autosummary/ansys.fluent.core.services.field_data.FieldData and {'json_url': 'https://fluent.docs.pyansys.com/release/versions.json', 'version_match': '0.13'}.
+     variables api/general/services/_autosummary/ansys.fluent.core.services.field_data.FieldData and {'json_url': 'https://fluent.docs.pyansys.com/release/versions.json', 'version_match': 'dev'}.
 -->
 
 <script type="text/javascript">
@@ -207,10 +207,10 @@ function checkPageExistsAndRedirect(event) {
 
             $("#version_switcher_menu").append(node);
             // replace dropdown button text with the preferred display name of
-            // this version, rather than using sphinx's 0.13.dev5 variable.
+            // this version, rather than using sphinx's 0.14.dev0 variable.
             // also highlight the dropdown entry for the currently-viewed
             // version's entry
-            if (entry.version == "0.13") {
+            if (entry.version == "dev") {
                 node.classList.add("active");
                 btn.innerText = btn.dataset["activeVersionName"] = entry.name;
                 btn.dataset["activeVersion"] = entry.version;
@@ -382,6 +382,26 @@ function checkPageExistsAndRedirect(event) {
          unavailable_field_error_message
         </a>
        </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.fluent.core.services.field_data.BaseFieldData.html">
+         ansys.fluent.core.services.field_data.BaseFieldData
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.fluent.core.services.field_data.FacesCentroid.html">
+         ansys.fluent.core.services.field_data.FacesCentroid
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.fluent.core.services.field_data.FacesConnectivity.html">
+         ansys.fluent.core.services.field_data.FacesConnectivity
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.fluent.core.services.field_data.FacesNormal.html">
+         ansys.fluent.core.services.field_data.FacesNormal
+        </a>
+       </li>
        <li class="toctree-l4 current active has-children">
         <a class="current reference internal" href="#">
          ansys.fluent.core.services.field_data.FieldData
@@ -440,8 +460,28 @@ function checkPageExistsAndRedirect(event) {
         </a>
        </li>
        <li class="toctree-l4">
+        <a class="reference internal" href="ansys.fluent.core.services.field_data.ScalarFieldData.html">
+         ansys.fluent.core.services.field_data.ScalarFieldData
+        </a>
+       </li>
+       <li class="toctree-l4">
         <a class="reference internal" href="ansys.fluent.core.services.field_data.SurfaceDataType.html">
          ansys.fluent.core.services.field_data.SurfaceDataType
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.fluent.core.services.field_data.Vector.html">
+         ansys.fluent.core.services.field_data.Vector
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.fluent.core.services.field_data.VectorFieldData.html">
+         ansys.fluent.core.services.field_data.VectorFieldData
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="ansys.fluent.core.services.field_data.Vertices.html">
+         ansys.fluent.core.services.field_data.Vertices
         </a>
        </li>
       </ul>
@@ -610,7 +650,7 @@ function checkPageExistsAndRedirect(event) {
 <td><p>__init__ method of FieldData class.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="../../../solver/_autosummary/ansys.fluent.core.services.field_data.FieldData.get_pathlines_field_data.html#ansys.fluent.core.services.field_data.FieldData.get_pathlines_field_data" title="ansys.fluent.core.services.field_data.FieldData.get_pathlines_field_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_pathlines_field_data</span></code></a>(field_name[, ...])</p></td>
-<td><p>Get pathlines field data on a surface.</p></td>
+<td><p>Get the pathlines field data on a surface.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="../../../solver/_autosummary/ansys.fluent.core.services.field_data.FieldData.get_scalar_field_data.html#ansys.fluent.core.services.field_data.FieldData.get_scalar_field_data" title="ansys.fluent.core.services.field_data.FieldData.get_scalar_field_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_scalar_field_data</span></code></a>(field_name[, ...])</p></td>
 <td><p>Get scalar field data on a surface.</p></td>

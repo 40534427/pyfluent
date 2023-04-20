@@ -1,0 +1,30 @@
+ansys.fluent.core.services.field\_data.BaseFieldData
+====================================================
+
+.. currentmodule:: ansys.fluent.core.services.field_data
+
+.. autoclass:: BaseFieldData
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      ~BaseFieldData.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BaseFieldData.data
+      ~BaseFieldData.size
+      ~BaseFieldData.surface_id
+   
+   

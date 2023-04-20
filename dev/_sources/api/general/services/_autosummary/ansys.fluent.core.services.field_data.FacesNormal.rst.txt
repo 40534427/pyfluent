@@ -1,0 +1,30 @@
+ansys.fluent.core.services.field\_data.FacesNormal
+==================================================
+
+.. currentmodule:: ansys.fluent.core.services.field_data
+
+.. autoclass:: FacesNormal
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      ~FacesNormal.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~FacesNormal.data
+      ~FacesNormal.size
+      ~FacesNormal.surface_id
+   
+   

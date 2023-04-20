@@ -14,5 +14,5 @@ mouse_mapping
 .. toctree::
    :hidden:
 
-   additional/index
    basic/index
+   additional/index

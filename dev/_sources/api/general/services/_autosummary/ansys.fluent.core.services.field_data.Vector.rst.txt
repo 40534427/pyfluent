@@ -1,0 +1,30 @@
+ansys.fluent.core.services.field\_data.Vector
+=============================================
+
+.. currentmodule:: ansys.fluent.core.services.field_data
+
+.. autoclass:: Vector
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      ~Vector.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Vector.x
+      ~Vector.y
+      ~Vector.z
+   
+   

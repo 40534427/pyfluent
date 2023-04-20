@@ -55,8 +55,8 @@
     <link rel="shortcut icon" href="../../../../../../../_static/ansys-favicon.png"/>
     <link rel="index" title="Index" href="../../../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../../../search.html" />
-    <link rel="next" title="adv_front_method" href="../adv_front_method/index.html" />
-    <link rel="prev" title="controls" href="../index.html" />
+    <link rel="next" title="remove_slivers" href="../remove_slivers/index.html" />
+    <link rel="prev" title="skew_improve" href="../adv_front_method/skew_improve/index.html" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="docsearch:language" content="en">
   </head>
@@ -142,7 +142,7 @@
       <div class="navbar-end-item">
         <div class="dropdown" id="version_switcher">
     <button type="button" class="btn btn-sm navbar-btn dropdown-toggle" id="version_switcher_button" data-toggle="dropdown">
-        0.13  <!-- this text may get changed later by javascript -->
+        dev  <!-- this text may get changed later by javascript -->
         <span class="caret"></span>
     </button>
     <div id="version_switcher_menu" class="dropdown-menu list-group-flush py-0" aria-labelledby="version_switcher_button">
@@ -152,7 +152,7 @@
 
 <!-- NOTE: this JS must live here (not in our global JS file) because it relies
      on being processed by Jinja before it is run (specifically for replacing
-     variables api/meshing/tui/mesh/tet/controls/improve_mesh/index and {'json_url': 'https://fluent.docs.pyansys.com/release/versions.json', 'version_match': '0.13'}.
+     variables api/meshing/tui/mesh/tet/controls/improve_mesh/index and {'json_url': 'https://fluent.docs.pyansys.com/release/versions.json', 'version_match': 'dev'}.
 -->
 
 <script type="text/javascript">
@@ -207,10 +207,10 @@ function checkPageExistsAndRedirect(event) {
 
             $("#version_switcher_menu").append(node);
             // replace dropdown button text with the preferred display name of
-            // this version, rather than using sphinx's 0.13.dev5 variable.
+            // this version, rather than using sphinx's 0.14.dev0 variable.
             // also highlight the dropdown entry for the currently-viewed
             // version's entry
-            if (entry.version == "0.13") {
+            if (entry.version == "dev") {
                 node.classList.add("active");
                 btn.innerText = btn.dataset["activeVersionName"] = entry.name;
                 btn.dataset["activeVersion"] = entry.version;
@@ -335,8 +335,18 @@ function checkPageExistsAndRedirect(event) {
     </label>
     <ul class="current">
      <li class="toctree-l3">
+      <a class="reference internal" href="../../../../display/index.html">
+       display
+      </a>
+     </li>
+     <li class="toctree-l3">
       <a class="reference internal" href="../../../../file/index.html">
        file
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../../report/index.html">
+       report
       </a>
      </li>
      <li class="toctree-l3">
@@ -355,68 +365,23 @@ function checkPageExistsAndRedirect(event) {
       </label>
       <ul class="current">
        <li class="toctree-l4">
+        <a class="reference internal" href="../../../modify/index.html">
+         modify
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../cartesian/index.html">
+         cartesian
+        </a>
+       </li>
+       <li class="toctree-l4">
         <a class="reference internal" href="../../../cavity/index.html">
          cavity
         </a>
        </li>
        <li class="toctree-l4">
-        <a class="reference internal" href="../../../thin_volume_mesh/index.html">
-         thin_volume_mesh
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../../../rapid_octree/index.html">
-         rapid_octree
-        </a>
-       </li>
-       <li class="toctree-l4">
         <a class="reference internal" href="../../../poly/index.html">
          poly
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../../../non_conformals/index.html">
-         non_conformals
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../../../separate/index.html">
-         separate
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../../../hexcore/index.html">
-         hexcore
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../../../poly_hexcore/index.html">
-         poly_hexcore
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../../../scoped_prisms/index.html">
-         scoped_prisms
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../../../pyramid/index.html">
-         pyramid
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../../../manage/index.html">
-         manage
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../../../domains/index.html">
-         domains
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../../../cell_zone_conditions/index.html">
-         cell_zone_conditions
         </a>
        </li>
        <li class="toctree-l4 current active has-children">
@@ -439,9 +404,9 @@ function checkPageExistsAndRedirect(event) {
            </i>
           </label>
           <ul class="current">
-           <li class="toctree-l6 current active">
-            <a class="current reference internal" href="#">
-             improve_mesh
+           <li class="toctree-l6">
+            <a class="reference internal" href="../tet_improve/index.html">
+             tet_improve
             </a>
            </li>
            <li class="toctree-l6">
@@ -449,9 +414,9 @@ function checkPageExistsAndRedirect(event) {
              adv_front_method
             </a>
            </li>
-           <li class="toctree-l6">
-            <a class="reference internal" href="../tet_improve/index.html">
-             tet_improve
+           <li class="toctree-l6 current active">
+            <a class="current reference internal" href="#">
+             improve_mesh
             </a>
            </li>
            <li class="toctree-l6">
@@ -474,13 +439,28 @@ function checkPageExistsAndRedirect(event) {
         </ul>
        </li>
        <li class="toctree-l4">
-        <a class="reference internal" href="../../../cartesian/index.html">
-         cartesian
+        <a class="reference internal" href="../../../domains/index.html">
+         domains
         </a>
        </li>
        <li class="toctree-l4">
-        <a class="reference internal" href="../../../auto_mesh_controls/index.html">
-         auto_mesh_controls
+        <a class="reference internal" href="../../../hexcore/index.html">
+         hexcore
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../separate/index.html">
+         separate
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../scoped_prisms/index.html">
+         scoped_prisms
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../thin_volume_mesh/index.html">
+         thin_volume_mesh
         </a>
        </li>
        <li class="toctree-l4">
@@ -489,40 +469,50 @@ function checkPageExistsAndRedirect(event) {
         </a>
        </li>
        <li class="toctree-l4">
-        <a class="reference internal" href="../../../modify/index.html">
-         modify
+        <a class="reference internal" href="../../../manage/index.html">
+         manage
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../non_conformals/index.html">
+         non_conformals
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../pyramid/index.html">
+         pyramid
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../rapid_octree/index.html">
+         rapid_octree
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../poly_hexcore/index.html">
+         poly_hexcore
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../auto_mesh_controls/index.html">
+         auto_mesh_controls
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../cell_zone_conditions/index.html">
+         cell_zone_conditions
         </a>
        </li>
       </ul>
      </li>
      <li class="toctree-l3">
-      <a class="reference internal" href="../../../../display/index.html">
-       display
+      <a class="reference internal" href="../../../../preferences/index.html">
+       preferences
       </a>
      </li>
      <li class="toctree-l3">
-      <a class="reference internal" href="../../../../diagnostics/index.html">
-       diagnostics
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="../../../../boundary/index.html">
-       boundary
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="../../../../parallel/index.html">
-       parallel
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="../../../../report/index.html">
-       report
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="../../../../objects/index.html">
-       objects
+      <a class="reference internal" href="../../../../openmp_controls/index.html">
+       openmp_controls
       </a>
      </li>
      <li class="toctree-l3">
@@ -531,13 +521,8 @@ function checkPageExistsAndRedirect(event) {
       </a>
      </li>
      <li class="toctree-l3">
-      <a class="reference internal" href="../../../../scoped_sizing/index.html">
-       scoped_sizing
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="../../../../openmp_controls/index.html">
-       openmp_controls
+      <a class="reference internal" href="../../../../diagnostics/index.html">
+       diagnostics
       </a>
      </li>
      <li class="toctree-l3">
@@ -551,8 +536,23 @@ function checkPageExistsAndRedirect(event) {
       </a>
      </li>
      <li class="toctree-l3">
-      <a class="reference internal" href="../../../../preferences/index.html">
-       preferences
+      <a class="reference internal" href="../../../../scoped_sizing/index.html">
+       scoped_sizing
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../../objects/index.html">
+       objects
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../../boundary/index.html">
+       boundary
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../../parallel/index.html">
+       parallel
       </a>
      </li>
     </ul>
@@ -669,16 +669,16 @@ function checkPageExistsAndRedirect(event) {
 <p><strong>Methods:</strong></p>
 <table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="../../../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.tet.controls.improve_mesh.improve" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.tet.controls.improve_mesh.improve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">improve</span></code></a>(*args, **kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.tet.controls.improve_mesh.improve" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.tet.controls.improve_mesh.improve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">improve</span></code></a>(*args, **kwargs)</p></td>
 <td><p>Automatically improves the mesh.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../../../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.tet.controls.improve_mesh.laplace_smooth" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.tet.controls.improve_mesh.laplace_smooth"><code class="xref py py-obj docutils literal notranslate"><span class="pre">laplace_smooth</span></code></a>(*args, **kwargs)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.tet.controls.improve_mesh.laplace_smooth" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.tet.controls.improve_mesh.laplace_smooth"><code class="xref py py-obj docutils literal notranslate"><span class="pre">laplace_smooth</span></code></a>(*args, **kwargs)</p></td>
 <td><p>Enables you to specify the Laplace smoothing parameters.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../../../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.tet.controls.improve_mesh.skewness_smooth" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.tet.controls.improve_mesh.skewness_smooth"><code class="xref py py-obj docutils literal notranslate"><span class="pre">skewness_smooth</span></code></a>(*args, **kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.tet.controls.improve_mesh.skewness_smooth" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.tet.controls.improve_mesh.skewness_smooth"><code class="xref py py-obj docutils literal notranslate"><span class="pre">skewness_smooth</span></code></a>(*args, **kwargs)</p></td>
 <td><p>Enables you to specify the skewness smooth parameters.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../../../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.tet.controls.improve_mesh.swap" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.tet.controls.improve_mesh.swap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">swap</span></code></a>(*args, **kwargs)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../../index.html#ansys.fluent.core.meshing.tui_231.main_menu.mesh.tet.controls.improve_mesh.swap" title="ansys.fluent.core.meshing.tui_231.main_menu.mesh.tet.controls.improve_mesh.swap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">swap</span></code></a>(*args, **kwargs)</p></td>
 <td><p>Enables you to specify the face swap parameters.</p></td>
 </tr>
 </tbody>

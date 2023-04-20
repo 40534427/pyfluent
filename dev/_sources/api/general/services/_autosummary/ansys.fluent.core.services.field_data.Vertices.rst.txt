@@ -1,0 +1,30 @@
+ansys.fluent.core.services.field\_data.Vertices
+===============================================
+
+.. currentmodule:: ansys.fluent.core.services.field_data
+
+.. autoclass:: Vertices
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      ~Vertices.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Vertices.data
+      ~Vertices.size
+      ~Vertices.surface_id
+   
+   

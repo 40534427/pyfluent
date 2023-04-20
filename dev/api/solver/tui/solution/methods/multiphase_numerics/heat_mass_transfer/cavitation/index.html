@@ -55,8 +55,8 @@
     <link rel="shortcut icon" href="../../../../../../../../_static/ansys-favicon.png"/>
     <link rel="index" title="Index" href="../../../../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../../../../search.html" />
-    <link rel="next" title="boiling" href="../boiling/index.html" />
-    <link rel="prev" title="area_density" href="../area_density/index.html" />
+    <link rel="next" title="face_pressure_controls" href="../../face_pressure_controls/index.html" />
+    <link rel="prev" title="boiling" href="../boiling/index.html" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="docsearch:language" content="en">
   </head>
@@ -142,7 +142,7 @@
       <div class="navbar-end-item">
         <div class="dropdown" id="version_switcher">
     <button type="button" class="btn btn-sm navbar-btn dropdown-toggle" id="version_switcher_button" data-toggle="dropdown">
-        0.13  <!-- this text may get changed later by javascript -->
+        dev  <!-- this text may get changed later by javascript -->
         <span class="caret"></span>
     </button>
     <div id="version_switcher_menu" class="dropdown-menu list-group-flush py-0" aria-labelledby="version_switcher_button">
@@ -152,7 +152,7 @@
 
 <!-- NOTE: this JS must live here (not in our global JS file) because it relies
      on being processed by Jinja before it is run (specifically for replacing
-     variables api/solver/tui/solution/methods/multiphase_numerics/heat_mass_transfer/cavitation/index and {'json_url': 'https://fluent.docs.pyansys.com/release/versions.json', 'version_match': '0.13'}.
+     variables api/solver/tui/solution/methods/multiphase_numerics/heat_mass_transfer/cavitation/index and {'json_url': 'https://fluent.docs.pyansys.com/release/versions.json', 'version_match': 'dev'}.
 -->
 
 <script type="text/javascript">
@@ -207,10 +207,10 @@ function checkPageExistsAndRedirect(event) {
 
             $("#version_switcher_menu").append(node);
             // replace dropdown button text with the preferred display name of
-            // this version, rather than using sphinx's 0.13.dev5 variable.
+            // this version, rather than using sphinx's 0.14.dev0 variable.
             // also highlight the dropdown entry for the currently-viewed
             // version's entry
-            if (entry.version == "0.13") {
+            if (entry.version == "dev") {
                 node.classList.add("active");
                 btn.innerText = btn.dataset["activeVersionName"] = entry.name;
                 btn.dataset["activeVersion"] = entry.version;
@@ -352,8 +352,38 @@ function checkPageExistsAndRedirect(event) {
       </label>
       <ul class="current">
        <li class="toctree-l4">
+        <a class="reference internal" href="../../../../../turbo_workflow/index.html">
+         turbo_workflow
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../../setup/index.html">
+         setup
+        </a>
+       </li>
+       <li class="toctree-l4">
         <a class="reference internal" href="../../../../../mesh/index.html">
          mesh
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../../parametric_study/index.html">
+         parametric_study
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../../display/index.html">
+         display
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../../results/index.html">
+         results
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../../plot/index.html">
+         plot
         </a>
        </li>
        <li class="toctree-l4">
@@ -362,13 +392,23 @@ function checkPageExistsAndRedirect(event) {
         </a>
        </li>
        <li class="toctree-l4">
-        <a class="reference internal" href="../../../../../report/index.html">
-         report
+        <a class="reference internal" href="../../../../../icing/index.html">
+         icing
         </a>
        </li>
        <li class="toctree-l4">
-        <a class="reference internal" href="../../../../../results/index.html">
-         results
+        <a class="reference internal" href="../../../../../views/index.html">
+         views
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../../server/index.html">
+         server
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../../define/index.html">
+         define
         </a>
        </li>
        <li class="toctree-l4 current active has-children">
@@ -381,21 +421,6 @@ function checkPageExistsAndRedirect(event) {
          </i>
         </label>
         <ul class="current">
-         <li class="toctree-l5">
-          <a class="reference internal" href="../../../../initialize/index.html">
-           initialize
-          </a>
-         </li>
-         <li class="toctree-l5">
-          <a class="reference internal" href="../../../../cell_registers/index.html">
-           cell_registers
-          </a>
-         </li>
-         <li class="toctree-l5">
-          <a class="reference internal" href="../../../../report_definitions/index.html">
-           report_definitions
-          </a>
-         </li>
          <li class="toctree-l5 current active has-children">
           <a class="reference internal" href="../../../index.html">
            methods
@@ -407,28 +432,13 @@ function checkPageExistsAndRedirect(event) {
           </label>
           <ul class="current">
            <li class="toctree-l6">
-            <a class="reference internal" href="../../../high_order_term_relaxation/index.html">
-             high_order_term_relaxation
-            </a>
-           </li>
-           <li class="toctree-l6">
             <a class="reference internal" href="../../../pseudo_time_method/index.html">
              pseudo_time_method
             </a>
            </li>
            <li class="toctree-l6">
-            <a class="reference internal" href="../../../query/index.html">
-             query
-            </a>
-           </li>
-           <li class="toctree-l6">
-            <a class="reference internal" href="../../../overset/index.html">
-             overset
-            </a>
-           </li>
-           <li class="toctree-l6">
-            <a class="reference internal" href="../../../nita_expert_controls/index.html">
-             nita_expert_controls
+            <a class="reference internal" href="../../../high_order_term_relaxation/index.html">
+             high_order_term_relaxation
             </a>
            </li>
            <li class="toctree-l6 current active has-children">
@@ -442,8 +452,33 @@ function checkPageExistsAndRedirect(event) {
             </label>
             <ul class="current">
              <li class="toctree-l7">
+              <a class="reference internal" href="../../porous_media/index.html">
+               porous_media
+              </a>
+             </li>
+             <li class="toctree-l7">
+              <a class="reference internal" href="../../compressible_flow/index.html">
+               compressible_flow
+              </a>
+             </li>
+             <li class="toctree-l7">
               <a class="reference internal" href="../../boiling_parameters/index.html">
                boiling_parameters
+              </a>
+             </li>
+             <li class="toctree-l7">
+              <a class="reference internal" href="../../default_controls/index.html">
+               default_controls
+              </a>
+             </li>
+             <li class="toctree-l7">
+              <a class="reference internal" href="../../viscous_flow/index.html">
+               viscous_flow
+              </a>
+             </li>
+             <li class="toctree-l7">
+              <a class="reference internal" href="../../solution_stabilization/index.html">
+               solution_stabilization
               </a>
              </li>
              <li class="toctree-l7 current active has-children">
@@ -457,23 +492,23 @@ function checkPageExistsAndRedirect(event) {
               </label>
               <ul class="current">
                <li class="toctree-l8">
+                <a class="reference internal" href="../area_density/index.html">
+                 area_density
+                </a>
+               </li>
+               <li class="toctree-l8">
                 <a class="reference internal" href="../evaporation_condensation/index.html">
                  evaporation_condensation
                 </a>
                </li>
                <li class="toctree-l8">
-                <a class="reference internal" href="../area_density/index.html">
-                 area_density
+                <a class="reference internal" href="../boiling/index.html">
+                 boiling
                 </a>
                </li>
                <li class="toctree-l8 current active">
                 <a class="current reference internal" href="#">
                  cavitation
-                </a>
-               </li>
-               <li class="toctree-l8">
-                <a class="reference internal" href="../boiling/index.html">
-                 boiling
                 </a>
                </li>
               </ul>
@@ -488,32 +523,22 @@ function checkPageExistsAndRedirect(event) {
                advanced_stability_controls
               </a>
              </li>
-             <li class="toctree-l7">
-              <a class="reference internal" href="../../viscous_flow/index.html">
-               viscous_flow
-              </a>
-             </li>
-             <li class="toctree-l7">
-              <a class="reference internal" href="../../solution_stabilization/index.html">
-               solution_stabilization
-              </a>
-             </li>
-             <li class="toctree-l7">
-              <a class="reference internal" href="../../porous_media/index.html">
-               porous_media
-              </a>
-             </li>
-             <li class="toctree-l7">
-              <a class="reference internal" href="../../default_controls/index.html">
-               default_controls
-              </a>
-             </li>
-             <li class="toctree-l7">
-              <a class="reference internal" href="../../compressible_flow/index.html">
-               compressible_flow
-              </a>
-             </li>
             </ul>
+           </li>
+           <li class="toctree-l6">
+            <a class="reference internal" href="../../../warped_face_gradient_correction/index.html">
+             warped_face_gradient_correction
+            </a>
+           </li>
+           <li class="toctree-l6">
+            <a class="reference internal" href="../../../nita_expert_controls/index.html">
+             nita_expert_controls
+            </a>
+           </li>
+           <li class="toctree-l6">
+            <a class="reference internal" href="../../../overset/index.html">
+             overset
+            </a>
            </li>
            <li class="toctree-l6">
             <a class="reference internal" href="../../../expert/index.html">
@@ -521,8 +546,8 @@ function checkPageExistsAndRedirect(event) {
             </a>
            </li>
            <li class="toctree-l6">
-            <a class="reference internal" href="../../../warped_face_gradient_correction/index.html">
-             warped_face_gradient_correction
+            <a class="reference internal" href="../../../query/index.html">
+             query
             </a>
            </li>
           </ul>
@@ -533,13 +558,23 @@ function checkPageExistsAndRedirect(event) {
           </a>
          </li>
          <li class="toctree-l5">
-          <a class="reference internal" href="../../../../run_calculation/index.html">
-           run_calculation
+          <a class="reference internal" href="../../../../report_definitions/index.html">
+           report_definitions
           </a>
          </li>
          <li class="toctree-l5">
-          <a class="reference internal" href="../../../../controls/index.html">
-           controls
+          <a class="reference internal" href="../../../../cell_registers/index.html">
+           cell_registers
+          </a>
+         </li>
+         <li class="toctree-l5">
+          <a class="reference internal" href="../../../../expert/index.html">
+           expert
+          </a>
+         </li>
+         <li class="toctree-l5">
+          <a class="reference internal" href="../../../../initialize/index.html">
+           initialize
           </a>
          </li>
          <li class="toctree-l5">
@@ -548,80 +583,20 @@ function checkPageExistsAndRedirect(event) {
           </a>
          </li>
          <li class="toctree-l5">
-          <a class="reference internal" href="../../../../expert/index.html">
-           expert
+          <a class="reference internal" href="../../../../controls/index.html">
+           controls
+          </a>
+         </li>
+         <li class="toctree-l5">
+          <a class="reference internal" href="../../../../run_calculation/index.html">
+           run_calculation
           </a>
          </li>
         </ul>
        </li>
        <li class="toctree-l4">
-        <a class="reference internal" href="../../../../../turbo_workflow/index.html">
-         turbo_workflow
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../../../../../setup/index.html">
-         setup
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../../../../../solve/index.html">
-         solve
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../../../../../parametric_study/index.html">
-         parametric_study
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../../../../../define/index.html">
-         define
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../../../../../parameters__and__customization/index.html">
-         parameters__and__customization
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../../../../../file/index.html">
-         file
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../../../../../server/index.html">
-         server
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../../../../../preferences/index.html">
-         preferences
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../../../../../turbo_post/index.html">
-         turbo_post
-        </a>
-       </li>
-       <li class="toctree-l4">
         <a class="reference internal" href="../../../../../simulation_reports/index.html">
          simulation_reports
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../../../../../plot/index.html">
-         plot
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../../../../../parallel/index.html">
-         parallel
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../../../../../views/index.html">
-         views
         </a>
        </li>
        <li class="toctree-l4">
@@ -630,13 +605,38 @@ function checkPageExistsAndRedirect(event) {
         </a>
        </li>
        <li class="toctree-l4">
-        <a class="reference internal" href="../../../../../display/index.html">
-         display
+        <a class="reference internal" href="../../../../../file/index.html">
+         file
         </a>
        </li>
        <li class="toctree-l4">
-        <a class="reference internal" href="../../../../../icing/index.html">
-         icing
+        <a class="reference internal" href="../../../../../parallel/index.html">
+         parallel
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../../report/index.html">
+         report
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../../turbo_post/index.html">
+         turbo_post
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../../parameters__and__customization/index.html">
+         parameters__and__customization
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../../solve/index.html">
+         solve
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../../preferences/index.html">
+         preferences
         </a>
        </li>
       </ul>
