@@ -15,6 +15,6 @@ set
    :hidden:
 
    adv_front_method/index
+   improve_mesh/index
    tet_improve/index
    remove_slivers/index
-   improve_mesh/index

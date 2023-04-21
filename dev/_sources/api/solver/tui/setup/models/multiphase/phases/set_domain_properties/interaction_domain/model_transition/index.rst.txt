@@ -14,9 +14,9 @@ model_transition
 .. toctree::
    :hidden:
 
-   interphase_discretization/index
+   lift/index
    interphase_viscous_dissipation/index
+   interphase_discretization/index
+   surface_tension/index
    virtual_mass/index
    cavitation/index
-   surface_tension/index
-   lift/index

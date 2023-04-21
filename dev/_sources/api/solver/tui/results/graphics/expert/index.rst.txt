@@ -14,8 +14,8 @@ expert
 .. toctree::
    :hidden:
 
-   particle_tracks/index
-   set/index
+   path_lines/index
    flamelet_data/index
    pdf_data/index
-   path_lines/index
+   particle_tracks/index
+   set/index
