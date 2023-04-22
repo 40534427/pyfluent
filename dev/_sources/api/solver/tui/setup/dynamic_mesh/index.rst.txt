@@ -15,7 +15,7 @@ dynamic_mesh
    :hidden:
 
    controls/index
+   actions/index
    zones/index
    transient_settings/index
-   actions/index
    events/index

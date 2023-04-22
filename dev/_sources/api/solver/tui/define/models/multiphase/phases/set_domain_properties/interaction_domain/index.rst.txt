@@ -15,7 +15,7 @@ interaction_domain
    :hidden:
 
    interfacial_area/index
+   numerics/index
    heat_mass_reactions/index
    model_transition/index
-   numerics/index
    forces/index

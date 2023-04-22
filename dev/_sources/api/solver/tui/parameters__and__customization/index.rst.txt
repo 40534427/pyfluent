@@ -14,5 +14,5 @@ parameters__and__customization
 .. toctree::
    :hidden:
 
-   user_defined/index
    parameters/index
+   user_defined/index

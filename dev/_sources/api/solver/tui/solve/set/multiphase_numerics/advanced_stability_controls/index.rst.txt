@@ -14,9 +14,9 @@ advanced_stability_controls
 .. toctree::
    :hidden:
 
-   equation_order/index
-   p_v_coupling/index
-   pseudo_time/index
-   num_ventilation/index
    anti_diffusion/index
+   num_ventilation/index
+   p_v_coupling/index
    hybrid_nita/index
+   pseudo_time/index
+   equation_order/index

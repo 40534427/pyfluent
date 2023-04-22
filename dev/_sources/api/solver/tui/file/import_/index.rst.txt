@@ -14,13 +14,13 @@ import_
 .. toctree::
    :hidden:
 
-   mechanical_apdl/index
-   partition/index
+   lstc/index
    patran/index
+   mechanical_apdl/index
    cfx/index
    cgns/index
-   nastran/index
-   lstc/index
+   partition/index
    tecplot/index
+   nastran/index
    plot3d/index
    abaqus/index

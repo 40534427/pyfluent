@@ -14,21 +14,21 @@ models
 .. toctree::
    :hidden:
 
-   structure/index
-   radiation/index
-   soot_parameters/index
-   heat_exchanger/index
-   nox_parameters/index
-   two_temperature/index
-   shell_conduction/index
-   eulerian_wallfilm/index
-   cht/index
-   dpm/index
    optics/index
-   multiphase/index
+   electrolysis/index
+   radiation/index
    solver/index
+   structure/index
+   viscous/index
    species/index
+   dpm/index
+   two_temperature/index
+   cht/index
    acoustics/index
    system_coupling_settings/index
-   viscous/index
-   electrolysis/index
+   heat_exchanger/index
+   shell_conduction/index
+   eulerian_wallfilm/index
+   multiphase/index
+   nox_parameters/index
+   soot_parameters/index

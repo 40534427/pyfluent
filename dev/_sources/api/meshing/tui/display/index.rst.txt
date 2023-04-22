@@ -14,11 +14,11 @@ display
 .. toctree::
    :hidden:
 
+   display_states/index
+   set_grid/index
+   update_scene/index
    objects/index
    set/index
    zones/index
-   advanced_rendering/index
-   set_grid/index
-   update_scene/index
    xy_plot/index
-   display_states/index
+   advanced_rendering/index

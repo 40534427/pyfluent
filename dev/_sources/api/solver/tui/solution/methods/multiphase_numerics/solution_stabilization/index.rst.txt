@@ -14,5 +14,5 @@ solution_stabilization
 .. toctree::
    :hidden:
 
-   velocity_limiting_treatment/index
    additional_stabilization_controls/index
+   velocity_limiting_treatment/index
