@@ -15,5 +15,5 @@ parametric_study
    :hidden:
 
    study/index
-   design_points/index
    update/index
+   design_points/index

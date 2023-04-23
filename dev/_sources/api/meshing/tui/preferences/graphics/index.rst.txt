@@ -14,16 +14,16 @@ graphics
 .. toctree::
    :hidden:
 
-   transparency/index
-   vector_settings/index
-   boundary_markers/index
-   export_video_settings/index
-   hardcopy_settings/index
-   colormap_settings/index
-   performance/index
-   meshing_mode/index
-   graphics_effects/index
-   material_effects/index
-   lighting/index
-   manage_hoops_memory/index
    embedded_windows/index
+   transparency/index
+   boundary_markers/index
+   lighting/index
+   export_video_settings/index
+   vector_settings/index
+   manage_hoops_memory/index
+   colormap_settings/index
+   graphics_effects/index
+   hardcopy_settings/index
+   meshing_mode/index
+   performance/index
+   material_effects/index

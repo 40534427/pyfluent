@@ -14,25 +14,25 @@ define
 .. toctree::
    :hidden:
 
+   boundary_conditions/index
    spectral/index
-   custom_field_functions/index
-   periodic_conditions/index
-   models/index
-   gap_model/index
    phases/index
-   curvilinear_coordinate_system/index
+   virtual_boundary/index
+   user_defined/index
+   turbo_model/index
+   custom_field_functions/index
+   gap_model/index
+   materials/index
+   dynamic_mesh/index
+   mesh_interfaces/index
+   periodic_conditions/index
    profiles/index
    overset_interfaces/index
-   materials/index
-   named_expressions/index
-   turbo_model/index
-   operating_conditions/index
    parameters/index
-   mixing_planes/index
-   dynamic_mesh/index
-   virtual_boundary/index
-   mesh_interfaces/index
    reference_frames/index
-   boundary_conditions/index
-   user_defined/index
+   named_expressions/index
+   models/index
+   curvilinear_coordinate_system/index
+   operating_conditions/index
+   mixing_planes/index
    solution_strategy/index

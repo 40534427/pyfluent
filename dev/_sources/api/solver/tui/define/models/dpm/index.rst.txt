@@ -16,9 +16,9 @@ dpm
 
    erosion_dynamic_mesh/index
    parallel/index
-   collisions/index
-   options/index
    stripping_options/index
    interaction/index
-   splash_options/index
    numerics/index
+   collisions/index
+   splash_options/index
+   options/index
