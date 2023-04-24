@@ -14,5 +14,5 @@ population_balance
 .. toctree::
    :hidden:
 
-   expert/index
    phenomena/index
+   expert/index

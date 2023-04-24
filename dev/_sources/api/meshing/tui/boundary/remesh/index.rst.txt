@@ -14,5 +14,5 @@ remesh
 .. toctree::
    :hidden:
 
-   controls/index
    size_functions/index
+   controls/index

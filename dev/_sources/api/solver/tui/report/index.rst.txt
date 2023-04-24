@@ -14,13 +14,13 @@ report
 .. toctree::
    :hidden:
 
-   modified_setting/index
+   forces/index
+   system/index
+   icing/index
    population_balance/index
    fluxes/index
-   system/index
-   forces/index
-   reference_values/index
-   icing/index
    dpm_histogram/index
+   reference_values/index
    heat_exchanger/index
+   modified_setting/index
    simulation_reports/index

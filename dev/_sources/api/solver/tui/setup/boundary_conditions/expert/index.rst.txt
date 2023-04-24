@@ -15,6 +15,6 @@ expert
    :hidden:
 
    non_reflecting_bc/index
-   periodic_conditions/index
-   impedance_data_fitting/index
    perforated_walls/index
+   impedance_data_fitting/index
+   periodic_conditions/index

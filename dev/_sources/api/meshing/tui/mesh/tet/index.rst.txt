@@ -15,5 +15,5 @@ tet
    :hidden:
 
    controls/index
-   local_regions/index
    improve/index
+   local_regions/index

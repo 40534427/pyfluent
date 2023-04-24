@@ -14,10 +14,10 @@ multiphase
 .. toctree::
    :hidden:
 
+   wet_steam/index
    phases/index
    hybrid_models/index
-   wet_steam/index
-   sub_models/index
-   flow_regime_modeling/index
    population_balance/index
+   flow_regime_modeling/index
+   sub_models/index
    explicit_expert_options/index

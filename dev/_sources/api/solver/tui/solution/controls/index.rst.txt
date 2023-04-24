@@ -14,7 +14,7 @@ controls
 .. toctree::
    :hidden:
 
-   advanced/index
-   contact_solution_controls/index
-   query/index
    acoustics_wave_equation_controls/index
+   advanced/index
+   query/index
+   contact_solution_controls/index

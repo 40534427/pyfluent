@@ -14,9 +14,9 @@ heat_mass_reactions
 .. toctree::
    :hidden:
 
-   cavitation/index
-   lift/index
    interphase_discretization/index
-   interphase_viscous_dissipation/index
-   surface_tension/index
+   cavitation/index
    virtual_mass/index
+   surface_tension/index
+   lift/index
+   interphase_viscous_dissipation/index

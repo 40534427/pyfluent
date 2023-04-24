@@ -14,9 +14,9 @@ windows
 .. toctree::
    :hidden:
 
-   xy/index
-   video/index
-   main/index
    text/index
+   video/index
    axes/index
    scale/index
+   main/index
+   xy/index
