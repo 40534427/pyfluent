@@ -36,6 +36,9 @@ def build_parser() -> argparse.ArgumentParser:
                    help="physical end time [s] (default: *CONTROL_TERMINATION)")
     p.add_argument("--vel-scale", type=float, default=1.0,
                    help="scale factor on the prescribed velocity curve")
+    p.add_argument("--constant-vel", type=float, default=None,
+                   help="override the inlet velocity with this constant value "
+                        "[m/s] (ignores the K-file curve ramp)")
     p.add_argument("--cfl", type=float, default=0.5)
     p.add_argument("--tssfac", type=float, default=0.9)
     p.add_argument("--mass-scale", type=float, default=1.0,
@@ -51,8 +54,19 @@ def build_parser() -> argparse.ArgumentParser:
                    help="disable the CLLS leakage control (card ILEAK)")
     p.add_argument("--pleak", type=float, default=None,
                    help="leakage coefficient PLEAK (default: K file)")
+    p.add_argument("--leak-cap", type=float, default=None,
+                   help="per-step mass-leak cap as a fraction of donor-cell "
+                        "mass (default: 0.1); raise for strong inflation")
+    p.add_argument("--p-cap", type=float, default=None,
+                   help="cap of the pressure perturbation (p - p_ref) that "
+                        "enters the coupling traction [Pa] (default: no cap; "
+                        "use ~1e6 for constant 220 m/s to avoid trapped-air "
+                        "runaway)")
     p.add_argument("--hg-qh", type=float, default=0.1,
                    help="*CONTROL_HOURGLASS qh for the quad flap mode")
+    p.add_argument("--struct-damping", type=float, default=0.0,
+                   help="mass-proportional velocity damping [1/s] "
+                        "(0 = off; use ~500-2000 for constant high-speed inflow)")
     p.add_argument("--theory", type=int, default=None,
                    help="*CONTROL_SHELL THEORY override (default: K file)")
     p.add_argument("--bwc", type=int, default=None,
@@ -100,11 +114,12 @@ def main(argv=None) -> int:
     opt = Options(
         endtime=args.endtime if args.endtime is not None
         else float(model.controls.get("CONTROL_TERMINATION", {}).get("endtim", 0.02)),
-        vel_scale=args.vel_scale, cfl=args.cfl, tssfac=args.tssfac,
+        vel_scale=args.vel_scale, constant_vel=args.constant_vel, cfl=args.cfl, tssfac=args.tssfac,
         mass_scale=args.mass_scale, omega=args.omega, cdamp=args.cdamp,
         fsi_mach_cap=args.fsi_mach_cap, fsi_leak=not args.no_fsi_leak,
-        pleak=args.pleak,
-        hg_qh=args.hg_qh, theory=args.theory, bwc=args.bwc, ihq=args.ihq,
+        pleak=args.pleak, leak_cap=args.leak_cap, p_cap=args.p_cap,
+        hg_qh=args.hg_qh, struct_damping=args.struct_damping,
+        theory=args.theory, bwc=args.bwc, ihq=args.ihq,
         contact=not args.no_contact, contact_scale=args.contact_scale,
         contact_vdc=args.contact_vdc,
         contact_thk_scale=args.contact_thk_scale,

@@ -24,6 +24,7 @@ from . import vtkio
 class Options:
     endtime: float = 0.02
     vel_scale: float = 1.0        # scale on *BOUNDARY_PRESCRIBED_MOTION curve
+    constant_vel: Optional[float] = None  # override inlet velocity (constant)
     cfl: float = 0.5
     tssfac: float = 0.9
     coupling: bool = True
@@ -34,7 +35,10 @@ class Options:
     fsi_mach_cap: float = 0.3    # max Mach number of the injected FSI source
     fsi_leak: bool = True         # CLLS leakage control (card ILEAK)
     pleak: Optional[float] = None # PLEAK override
+    leak_cap: Optional[float] = None # per-step mass-leak cap override
+    p_cap: Optional[float] = None # cap of the pressure perturbation [Pa]
     hg_qh: float = 0.1           # *CONTROL_HOURGLASS qh for the quad flap mode
+    struct_damping: float = 0.0  # mass-proportional velocity damping [1/s]
     alt_floor: float = 0.1       # min altitude fraction for the shell time step
     # *CONTROL_SHELL THEORY / BWC and *CONTROL_HOURGLASS IHQ.  ``None``
     # means: take the value from the keyword file.
@@ -110,7 +114,8 @@ class Simulation:
             self.struct, tension_only=True,
             hg_qh=float(chg.get("qh", options.hg_qh)),
             alt_floor=options.alt_floor,
-            theory=self.theory, bwc=self.bwc, ihq=self.ihq)
+            theory=self.theory, bwc=self.bwc, ihq=self.ihq,
+            struct_damping=options.struct_damping)
         self.ssolver.update_kinematics()      # nodal areas for the coupler
         self.coupler = PenaltyCoupler(self.fluid, self.ssolver, model,
                                       enabled=options.coupling)
@@ -121,6 +126,10 @@ class Simulation:
             self.coupler.ileak = 0
         if options.pleak is not None:
             self.coupler.pleak = float(options.pleak)
+        if options.leak_cap is not None:
+            self.coupler.leak_cap = float(options.leak_cap)
+        if options.p_cap is not None:
+            self.coupler.p_cap = float(options.p_cap)
 
         # *CONTACT_AUTOMATIC_SINGLE_SURFACE on the canopy part
         self.contact = None
@@ -143,8 +152,11 @@ class Simulation:
         pm = model.bc.get("prescribed_motion", [])
         self.pm = pm[0] if pm else None
         if self.pm is not None:
-            self.fluid.set_drive(cells, self.pm["dof"],
-                                 timeseries(model.curve(self.pm["lcid"]), 0.0) * options.vel_scale)
+            if options.constant_vel is not None:
+                v0 = float(options.constant_vel)
+            else:
+                v0 = timeseries(model.curve(self.pm["lcid"]), 0.0) * options.vel_scale
+            self.fluid.set_drive(cells, self.pm["dof"], v0)
 
         self.history: List[dict] = []
         self.line_history: List[list] = []
@@ -296,10 +308,15 @@ class Simulation:
                 self.coupler.transfer(f_c, dt)
             # ---- driven flow (prescribed motion card)
             if self.pm is not None:
-                val = timeseries(self.model.curve(self.pm["lcid"]), self.t) * opt.vel_scale
+                if opt.constant_vel is not None:
+                    val = float(opt.constant_vel)
+                else:
+                    val = timeseries(self.model.curve(self.pm["lcid"]), self.t) * opt.vel_scale
                 self.fluid.set_drive(self.driven_cells, self.pm["dof"], val)
             # ---- fluid
             self.fluid.step(dt)
+            if opt.coupling:
+                self.coupler.cap_pressure()
 
             self.t += dt
             self.step_count += 1

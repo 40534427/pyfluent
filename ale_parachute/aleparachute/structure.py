@@ -49,7 +49,8 @@ class StructureSolver:
     def __init__(self, st: Structure, damping: float = 0.0,
                  tension_only: bool = True, hg_qh: float = 0.1,
                  hg_damp: float = 0.5, alt_floor: float = 0.1,
-                 theory: int = 5, bwc: int = 2, ihq: int = 1):
+                 theory: int = 5, bwc: int = 2, ihq: int = 1,
+                 struct_damping: float = 0.0):
         self.st = st
         self.damping = damping
         self.tension_only = tension_only
@@ -59,6 +60,12 @@ class StructureSolver:
         self.theory = int(theory)
         self.bwc = int(bwc)
         self.ihq = int(ihq)
+        # mass-proportional velocity damping (1/s) applied to every free
+        # node.  A folded membrane (BWC = 2, no bending stiffness) hit by a
+        # constant high-speed flow needs a dashpot so that the inflation
+        # does not overshoot and diverge; the default is zero so that the
+        # element-level physics stays untouched.
+        self.struct_damping = float(struct_damping)
         self._build_reference()
         self._build_lines()
 
@@ -399,6 +406,8 @@ class StructureSolver:
         f = self.internal_forces()
         if f_ext is not None:
             f = f + f_ext
+        if self.struct_damping > 0.0:
+            f = f - self.struct_damping * st.mass[:, None] * st.v
         self.apply_constraints(f)
         st.f = f
         acc = f / st.mass[:, None]

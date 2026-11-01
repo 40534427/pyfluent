@@ -83,6 +83,21 @@ class PenaltyCoupler:
         # which relaxes the jump without touching the penalty force itself.
         self.ileak = int(c.get("ileak", 0))
         self.pleak = float(c.get("pleak", 0.1))
+        # per-step mass-leak cap, as a fraction of the donor-cell mass shared
+        # by the sampling nodes.  The default 0.1 is conservative; a folded
+        # canopy hit by a constant 220 m/s stream needs a much larger value so
+        # that the trapped air can escape and the internal pressure does not
+        # run away (the fabric has no bending stiffness, BWC = 2).
+        self.leak_cap = float(c.get("leak_cap", 0.1))
+        # hard cap of the pressure *perturbation* (p - p_ref) that enters the
+        # coupling traction, in Pa.  With a light, bend-free membrane hit by
+        # a constant full-speed stream the air trapped between the canopy and
+        # the domain wall gets compressed to several MPa (the stagnation
+        # pressure is only ~30 kPa); without a cap the penalty force grows
+        # without bound and the step diverges.  ``None`` disables the cap.
+        self.p_cap = c.get("p_cap", None)
+        if self.p_cap is not None:
+            self.p_cap = float(self.p_cap)
         self.k_fsi = 0.0
         self.fsi_dt = float("inf")
         self.impedance = 0.0
@@ -123,11 +138,26 @@ class PenaltyCoupler:
             return
         x = st.x[sel]
         nrm = st.nodal_normal[sel]
+        # guard: skip nodes that have flown out of the domain or become
+        # non-finite (an unstable step can push a light fabric node to inf)
+        finite = np.all(np.isfinite(x), axis=1) & np.all(np.isfinite(nrm), axis=1)
+        if not finite.all():
+            sel = sel[finite]
+            x = x[finite]
+            nrm = nrm[finite]
+        if sel.size == 0:
+            self._active[:] = False
+            self.nodes_active = 0
+            return
+        ncell = self.fluid.g.ncell
         dist, cel = self.tree.query(x)
+        cel = np.clip(cel, 0, ncell - 1)
         h = self.cell_size[cel]
         d = 0.6 * h
         dp, cp = self.tree.query(x + d[:, None] * nrm)
         dm, cm = self.tree.query(x - d[:, None] * nrm)
+        cp = np.clip(cp, 0, ncell - 1)
+        cm = np.clip(cm, 0, ncell - 1)
         ok = ((dist <= 1.5 * h) & (dp <= 1.5 * h) & (dm <= 1.5 * h)
               & (cp != cm) & (st.nodal_coherence[sel] > self.coh_min))
         self._cell[:] = -1
@@ -192,6 +222,12 @@ class PenaltyCoupler:
         rho, u, p, c = self.fluid.primitive()
         pp = p[cp] - self.pref
         pm = p[cm] - self.pref
+        # cap the pressure perturbation so a trapped pocket of air between
+        # the canopy and the domain wall cannot drive the penalty traction to
+        # the MPa range and blow the (bend-free, light) membrane apart.
+        if self.p_cap is not None:
+            pp = np.clip(pp, -self.p_cap, self.p_cap)
+            pm = np.clip(pm, -self.p_cap, self.p_cap)
         ubar = 0.5 * (u[cp] + u[cm])
         # local acoustic impedance: rho (c + |u_rel|).  It is the quantity
         # that changes with the inflation speed and therefore changes the
@@ -317,7 +353,7 @@ class PenaltyCoupler:
             vol = self.fluid.g.vol
             shared = np.minimum(rho[cp] * vol[cp] / cntp[cp],
                                 rho[cm] * vol[cm] / cntm[cm])
-            cap = 0.1 * shared
+            cap = self.leak_cap * shared
             dm = np.clip(dm, -cap, cap)
             donor = np.where(dm > 0.0, cm, cp)       # upwind cell state
             ud = u[donor]
@@ -334,6 +370,37 @@ class PenaltyCoupler:
             self.fluid.U[:, 4] += me
 
         self.fluid._enforce(self.fluid.U)
+        self.cap_pressure()
+
+    def cap_pressure(self) -> None:
+        """Pressure relief valve.
+
+        The coupling-force cap (``p_cap`` on ``pp``/``pm``) limits the
+        traction on the fabric, but the fluid itself can still be compressed
+        to tens of MPa by the inflating canopy (the stagnation pressure is
+        only ~30 kPa).  Here we remove the excess internal energy from every
+        cell whose pressure exceeds ``p_ref + p_cap``; the removed energy
+        represents air escaping through the porous fabric.  This keeps both
+        the fluid pressure and the resulting time step bounded.  Must be
+        called both inside :meth:`transfer` (before the Riemann step) and
+        again after the fluid step, since the Riemann solver can move
+        high-pressure fluid into neighbouring cells.
+        """
+        if self.p_cap is None:
+            return
+        rho, u, p, c = self.fluid.primitive()
+        p_max = self.pref + self.p_cap
+        over = np.nonzero(p > p_max)[0]
+        if over.size == 0:
+            return
+        gas = self.fluid.gas
+        vol = self.fluid.g.vol[over]
+        Uo = self.fluid.U[over]
+        ke = 0.5 * np.sum(Uo[:, 1:4] ** 2, axis=1) \
+            / np.maximum(Uo[:, 0], 1e-30) * vol
+        a = gas.c4 + gas.c5 * (rho[over] / gas.rho0 - 1.0)
+        e_int_max = p_max / np.maximum(a, 1e-30)
+        self.fluid.U[over, 4] = np.minimum(Uo[:, 4], e_int_max * vol + ke)
 
     def drag(self, f_struct: np.ndarray, axis: int = 1) -> float:
         act = np.nonzero(self._active)[0]
