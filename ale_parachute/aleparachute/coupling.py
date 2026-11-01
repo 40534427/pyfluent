@@ -64,6 +64,36 @@ class PenaltyCoupler:
         # two sampling cells can end up on the same side of the fabric and
         # produce a spurious pressure jump.  Such nodes are excluded.
         self.coh_min = float(c.get("coherence_min", 0.5))
+        # LS-DYNA CLLS penalty stiffness parameters.  The interface stiffness
+        # grows with the local relative speed, k = PFAC (A1 + B1 |u_rel|),
+        # which is the behaviour reported in the reference presentation:
+        # stiffer interface at full inflation speed -> shorter stable dt.
+        self.a1 = float(c.get("a1", 0.0))
+        self.b1 = float(c.get("b1", 0.0))
+        self.a2 = float(c.get("a2", 0.0))
+        self.b2 = float(c.get("b2", 0.0))
+        self.nquad = int(c.get("nquad", 2))
+        # LS-DYNA leakage control (ILEAK/PLEAK).  With a Lagrangian surface
+        # embedded in a coarse ALE grid, mass is artificially trapped on the
+        # wrong side of the interface and the pressure difference runs away
+        # (a sealed folded canopy inside a driven cylinder behaves like a
+        # balloon).  ILEAK = 2 switches on the leakage control of the deck:
+        # air passes through the coupling interface with the leak velocity
+        #   u_leak = PLEAK * (p_minus - p_plus) / (rho c)
+        # which relaxes the jump without touching the penalty force itself.
+        self.ileak = int(c.get("ileak", 0))
+        self.pleak = float(c.get("pleak", 0.1))
+        self.k_fsi = 0.0
+        self.fsi_dt = float("inf")
+        self.impedance = 0.0
+        self._dt = 0.0
+        # cap of the momentum source expressed as a local Mach number.  A
+        # coarse ALE cell collects the reaction of many fabric nodes; without
+        # the cap the cell velocity can exceed the sound speed, the Riemann
+        # solver then sees supersonic states and the pressure runs away.  The
+        # same factor is applied to the momentum and to the work so that the
+        # source stays thermodynamically consistent.
+        self.mach_cap = float(c.get("fsi_mach_cap", 0.3))
 
         self.tree = cKDTree(fluid.g.center)
         self.cell_size = np.cbrt(fluid.g.vol)
@@ -130,9 +160,13 @@ class PenaltyCoupler:
             self._refresh_targets()
 
     # ----------------------------------------------------------------- force
-    def force(self, t: float) -> np.ndarray:
+    def force(self, t: float, dt: float = 0.0) -> np.ndarray:
         st = self.st.st
+        self._dt = float(dt) if dt > 0.0 else 0.0
         f = np.zeros((st.nnode, 3))
+        self.k_fsi = 0.0
+        self.fsi_dt = float("inf")
+        self.impedance = 0.0
         self._srcp[:] = 0.0
         self._srcm[:] = 0.0
         if not self.st_enabled:
@@ -159,17 +193,54 @@ class PenaltyCoupler:
         pp = p[cp] - self.pref
         pm = p[cm] - self.pref
         ubar = 0.5 * (u[cp] + u[cm])
-        rc = 0.5 * (rho[cp] * c[cp] + rho[cm] * c[cm])
+        # local acoustic impedance: rho (c + |u_rel|).  It is the quantity
+        # that changes with the inflation speed and therefore changes the
+        # penalty damping and the FSI stiffness of the interface.
+        urel = st.v[act] - ubar
+        uspeed = np.linalg.norm(urel, axis=1)
+        rc = 0.5 * (rho[cp] * (c[cp] + uspeed)
+                    + rho[cm] * (c[cm] + uspeed))
         A = st.nodal_area[act]
         nrm = st.nodal_normal[act]
 
-        vn = np.einsum("ij,ij->i", st.v[act] - ubar, nrm)
-        dfac = self.cdamp * rc * vn
-        fn = (pm - pp) - dfac                             # scalar traction
+        # LS-DYNA CLLS interface stiffness and its explicit stable dt
+        h = np.maximum(0.5 * (self.cell_size[cp] + self.cell_size[cm]), 1e-12)
+        k_node = (self.pfac * (self.a1 + self.b1 * uspeed)
+                  * A / h) if (self.a1 + self.b1) > 0.0 else rc * A / h
+        k_node = np.maximum(k_node, 0.0)
+        self.k_fsi = float(np.max(k_node)) if k_node.size else 0.0
+        self.impedance = float(np.mean(rc)) if rc.size else 0.0
+        m_node = float(np.min(st.mass[act])) if act.size else 1.0
+        self.fsi_dt = (0.9 * float(np.sqrt(max(m_node, 1e-18)
+                                            / max(self.k_fsi, 1e-30)))
+                       if self.k_fsi > 0.0 else float("inf"))
+
+        # normal relative velocity: nodal part and fluid part are separated so
+        # that the *nodal* part can be treated implicitly.  A fabric node is
+        # extremely light (m ~ 5e-6 kg) compared with the interface force it
+        # carries, so the explicit update of the acoustic impedance term
+        #   F = A [ (p_m - p_p) - rho c (v_n - u_n) ]
+        # is unconditionally unstable.  Solving for v_n^{n+1} gives the
+        # standard semi-implicit (added-damping) traction
+        #   F = A [ dp - D (v_n^n - u_n) ] / (1 + A D dt / m)
+        # which reduces to a velocity-relaxation for large A D dt / m and
+        # therefore cannot inject energy.  The pressure part is scaled by the
+        # same factor so that Newton's third law (fluid reaction = -f_node)
+        # holds exactly for the *applied* force.
+        vn_node = np.einsum("ij,ij->i", st.v[act], nrm)
+        vn_fluid = np.einsum("ij,ij->i", ubar, nrm)
+        d = self.cdamp * rc
+        dp = pm - pp
+        corr = d * (vn_node - vn_fluid)
+        den = np.ones_like(A)
+        if self._dt > 0.0:
+            m = np.maximum(st.mass[act], 1e-18)
+            den = 1.0 + A * d * self._dt / m
+        fn = (dp - corr) / den                             # scalar traction
         an = A[:, None] * nrm
-        fdamp = -dfac[:, None] * an                       # damping part
-        srcp = pp[:, None] * an - 0.5 * fdamp
-        srcm = -pm[:, None] * an - 0.5 * fdamp
+        dsrc = (0.5 * corr / den)[:, None] * an           # damping reaction
+        srcp = (pp / den)[:, None] * an + dsrc
+        srcm = (-pm / den)[:, None] * an + dsrc
 
         w = self.omega
         f_act = w * (fn[:, None] * an) + (1.0 - w) * self._f_prev[act]
@@ -196,22 +267,72 @@ class PenaltyCoupler:
         cm = self._cm[act]
         sp = self._srcp[act]
         sm = self._srcm[act]
+        A = self.st.st.nodal_area[act]
         rho, u, p, c = self.fluid.primitive()
 
         ncell = self.fluid.g.ncell
         inv_vol = 1.0 / self.fluid.g.vol
         mom = np.zeros((ncell, 3))
-        work = np.zeros(ncell)
         for k in range(3):
             mom[:, k] = (np.bincount(cp, weights=sp[:, k], minlength=ncell)
                          + np.bincount(cm, weights=sm[:, k], minlength=ncell))
-            mom[:, k] *= dt * inv_vol
+        mom *= (dt * inv_vol)[:, None]
         work = (np.bincount(cp, weights=np.einsum("ij,ij->i", sp, u[cp]),
                             minlength=ncell)
                 + np.bincount(cm, weights=np.einsum("ij,ij->i", sm, u[cm]),
                               minlength=ncell)) * dt * inv_vol
+
+        # Mach cap of the source.  On a coarse ALE grid one control volume
+        # carries the reaction of many fabric nodes, so the momentum fed back
+        # in one step can push the cell above the local sound speed.  The
+        # Riemann solver then sees supersonic states and the pressure runs
+        # away (pmax ~ 26 q).  Limiting the *added* velocity to a fraction of
+        # the local speed of sound keeps the update in the regime where the
+        # Godunov flux is still dissipative.  The work source is scaled by the
+        # same factor so that the injected energy stays consistent with the
+        # injected momentum (both vanish together for a zero-velocity jump).
+        if self.mach_cap > 0.0:
+            rho_c = np.maximum(rho, 1e-30)
+            c_c = np.maximum(c, 1e-30)
+            du = np.linalg.norm(mom, axis=1) / rho_c
+            fac = np.minimum(1.0, self.mach_cap * c_c / np.maximum(du, 1e-30))
+            mom *= fac[:, None]
+            work *= fac
         self.fluid.U[:, 1:4] += mom
         self.fluid.U[:, 4] += work
+
+        # ---- leakage control (ILEAK / PLEAK) --------------------------------
+        # Air crosses the interface towards the low pressure side.  Mass,
+        # momentum and total energy are moved together (the donor state is
+        # taken from the upwind cell), so the transfer is conservative.
+        if self.ileak > 0 and self.pleak > 0.0:
+            rf = 0.5 * (rho[cp] + rho[cm])
+            cf = 0.5 * (c[cp] + c[cm])
+            uleak = self.pleak * (p[cm] - p[cp]) / np.maximum(rf * cf, 1e-30)
+            dm = rf * uleak * A * dt                 # > 0: minus -> plus
+            # no control volume may lose more than 10 % of its mass in one
+            # step, shared between the nodes that sample it
+            cntp = np.maximum(np.bincount(cp, minlength=ncell), 1)
+            cntm = np.maximum(np.bincount(cm, minlength=ncell), 1)
+            vol = self.fluid.g.vol
+            shared = np.minimum(rho[cp] * vol[cp] / cntp[cp],
+                                rho[cm] * vol[cm] / cntm[cm])
+            cap = 0.1 * shared
+            dm = np.clip(dm, -cap, cap)
+            donor = np.where(dm > 0.0, cm, cp)       # upwind cell state
+            ud = u[donor]
+            ed = self.fluid.U[donor, 4] / np.maximum(rho[donor], 1e-30)
+            mc = (np.bincount(cp, weights=dm, minlength=ncell)
+                  - np.bincount(cm, weights=dm, minlength=ncell))
+            for k in range(3):
+                self.fluid.U[:, 1 + k] += (
+                    np.bincount(cp, weights=dm * ud[:, k], minlength=ncell)
+                    - np.bincount(cm, weights=dm * ud[:, k], minlength=ncell))
+            me = (np.bincount(cp, weights=dm * ed, minlength=ncell)
+                  - np.bincount(cm, weights=dm * ed, minlength=ncell))
+            self.fluid.U[:, 0] += mc
+            self.fluid.U[:, 4] += me
+
         self.fluid._enforce(self.fluid.U)
 
     def drag(self, f_struct: np.ndarray, axis: int = 1) -> float:

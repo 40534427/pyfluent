@@ -573,9 +573,36 @@ def load_model(path: str, mesh: bool = True) -> Model:
     # contact --------------------------------------------------------------
     for c in _all_cards(cards, "CONTACT_AUTOMATIC_SINGLE_SURFACE_ID"):
         n = _numeric_lines(c)
-        if n:
-            f = fields10(n[0], 8)
-            m.contact.append({"cid": inum(f[0]), "title": n[0][10:].strip()})
+        if not n:
+            continue
+        d = {}
+        f = fields10(n[0], 8)
+        d.update({"cid": inum(f[0]), "title": n[0][10:].strip()})
+        if len(n) > 1:
+            f = fields10(n[1], 8)
+            d.update({"ssid": inum(f[0]), "msid": inum(f[1]),
+                      "sstyp": inum(f[2]), "mstyp": inum(f[3]),
+                      "sboxid": inum(f[4]), "mboxid": inum(f[5]),
+                      "spr": inum(f[6]), "mpr": inum(f[7])})
+        if len(n) > 2:
+            f = fields10(n[2], 8)
+            d.update({"fs": fnum(f[0]), "fd": fnum(f[1]), "dc": fnum(f[2]),
+                      "vc": fnum(f[3]), "vdc": fnum(f[4]),
+                      "penchk": inum(f[5]), "bt": inum(f[6], 0),
+                      "dt": fnum(f[7], 1e20)})
+        if len(n) > 3:
+            f = fields10(n[3], 8)
+            d.update({"sfs": fnum(f[0], 1.0), "sfm": fnum(f[1], 1.0),
+                      "sst": fnum(f[2], 0.0), "mst": fnum(f[3], 0.0),
+                      "sfst": fnum(f[4], 1.0), "sfmt": fnum(f[5], 1.0),
+                      "fsf": fnum(f[6], 1.0), "vsf": fnum(f[7], 1.0)})
+        d.setdefault("sstyp", 0)
+        d.setdefault("ssid", 0)
+        d.setdefault("sfs", 1.0)
+        d.setdefault("sfm", 1.0)
+        d.setdefault("vdc", 0.0)
+        d.setdefault("penchk", 0)
+        m.contact.append(d)
 
     # mesh -----------------------------------------------------------------
     if mesh:

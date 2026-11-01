@@ -14,5 +14,6 @@ from .mesh import (HexGrid, Structure, auto_cylinder_grid,   # noqa: F401
                    build_hex_grid, build_structure, fluid_geometry, native_grid)
 from .fluid import ALEFluid, IdealGas          # noqa: F401
 from .structure import StructureSolver         # noqa: F401
+from .contact import SelfContact               # noqa: F401
 from .coupling import PenaltyCoupler           # noqa: F401
 from .solver import Options, Simulation        # noqa: F401

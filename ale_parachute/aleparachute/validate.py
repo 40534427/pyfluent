@@ -147,10 +147,8 @@ def uniform_case(nstep: int = 200) -> dict:
 # ----------------------------------------------------------------------------
 # membrane patch
 # ----------------------------------------------------------------------------
-def membrane_case(eps: float = 1e-3, t: float = 9e-4, EA: float = 4.309e7,
-                  nu: float = 0.0) -> dict:
-    x = np.array([[0.0, 0.0, 0.0], [1.0, 0.0, 0.0],
-                  [1.0, 1.0, 0.0], [0.0, 1.0, 0.0]])
+def _patch(x: np.ndarray, t: float = 9e-4, EA: float = 4.309e7,
+           nu: float = 0.0) -> Structure:
     tris = np.array([[0, 1, 2], [0, 2, 3]])
     n = x.shape[0]
     area0 = 0.5 * np.linalg.norm(
@@ -159,39 +157,93 @@ def membrane_case(eps: float = 1e-3, t: float = 9e-4, EA: float = 4.309e7,
     edge0 = np.stack([np.linalg.norm(x[tris[:, 1]] - x[tris[:, 0]], axis=1),
                       np.linalg.norm(x[tris[:, 2]] - x[tris[:, 1]], axis=1),
                       np.linalg.norm(x[tris[:, 0]] - x[tris[:, 2]], axis=1)], axis=1)
-    st = Structure(
+    return Structure(
         x=x.copy(), v=np.zeros_like(x), f=np.zeros_like(x),
         mass=np.full(n, 533.77 * t * 0.25), node_ids=np.arange(n) + 1,
         tris=tris, tri_area0=area0, tri_thk=np.full(2, t),
         tri_ea=np.full(2, EA), tri_eb=np.full(2, EA),
         tri_g=np.full(2, EA / (2.0 * (1.0 + nu))), tri_nu=np.full(2, nu),
         tri_rho=np.full(2, 533.77), tri_edge0=edge0,
+        quads=np.array([[0, 1, 2, 3]]),
         tri_area=area0.copy(), tri_normal=np.zeros((2, 3)),
         nodal_area=np.zeros(n), nodal_normal=np.zeros((n, 3)),
     )
-    s = StructureSolver(st, tension_only=False)
+
+
+def membrane_case(eps: float = 1e-3, t: float = 9e-4, EA: float = 4.309e7,
+                  nu: float = 0.0) -> dict:
+    """THEORY = 5 (BT membrane) uniaxial patch and rigid rotation check."""
+    x = np.array([[0.0, 0.0, 0.0], [1.0, 0.0, 0.0],
+                  [1.0, 1.0, 0.0], [0.0, 1.0, 0.0]])
+    st = _patch(x, t, EA, nu)
+    s = StructureSolver(st, tension_only=False, theory=5, bwc=2)
     # affine uniaxial extension, no lateral contraction
     st.x[:, 0] *= (1.0 + eps)
     s.update_kinematics()
     f = s.internal_forces()
-    # analytic: right edge carries C11*eps*t over unit width
+    # analytic: right edge carries EA*t*eps over unit width
     expected = EA * t * eps * 1.0
-    got = abs(float(f[1, 0] + f[2, 0]))    # total force on the right edge
+    got = abs(float(f[1, 0] + f[2, 0]))
+    # rigid body rotation must be force free (co-rotational formulation)
+    ang = 0.4
+    R = np.array([[np.cos(ang), -np.sin(ang), 0.0],
+                  [np.sin(ang), np.cos(ang), 0.0], [0.0, 0.0, 1.0]])
+    st2 = _patch(x @ R.T, t, EA, nu)
+    s2 = StructureSolver(st2, tension_only=False, theory=5, bwc=2)
+    f2 = s2.internal_forces()
     return {"expected": expected, "got": got, "rel": abs(got / expected - 1.0),
-            "sum": float(np.abs(f.sum(axis=0)).max())}
+            "sum": float(np.abs(f.sum(axis=0)).max()),
+            "rotation": float(np.abs(f2).max())}
+
+
+def contact_case(gap: float = 4e-4, push: float = 1e-3) -> dict:
+    """Two parallel patches: penalty contact gives repulsion and no net force."""
+    from .contact import SelfContact
+    t = 9e-4
+    top = np.array([[0.0, 0.0, 0.0], [1.0, 0.0, 0.0],
+                    [1.0, 1.0, 0.0], [0.0, 1.0, 0.0]])
+    bot = top.copy()
+    bot[:, 2] += gap
+    x = np.vstack([top, bot])
+    st = x  # placeholder
+    st = Structure(
+        x=x.copy(), v=np.zeros_like(x), f=np.zeros_like(x),
+        mass=np.full(8, 533.77 * t * 0.25), node_ids=np.arange(1, 9),
+        tris=np.array([[0, 1, 2], [0, 2, 3], [4, 5, 6], [4, 6, 7]]),
+        tri_area0=np.full(4, 0.5), tri_thk=np.full(4, t),
+        tri_ea=np.full(4, 4.309e7), tri_eb=np.full(4, 4.309e7),
+        tri_g=np.full(4, 2.1545e7), tri_nu=np.zeros(4),
+        tri_rho=np.full(4, 533.77),
+        tri_edge0=np.tile([1.0, 1.0, 1.4142], (4, 1)),
+        quads=np.array([[0, 1, 2, 3], [4, 5, 6, 7]]),
+    )
+    c = SelfContact(st, scale=1.0, sfs=1.0)
+    f0 = c.force()
+    st.x[4:, 2] -= push
+    f1 = c.force()
+    return {"initial": float(np.abs(f0).max()),
+            "force": float(np.abs(f1).max()),
+            "pairs": c.stats.pairs,
+            "sum": float(np.abs(f1.sum(axis=0)).max()),
+            "pen": c.stats.pen_max}
 
 
 def run_all(verbose: bool = True) -> dict:
     res = {}
     res["uniform"] = uniform_case()
     res["membrane"] = membrane_case()
+    res["contact"] = contact_case()
     res["sod"] = sod_case()
     if verbose:
         u = res["uniform"]
         print(f"uniform  : dm={u['dm']:.3e} de={u['de']:.3e} umax={u['umax']:.3e}")
         mm = res["membrane"]
         print(f"membrane : force={mm['got']:.4e} N expected={mm['expected']:.4e} N "
-              f"rel={mm['rel']:.2e} reaction={mm['sum']:.2e}")
+              f"rel={mm['rel']:.2e} reaction={mm['sum']:.2e} "
+              f"rotation={mm['rotation']:.2e}")
+        ct = res["contact"]
+        print(f"contact  : initial={ct['initial']:.2e} N push={ct['force']:.4e} N "
+              f"pairs={ct['pairs']} pen={ct['pen']:.3e} m sum={ct['sum']:.2e}")
         s = res["sod"]
         print(f"sod      : p*={s['p_star']:.4f} (exact 0.30313) "
               f"u*={s['u_star']:.4f} (exact 0.92745) L1(rho)={s['l1']:.3f}")

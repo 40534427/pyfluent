@@ -11,6 +11,7 @@ from typing import Dict, List, Optional
 import numpy as np
 from scipy.spatial import cKDTree
 
+from .contact import SelfContact
 from .coupling import PenaltyCoupler
 from .fluid import ALEFluid, IdealGas
 from .kfile import Model, timeseries
@@ -30,8 +31,20 @@ class Options:
     mass_scale: float = 1.0      # structure mass scaling (explicit FSI aid)
     omega: float = 0.2           # under-relaxation of the exchanged traction
     cdamp: float = 1.0           # acoustic impedance damping of the penalty
+    fsi_mach_cap: float = 0.3    # max Mach number of the injected FSI source
+    fsi_leak: bool = True         # CLLS leakage control (card ILEAK)
+    pleak: Optional[float] = None # PLEAK override
     hg_qh: float = 0.1           # *CONTROL_HOURGLASS qh for the quad flap mode
     alt_floor: float = 0.1       # min altitude fraction for the shell time step
+    # *CONTROL_SHELL THEORY / BWC and *CONTROL_HOURGLASS IHQ.  ``None``
+    # means: take the value from the keyword file.
+    theory: Optional[int] = None
+    bwc: Optional[int] = None
+    ihq: Optional[int] = None
+    contact: bool = True         # *CONTACT_AUTOMATIC_SINGLE_SURFACE
+    contact_scale: float = 1.0   # penalty stiffness multiplier
+    contact_vdc: Optional[float] = None   # viscous damping (card VDC)
+    contact_thk_scale: float = 1.0
     vtk_every: float = 0.0        # <=0 -> only the final state
     outdir: str = "out"
     max_steps: int = 100000
@@ -84,14 +97,46 @@ class Simulation:
         self.struct = build_structure(model)
         if options.mass_scale != 1.0:
             self.struct.mass *= float(options.mass_scale)
-        self.ssolver = StructureSolver(self.struct, tension_only=True,
-                                       hg_qh=options.hg_qh,
-                                       alt_floor=options.alt_floor)
+
+        cs = model.controls.get("CONTROL_SHELL", {})
+        chg = model.controls.get("CONTROL_HOURGLASS", {})
+        self.theory = int(options.theory if options.theory is not None
+                          else cs.get("theory", 5))
+        self.bwc = int(options.bwc if options.bwc is not None
+                       else cs.get("bwc", 2))
+        self.ihq = int(options.ihq if options.ihq is not None
+                       else chg.get("ihq", 1))
+        self.ssolver = StructureSolver(
+            self.struct, tension_only=True,
+            hg_qh=float(chg.get("qh", options.hg_qh)),
+            alt_floor=options.alt_floor,
+            theory=self.theory, bwc=self.bwc, ihq=self.ihq)
         self.ssolver.update_kinematics()      # nodal areas for the coupler
         self.coupler = PenaltyCoupler(self.fluid, self.ssolver, model,
                                       enabled=options.coupling)
         self.coupler.omega = float(options.omega)
         self.coupler.cdamp = float(options.cdamp)
+        self.coupler.mach_cap = float(options.fsi_mach_cap)
+        if not options.fsi_leak:
+            self.coupler.ileak = 0
+        if options.pleak is not None:
+            self.coupler.pleak = float(options.pleak)
+
+        # *CONTACT_AUTOMATIC_SINGLE_SURFACE on the canopy part
+        self.contact = None
+        self.contact_card = model.contact[0] if model.contact else {}
+        if options.contact and self.struct.quads.shape[0] > 0:
+            cc = self.contact_card
+            vdc = (float(options.contact_vdc)
+                   if options.contact_vdc is not None
+                   else float(cc.get("vdc", 0.0)))
+            self.contact = SelfContact(
+                self.struct, enabled=True,
+                scale=float(options.contact_scale),
+                sfs=float(cc.get("sfs", 1.0)),
+                sfm=float(cc.get("sfm", 1.0)),
+                vdc=vdc,
+                thickness_scale=float(options.contact_thk_scale))
 
         cells = driven_cells(grid, model)
         self.driven_cells = cells
@@ -102,6 +147,7 @@ class Simulation:
                                  timeseries(model.curve(self.pm["lcid"]), 0.0) * options.vel_scale)
 
         self.history: List[dict] = []
+        self.line_history: List[list] = []
         self.t = 0.0
         self.step_count = 0
         self.dt_last = 0.0
@@ -119,12 +165,14 @@ class Simulation:
         else:
             radius = height = 0.0
         if st.beams.size:
-            tl = self.ssolver.beam_tension()
-            line_max = float(tl.max())
-            line_sum = float(tl.sum())
+            lt = self.ssolver.line_tension()
+            line_max = float(lt.max()) if lt.size else 0.0
+            line_sum = float(lt.sum()) if lt.size else 0.0
             line_anchor = self.ssolver.beam_anchor_force()
         else:
+            lt = np.zeros(0)
             line_max = line_sum = line_anchor = 0.0
+        cstat = self.contact.stats if self.contact is not None else None
         return {
             "time": self.t,
             "step": self.step_count,
@@ -138,10 +186,21 @@ class Simulation:
             "canopy_radius": radius,
             "canopy_y": height,
             "struct_kinetic": float(np.sum(0.5 * st.mass * np.sum(st.v ** 2, axis=1))),
+            "struct_vmax": float(np.max(np.linalg.norm(st.v, axis=1))) if st.nnode else 0.0,
             "coupling_drag": self.coupler.drag(f_couple),
             "line_tension_max": line_max,
             "line_tension_sum": line_sum,
             "line_anchor_force": line_anchor,
+            "contact_force_max": cstat.fmax if cstat else 0.0,
+            "contact_pairs": cstat.pairs if cstat else 0,
+            "contact_penetration": cstat.pen_max if cstat else 0.0,
+            "fsi_stiffness": self.coupler.k_fsi,
+            "fsi_impedance": self.coupler.impedance,
+            "fsi_dt": self.coupler.fsi_dt if np.isfinite(self.coupler.fsi_dt) else 0.0,
+            "dt_fluid": self.fluid.stable_dt(),
+            "dt_struct": self.ssolver.stable_dt(),
+            "dt_contact": (self.contact.stable_dt() if self.contact is not None
+                           else 0.0),
             "dt": self.dt_last,
         }
 
@@ -159,13 +218,15 @@ class Simulation:
 
         scells = [list(map(int, t)) for t in st.tris]
         stypes = np.full(len(scells), 5)
+        tension = np.zeros(len(scells))
         if st.beams.size:
             for b in st.beams:
                 scells.append(list(map(int, b)))
             stypes = np.concatenate([stypes, np.full(st.beams.shape[0], 3)])
+            tension = np.concatenate([tension, self.ssolver.beam_tension()])
         vtkio.write_vtk(
             path + "_structure.vtk", st.x, scells, stypes,
-            None,
+            {"tension": tension},
             {"mass": st.mass, "velocity": st.v, "normal": st.nodal_normal},
             title=f"canopy t={self.t:.5f}")
 
@@ -178,28 +239,58 @@ class Simulation:
             w.writeheader()
             for row in self.history:
                 w.writerow(row)
+        if self.line_history:
+            nline = self.ssolver.line_count
+            lpath = os.path.join(os.path.dirname(path), "line_force.csv")
+            with open(lpath, "w", newline="") as fh:
+                w = csv.writer(fh)
+                w.writerow(["time"] + [f"line_{k + 1}" for k in range(nline)])
+                for row in self.line_history:
+                    t = row[0]
+                    vals = list(row[1]) + [0.0] * (nline - len(row[1]))
+                    w.writerow([t] + vals[:nline])
+
+    # ------------------------------------------------------------ combined dt
+    def stable_dt(self) -> float:
+        """Smallest explicit stable step over all physics.
+
+        fluid (CFL / spectral radius) -- structure (membrane + cable) --
+        penalty contact -- CLLS interface stiffness.
+        """
+        dt = min(self.fluid.stable_dt(), self.ssolver.stable_dt())
+        if self.contact is not None:
+            dt = min(dt, self.contact.stable_dt())
+        if np.isfinite(self.coupler.fsi_dt):
+            dt = min(dt, self.coupler.fsi_dt)
+        return float(dt)
 
     # -------------------------------------------------------------------- run
     def run(self) -> dict:
         opt = self.opt
         os.makedirs(opt.outdir, exist_ok=True)
         endtime = opt.endtime
-        dt = min(self.fluid.stable_dt(), self.ssolver.stable_dt()) * opt.tssfac
+        dt = self.stable_dt() * opt.tssfac
         self.dt_last = dt
         next_vtk = 0.0
         hist_every = max(endtime / 200.0, 1e-9)
         next_hist = hist_every
         f_c = np.zeros_like(self.struct.x)
+        f_ct = np.zeros_like(self.struct.x)
         if opt.vtk_every > 0:
             self.write_state(os.path.join(opt.outdir, "state_0000"))
 
         curves = self.model.curves if self.pm is not None else {}
         while self.t < endtime and self.step_count < opt.max_steps:
             # ---- coupling force at t
-            f_c = self.coupler.force(self.t) if opt.coupling else np.zeros_like(self.struct.x)
+            f_c = (self.coupler.force(self.t, dt) if opt.coupling
+                   else np.zeros_like(self.struct.x))
+            # ---- penalty self-contact of the canopy at t
+            f_ct = (self.contact.force() if self.contact is not None
+                    else np.zeros_like(self.struct.x))
+            f_ext = f_c + f_ct
             # ---- structure
             if opt.structure:
-                self.ssolver.step(dt, self.t, curves, opt.vel_scale, f_ext=f_c)
+                self.ssolver.step(dt, self.t, curves, opt.vel_scale, f_ext=f_ext)
             # ---- fluid reaction
             if opt.coupling:
                 self.coupler.transfer(f_c, dt)
@@ -217,24 +308,33 @@ class Simulation:
                 next_hist += hist_every
                 row = self.diagnostics(f_c)
                 self.history.append(row)
+                self.line_history.append([self.t, self.ssolver.line_tension().copy()])
                 if opt.verbose:
-                    print(f"t={self.t:.5f} dt={dt:.3e} dt_fluid={self.fluid.stable_dt():.3e} "
+                    print(f"t={self.t:.5f} dt={dt:.3e} dt_f={row['dt_fluid']:.3e} "
                           f"R={row['canopy_radius']:.4f} y={row['canopy_y']:.4f} "
                           f"pmax={row['p_max']:.3e} umax={row['u_max']:.2f} "
-                          f"drag={row['coupling_drag']:.3e}")
+                          f"drag={row['coupling_drag']:.3e} "
+                          f"vmax={row['struct_vmax']:.3e} "
+                          f"Tc={row['line_tension_max']:.1f}N "
+                          f"ct={row['contact_pairs']} "
+                          f"pen={row['contact_penetration']:.3e} "
+                          f"ctf={row['contact_force_max']:.3e}")
 
             if opt.vtk_every > 0 and self.t >= next_vtk + opt.vtk_every - 1e-12:
                 next_vtk += opt.vtk_every
                 self.write_state(os.path.join(opt.outdir,
                                               f"state_{next_vtk:8.4f}"))
 
-            dt_new = min(self.fluid.stable_dt(), self.ssolver.stable_dt()) * opt.tssfac
+            dt_new = self.stable_dt() * opt.tssfac
             dt = min(dt_new, 1.3 * dt)      # gentle growth
             dt = max(dt, 2e-9)
             self.dt_last = dt
 
             if not np.all(np.isfinite(self.fluid.U)):
                 raise RuntimeError("fluid state became non finite")
+            if not (np.all(np.isfinite(self.struct.x))
+                    and np.all(np.isfinite(self.struct.v))):
+                raise RuntimeError("structure state became non finite")
 
         final = self.diagnostics(f_c)
         self.history.append(final)
