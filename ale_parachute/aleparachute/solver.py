@@ -118,6 +118,13 @@ class Simulation:
             height = float(np.sum(wa * st.x[:, 1]))
         else:
             radius = height = 0.0
+        if st.beams.size:
+            tl = self.ssolver.beam_tension()
+            line_max = float(tl.max())
+            line_sum = float(tl.sum())
+            line_anchor = self.ssolver.beam_anchor_force()
+        else:
+            line_max = line_sum = line_anchor = 0.0
         return {
             "time": self.t,
             "step": self.step_count,
@@ -132,6 +139,9 @@ class Simulation:
             "canopy_y": height,
             "struct_kinetic": float(np.sum(0.5 * st.mass * np.sum(st.v ** 2, axis=1))),
             "coupling_drag": self.coupler.drag(f_couple),
+            "line_tension_max": line_max,
+            "line_tension_sum": line_sum,
+            "line_anchor_force": line_anchor,
             "dt": self.dt_last,
         }
 

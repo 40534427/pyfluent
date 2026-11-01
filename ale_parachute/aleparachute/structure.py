@@ -263,6 +263,38 @@ class StructureSolver:
     def add_force(self, f: np.ndarray) -> None:
         self.st.f += f
 
+    # ------------------------------------------------------------ line forces
+    def beam_tension(self) -> np.ndarray:
+        """Axial tension carried by every suspension-line element [N].
+
+        Only the elastic (tension-only) part is returned, so the value is the
+        actual force in the cable rather than the damping contribution.
+        """
+        st = self.st
+        if st.beams.size == 0:
+            return np.zeros(0)
+        d = st.x[st.beams[:, 1]] - st.x[st.beams[:, 0]]
+        L = np.maximum(np.linalg.norm(d, axis=1), 1e-12)
+        ext = L - st.beam_L0
+        if self.tension_only:
+            ext = np.maximum(ext, 0.0)
+        return self.beam_k * ext
+
+    def beam_anchor_force(self) -> float:
+        """Magnitude of the resultant line force acting on the fixed nodes."""
+        st = self.st
+        if st.beams.size == 0 or st.fixed.size == 0:
+            return 0.0
+        d = st.x[st.beams[:, 1]] - st.x[st.beams[:, 0]]
+        L = np.maximum(np.linalg.norm(d, axis=1), 1e-12)
+        t = self.beam_tension()
+        fvec = (t / L)[:, None] * d
+        fb = np.zeros_like(st.x)
+        for k in range(3):
+            np.add.at(fb[:, k], st.beams[:, 0], fvec[:, k])
+            np.add.at(fb[:, k], st.beams[:, 1], -fvec[:, k])
+        return float(np.linalg.norm(fb[st.fixed].sum(axis=0)))
+
     # ------------------------------------------------------------ properties
     def stable_dt(self) -> float:
         st = self.st
