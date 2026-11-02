@@ -294,7 +294,15 @@ def build_structure(model) -> Structure:
     # stiffness, i.e. the canopy behaves as a uniaxial fibre membrane
     # (meridional fibres only).  Do *not* fall back to EA here -- that would
     # turn the fabric into an isotropic sheet and change the inflation shape.
-    eb = float(mat["eb"])
+    # The BT co-rotational membrane carries follower (frame-rotation) terms
+    # in its tangent stiffness, so a quad with eb = 0 can collapse freely in
+    # the b direction (detJ -> 0 -> B -> infinity -> blow-up).  A tiny
+    # stabilising modulus eb_stab = 0.01 * ea locks the element area from
+    # vanishing without altering the meridional tension that governs the
+    # inflation shape.
+    eb_raw = float(mat["eb"])
+    eb_stab = 0.01 * ea
+    eb = eb_raw if eb_raw > eb_stab else eb_stab
     nu = float(mat.get("prba", 0.0))
     gab = float(mat.get("gab", 0.0))
     if gab <= 0.0:

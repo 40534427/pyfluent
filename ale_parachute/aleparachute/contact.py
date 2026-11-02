@@ -102,10 +102,21 @@ class SelfContact:
         nodes = np.nonzero(self.node_thk > 0.0)[0]
         if nodes.size == 0:
             return {"n": 0}
+        # Guard against a diverged structure: NaN/Inf coordinates make the
+        # kd-tree query crash (segmentation fault in scipy) or return garbage
+        # indices, which then blow up on ``f[pf, k]`` below.
+        sel = np.all(np.isfinite(xref[nodes]), axis=1)
+        if not sel.all():
+            nodes = nodes[sel]
+            if nodes.size == 0:
+                return {"n": 0}
         kk = min(self.nsearch, self.nface)
         dist, fidx = self.tree.query(st.x[nodes], k=kk)
         fidx = np.asarray(fidx).reshape(-1, kk)
         dist = np.asarray(dist).reshape(-1, kk)
+        # clamp face indices returned by the tree; NaN input can produce
+        # out-of-range values that would otherwise index ``f`` out of bounds
+        fidx = np.clip(fidx, 0, self.nface - 1)
         pn = np.repeat(nodes, fidx.shape[1])
         pf = fidx.ravel()
         pd = dist.ravel()
