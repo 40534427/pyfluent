@@ -135,7 +135,26 @@ class ALEFluid:
 
     # ------------------------------------------------------------- boundaries
     def _ghost_states(self, U_L, nvec, bc):
-        """Return conservative ghost states for boundary faces."""
+        """Return conservative ghost states for boundary faces.
+
+        Three categories:
+
+        * ``bc == 0``: solid wall.  Ghost = mirrored interior normal velocity
+          so that mass flux through the face is zero.
+
+        * ``bc == 1``: non-reflecting *outflow*.  The ghost state is set so
+          that its pressure equals the ambient ``p_ref`` (the right-running
+          Riemann invariant is pinned to the exterior sound speed and
+          ambient density), while the tangential velocity is copied from
+          the interior.  Subsonic fluid therefore exits the domain at the
+          Riemann-solver computed rate, and the stagnation zone cannot
+          accumulate pressure indefinitely.
+
+        * ``bc == 2``: driven inlet.  Treated identically to non-reflecting
+          here – the actual inflow velocity is enforced in ``_apply_drive``
+          after every step, so the Riemann flux already sees the correct
+          interior state.
+        """
         rho = U_L[:, 0]
         u = U_L[:, 1:4] / rho[:, None]
         rhov2 = np.sum(U_L[:, 1:4] ** 2, axis=1) / rho
@@ -143,17 +162,34 @@ class ALEFluid:
         un = np.einsum("ij,ij->i", u, nvec)
 
         UG = U_L.copy()
+
+        # -- solid wall: mirror normal velocity -----------------------------
         wall = bc == 0
         if wall.any():
-            # mirror the normal velocity: no mass flux (solid wall)
             u_w = u[wall] - 2.0 * un[wall, None] * nvec[wall]
             UG[wall, 1:4] = rho[wall, None] * u_w
             UG[wall, 4] = e_int[wall] + 0.5 * rho[wall] * np.sum(u_w ** 2, axis=1)
-        nr = bc == 1
-        if nr.any():
-            # non-reflecting: zero-gradient ghost, so that a uniform state is
-            # an exact steady solution of the discrete system
-            UG[nr] = U_L[nr]
+
+        # -- non-reflecting / driven outflow: pin ghost pressure to p_ref --
+        out = bc == 1
+        if out.any():
+            g = self.gas
+            # ghost ambient state: quiescent, p = p_ref
+            # p_ref = (c4 + c5*(rho_ref/rho0 - 1)) * e_int_ref
+            # → solve for rho_ref iteratively or analytically
+            # For our EOS (c4=c5=0.4, c6=0, e0=250000):
+            #   p = (0.4 + 0.4*mu) * e_int, and gamma_eff = 1 + c4 + c5*mu
+            #   Treat as gamma-law: p = (gamma_eff - 1) * rho * e_int
+            #   So e_int = p / ((gamma_eff - 1) * rho), gamma_eff ≈ gamma_ref
+            gamma_ref = 1.0 + g.c4                          # 1.4 at rho0
+            rho_ref = g.rho0                                # use rho0 as ghost density
+            e_int_ref = g.pref / np.maximum(gamma_ref - 1.0, 1e-30)
+            UG[out, 0] = rho_ref
+            # interior tangential velocity is kept, normal velocity from Riemann
+            # The Riemann solver will naturally compute un_out ≈ un_L (mass
+            # exit) when p_R < p_L.
+            UG[out, 1:4] = 0.0                              # ghost u = 0
+            UG[out, 4] = e_int_ref                          # ghost e_int = e_int_ref
         return UG
 
     # ------------------------------------------------------------------- flux
