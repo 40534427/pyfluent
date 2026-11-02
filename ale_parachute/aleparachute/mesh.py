@@ -290,7 +290,11 @@ def build_structure(model) -> Structure:
     mat = model.materials[part["mid"]]
     t = float(sec.get("t1", 1.0e-3))
     ea = float(mat["ea"])
-    eb = float(mat["eb"]) if mat["eb"] > 0 else ea
+    # *MAT_FABRIC  EB = 0 in the deck: the fill (b) direction carries no
+    # stiffness, i.e. the canopy behaves as a uniaxial fibre membrane
+    # (meridional fibres only).  Do *not* fall back to EA here -- that would
+    # turn the fabric into an isotropic sheet and change the inflation shape.
+    eb = float(mat["eb"])
     nu = float(mat.get("prba", 0.0))
     gab = float(mat.get("gab", 0.0))
     if gab <= 0.0:

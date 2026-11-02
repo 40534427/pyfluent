@@ -64,10 +64,12 @@ class PenaltyCoupler:
         # two sampling cells can end up on the same side of the fabric and
         # produce a spurious pressure jump.  Such nodes are excluded.
         self.coh_min = float(c.get("coherence_min", 0.5))
-        # LS-DYNA CLLS penalty stiffness parameters.  The interface stiffness
-        # grows with the local relative speed, k = PFAC (A1 + B1 |u_rel|),
-        # which is the behaviour reported in the reference presentation:
-        # stiffer interface at full inflation speed -> shorter stable dt.
+        # LS-DYNA CLLS penalty stiffness parameters.  The deck stores
+        # A1 = 1.6e6, B1 = 4.8e5 on the ``*CONSTRAINED_LAGRANGE_IN_SOLID``
+        # card and the interface stiffness grows with the local *pressure*:
+        #   k = PFAC (A1 + B1 p)        (p = dynamic pressure perturbation)
+        # A high-pressure pocket therefore produces a stiffer interface, which
+        # is what keeps the fabric from being pushed through the ALE grid.
         self.a1 = float(c.get("a1", 0.0))
         self.b1 = float(c.get("b1", 0.0))
         self.a2 = float(c.get("a2", 0.0))
@@ -84,11 +86,12 @@ class PenaltyCoupler:
         self.ileak = int(c.get("ileak", 0))
         self.pleak = float(c.get("pleak", 0.1))
         # per-step mass-leak cap, as a fraction of the donor-cell mass shared
-        # by the sampling nodes.  The default 0.1 is conservative; a folded
-        # canopy hit by a constant 220 m/s stream needs a much larger value so
-        # that the trapped air can escape and the internal pressure does not
-        # run away (the fabric has no bending stiffness, BWC = 2).
-        self.leak_cap = float(c.get("leak_cap", 0.1))
+        # by the sampling nodes.  ILEAK = 2 with PLEAK = 0.1 already limits the
+        # leak velocity to ~0.1 (p_minus - p_plus)/(rho c), so the cap is only
+        # a numerical safeguard against driving a donor cell negative; the
+        # default 1.0 (i.e. at most the donor mass itself) leaves the deck's
+        # leakage model untouched.
+        self.leak_cap = float(c.get("leak_cap", 1.0))
         # hard cap of the pressure *perturbation* (p - p_ref) that enters the
         # coupling traction, in Pa.  With a light, bend-free membrane hit by
         # a constant full-speed stream the air trapped between the canopy and
@@ -239,10 +242,12 @@ class PenaltyCoupler:
         A = st.nodal_area[act]
         nrm = st.nodal_normal[act]
 
-        # LS-DYNA CLLS interface stiffness and its explicit stable dt
+        # LS-DYNA CLLS interface stiffness and its explicit stable dt:
+        #   k = PFAC (A1 + B1 p),  p = local dynamic pressure perturbation.
         h = np.maximum(0.5 * (self.cell_size[cp] + self.cell_size[cm]), 1e-12)
-        k_node = (self.pfac * (self.a1 + self.b1 * uspeed)
-                  * A / h) if (self.a1 + self.b1) > 0.0 else rc * A / h
+        pbar = np.maximum(0.5 * (pp + pm), 0.0)
+        k_node = (self.pfac * (self.a1 + self.b1 * pbar) * A / h
+                  if (self.a1 + self.b1) > 0.0 else rc * A / h)
         k_node = np.maximum(k_node, 0.0)
         self.k_fsi = float(np.max(k_node)) if k_node.size else 0.0
         self.impedance = float(np.mean(rc)) if rc.size else 0.0

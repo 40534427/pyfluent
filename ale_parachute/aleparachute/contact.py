@@ -124,9 +124,12 @@ class SelfContact:
         # stiffness and the whole surface diverges exponentially.
         gap, xi, et = self._gap_and_params(pn, pf, xref)
         tcg = 0.5 * (self.node_thk[pn] + self.face_thk[pf]) * self.thickness_scale
-        # initial gap below the thickness: shift the segment by this depth
-        off = np.where(gap < tcg, tcg - gap, 0.0) if self.ignore_initial \
-            else np.zeros_like(gap)
+        # initial gap within the thickness: shift the segment by this depth.
+        # The penetration is measured on the *absolute* distance to the
+        # segment plane so that a node which has already crossed the mid-plane
+        # is still pushed back to the side it came from.
+        off = (np.where(np.abs(gap) < tcg, tcg - np.abs(gap), 0.0)
+               if self.ignore_initial else np.zeros_like(gap))
         # A direct search repeated during the motion must not switch a node to
         # a *new* segment that already carries a "reference" penetration: the
         # new pair would start with a finite penetration and deliver an
@@ -136,7 +139,7 @@ class SelfContact:
         # accumulated approach is continuous across the rebuild.
         if prev is not None and prev.get("n", 0):
             gapc, _, _ = self._gap_and_params(pn, pf)
-            off = np.maximum(tcg - gapc, 0.0)
+            off = np.maximum(tcg - np.abs(gapc), 0.0)
             key_prev = (prev["node"].astype(np.int64) * self.nface
                         + prev["face"].astype(np.int64))
             order = np.argsort(key_prev, kind="stable")
@@ -161,6 +164,7 @@ class SelfContact:
             idx = idx[first]
             out = {"n": idx.size, "node": pn[idx], "face": pf[idx],
                    "gap0": gap[idx], "off": off[idx],
+                   "side": np.where(gap[idx] >= 0.0, 1.0, -1.0),
                    "k": k[idx], "tc": tcg[idx], "xi": xi[idx], "et": et[idx]}
         return out
 
@@ -215,7 +219,11 @@ class SelfContact:
         pn = pr["node"]
         pf = pr["face"]
         gap, xi, et = self._gap_and_params(pn, pf)
-        pen = pr["tc"] - gap
+        # penetration beyond the shell thickness, measured from the nearest
+        # side of the segment.  A node that has crossed the mid-plane keeps
+        # its penetration sign and is pushed back the way it came; using the
+        # signed gap here would accelerate it through the segment instead.
+        pen = pr["tc"] - np.abs(gap)
         if self.ignore_initial:
             pen = pen - pr["off"]
         act = pen > 0.0
@@ -230,11 +238,18 @@ class SelfContact:
         xi = xi[idx]
         et = et[idx]
         k = pr["k"][idx]
+        # The side of the segment a node belongs to is fixed by the reference
+        # configuration of the pair.  Using the instantaneous sign of the gap
+        # makes a node sitting on the mid-plane flip its force direction every
+        # step (a high-frequency penalty oscillation).  The reference side
+        # instead always pushes the node back to where it came from.
+        side = pr["side"][idx]
 
         fq = self.faces[pf]
         p = st.x[fq]
         n = np.cross(p[:, 2] - p[:, 0], p[:, 3] - p[:, 1])
         n /= np.maximum(np.linalg.norm(n, axis=1, keepdims=True), 1e-30)
+        n = side[:, None] * n                  # points away from the segment
 
         fmag = k * pen
         if self.vdc > 0.0:

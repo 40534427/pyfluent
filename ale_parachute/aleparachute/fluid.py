@@ -142,18 +142,18 @@ class ALEFluid:
         * ``bc == 0``: solid wall.  Ghost = mirrored interior normal velocity
           so that mass flux through the face is zero.
 
-        * ``bc == 1``: non-reflecting *outflow*.  The ghost state is set so
-          that its pressure equals the ambient ``p_ref`` (the right-running
-          Riemann invariant is pinned to the exterior sound speed and
-          ambient density), while the tangential velocity is copied from
-          the interior.  Subsonic fluid therefore exits the domain at the
-          Riemann-solver computed rate, and the stagnation zone cannot
-          accumulate pressure indefinitely.
+        * ``bc == 1``: non-reflecting *outflow*.  The ghost state uses the
+          interior velocity (zero-order extrapolation) with the pressure
+          pinned to the ambient ``p_ref`` and the density to ``rho0``.  Since
+          the velocity is continuous across the face the Riemann flux reduces
+          to the interior flux, i.e. the boundary is effectively transparent
+          (free outflow) and the stagnation zone cannot accumulate pressure
+          indefinitely.  This is what ``*BOUNDARY_NON_REFLECTING`` on the
+          side/top/bottom segment sets 100/102/104 of the deck asks for.
 
-        * ``bc == 2``: driven inlet.  Treated identically to non-reflecting
-          here – the actual inflow velocity is enforced in ``_apply_drive``
-          after every step, so the Riemann flux already sees the correct
-          interior state.
+        The inflow is *not* a boundary condition in this deck: it is imposed
+        by ``*BOUNDARY_PRESCRIBED_MOTION_SET`` on an interior node layer and
+        is handled as a driven reservoir in :meth:`_apply_drive`.
         """
         rho = U_L[:, 0]
         u = U_L[:, 1:4] / rho[:, None]
@@ -182,13 +182,13 @@ class ALEFluid:
             #   Treat as gamma-law: p = (gamma_eff - 1) * rho * e_int
             #   So e_int = p / ((gamma_eff - 1) * rho), gamma_eff ≈ gamma_ref
             gamma_ref = 1.0 + g.c4                          # 1.4 at rho0
-            rho_ref = g.rho0                                # use rho0 as ghost density
+            rho_ref = g.rho0                                # ambient density
             e_int_ref = g.pref / np.maximum(gamma_ref - 1.0, 1e-30)
             UG[out, 0] = rho_ref
-            # interior tangential velocity is kept, normal velocity from Riemann
-            # The Riemann solver will naturally compute un_out ≈ un_L (mass
-            # exit) when p_R < p_L.
-            UG[out, 1:4] = 0.0                              # ghost u = 0
+            # Zero-order velocity extrapolation: the ghost stream carries the
+            # same velocity as the interior, so the face flux is the physical
+            # outflow flux instead of an artificial u = 0 jump.
+            UG[out, 1:4] = U_L[out, 1:4]
             UG[out, 4] = e_int_ref                          # ghost e_int = e_int_ref
         return UG
 
@@ -245,6 +245,9 @@ class ALEFluid:
     # --------------------------------------------------------------- stepping
     def step(self, dt: float) -> None:
         """SSP-RK2 (Heun): U2 = 1/2 U0 + 1/2 (U1 + dt*R(U1)), U1 = U0 + dt*R(U0)."""
+        # the driven layer is a reservoir: refresh it before the predictor so
+        # that both stages see the prescribed velocity and ambient state
+        self._apply_drive(self.U)
         U0 = self.U
         k1 = self.residual()              # R(U0)
         U1 = U0 + dt * k1
@@ -270,17 +273,30 @@ class ALEFluid:
             U[low, 4] = ke[low] + 0.02 * self.gas.e0
 
     def _apply_drive(self, U: np.ndarray) -> None:
+        """Impose ``*BOUNDARY_PRESCRIBED_MOTION_SET`` on the interior node layer.
+
+        The deck does not use an inflow boundary: the upstream 0.035 m thick
+        node layer (``SET_NODE_LIST 23``) is prescribed a +Y velocity through
+        ``*DEFINE_CURVE 11``.  In a fixed Eulerian grid the equivalent is a
+        *reservoir*: the control volumes covering that layer are reset to the
+        ambient state with the prescribed velocity every stage.  That supplies
+        the correct mass and energy flux through the layer's downstream faces
+        (a velocity inlet) without needing a separate ghost state, and avoids
+        draining the layer to vacuum as would happen if only the momentum
+        were overwritten.
+        """
         if self.driven_cells.size == 0:
             return
         c = self.driven_cells
-        rho = U[c, 0]
+        g = self.gas
+        rho = g.rho0
         dof = self.driven_dof - 1
-        u = U[c, 1:4] / rho[:, None]
+        u = np.zeros((c.size, 3))
         u[:, dof] = self.driven_value
-        U[c, 1:4] = rho[:, None] * u
-        # keep total energy consistent with the new kinetic energy
-        ke = 0.5 * rho * np.sum(u ** 2, axis=1)
-        U[c, 4] = np.maximum(U[c, 4], ke + 0.02 * self.gas.e0)
+        U[c, 0] = rho
+        U[c, 1:4] = rho * u
+        # total energy per unit volume: ambient internal + drive kinetic
+        U[c, 4] = g.e0 + 0.5 * rho * np.sum(u ** 2, axis=1)
 
     # ------------------------------------------------------------- diagnostics
     def mass(self) -> float:

@@ -537,7 +537,12 @@ class StructureSolver:
         if self.use_quads:
             h0 = float(self.q_alt0.min())
             hc = h0
-            dt_q = hc / max(c, 1e-9)
+            # The co-rotational B-T tangent carries the frame-rotation (follower)
+            # terms, which lower the element's real stability limit well below
+            # the acoustic estimate h/c.  A parametric test on the deck canopy
+            # (13056 quads) is stable at dt <= 5e-6 s while h0/c = 1.6e-5 s,
+            # so the membrane estimate is scaled by 0.3.
+            dt_q = 0.3 * hc / max(c, 1e-9)
             m_hg = float(np.min(self.q_mass))
             k_hg = float(np.max(self.q_khg))
             dt_hg = 0.9 * 2.0 * np.sqrt(m_hg / max(k_hg, 1e-12))
