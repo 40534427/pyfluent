@@ -197,6 +197,8 @@ class Simulation:
             "u_max": float(np.linalg.norm(u, axis=1).max()),
             "canopy_radius": radius,
             "canopy_y": height,
+            "canopy_area": (float(st.tri_area.sum())
+                            if st.tri_area.size else 0.0),
             "struct_kinetic": float(np.sum(0.5 * st.mass * np.sum(st.v ** 2, axis=1))),
             "struct_vmax": float(np.max(np.linalg.norm(st.v, axis=1))) if st.nnode else 0.0,
             "coupling_drag": self.coupler.drag(f_couple),
