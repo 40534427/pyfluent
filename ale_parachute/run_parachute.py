@@ -37,6 +37,10 @@ def build_parser() -> argparse.ArgumentParser:
                         "(default: K-file fluid domain).  Enlarging it removes "
                         "the blockage of the canopy; the whole inlet layer is "
                         "then driven")
+    p.add_argument("--y1-extension", type=float, default=0.0,
+                   help="extend the downstream (y1) boundary of the auto grid "
+                        "by this many metres [m] (default 0).  Gives the wake "
+                        "more room to develop before the non-reflecting outlet")
     p.add_argument("--endtime", type=float, default=None,
                    help="physical end time [s] (default: *CONTROL_TERMINATION)")
     p.add_argument("--vel-scale", type=float, default=1.0,
@@ -141,6 +145,10 @@ def main(argv=None) -> int:
             r = float(args.domain_radius)
             print(f"fluid domain radius overridden: R={r:.4f} m "
                   f"(K file: {fluid_geometry(model)[2]:.4f} m)")
+        if args.y1_extension > 0.0:
+            y1 = y1 + float(args.y1_extension)
+            print(f"fluid domain downstream extended: y1={y1:.4f} m "
+                  f"(+{args.y1_extension:.4f} m)")
         print(f"fluid domain y=[{y0:.4f},{y1:.4f}] R={r:.4f} centre=({cx:.4f},{cz:.4f})")
         grid = auto_cylinder_grid(y0, y1, r, args.nx, args.ny, args.nz, cx, cz)
     print(f"  grid: {grid.boundary_info()}")
