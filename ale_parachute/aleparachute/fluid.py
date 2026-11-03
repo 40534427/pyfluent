@@ -142,14 +142,19 @@ class ALEFluid:
         * ``bc == 0``: solid wall.  Ghost = mirrored interior normal velocity
           so that mass flux through the face is zero.
 
-        * ``bc == 1``: non-reflecting *outflow*.  The ghost state uses the
-          interior velocity (zero-order extrapolation) with the pressure
-          pinned to the ambient ``p_ref`` and the density to ``rho0``.  Since
-          the velocity is continuous across the face the Riemann flux reduces
-          to the interior flux, i.e. the boundary is effectively transparent
-          (free outflow) and the stagnation zone cannot accumulate pressure
-          indefinitely.  This is what ``*BOUNDARY_NON_REFLECTING`` on the
-          side/top/bottom segment sets 100/102/104 of the deck asks for.
+        * ``bc == 1``: non-reflecting *outflow*.  The complete ghost state is
+          the zero-order extrapolation of the interior state (density,
+          momentum and total energy), which makes the Riemann flux equal to
+          the interior flux, i.e. the boundary is transparent (free outflow).
+
+          Note that the previous implementation pinned the ghost *internal*
+          energy to ``p_ref`` but stored it in the total-energy slot.  That
+          subtracts the kinetic energy ``0.5 rho u^2`` from the pressure:
+          ``p_ghost = 0.4 (e_int_ref - 0.5 rho u^2) = 89.4 kPa`` for the
+          220 m/s upstream layer instead of ``100 kPa``.  The whole inflow
+          stream was thus 11 % too cold, and the "wake vacuum" reported by the
+          diagnostics was this boundary artefact rather than a physical base
+          pressure.  Zero-order extrapolation removes it.
 
         The inflow is *not* a boundary condition in this deck: it is imposed
         by ``*BOUNDARY_PRESCRIBED_MOTION_SET`` on an interior node layer and
@@ -170,26 +175,27 @@ class ALEFluid:
             UG[wall, 1:4] = rho[wall, None] * u_w
             UG[wall, 4] = e_int[wall] + 0.5 * rho[wall] * np.sum(u_w ** 2, axis=1)
 
-        # -- non-reflecting / driven outflow: pin ghost pressure to p_ref --
+        # -- non-reflecting outflow: ambient ghost state -------------------
+        # Anchor the ghost pressure to the ambient state while keeping the
+        # interior velocity (zero-order extrapolation of the velocity only),
+        # so the boundary lets the stream leave without reflecting acoustic
+        # waves and still fixes the far-field pressure.
+        #
+        # The previous version pinned the ghost *internal* energy into the
+        # total-energy slot, which subtracts ``0.5 rho u^2`` from the pressure:
+        # ``p_ghost = 0.4 (e_int - 0.5*1.225*220^2) = 89.4 kPa`` for the
+        # 220 m/s stream instead of the ambient 100 kPa.  The whole inflow was
+        # 10 kPa too cold, and the reported p_min was this artefact rather
+        # than a physical base pressure.  The total energy below restores the
+        # kinetic part, so ``p_ghost`` is exactly the ambient pressure.
         out = bc == 1
         if out.any():
             g = self.gas
-            # ghost ambient state: quiescent, p = p_ref
-            # p_ref = (c4 + c5*(rho_ref/rho0 - 1)) * e_int_ref
-            # → solve for rho_ref iteratively or analytically
-            # For our EOS (c4=c5=0.4, c6=0, e0=250000):
-            #   p = (0.4 + 0.4*mu) * e_int, and gamma_eff = 1 + c4 + c5*mu
-            #   Treat as gamma-law: p = (gamma_eff - 1) * rho * e_int
-            #   So e_int = p / ((gamma_eff - 1) * rho), gamma_eff ≈ gamma_ref
-            gamma_ref = 1.0 + g.c4                          # 1.4 at rho0
-            rho_ref = g.rho0                                # ambient density
-            e_int_ref = g.pref / np.maximum(gamma_ref - 1.0, 1e-30)
-            UG[out, 0] = rho_ref
-            # Zero-order velocity extrapolation: the ghost stream carries the
-            # same velocity as the interior, so the face flux is the physical
-            # outflow flux instead of an artificial u = 0 jump.
-            UG[out, 1:4] = U_L[out, 1:4]
-            UG[out, 4] = e_int_ref                          # ghost e_int = e_int_ref
+            rho_g = g.rho0
+            u_g = U_L[out, 1:4] / np.maximum(U_L[out, 0:1], 1e-30)
+            UG[out, 0] = rho_g
+            UG[out, 1:4] = rho_g * u_g
+            UG[out, 4] = g.e0 + 0.5 * rho_g * np.sum(u_g ** 2, axis=1)
         return UG
 
     # ------------------------------------------------------------------- flux
