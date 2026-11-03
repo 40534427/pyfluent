@@ -50,10 +50,15 @@ class StructureSolver:
                  tension_only: bool = True, hg_qh: float = 0.1,
                  hg_damp: float = 0.5, alt_floor: float = 0.1,
                  theory: int = 5, bwc: int = 2, ihq: int = 1,
-                 struct_damping: float = 0.0):
+                 struct_damping: float = 0.0,
+                 membrane_tension_only: bool = False):
         self.st = st
         self.damping = damping
         self.tension_only = tension_only
+        # *MAT_FABRIC is a fabric: a slack fibre carries no compression.  The
+        # linear membrane below would otherwise push back when a fold is
+        # compressed, which is what makes the T2b canopy buckle into wrinkles.
+        self.membrane_tension_only = bool(membrane_tension_only)
         self.hg_qh = float(hg_qh)
         self.hg_damp = float(hg_damp)
         self.alt_floor = float(alt_floor)
@@ -311,6 +316,15 @@ class StructureSolver:
         S11 = self.q_C11 * E[:, 0, 0] + self.q_C12 * E[:, 1, 1]
         S22 = self.q_C12 * E[:, 0, 0] + self.q_C22 * E[:, 1, 1]
         S12 = 2.0 * self.q_C66 * E[:, 0, 1]
+        if self.membrane_tension_only:
+            # slack fibre: a compressed direction carries no stress
+            # (*MAT_FABRIC semantics).  Shear is dropped only when both
+            # fibre directions are slack, i.e. the element is fully loose.
+            slack_a = E[:, 0, 0] < 0.0
+            slack_b = E[:, 1, 1] < 0.0
+            S11 = np.where(slack_a, 0.0, S11)
+            S22 = np.where(slack_b, 0.0, S22)
+            S12 = np.where(slack_a & slack_b, 0.0, S12)
         S = np.stack([np.stack([S11, S12], axis=1),
                       np.stack([S12, S22], axis=1)], axis=1)
         P = np.einsum("nij,njk->nik", F, S)
@@ -364,6 +378,12 @@ class StructureSolver:
         S11 = self.C11 * E[:, 0, 0] + self.C12 * E[:, 1, 1]
         S22 = self.C12 * E[:, 0, 0] + self.C22 * E[:, 1, 1]
         S12 = 2.0 * self.C66 * E[:, 0, 1]
+        if self.membrane_tension_only:
+            slack_a = E[:, 0, 0] < 0.0
+            slack_b = E[:, 1, 1] < 0.0
+            S11 = np.where(slack_a, 0.0, S11)
+            S22 = np.where(slack_b, 0.0, S22)
+            S12 = np.where(slack_a & slack_b, 0.0, S12)
         S = np.stack([np.stack([S11, S12], axis=1),
                       np.stack([S12, S22], axis=1)], axis=1)
         P = np.einsum("nij,njk->nik", F, S)
@@ -470,9 +490,19 @@ class StructureSolver:
         from scipy.sparse import coo_matrix
         from scipy.sparse.csgraph import connected_components
 
-        i = st.beams[:, 0]
-        j = st.beams[:, 1]
-        nb = st.beams.shape[0]
+        # the vent reinforcement ring is *not* a suspension line: drop it so
+        # that the line count stays at the 16 physical lines of the deck
+        allb = np.arange(st.beams.shape[0])
+        sel_b = np.ones(allb.size, dtype=bool)
+        if getattr(st, "vent_beams", np.zeros(0)).size:
+            sel_b[st.vent_beams] = False
+        bidx = allb[sel_b]
+        if bidx.size == 0:
+            return
+
+        i = st.beams[bidx, 0]
+        j = st.beams[bidx, 1]
+        nb = bidx.size
         nn = st.nnode
         fs = np.zeros(nn, dtype=bool)
         if st.fixed.size:
@@ -496,8 +526,8 @@ class StructureSolver:
                     continue
                 touch = members[fs[i[members]] | fs[j[members]]]
                 sel = touch[0] if touch.size else members[0]
-                anchor.append(sel)
-                line_beams.append(members)
+                anchor.append(bidx[sel])
+                line_beams.append(bidx[members])
         else:
             g = coo_matrix((np.ones(nb), (i, j), ), shape=(nn, nn)).tocsr()
             ncomp, labels = connected_components(g, directed=False)
@@ -507,8 +537,8 @@ class StructureSolver:
                 if members.size == 0:
                     continue
                 ymin = np.minimum(st.x[i[members], 1], st.x[j[members], 1])
-                anchor.append(members[np.argmin(ymin)])
-                line_beams.append(members)
+                anchor.append(bidx[members[np.argmin(ymin)]])
+                line_beams.append(bidx[members])
 
         self.line_anchor_beam = np.asarray(anchor, dtype=np.int64)
         self.line_count = self.line_anchor_beam.size

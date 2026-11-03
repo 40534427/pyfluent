@@ -39,6 +39,9 @@ class Options:
     p_cap: Optional[float] = None # cap of the pressure perturbation [Pa]
     pfac: Optional[float] = None  # CLLS penalty stiffness multiplier (K file default 0.1)
     eb_stab_frac: Optional[float] = None  # eb_stab / ea stabilising modulus (default 0.001)
+    eb_frac: Optional[float] = None      # eb / ea explicit override (T4: 0.3)
+    membrane_tension_only: bool = False  # *MAT_FABRIC slack-fibre membrane
+    vent_radius: float = 0.0             # reinforced vent ring radius [m] (0 = off)
     hg_qh: float = 0.1           # *CONTROL_HOURGLASS qh for the quad flap mode
     struct_damping: float = 0.0  # mass-proportional velocity damping [1/s]
     alt_floor: float = 0.1       # min altitude fraction for the shell time step
@@ -100,10 +103,13 @@ class Simulation:
             IdealGas.from_model(model, model.parts[pid_air]["mid"],
                                 model.parts[pid_air]["eosid"]),
             cfl=options.cfl)
-        self.struct = build_structure(model)
+        self.struct = build_structure(model, vent_radius=float(options.vent_radius))
         if options.mass_scale != 1.0:
             self.struct.mass *= float(options.mass_scale)
-        if options.eb_stab_frac is not None:
+        if options.eb_frac is not None:
+            ea = self.struct.tri_ea
+            self.struct.tri_eb = float(options.eb_frac) * ea
+        elif options.eb_stab_frac is not None:
             frac = float(options.eb_stab_frac)
             ea = self.struct.tri_ea
             self.struct.tri_eb = np.maximum(self.struct.tri_eb, frac * ea)
@@ -121,7 +127,8 @@ class Simulation:
             hg_qh=float(chg.get("qh", options.hg_qh)),
             alt_floor=options.alt_floor,
             theory=self.theory, bwc=self.bwc, ihq=self.ihq,
-            struct_damping=options.struct_damping)
+            struct_damping=options.struct_damping,
+            membrane_tension_only=options.membrane_tension_only)
         self.ssolver.update_kinematics()      # nodal areas for the coupler
         self.coupler = PenaltyCoupler(self.fluid, self.ssolver, model,
                                       enabled=options.coupling)

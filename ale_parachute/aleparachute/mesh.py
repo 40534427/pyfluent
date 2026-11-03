@@ -250,6 +250,7 @@ class Structure:
     beam_L0: np.ndarray = field(default_factory=lambda: np.zeros(0))
     beam_mass: np.ndarray = field(default_factory=lambda: np.zeros(0))
     beam_eid: np.ndarray = field(default_factory=lambda: np.zeros(0, int))
+    vent_beams: np.ndarray = field(default_factory=lambda: np.zeros(0, int))
     fixed: np.ndarray = field(default_factory=lambda: np.zeros(0, int))
     driven: np.ndarray = field(default_factory=lambda: np.zeros(0, int))
     driven_dof: np.ndarray = field(default_factory=lambda: np.zeros(0, int))
@@ -265,7 +266,7 @@ class Structure:
                 "cables": int(self.beams.shape[0]),
                 "mass": float(self.mass.sum())}
 
-def build_structure(model) -> Structure:
+def build_structure(model, vent_radius: float = 0.0) -> Structure:
     nodes = model.mesh["nodes"]
     ids = nodes[:, 0].astype(np.int64)
     n2i = {int(v): i for i, v in enumerate(ids)}
@@ -339,6 +340,38 @@ def build_structure(model) -> Structure:
     beam_area = np.full(beams.shape[0], b_area_s)
     beam_E = np.full(beams.shape[0], b_E)
     beam_mass_e = b_rho * b_area_s * L0
+    beam_eid = np.asarray(model.mesh["beam_eid"], dtype=np.int64).copy()
+
+    # ---- vent (apex) reinforcement ring ----------------------------------
+    # A closed ring of tension-only truss elements is threaded through the
+    # nodes of the apex ring.  Its rest length is set to the *deployed*
+    # circumference, so the ring is slack while the canopy is folded and
+    # becomes taut once the vent has opened to ``vent_radius``: from then on
+    # it behaves like the reinforced vent line of a real canopy and stops the
+    # hole from being blown open (the failure mode of T2b).
+    vent_beams = np.zeros(0, dtype=np.int64)
+    if vent_radius and vent_radius > 0.0:
+        cnodes = np.unique(a)
+        yc = x0[cnodes, 1]
+        ymax = float(yc.max())
+        ring = cnodes[np.isclose(yc, ymax, rtol=0.0, atol=1e-7)]
+        if ring.size >= 3:
+            p = x0[ring]
+            cx, cz = p[:, 0].mean(), p[:, 2].mean()
+            order = np.argsort(np.arctan2(p[:, 2] - cz, p[:, 0] - cx))
+            ring = ring[order]
+            n = int(ring.size)
+            rbeams = np.stack([ring, np.roll(ring, -1)], axis=1)
+            L0t = 2.0 * np.pi * vent_radius / n
+            beams = np.vstack([beams, rbeams])
+            L0 = np.concatenate([L0, np.full(n, L0t)])
+            beam_area = np.concatenate([beam_area, np.full(n, b_area_s)])
+            beam_E = np.concatenate([beam_E, np.full(n, b_E)])
+            beam_mass_e = np.concatenate([beam_mass_e,
+                                          np.full(n, b_rho * b_area_s * L0t)])
+            beam_eid = np.concatenate([beam_eid, np.full(n, -1, dtype=np.int64)])
+            vent_beams = np.arange(beams.shape[0] - n, beams.shape[0],
+                                   dtype=np.int64)
 
     # ---- lumped mass ------------------------------------------------------
     mass = np.zeros(len(used_ids))
@@ -375,7 +408,7 @@ def build_structure(model) -> Structure:
         tri_area=area0.copy(), tri_normal=np.zeros((nt, 3)),
         nodal_area=np.zeros(len(used_ids)), nodal_normal=np.zeros((len(used_ids), 3)),
         beams=beams, beam_area=beam_area, beam_E=beam_E, beam_L0=L0,
-        beam_mass=beam_mass_e, beam_eid=model.mesh["beam_eid"],
+        beam_mass=beam_mass_e, beam_eid=beam_eid, vent_beams=vent_beams,
         fixed=fixed.astype(np.int64),
         driven=np.asarray(driven, dtype=np.int64),
         driven_dof=np.asarray(driven_dof, dtype=np.int64),

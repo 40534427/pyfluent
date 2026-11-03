@@ -70,6 +70,16 @@ def build_parser() -> argparse.ArgumentParser:
                    help="override eb_stab / ea stabilising modulus for the "
                         "membrane b-direction (default: 0.001; try 0.005 or "
                         "0.01 to resist wrinkling)")
+    p.add_argument("--eb-frac", type=float, default=None,
+                   help="explicit eb / ea for the membrane b-direction "
+                        "(overrides --eb-stab-frac; T4 uses 0.3)")
+    p.add_argument("--tension-only-membrane", action="store_true",
+                   help="slack-fibre membrane: a compressed fibre direction "
+                        "carries no stress (*MAT_FABRIC semantics)")
+    p.add_argument("--vent-radius", type=float, default=0.0,
+                   help="radius [m] of a tension-only reinforcement ring "
+                        "threaded through the apex nodes; the ring is slack "
+                        "until the vent opens to this radius (0 = off)")
     p.add_argument("--hg-qh", type=float, default=0.1,
                    help="*CONTROL_HOURGLASS qh for the quad flap mode")
     p.add_argument("--struct-damping", type=float, default=0.0,
@@ -127,6 +137,8 @@ def main(argv=None) -> int:
         fsi_mach_cap=args.fsi_mach_cap, fsi_leak=not args.no_fsi_leak,
         pleak=args.pleak, leak_cap=args.leak_cap, p_cap=args.p_cap,
         pfac=args.pfac, eb_stab_frac=args.eb_stab_frac,
+        eb_frac=args.eb_frac, membrane_tension_only=args.tension_only_membrane,
+        vent_radius=args.vent_radius,
         hg_qh=args.hg_qh, struct_damping=args.struct_damping,
         theory=args.theory, bwc=args.bwc, ihq=args.ihq,
         contact=not args.no_contact, contact_scale=args.contact_scale,
