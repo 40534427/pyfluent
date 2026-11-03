@@ -37,6 +37,8 @@ class Options:
     pleak: Optional[float] = None # PLEAK override
     leak_cap: Optional[float] = None # per-step mass-leak cap override
     p_cap: Optional[float] = None # cap of the pressure perturbation [Pa]
+    pfac: Optional[float] = None  # CLLS penalty stiffness multiplier (K file default 0.1)
+    eb_stab_frac: Optional[float] = None  # eb_stab / ea stabilising modulus (default 0.001)
     hg_qh: float = 0.1           # *CONTROL_HOURGLASS qh for the quad flap mode
     struct_damping: float = 0.0  # mass-proportional velocity damping [1/s]
     alt_floor: float = 0.1       # min altitude fraction for the shell time step
@@ -101,6 +103,10 @@ class Simulation:
         self.struct = build_structure(model)
         if options.mass_scale != 1.0:
             self.struct.mass *= float(options.mass_scale)
+        if options.eb_stab_frac is not None:
+            frac = float(options.eb_stab_frac)
+            ea = self.struct.tri_ea
+            self.struct.tri_eb = np.maximum(self.struct.tri_eb, frac * ea)
 
         cs = model.controls.get("CONTROL_SHELL", {})
         chg = model.controls.get("CONTROL_HOURGLASS", {})
@@ -121,6 +127,8 @@ class Simulation:
                                       enabled=options.coupling)
         self.coupler.omega = float(options.omega)
         self.coupler.cdamp = float(options.cdamp)
+        if options.pfac is not None:
+            self.coupler.pfac = float(options.pfac)
         self.coupler.mach_cap = float(options.fsi_mach_cap)
         if not options.fsi_leak:
             self.coupler.ileak = 0

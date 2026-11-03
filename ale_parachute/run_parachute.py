@@ -62,6 +62,14 @@ def build_parser() -> argparse.ArgumentParser:
                         "enters the coupling traction [Pa] (default: no cap; "
                         "use ~1e6 for constant 220 m/s to avoid trapped-air "
                         "runaway)")
+    p.add_argument("--pfac", type=float, default=None,
+                   help="override the CLLS penalty stiffness multiplier "
+                        "(default: K file value = 0.1; try 0.5 or 1.0 for "
+                        "stronger fluid-structure binding)")
+    p.add_argument("--eb-stab-frac", type=float, default=None,
+                   help="override eb_stab / ea stabilising modulus for the "
+                        "membrane b-direction (default: 0.001; try 0.005 or "
+                        "0.01 to resist wrinkling)")
     p.add_argument("--hg-qh", type=float, default=0.1,
                    help="*CONTROL_HOURGLASS qh for the quad flap mode")
     p.add_argument("--struct-damping", type=float, default=0.0,
@@ -118,6 +126,7 @@ def main(argv=None) -> int:
         mass_scale=args.mass_scale, omega=args.omega, cdamp=args.cdamp,
         fsi_mach_cap=args.fsi_mach_cap, fsi_leak=not args.no_fsi_leak,
         pleak=args.pleak, leak_cap=args.leak_cap, p_cap=args.p_cap,
+        pfac=args.pfac, eb_stab_frac=args.eb_stab_frac,
         hg_qh=args.hg_qh, struct_damping=args.struct_damping,
         theory=args.theory, bwc=args.bwc, ihq=args.ihq,
         contact=not args.no_contact, contact_scale=args.contact_scale,
