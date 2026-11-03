@@ -42,12 +42,18 @@ class IdealGas:
         mat = model.materials[mid]
         eosid = int(eosid) if eosid else int(mat.get("eosid", 0))
         eos = model.eos.get(eosid, {})
-        return cls(rho0=float(mat["ro"]),
-                   c4=float(eos.get("c4", 0.4)),
-                   c5=float(eos.get("c5", 0.0)),
-                   c6=float(eos.get("c6", 0.0)),
-                   e0=float(eos.get("e0", 250000.0)),
-                   pref=float(model.controls.get("CONTROL_ALE", {}).get("pref", 101300.0)))
+        c4 = float(eos.get("c4", 0.4))
+        c5 = float(eos.get("c5", 0.0))
+        c6 = float(eos.get("c6", 0.0))
+        e0 = float(eos.get("e0", 250000.0))
+        # The EOS fixes the undisturbed ambient state: p0 = c4 e0 (mu = 0).
+        # *CONTROL_ALE PREF (101300 Pa in this deck) is *not* the ambient
+        # pressure of the gas -- the deck's e0 gives 100000 Pa.  Using the
+        # card value would put a 1.3 kPa uniform bias into every pressure
+        # perturbation, so pref is taken from the EOS instead.
+        ambient = c4 * e0
+        return cls(rho0=float(mat["ro"]), c4=c4, c5=c5, c6=c6, e0=e0,
+                   pref=ambient)
 
     def pressure(self, rho: np.ndarray, e_int: np.ndarray) -> np.ndarray:
         mu = rho / self.rho0 - 1.0

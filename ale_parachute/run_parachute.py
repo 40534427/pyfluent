@@ -32,6 +32,11 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--nx", type=int, default=20, help="auto grid cells in x")
     p.add_argument("--ny", type=int, default=32, help="auto grid cells in y")
     p.add_argument("--nz", type=int, default=20, help="auto grid cells in z")
+    p.add_argument("--domain-radius", type=float, default=None,
+                   help="override the cylinder radius of the auto grid [m] "
+                        "(default: K-file fluid domain).  Enlarging it removes "
+                        "the blockage of the canopy; the whole inlet layer is "
+                        "then driven")
     p.add_argument("--endtime", type=float, default=None,
                    help="physical end time [s] (default: *CONTROL_TERMINATION)")
     p.add_argument("--vel-scale", type=float, default=1.0,
@@ -132,6 +137,10 @@ def main(argv=None) -> int:
         grid = native_grid(model)
     else:
         y0, y1, r, cx, cz = fluid_geometry(model)
+        if args.domain_radius is not None:
+            r = float(args.domain_radius)
+            print(f"fluid domain radius overridden: R={r:.4f} m "
+                  f"(K file: {fluid_geometry(model)[2]:.4f} m)")
         print(f"fluid domain y=[{y0:.4f},{y1:.4f}] R={r:.4f} centre=({cx:.4f},{cz:.4f})")
         grid = auto_cylinder_grid(y0, y1, r, args.nx, args.ny, args.nz, cx, cz)
     print(f"  grid: {grid.boundary_info()}")
@@ -142,6 +151,7 @@ def main(argv=None) -> int:
         vel_scale=args.vel_scale, constant_vel=args.constant_vel, cfl=args.cfl, tssfac=args.tssfac,
         mass_scale=args.mass_scale, omega=args.omega, cdamp=args.cdamp,
         fsi_mach_cap=args.fsi_mach_cap, fsi_leak=not args.no_fsi_leak,
+        drive_full_inlet_layer=args.domain_radius is not None,
         pleak=args.pleak, leak_cap=args.leak_cap, p_cap=args.p_cap,
         pfac=args.pfac, eb_stab_frac=args.eb_stab_frac,
         eb_frac=args.eb_frac, membrane_tension_only=args.tension_only_membrane,
@@ -159,6 +169,9 @@ def main(argv=None) -> int:
     st = sim.struct
     print(f"structure: {st.summary()}  fixed={st.fixed.size} driven={st.driven.size}")
     print(f"driven fluid cells: {sim.driven_cells.size}")
+    gas = sim.fluid.gas
+    print(f"gas: rho0={gas.rho0:.4f}  e0={gas.e0:.1f}  ambient p0={gas.c4 * gas.e0:.1f} Pa  "
+          f"pref={gas.pref:.1f} Pa")
 
     res = sim.run()
 

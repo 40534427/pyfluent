@@ -115,8 +115,10 @@ class PenaltyCoupler:
 
         self.tree = cKDTree(fluid.g.center)
         self.cell_size = np.cbrt(fluid.g.vol)
-        self.pref = float(fluid.gas.pressure(np.array([fluid.gas.rho0]),
-                                             np.array([fluid.gas.e0]))[0])
+        # reference pressure of the pressure perturbation: the undisturbed
+        # ambient state of the EOS (100000 Pa for this deck).  Single source
+        # of truth so that *CONTROL_ALE PREF cannot introduce a uniform bias.
+        self.pref = float(fluid.gas.pref)
         n = struct.st.nnode
         self._cell = np.full(n, -1, dtype=np.int64)      # nearest cell
         self._cp = np.full(n, -1, dtype=np.int64)        # cell on + normal

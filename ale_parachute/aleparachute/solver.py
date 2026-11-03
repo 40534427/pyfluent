@@ -35,6 +35,7 @@ class Options:
     fsi_mach_cap: float = 0.3    # max Mach number of the injected FSI source
     fsi_leak: bool = True         # CLLS leakage control (card ILEAK)
     pleak: Optional[float] = None # PLEAK override
+    drive_full_inlet_layer: bool = False  # drive every cell of the inlet layer
     leak_cap: Optional[float] = None # per-step mass-leak cap override
     p_cap: Optional[float] = None # cap of the pressure perturbation [Pa]
     pfac: Optional[float] = None  # CLLS penalty stiffness multiplier (K file default 0.1)
@@ -62,13 +63,28 @@ class Options:
     verbose: bool = True
 
 
-def driven_cells(grid: HexGrid, model: Model) -> np.ndarray:
+def driven_cells(grid: HexGrid, model: Model,
+                 full_inlet_layer: bool = False) -> np.ndarray:
     """Fluid cells that carry the *BOUNDARY_PRESCRIBED_MOTION node set.
 
     The K file prescribes the velocity on ALE nodes of the upstream boundary
     layer; here every node is mapped to its nearest cell so that the same
     layer of control volumes is driven.
+
+    ``full_inlet_layer`` drives *every* cell of the first (upstream) y layer
+    instead of only the cells nearest to the K-file node layer.  This is
+    required when the cylindrical domain is enlarged beyond the K-file radius:
+    the prescribed nodes then sit inside the domain and would leave the outer
+    annulus of the inlet undriven.
     """
+    if full_inlet_layer:
+        y = grid.center[:, 1]
+        layers = np.unique(y)
+        if layers.size == 1:
+            return np.arange(grid.ncell, dtype=np.int64)
+        dy = float(np.min(np.diff(layers)))
+        return np.nonzero(np.abs(y - layers[0]) <= 0.25 * dy)[0].astype(np.int64)
+
     ids = []
     for pm in model.bc.get("prescribed_motion", []):
         s = model.sets_by_type.get(("node", pm["nsid"]))
@@ -165,7 +181,8 @@ class Simulation:
                 vdc=vdc,
                 thickness_scale=float(options.contact_thk_scale))
 
-        cells = driven_cells(grid, model)
+        cells = driven_cells(grid, model,
+                             full_inlet_layer=bool(options.drive_full_inlet_layer))
         self.driven_cells = cells
         pm = model.bc.get("prescribed_motion", [])
         self.pm = pm[0] if pm else None
