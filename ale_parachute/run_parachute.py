@@ -85,6 +85,13 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--struct-damping", type=float, default=0.0,
                    help="mass-proportional velocity damping [1/s] "
                         "(0 = off; use ~500-2000 for constant high-speed inflow)")
+    p.add_argument("--bend-scale", type=float, default=0.0,
+                   help="amplification of the edge-hinge plate bending "
+                        "stiffness D = E t^3 / (12 (1-nu^2)).  1 = physical "
+                        "fabric, 0 = pure membrane (LS-DYNA BWC=2); use "
+                        "~1e3 to suppress membrane wrinkling")
+    p.add_argument("--bend-damp", type=float, default=0.5,
+                   help="viscous damping ratio of the bending hinges")
     p.add_argument("--theory", type=int, default=None,
                    help="*CONTROL_SHELL THEORY override (default: K file)")
     p.add_argument("--bwc", type=int, default=None,
@@ -140,6 +147,7 @@ def main(argv=None) -> int:
         eb_frac=args.eb_frac, membrane_tension_only=args.tension_only_membrane,
         vent_radius=args.vent_radius,
         hg_qh=args.hg_qh, struct_damping=args.struct_damping,
+        bend_scale=args.bend_scale, bend_damp=args.bend_damp,
         theory=args.theory, bwc=args.bwc, ihq=args.ihq,
         contact=not args.no_contact, contact_scale=args.contact_scale,
         contact_vdc=args.contact_vdc,

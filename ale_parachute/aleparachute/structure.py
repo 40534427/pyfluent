@@ -51,9 +51,18 @@ class StructureSolver:
                  hg_damp: float = 0.5, alt_floor: float = 0.1,
                  theory: int = 5, bwc: int = 2, ihq: int = 1,
                  struct_damping: float = 0.0,
-                 membrane_tension_only: bool = False):
+                 membrane_tension_only: bool = False,
+                 bend_scale: float = 0.0, bend_damp: float = 0.5):
         self.st = st
         self.damping = damping
+        # edge-hinge bending stiffness (see _build_bending): the physical
+        # plate stiffness D = E t^3 / (12 (1 - nu^2)) is multiplied by
+        # ``bend_scale``.  bend_scale = 1 reproduces the physical D of the
+        # fabric; LS-DYNA's plain B-T shell (BWC = 2) carries no warping
+        # stiffness at all, so a value of order 1e3 is used when the intent is
+        # to suppress the zero-energy wrinkling of the membrane.
+        self.bend_scale = float(bend_scale)
+        self.bend_damp = float(bend_damp)
         self.tension_only = tension_only
         # *MAT_FABRIC is a fabric: a slack fibre carries no compression.  The
         # linear membrane below would otherwise push back when a fold is
@@ -221,6 +230,102 @@ class StructureSolver:
                          for k in range(4)], axis=1)
         self.q_alt0 = 2.0 * a0 / np.maximum(edge.max(axis=1), 1e-30)
 
+        self._build_bending()
+
+    # ------------------------------------------------------------- bending
+    def _build_bending(self) -> None:
+        """Edge-hinge bending stiffness of the membrane.
+
+        Every internal edge shared by two quads is a hinge.  Its bending
+        energy is
+
+            U = 1/2 k (phi - phi0)^2,      k = bend_scale * D L / h
+
+        where ``phi`` is the signed dihedral angle between the two face
+        normals, ``D = E t^3 / (12 (1 - nu^2))`` the plate stiffness, ``L``
+        the edge length and ``h`` the element size.  This is the standard
+        discrete Kirchhoff hinge and it is the term that a Belytschko-Tsay
+        *shell* would carry and a membrane element (ELFORM = 5, BWC = 2)
+        does not.
+        """
+        st = self.st
+        q = st.quads
+        if q.shape[0] == 0 or self.bend_scale <= 0.0:
+            self.be_kb = np.zeros(0)
+            self.be_phi0 = np.zeros(0)
+            self.be_h = np.zeros(0)
+            self.be_cb = np.zeros(0)
+            return
+
+        e = np.stack([q[:, [0, 1]], q[:, [1, 2]],
+                      q[:, [2, 3]], q[:, [3, 0]]], axis=1)
+        flat = e.reshape(-1, 2)
+        key = np.sort(flat, axis=1)
+        uniq, inv, cnt = np.unique(key, axis=0, return_inverse=True,
+                                   return_counts=True)
+        two = np.nonzero(cnt == 2)[0]
+        if two.size == 0:
+            self.be_kb = np.zeros(0)
+            self.be_phi0 = np.zeros(0)
+            self.be_h = np.zeros(0)
+            self.be_cb = np.zeros(0)
+            return
+        order = np.argsort(inv, kind="stable")
+        off = np.concatenate([[0], np.cumsum(cnt)[:-1]])
+        o1 = order[off[two]]
+        o2 = order[off[two] + 1]
+
+        # local edge occurrence -> (quad, opposite node)
+        q1 = o1 // 4
+        q2 = o2 // 4
+        self.be_i = flat[o1, 0].astype(np.int64)
+        self.be_j = flat[o1, 1].astype(np.int64)
+        self.be_k = q[q1, (o1 % 4 + 2) % 4].astype(np.int64)
+        self.be_l = q[q2, (o2 % 4 + 2) % 4].astype(np.int64)
+        self.be_q1 = q1
+        self.be_q2 = q2
+
+        x = st.x
+        pi, pj = x[self.be_i], x[self.be_j]
+        pk, pl = x[self.be_k], x[self.be_l]
+        u = pj - pi
+        L = np.maximum(np.linalg.norm(u, axis=1), 1e-30)
+        uh = u / L[:, None]
+        r1 = pk - pi
+        r2 = pl - pi
+        N1 = np.cross(uh, r1)
+        N2 = np.cross(r2, uh)
+        h1 = np.maximum(np.linalg.norm(N1, axis=1), 1e-30)
+        h2 = np.maximum(np.linalg.norm(N2, axis=1), 1e-30)
+        n1 = N1 / h1[:, None]
+        n2 = N2 / h2[:, None]
+        cosphi = np.einsum("ij,ij->i", n1, n2)
+        sinphi = np.einsum("ij,ij->i", np.cross(n1, n2), uh)
+        self.be_phi0 = np.arctan2(sinphi, cosphi)
+        self.be_L0 = L
+
+        # plate stiffness of every hinge
+        tq = self.q_thk
+        nu = float(np.mean(st.tri_nu))
+        Dq = self.q_C11 * tq ** 3 / (12.0 * max(1.0 - nu * nu, 1e-6))
+        D = 0.5 * (Dq[q1] + Dq[q2])
+        hq = np.sqrt(self.q_area0)
+        h = np.maximum(0.5 * (hq[q1] + hq[q2]), 1e-12)
+        self.be_h = h
+        self.be_kb = self.bend_scale * D * L / h
+        # rotational inertia of the hinge for the viscous part
+        I = 0.25 * (self.q_mass[q1] + self.q_mass[q2]) * h * h
+        self.be_cb = 2.0 * self.bend_damp * np.sqrt(self.be_kb * I)
+        # Lower bound of the current hinge altitude.  In a violently opening
+        # canopy some quads collapse (h/h0 ~ 1e-2) and the exact dihedral
+        # gradient then scales as 1/h, i.e. far stiffer than the time step
+        # budgeted with the reference altitude.  Clamping h in the gradient
+        # denominators bounds the force and the local stiffness while leaving
+        # the hinge moment itself unchanged.  ``be_h_cur`` is refreshed at
+        # every force evaluation and consumed by ``stable_dt``.
+        self.be_h_floor = 0.4 * self.be_h
+        self.be_h_cur = self.be_h.copy()
+
     @staticmethod
     def _quad_frame(p: np.ndarray):
         """Co-rotational frame: x along side 0-1, z along the two diagonals."""
@@ -358,6 +463,78 @@ class StructureSolver:
 
         self.q_warp_angle = float(np.degrees(np.max(np.abs(s) /
                                                     np.maximum(self.q_alt0, 1e-30))))
+
+        # ---- edge-hinge bending stiffness --------------------------------
+        self._bending_forces(f)
+
+    # ---- edge-hinge bending ----------------------------------------------
+    def _bending_forces(self, f: np.ndarray) -> None:
+        if getattr(self, "be_kb", np.zeros(0)).size == 0:
+            return
+        st = self.st
+        x = st.x
+        pi = x[self.be_i]
+        pj = x[self.be_j]
+        pk = x[self.be_k]
+        pl = x[self.be_l]
+        u = pj - pi
+        L2 = np.maximum(np.einsum("ij,ij->i", u, u), 1e-30)
+        L = np.sqrt(L2)
+        uh = u / L[:, None]
+        r1 = pk - pi
+        r2 = pl - pi
+        N1 = np.cross(uh, r1)
+        N2 = np.cross(r2, uh)
+        h1 = np.maximum(np.linalg.norm(N1, axis=1), 1e-30)
+        h2 = np.maximum(np.linalg.norm(N2, axis=1), 1e-30)
+        n1 = N1 / h1[:, None]
+        n2 = N2 / h2[:, None]
+        # bounded altitudes, used only in the gradient denominators
+        h1e = np.maximum(h1, self.be_h_floor)
+        h2e = np.maximum(h2, self.be_h_floor)
+        self.be_h_cur = np.minimum(h1e, h2e)
+        cosphi = np.einsum("ij,ij->i", n1, n2)
+        sinphi = np.einsum("ij,ij->i", np.cross(n1, n2), uh)
+        phi = np.arctan2(sinphi, cosphi)
+        dphi = phi - self.be_phi0
+        dphi = np.where(dphi > np.pi, dphi - 2.0 * np.pi, dphi)
+        dphi = np.where(dphi < -np.pi, dphi + 2.0 * np.pi, dphi)
+
+        # Exact gradient of the hinge angle w.r.t. the four nodes.  With
+        # A = n1 x uh and B = uh x n2:
+        #   g_c = (A x u) / |u x r1|
+        #   g_d = (u x B) / |r2 x u|
+        #   g_b = (r1 x A) / |u x r1| + (B x r2) / |r2 x u|
+        #   g_a = -(g_b + g_c + g_d)
+        # This distribution is conservative (dphi = sum g_i . dx_i), unlike
+        # the simpler barycentric reaction split which over-predicts the work.
+        A = np.cross(n1, uh)
+        B = np.cross(uh, n2)
+        L1 = h1e * L                # clamped |u x r1|
+        L2_ = h2e * L               # clamped |r2 x u|
+        gc = np.cross(A, u) / L1[:, None]
+        gd = np.cross(u, B) / L2_[:, None]
+        gb = (np.cross(r1, A) / L1[:, None]
+              + np.cross(B, r2) / L2_[:, None])
+        ga = -(gb + gc + gd)
+
+        v = st.v
+        rate = (np.einsum("ij,ij->i", v[self.be_k], gc)
+                + np.einsum("ij,ij->i", v[self.be_l], gd)
+                + np.einsum("ij,ij->i", v[self.be_i], ga)
+                + np.einsum("ij,ij->i", v[self.be_j], gb))
+
+        M = self.be_kb * dphi + self.be_cb * rate
+
+        fa = -M[:, None] * ga
+        fb = -M[:, None] * gb
+        fc = -M[:, None] * gc
+        fd = -M[:, None] * gd
+
+        idx = np.concatenate([self.be_i, self.be_j, self.be_k, self.be_l])
+        w = np.concatenate([fa, fb, fc, fd], axis=0)
+        for k in range(3):
+            f[:, k] += np.bincount(idx, weights=w[:, k], minlength=st.nnode)
 
     # ---- constant-strain-triangle fallback --------------------------------
     def _cst_membrane_forces(self, f: np.ndarray) -> None:
@@ -581,6 +758,12 @@ class StructureSolver:
                 k_w = float(np.max(self.q_kw))
                 dt_w = 0.9 * 2.0 * np.sqrt(m_hg / max(k_w, 1e-12))
                 dt_s = min(dt_s, dt_w)
+            # edge-hinge bending: nodal stiffness ~ k / h^2
+            if getattr(self, "be_kb", np.zeros(0)).size:
+                k_b = float(np.max(self.be_kb / np.maximum(self.be_h_cur ** 2,
+                                                           1e-12)))
+                dt_b = 0.9 * 2.0 * np.sqrt(m_hg / max(k_b, 1e-12))
+                dt_s = min(dt_s, dt_b)
         else:
             h0 = float(self.alt0.min()) if self.alt0.size else 1e-3
             hc = float(self.alt_cur.min()) if self.alt_cur.size else h0
