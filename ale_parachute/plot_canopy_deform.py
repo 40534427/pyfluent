@@ -65,18 +65,20 @@ def read_structure_vtk(path):
 
 
 def frame_files(outdir):
-    files = sorted(glob.glob(os.path.join(outdir, "state_*_structure.vtk")))
+    files = sorted(glob.glob(os.path.join(outdir, "state_*structure.vtk")))
     final = os.path.join(outdir, "final_structure.vtk")
     if os.path.exists(final):
         files.append(final)
     out = []
     for f in files:
-        m = re.search(r"state_(\d+)", os.path.basename(f))
+        base = os.path.basename(f)
+        m = re.search(r"state_\s*([0-9.]+)_structure", base)
         if m:
-            out.append((os.path.basename(f), f))
-        elif os.path.basename(f).startswith("final"):
-            out.append(("final", f))
-    return out
+            out.append((float(m.group(1)), f"t={float(m.group(1)):.3f}", f))
+        elif base.startswith("final"):
+            out.append((1e9, "final", f))
+    out.sort(key=lambda r: r[0])
+    return [(lab, f) for _, lab, f in out]
 
 
 def metrics(x, cells, types):
