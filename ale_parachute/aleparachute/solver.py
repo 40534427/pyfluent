@@ -269,15 +269,31 @@ class Simulation:
 
         scells = [list(map(int, t)) for t in st.tris]
         stypes = np.full(len(scells), 5)
-        tension = np.zeros(len(scells))
+        ntri = len(scells)
+        tri_stress, tri_strain = self.ssolver.tri_stress_strain()
+        tension = np.zeros(ntri)
+        s11 = np.zeros(ntri); s22 = np.zeros(ntri); s12 = np.zeros(ntri)
+        e11 = np.zeros(ntri); e22 = np.zeros(ntri); e12 = np.zeros(ntri)
+        if tri_stress.shape[0] == ntri:
+            s11 = tri_stress[:, 0]; s22 = tri_stress[:, 1]; s12 = tri_stress[:, 2]
+            e11 = tri_strain[:, 0]; e22 = tri_strain[:, 1]; e12 = tri_strain[:, 2]
         if st.beams.size:
             for b in st.beams:
                 scells.append(list(map(int, b)))
-            stypes = np.concatenate([stypes, np.full(st.beams.shape[0], 3)])
+            nb = st.beams.shape[0]
+            stypes = np.concatenate([stypes, np.full(nb, 3)])
             tension = np.concatenate([tension, self.ssolver.beam_tension()])
+            s11 = np.concatenate([s11, np.zeros(nb)])
+            s22 = np.concatenate([s22, np.zeros(nb)])
+            s12 = np.concatenate([s12, np.zeros(nb)])
+            e11 = np.concatenate([e11, np.zeros(nb)])
+            e22 = np.concatenate([e22, np.zeros(nb)])
+            e12 = np.concatenate([e12, np.zeros(nb)])
         vtkio.write_vtk(
             path + "_structure.vtk", st.x, scells, stypes,
-            {"tension": tension},
+            {"tension": tension,
+             "stress_11": s11, "stress_22": s22, "stress_12": s12,
+             "strain_11": e11, "strain_22": e22, "strain_12": e12},
             {"mass": st.mass, "velocity": st.v, "normal": st.nodal_normal},
             title=f"canopy t={self.t:.5f}")
 

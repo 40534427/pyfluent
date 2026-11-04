@@ -88,6 +88,10 @@ class StructureSolver:
         # choice ~20-50 m/s lets fast inflation proceed unhindered and
         # restrains the ring-down afterwards.
         self.struct_damping_vmax = float(struct_damping_vmax)
+        # latest membrane stress / strain (per element), populated by the
+        # force-evaluation routines so the VTK / report writer can export them.
+        self.membrane_stress = np.zeros(0)         # (N,3)  [S11, S22, S12]
+        self.membrane_strain = np.zeros(0)         # (N,3)  [E11, E22, E12]
         self._build_reference()
         self._build_lines()
 
@@ -442,6 +446,10 @@ class StructureSolver:
                       np.stack([S12, S22], axis=1)], axis=1)
         P = np.einsum("nij,njk->nik", F, S)
 
+        self.membrane_stress = np.stack([S11, S22, S12], axis=1)
+        self.membrane_strain = np.stack([E[:, 0, 0], E[:, 1, 1],
+                                         E[:, 0, 1]], axis=1)
+
         # nodal forces in the local frame, -t0 A0 P B
         fl = -np.einsum("n,n,nab,nib->nia", self.q_thk, self.q_area0,
                         P, self.qB0)
@@ -573,6 +581,10 @@ class StructureSolver:
                       np.stack([S12, S22], axis=1)], axis=1)
         P = np.einsum("nij,njk->nik", F, S)
 
+        self.membrane_stress = np.stack([S11, S22, S12], axis=1)
+        self.membrane_strain = np.stack([E[:, 0, 0], E[:, 1, 1],
+                                         E[:, 0, 1]], axis=1)
+
         t2 = np.einsum("nij,nj->ni", P, self.Xinv[:, 0, :])
         t3 = np.einsum("nij,nj->ni", P, self.Xinv[:, 1, :])
         scale = -self.vol0
@@ -634,6 +646,28 @@ class StructureSolver:
 
     def add_force(self, f: np.ndarray) -> None:
         self.st.f += f
+
+    # --------------------------------------------------- stress for reporting
+    def tri_stress_strain(self):
+        """Return (stress, strain) arrays aligned with ``st.tris``.
+
+        Each quad is split into two triangles in ``st.tris``; the element
+        stress/strain is constant per quad so it is duplicated for both
+        sub-triangles.  Returns zero arrays if no stress has been computed.
+        """
+        st = self.st
+        ntri = st.tris.shape[0]
+        zero3 = np.zeros((ntri, 3))
+        if self.membrane_stress.size == 0:
+            return zero3, zero3
+        if self.use_quads:
+            nq = self.membrane_stress.shape[0]
+            s = np.repeat(self.membrane_stress, 2, axis=0)[:ntri]
+            e = np.repeat(self.membrane_strain, 2, axis=0)[:ntri]
+            return s, e
+        # CST: one element per triangle
+        return (self.membrane_stress[:ntri].copy(),
+                self.membrane_strain[:ntri].copy())
 
     # ------------------------------------------------------------ line forces
     def beam_tension(self) -> np.ndarray:

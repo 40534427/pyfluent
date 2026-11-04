@@ -19,6 +19,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from aleparachute import (load_model, auto_cylinder_grid, native_grid,  # noqa: E402
                           fluid_geometry, Simulation, Options)
+from aleparachute.report import generate_report, get_cpu_info  # noqa: E402
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -127,6 +128,9 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--outdir", default="out")
     p.add_argument("--max-steps", type=int, default=100000)
     p.add_argument("--quiet", action="store_true")
+    p.add_argument("--generate-report", action="store_true",
+                   help="after the run, generate the full calculation report "
+                        "(HTML + figures + .dat tables + video) in --outdir")
     return p
 
 
@@ -195,6 +199,15 @@ def main(argv=None) -> int:
     print("  t_end={:.4f}s  R={:.4f}m  y={:.4f}m  pmax={:.3e}Pa  drag={:.3e}N"
           .format(*hist[-1]))
     print(f"  outputs in {os.path.abspath(args.outdir)}")
+
+    if args.generate_report:
+        print("generating calculation report ...")
+        try:
+            generate_report(args.outdir, model=model, opt=opt, grid=grid,
+                            sim=sim, wall_time=float(res["wall"]),
+                            cpu_info=get_cpu_info())
+        except Exception as exc:
+            print(f"[report] WARNING: report generation failed: {exc}")
     return 0
 
 
