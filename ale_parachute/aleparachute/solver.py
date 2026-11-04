@@ -45,6 +45,7 @@ class Options:
     vent_radius: float = 0.0             # reinforced vent ring radius [m] (0 = off)
     hg_qh: float = 0.1           # *CONTROL_HOURGLASS qh for the quad flap mode
     struct_damping: float = 0.0  # mass-proportional velocity damping [1/s]
+    struct_damping_vmax: float = 0.0  # smart damping: node-v threshold (m/s)
     bend_scale: float = 0.0      # amplification of the plate bending stiffness D
     bend_damp: float = 0.5       # viscous damping ratio of the edge hinges
     alt_floor: float = 0.1       # min altitude fraction for the shell time step
@@ -146,6 +147,7 @@ class Simulation:
             alt_floor=options.alt_floor,
             theory=self.theory, bwc=self.bwc, ihq=self.ihq,
             struct_damping=options.struct_damping,
+            struct_damping_vmax=options.struct_damping_vmax,
             membrane_tension_only=options.membrane_tension_only,
             bend_scale=options.bend_scale, bend_damp=options.bend_damp)
         self.ssolver.update_kinematics()      # nodal areas for the coupler

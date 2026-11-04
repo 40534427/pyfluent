@@ -51,6 +51,7 @@ class StructureSolver:
                  hg_damp: float = 0.5, alt_floor: float = 0.1,
                  theory: int = 5, bwc: int = 2, ihq: int = 1,
                  struct_damping: float = 0.0,
+                 struct_damping_vmax: float = 0.0,
                  membrane_tension_only: bool = False,
                  bend_scale: float = 0.0, bend_damp: float = 0.5):
         self.st = st
@@ -80,6 +81,13 @@ class StructureSolver:
         # does not overshoot and diverge; the default is zero so that the
         # element-level physics stays untouched.
         self.struct_damping = float(struct_damping)
+        # optional node-velocity threshold (m/s) for smart damping: the
+        # damping coefficient is smoothly turned ON when the maximum node
+        # velocity exceeds this value, and OFF below ~40% of it.  A value
+        # of zero disables the gate (full damping all the time).  Typical
+        # choice ~20-50 m/s lets fast inflation proceed unhindered and
+        # restrains the ring-down afterwards.
+        self.struct_damping_vmax = float(struct_damping_vmax)
         self._build_reference()
         self._build_lines()
 
@@ -604,7 +612,17 @@ class StructureSolver:
         if f_ext is not None:
             f = f + f_ext
         if self.struct_damping > 0.0:
-            f = f - self.struct_damping * st.mass[:, None] * st.v
+            damping_coeff = self.struct_damping
+            # smart damping gate (OFF during fast inflation, ON afterwards):
+            #   gate = sigmoid( (T - |v|_max) / (0.3 T) )
+            # i.e. fully OFF when |v|_max >= T, fully ON when |v|_max <= 0.6T.
+            # Zero threshold disables the gate (plain damping).
+            if self.struct_damping_vmax > 0.0:
+                vm = np.linalg.norm(st.v, axis=1).max()
+                T = self.struct_damping_vmax
+                gate = 1.0 / (1.0 + np.exp((vm - T) / max(0.3 * T, 1e-12)))
+                damping_coeff *= gate
+            f = f - damping_coeff * st.mass[:, None] * st.v
         self.apply_constraints(f)
         st.f = f
         acc = f / st.mass[:, None]

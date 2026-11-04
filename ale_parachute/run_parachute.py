@@ -93,7 +93,12 @@ def build_parser() -> argparse.ArgumentParser:
                    help="*CONTROL_HOURGLASS qh for the quad flap mode")
     p.add_argument("--struct-damping", type=float, default=0.0,
                    help="mass-proportional velocity damping [1/s] "
-                        "(0 = off; use ~500-2000 for constant high-speed inflow)")
+                        "(0 = off; use ~50-500 for constant high-speed inflow)")
+    p.add_argument("--struct-damping-vmax", type=float, default=0.0,
+                   help="smart damping: when > 0 the damping turns OFF above "
+                        "this node-vmax threshold (m/s) and fully ON below ~60%% "
+                        "of it, so fast inflation is not suppressed while the "
+                        "post-peak ring-down is damped.  Typical 20-50 m/s")
     p.add_argument("--bend-scale", type=float, default=0.0,
                    help="amplification of the edge-hinge plate bending "
                         "stiffness D = E t^3 / (12 (1-nu^2)).  1 = physical "
@@ -165,6 +170,7 @@ def main(argv=None) -> int:
         eb_frac=args.eb_frac, membrane_tension_only=args.tension_only_membrane,
         vent_radius=args.vent_radius,
         hg_qh=args.hg_qh, struct_damping=args.struct_damping,
+        struct_damping_vmax=args.struct_damping_vmax,
         bend_scale=args.bend_scale, bend_damp=args.bend_damp,
         theory=args.theory, bwc=args.bwc, ihq=args.ihq,
         contact=not args.no_contact, contact_scale=args.contact_scale,
