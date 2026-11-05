@@ -1,0 +1,22 @@
+{
+ "canopy_nodes": 15024,
+ "shell_quads": 13056,
+ "beam_only_nodes": 305,
+ "beams": 160,
+ "n_gores": 16,
+ "n_suspension_lines": 16,
+ "canopy_y_top": 0.0,
+ "canopy_y_bottom": -0.2181427925825119,
+ "apex_ring_radius": 0.007669137452847774,
+ "skirt_band_outer_radius": 0.02657011725959141,
+ "skirt_attach_y": -0.2070518,
+ "skirt_attach_radius": 0.06175740289794956,
+ "line_length_m": 1.512352667710194,
+ "folded_envelope_full_cone_angle_deg": 29.28047977725195,
+ "fluid_y0": -0.8995681,
+ "fluid_y1": 0.16755,
+ "fluid_R": 0.23481485000000002,
+ "fluid_cx": -0.00010759999999999936,
+ "fluid_cz": 3.149999999993436e-06,
+ "solid_elements_in_template": 292160
+}
