@@ -4,20 +4,23 @@ Pure standard library (json / math / gzip / struct / array) so it can be
 frozen into a small dependency-free Windows executable.
 
 Inputs : params.json (all editable values, Chinese annotations)
-Outputs: a new .k file with identical topology to the reference model but with
-         canopy / suspension-line / air / solver parameters taken from
-         params.json.  The produced file is consumed directly by
-         run_parachute.exe (the ALE solver) in the T5J delivery package.
+Outputs: a new .k file with identical topology to the reference model but
+         with canopy / suspension-line / air / solver parameters taken from
+         params.json.  Also writes build_log.json with a parameter snapshot,
+         mesh statistics and a diff vs. the previous run (if present).
 """
 from __future__ import annotations
 
 import argparse
+import difflib
 import gzip
 import json
 import math
 import os
+import re
 import struct
 import sys
+import time
 from array import array
 
 
@@ -108,10 +111,10 @@ def node_line(nid: int, x: float, y: float, z: float) -> str:
 
 
 # ===========================================================================
-# geometry transforms
+# geometry transforms (canopy cone + suspension-line chain)
 # ===========================================================================
 def transform_geometry(tpl: dict, P: dict) -> tuple:
-    """Return (canopy_xyz list[[x,y,z]], beam_xyz list[[x,y,z]])."""
+    """Return (canopy_xyz list[[x,y,z]], beam_xyz list[[x,y,z]], anchor_y)."""
     canopy = tpl["canopy"]
     nc = tpl["nc"]
     can = [[canopy[3 * i], canopy[3 * i + 1], canopy[3 * i + 2]]
@@ -125,7 +128,6 @@ def transform_geometry(tpl: dict, P: dict) -> tuple:
         pnt[0] *= k_cone
         pnt[2] *= k_cone
 
-    # skirt attachment geometry after canopy scaling
     sk_locals = list(tpl["skirt"])
     sk_pts = [can[i] for i in sk_locals]
     sk_y = sum(p[1] for p in sk_pts) / len(sk_pts)
@@ -133,13 +135,11 @@ def transform_geometry(tpl: dict, P: dict) -> tuple:
     sk_r1 = math.sqrt(
         sum(p[0] ** 2 + p[2] ** 2 for p in sk_pts) / len(sk_pts))
 
-    # suspension-line chains
     line_L = float(P("suspension_lines.line_length"))
     anchor_y = sk_y - math.sqrt(max(line_L ** 2 - sk_r1 ** 2, 0.0))
 
     bxyz = tpl["beam_xyz"]
-    nb = tpl["nbxyz"]
-    beams = [list(tpl["beam_xyz"][3 * i:3 * i + 3]) for i in range(nb)]
+    beams = [list(bxyz[3 * i:3 * i + 3]) for i in range(tpl["nbxyz"])]
     conn = tpl["beam_conn"]
     chain_set, ori_set = set(), set()
     for i in range(tpl["nbc"]):
@@ -167,6 +167,164 @@ def transform_geometry(tpl: dict, P: dict) -> tuple:
             pnt[0] *= rfac
             pnt[2] *= rfac
     return can, beams, anchor_y
+
+
+# ===========================================================================
+# suspension-line beam-chain resampling  (NEW in v2)
+#
+#  The template has 16 lines x 10 segments = 160 beams.  Each beam row is
+#  anchored to a canopy skirt node at one end and converges on the common
+#  anchor point at the other.  When the user asks for a different number
+#  of segments we rebuild each chain by uniform arclength interpolation
+#  between the skirt node (known from geometry scaling above) and the
+#  common anchor.
+#
+#  Returns (new_beams, new_conn, new_anchor_local)
+#    new_beams      : list of [x,y,z] beam-only node coords (anchor last)
+#    new_conn       : list of [n1_local, n2_local, n3_local] beam connectivities
+#    new_anchor_local : structure-local index of the common anchor node
+# ===========================================================================
+def resample_beam_chains(tpl: dict, P, can: list, anchor_y: float) -> tuple:
+    """Resample every suspension line to ``line_segments`` segments.
+
+    Design notes
+    ------------
+    Original template topology (understood after reverse engineering)::
+
+        anchor (shared by all 16 lines, at y=anchor_y, r=0)
+          ^
+          |  beam n1=chain0, n2=anchor   <-- beam 0 of each row
+          |
+        chain0
+          ^
+          |  beam n1=chain1, n2=chain0
+          |
+        chain1
+          ^
+         ...
+          ^
+          |  beam n1=skirt_canopy_node, n2=chainN   <-- last beam of each row
+          |
+        skirt node on canopy (structure-local id in tpl['skirt'])
+
+    So each beam connects ``n1`` (closer to skirt) to ``n2`` (closer to
+    anchor).  For LS-DYNA BEAM elements this direction only matters for the
+    element frame; we keep it.
+
+    The template has a perfect straight-line chain.  We rebuild it here with
+    ``segments`` uniform subdivisions per line (both chain endpoints and
+    direction nodes are regenerated, per-segment).
+    """
+    nc = tpl["nc"]
+    n_lines = int(tpl["meta"].get("n_suspension_lines", 16))
+    segments = int(P("suspension_lines.line_segments"))
+    if segments < 2:
+        segments = 2
+    if segments > 50:
+        segments = 50
+
+    skirt_locals = list(tpl["skirt"])
+    assert len(skirt_locals) == n_lines
+
+    anchor_xyz = [0.0, anchor_y, 0.0]
+
+    # Step 1 -- build chain nodes (one list per line).
+    #   Convention used below (matches the original template topology)::
+    #
+    #       chain[0]   = anchor   (shared by every line, at (0, anchor_y, 0))
+    #       chain[1..N-1] = interior nodes from anchor toward skirt
+    #       chain[N]    = skirt   (on canopy, already transformed)
+    #
+    # Uniform linear interpolation along the straight skirt->anchor segment.
+    # We place nodes at t=0 (skirt) ... t=1 (anchor) and then REVERSE so that
+    # chain[0] is anchor and chain[N] is skirt.  This matches the original
+    # template convention where beam 0 connects (chain[1], chain[0]).
+    new_beams: list[list[float]] = []
+    chain_per_line: list[list[int]] = []
+
+    for sk_local in skirt_locals:
+        sk_xyz = can[sk_local]
+        # t=0 → skirt, t=1 → anchor  (uniform spacing)
+        raw = []
+        for k in range(segments + 1):
+            t = k / segments
+            pt = [
+                sk_xyz[0] + t * (anchor_xyz[0] - sk_xyz[0]),
+                sk_xyz[1] + t * (anchor_xyz[1] - sk_xyz[1]),
+                sk_xyz[2] + t * (anchor_xyz[2] - sk_xyz[2]),
+            ]
+            raw.append(pt)
+        # raw[0]=skirt, raw[-1]=anchor  → reverse
+        chain_local_indices = []
+        for pt in reversed(raw):
+            chain_local_indices.append(len(new_beams))
+            new_beams.append(pt)
+        chain_per_line.append(chain_local_indices)
+
+    # Deduplicate the anchor: every line's chain[0] ends at anchor_xyz.
+    # We keep the anchor of the LAST line and have every other line point to
+    # it.  This gives us ONE shared anchor node (structure-local id).
+    anchor_beam_local = chain_per_line[-1][0]  # last line's chain[0] = anchor
+    for chain in chain_per_line:
+        chain[0] = anchor_beam_local
+    anchor_local_new = nc + anchor_beam_local
+
+    # Step 2 -- build beam connectivities.  Original template pattern::
+    #     beam 0: (chain[1], chain[0])          connects chain1 ↔ anchor
+    #     beam 1: (chain[2], chain[1])          connects chain2 ↔ chain1
+    #     ...
+    #     beam N-1: (skirt_canopy, chain[N])    connects skirt ↔ chainN
+    #
+    # In our representation the canopy skirt node is NOT part of new_beams
+    # — it lives in ``can`` at structure-local id ``sk_local``.  So the last
+    # beam of each row connects ``sk_local`` (structure-local, canopy node)
+    # to ``chain[N]`` (structure-local, beam-only node).
+    new_conn: list[list[int]] = []
+
+    for li, sk_local in enumerate(skirt_locals):
+        chain = chain_per_line[li]
+        # beams 0 .. segments-2  : chain[k+1] ↔ chain[k]  (beam-only nodes)
+        for seg in range(segments - 1):
+            n1 = nc + chain[seg + 1]
+            n2 = nc + chain[seg]
+            new_conn.append([n1, n2, -1])
+        # last beam (segments-1): skirt (canopy) ↔ chain[segments-1]
+        n1 = int(sk_local)          # canopy node id (structure-local!)
+        n2 = nc + chain[segments - 1]
+        new_conn.append([n1, n2, -1])
+
+    # Step 3 -- direction nodes (one per beam).
+    # The (n1, n2) pair can mix canopy and beam-only nodes (the last beam of
+    # each row has n1=canopy skirt).  We resolve each endpoint to its 3-D
+    # coord before computing the perpendicular offset.
+    dir_base = len(new_beams)
+    for bi, (n1_sl, n2_sl, _) in enumerate(new_conn):
+        if n1_sl < nc:
+            p1 = can[n1_sl]  # canopy node coords
+        else:
+            p1 = new_beams[n1_sl - nc]
+        if n2_sl < nc:
+            p2 = can[n2_sl]
+        else:
+            p2 = new_beams[n2_sl - nc]
+        dx = p2[0] - p1[0]
+        dy = p2[1] - p1[1]
+        dz = p2[2] - p1[2]
+        L = math.sqrt(dx * dx + dy * dy + dz * dz) + 1e-30
+        ox = -dz / L
+        oy = 0.0
+        oz = dx / L
+        dm = 0.5 * (p1[0] + p2[0]) + ox * 1e-4
+        em = 0.5 * (p1[1] + p2[1]) + oy * 1e-4
+        fm = 0.5 * (p1[2] + p2[2]) + oz * 1e-4
+        new_beams.append([dm, em, fm])
+        new_conn[bi][2] = nc + dir_base + bi
+
+    assert all(n3 >= 0 for _n1, _n2, n3 in new_conn)
+    assert len(new_conn) == n_lines * segments, (
+        f"expected {n_lines*segments} beams, got {len(new_conn)}")
+
+    return new_beams, new_conn, anchor_local_new
 
 
 # ===========================================================================
@@ -222,28 +380,217 @@ def build_fluid(P):
 
 
 # ===========================================================================
+# mesh statistics (for build_log.json)
+# ===========================================================================
+def compute_mesh_stats(can, beams, beam_conn, flu, nq, tpl, segments):
+    """Return a dict of human-readable mesh statistics."""
+    nc = tpl["nc"]
+    nbxyz = len(beams)
+    nbc = len(beam_conn)
+
+    # canopy shell area (approximate)
+    shell_area = 0.0
+    quads = tpl["quads"]
+    for qi in range(nq):
+        pids = [quads[4 * qi + a] for a in range(4)]
+        # 4 points, average of 2 triangles
+        pts = [can[p] for p in pids]
+
+        def tri_area(a, b, c):
+            import math as _m
+            ux, uy, uz = b[0] - a[0], b[1] - a[1], b[2] - a[2]
+            vx, vy, vz = c[0] - a[0], c[1] - a[1], c[2] - a[2]
+            cx_ = uy * vz - uz * vy
+            cy_ = uz * vx - ux * vz
+            cz_ = ux * vy - uy * vx
+            return 0.5 * _m.sqrt(cx_ * cx_ + cy_ * cy_ + cz_ * cz_)
+
+        shell_area += tri_area(pts[0], pts[1], pts[2])
+        shell_area += tri_area(pts[0], pts[2], pts[3])
+
+    beam_length = 0.0
+    for n1, n2, _n3 in beam_conn:
+        b1 = beams[n1 - nc] if n1 >= nc else can[n1]
+        b2 = beams[n2 - nc] if n2 >= nc else can[n2]
+        beam_length += math.sqrt(
+            (b1[0] - b2[0]) ** 2 + (b1[1] - b2[1]) ** 2
+            + (b1[2] - b2[2]) ** 2)
+
+    nfluid_nodes = flu["nfluid"]
+    nfluid_solids = len(flu["hexes"])
+    nfluid_total_nodes = nfluid_nodes + nc + nbxyz
+    nfluid_total_elems = nq + nbc + nfluid_solids
+
+    return {
+        "结构": {
+            "伞衣节点数_canopy_nodes": nc,
+            "伞衣壳单元数_quads": nq,
+            "伞衣总表面积_m2": round(shell_area, 6),
+            "伞绳梁单元数_beams": nbc,
+            "伞绳梁节点数_beam_nodes": nbxyz,
+            "每绳分段数_segments_per_line": segments,
+            "伞绳总长度_m": round(beam_length, 4),
+            "结构总节点数": nc + nbxyz,
+            "结构总单元数": nq + nbc,
+        },
+        "流体_K内置": {
+            "流体节点数_nfluid_nodes": nfluid_nodes,
+            "流体实体单元数_solids_in_k": nfluid_solids,
+            "box_nx": int(len(set(pt[0] for pt in flu["nodes"])) - 1),
+            "box_ny": int(len(set(pt[1] for pt in flu["nodes"])) - 1),
+            "box_nz": int(len(set(pt[2] for pt in flu["nodes"])) - 1),
+        },
+        "总计": {
+            "K文件总节点数_total_nodes": nfluid_total_nodes,
+            "K文件总单元数_total_elements": nfluid_total_elems,
+            "其中结构单元_structural": nq + nbc,
+            "其中流体单元_fluid_solids": nfluid_solids,
+        },
+        "求解器运行_auto模式": {
+            "说明": "实际参与 FSI 计算的流体网格由 solver_run_settings.nx/ny/nz 决定，"
+                   "与 K 内置盒网格独立",
+        },
+    }
+
+
+# ===========================================================================
+# build_log.json  writer
+# ===========================================================================
+def _leaf_str(params: dict) -> dict:
+    """Flatten params.json into {dotted.key:  value} for easy diffing."""
+    flat = {}
+
+    def walk(node, prefix=""):
+        if isinstance(node, dict):
+            if "值" in node and "单位" in node and "说明" in node:
+                flat[prefix] = node["值"]
+            else:
+                for k, v in node.items():
+                    walk(v, f"{prefix}.{k}" if prefix else k)
+
+    walk(params)
+    return flat
+
+
+def _diff_params(old_flat: dict, new_flat: dict) -> list:
+    """Return list of {key, old, new} for changed leaf values."""
+    keys = sorted(set(old_flat) | set(new_flat))
+    changes = []
+    for k in keys:
+        ov = old_flat.get(k, "<新增>")
+        nv = new_flat.get(k, "<已删除>")
+        if ov != nv:
+            changes.append({"参数": k, "旧值": ov, "新值": nv})
+    return changes
+
+
+def write_build_log(params: dict, stats: dict, k_path: str, segments: int) -> str:
+    """Write build_log.json next to the K file, with optional diff."""
+    k_dir = os.path.dirname(os.path.abspath(k_path)) or "."
+    fname = _try_leaf(lambda k: _leaf(params, k),
+                       "output.build_log_filename") or "build_log.json"
+    log_path = os.path.join(k_dir, fname)
+
+    prev = None
+    if os.path.exists(log_path):
+        try:
+            prev = json.load(open(log_path, encoding="utf-8"))
+        except Exception:
+            prev = None
+
+    new_flat = _leaf_str(params)
+    old_flat = _leaf_str(prev["参数快照"]) if prev and "参数快照" in prev else {}
+    changes = _diff_params(old_flat, new_flat)
+
+    # pretty summary
+    summary_lines = []
+    summary_lines.append("=== 生成日志 make_kfile.exe  ===")
+    summary_lines.append(f"时间: {time.strftime('%Y-%m-%d %H:%M:%S')}")
+    summary_lines.append(f"K 文件: {k_path}")
+    summary_lines.append("")
+    summary_lines.append("--- 参数变更 ---")
+    if changes:
+        for c in changes:
+            summary_lines.append(
+                f"  {c['参数']}: {c['旧值']!r} → {c['新值']!r}")
+    else:
+        summary_lines.append("  (与上次相比无参数变化)")
+    summary_lines.append("")
+    summary_lines.append("--- 网格统计 ---")
+    for group_name, group_vals in stats.items():
+        summary_lines.append(f"  [{group_name}]")
+        if isinstance(group_vals, dict):
+            for kk, vv in group_vals.items():
+                summary_lines.append(f"    {kk}: {vv}")
+    summary_lines.append("")
+    summary_lines.append(f"  K 文件总节点数: {stats['总计']['K文件总节点数_total_nodes']}")
+    summary_lines.append(f"  K 文件总单元数: {stats['总计']['K文件总单元数_total_elements']}")
+
+    log = {
+        "版本": "1.0",
+        "生成时间": time.strftime('%Y-%m-%d %H:%M:%S'),
+        "K文件路径": os.path.abspath(k_path),
+        "伞绳分段数_segments_per_line": segments,
+        "参数变更diff": changes,
+        "网格统计": stats,
+        "参数快照": params,  # full snapshot for future diff
+        "_summary_text": "\n".join(summary_lines),
+    }
+    with open(log_path, "w", encoding="utf-8") as fh:
+        json.dump(log, fh, ensure_ascii=False, indent=2)
+
+    # also print summary to stdout
+    print("\n".join(summary_lines))
+    return log_path
+
+
+# ===========================================================================
+# helper: try leaf access (returns None if missing)
+# ===========================================================================
+def _try_leaf(P, dotted: str):
+    try:
+        return _leaf(P, dotted)
+    except (KeyError, TypeError):
+        return None
+
+
+def _leaf(params: dict, dotted: str):
+    node = params
+    for part in dotted.split("."):
+        node = node[part]
+    if isinstance(node, dict) and "值" in node:
+        return node["值"]
+    return node
+
+
+# ===========================================================================
 # K file assembly
 # ===========================================================================
-def generate(params: dict, tpl: dict, out_path: str) -> None:
+def generate(params: dict, tpl: dict, out_path: str) -> tuple:
+    """Write K file and return (beams, beam_conn, segments, stats_dict)."""
     P = lambda key: _leaf(params, key)  # noqa: E731
     L: list[str] = []
 
     def w(line=""):
         L.append(line)
 
-    can, beams, anchor_y = transform_geometry(tpl, P)
+    can, beams_orig, anchor_y = transform_geometry(tpl, P)
+
+    # resample beam chains
+    segments = int(P("suspension_lines.line_segments"))
+    beams_new, beam_conn_new, anchor_local_new = resample_beam_chains(
+        tpl, P, can, anchor_y)
+
     flu = build_fluid(P)
     Nf = flu["nfluid"]
     nc = tpl["nc"]
     nq = tpl["nq"]
-    nbc = tpl["nbc"]
+    nbc = len(beam_conn_new)  # resampled
 
     def cg(local_or_gid: int) -> int:
-        """canopy node local id -> global id."""
         return Nf + 1 + local_or_gid
 
     def bg(beam_local: int) -> int:
-        """structure-local beam-node index -> global id."""
         return Nf + 1 + beam_local
 
     # ---- header -----------------------------------------------------------
@@ -269,7 +616,7 @@ def generate(params: dict, tpl: dict, out_path: str) -> None:
     if bool(P("solver_cards_in_k.contact_enabled_in_k")):
         w("*CONTACT_AUTOMATIC_SINGLE_SURFACE_ID")
         w(i10(1) + "ASingSurf_1")
-        w(i10(11, 0, 3, 0, 0, 0, 0, 0))
+        w(i10(11, 0, 3, 0, 0, 0, 0))
         w(i10(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.01, 1.0e20))
         w(i10(1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0))
 
@@ -347,12 +694,9 @@ def generate(params: dict, tpl: dict, out_path: str) -> None:
         w(f"{qi + 1:8d}{11:8d}" + "".join(f"{cg(q[a]):8d}" for a in range(4))
           + f"{0:8d}{0:8d}{0:8d}{0:8d}")
 
-    # ---- beams --------------------------------------------------------------
+    # ---- beams  (resampled!) ------------------------------------------------
     w("*ELEMENT_BEAM")
-    for bi in range(nbc):
-        n1 = tpl["beam_conn"][3 * bi]
-        n2 = tpl["beam_conn"][3 * bi + 1]
-        n3 = tpl["beam_conn"][3 * bi + 2]
+    for bi, (n1, n2, n3) in enumerate(beam_conn_new):
         w(f"{nq + 1 + bi:8d}{12:8d}{bg(n1):8d}{bg(n2):8d}{bg(n3):8d}"
           + f"{0:8d}{0:8d}{0:8d}{0:8d}{2:8d}")
 
@@ -373,7 +717,7 @@ def generate(params: dict, tpl: dict, out_path: str) -> None:
     for i, pnt in enumerate(can):
         nid += 1
         w(node_line(nid, pnt[0], pnt[1], pnt[2]))
-    for pnt in beams:
+    for pnt in beams_new:
         nid += 1
         w(node_line(nid, pnt[0], pnt[1], pnt[2]))
 
@@ -398,7 +742,8 @@ def generate(params: dict, tpl: dict, out_path: str) -> None:
     w("*BOUNDARY_SPC_SET")
     w(i10(22, 0, 1, 1, 1, 1, 1, 1))
 
-    anchor_gid = bg(tpl["anchor_local"])
+    # anchor_gid uses the RESAMPLED anchor_local
+    anchor_gid = bg(anchor_local_new)
     w("*SET_NODE_LIST")
     w("$#     sid       da1       da2       da3       da4    solver")
     w(i10(22, 0.0, 0.0, 0.0, 0.0))
@@ -455,17 +800,8 @@ def generate(params: dict, tpl: dict, out_path: str) -> None:
     with open(out_path, "w", newline="\n") as fh:
         fh.write("\n".join(L) + "\n")
 
-
-# ===========================================================================
-# params helpers
-# ===========================================================================
-def _leaf(params: dict, dotted: str):
-    node = params
-    for part in dotted.split("."):
-        node = node[part]
-    if isinstance(node, dict) and "值" in node:
-        return node["值"]
-    return node
+    stats = compute_mesh_stats(can, beams_new, beam_conn_new, flu, nq, tpl, segments)
+    return stats, segments
 
 
 # ===========================================================================
@@ -504,7 +840,8 @@ def write_run_bat(params: dict, k_filename: str, dirpath: str) -> str:
     R = params["solver_run_settings"]
     kv = lambda k: R[k]["值"]
     flags = {
-        "K": k_filename, "OUT": kv("results_dirname") if False else P("output.results_dirname"),
+        "K": k_filename,
+        "OUT": P("output.results_dirname"),
         "MESH": str(kv("mesh_mode")), "NX": kv("nx"), "NY": kv("ny"), "NZ": kv("nz"),
         "DR": kv("domain_radius"), "Y1E": kv("y1_extension"), "CFL": kv("cfl"),
         "OMEGA": kv("omega"), "CDAMP": kv("cdamp"), "MCAP": kv("fsi_mach_cap"),
@@ -519,9 +856,7 @@ def write_run_bat(params: dict, k_filename: str, dirpath: str) -> str:
     txt = RUN_BAT
     for key, val in flags.items():
         txt = txt.replace("{" + key + "}", str(val))
-    # collapse the double spaces left by empty optional flags
-    import re as _re
-    txt = _re.sub(r"[ \t]{2,}", " ", txt)
+    txt = re.sub(r"[ \t]{2,}", " ", txt)
     path = os.path.join(dirpath, "run_solver.bat")
     with open(path, "w", newline="\r\n") as fh:
         fh.write(txt)
@@ -538,9 +873,11 @@ def main(argv=None) -> int:
     ap.add_argument("--template", default=None, help="override _template.pkb.gz")
     ap.add_argument("--output", default=None, help="output .k path "
                     "(default: output.output_k_filename in params.json)")
-    ap.add_argument("--outdir", default=None, help="write K and run_solver.bat "
-                    "into this directory")
+    ap.add_argument("--outdir", default=None, help="write K, run_solver.bat "
+                    "and build_log.json into this directory")
     ap.add_argument("--no-bat", action="store_true")
+    ap.add_argument("--no-log", action="store_true",
+                    help="skip writing build_log.json")
     args = ap.parse_args(argv)
 
     with open(args.params, encoding="utf-8") as fh:
@@ -553,9 +890,22 @@ def main(argv=None) -> int:
         k_path = os.path.join(args.outdir, os.path.basename(k_name))
     else:
         k_path = k_name
-    generate(params, tpl, k_path)
-    print(f"[kgen] wrote {os.path.abspath(k_path)} "
-          f"({os.path.getsize(k_path)/1024:.0f} KB)")
+
+    stats, segments = generate(params, tpl, k_path)
+    k_size = os.path.getsize(k_path) / 1024
+    total_nodes = stats["总计"]["K文件总节点数_total_nodes"]
+    total_elems = stats["总计"]["K文件总单元数_total_elements"]
+    print(f"[kgen] wrote {os.path.abspath(k_path)} ({k_size:.0f} KB)")
+    print(f"[kgen]  mesh: {total_nodes} nodes, {total_elems} elems "
+          f"(beams={stats['结构']['伞绳梁单元数_beams']}, "
+          f"quads={stats['结构']['伞衣壳单元数_quads']}, "
+          f"solids={stats['流体_K内置']['流体实体单元数_solids_in_k']})")
+
+    # write build_log.json
+    log_enabled = _try_leaf(lambda k: _leaf(params, k), "output.write_build_log")
+    if not args.no_log and log_enabled is not False:
+        lp = write_build_log(params, stats, k_path, segments)
+        print(f"[kgen] wrote build log -> {lp}")
 
     if not args.no_bat:
         d = args.outdir or os.path.dirname(os.path.abspath(k_path)) or "."
