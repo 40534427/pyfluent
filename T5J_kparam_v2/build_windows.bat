@@ -5,7 +5,6 @@ cd /d "%~dp0"
 rem -----------------------------------------------------------------
 rem  T5J make_kfile.exe  -- one-click PyInstaller build for Windows
 rem  Usage: double-click, or run in cmd
-rem  Prereq: real Python 3.10+ installed (NOT the Microsoft Store stub)
 rem -----------------------------------------------------------------
 
 echo ============================================================
@@ -13,42 +12,34 @@ echo   T5J make_kfile.exe  Build (Windows)
 echo ============================================================
 
 rem ---- [0] find a REAL python --------------------------------------
-rem Strategy:
-rem   1) try every "python" on PATH, skip WindowsApps stubs
-rem   2) probe well-known install paths (python.org installer)
-rem   3) probe registry (py launcher registered python)
-rem   4) if still nothing, print a clear install guide
-
 set "PYEXE="
 
-rem --- 1a. iterate "where python", skip WindowsApps ---------------
-for /f "delims=" %%i in ('where python 2^>nul') do (
-    set "CAND=%%i"
-    if /i not "!CAND:WindowsApps=!"=="!CAND!" (
-        echo   [SKIP] WindowsApps stub: !CAND!
-    ) else (
-        if /i not "!CAND:store=!"=="!CAND!" (
-            echo   [SKIP] store-related: !CAND!
+rem --- Strategy A: py launcher is the most reliable ---------------
+rem     python.org installer ALWAYS registers "py" even without PATH.
+where py >nul 2>&1
+if not errorlevel 1 (
+    echo   [A] Trying py launcher (python.org registered) ...
+    for /f "delims=" %%i in ('py -3 -c "import sys; sys.stdout.write(sys.executable)" 2^>nul') do (
+        if exist "%%i" set "PYEXE=%%i"
+    )
+)
+
+rem --- Strategy B: filter PATH entries, skip WindowsApps store stub
+if not defined PYEXE (
+    echo   [B] Searching PATH (skipping WindowsApps) ...
+    for /f "delims=" %%i in ('where python 2^>nul') do (
+        set "CAND=%%i"
+        if /i not "!CAND:WindowsApps=!"=="!CAND!" (
+            echo     skip stub: !CAND!
         ) else (
-            if not defined PYEXE (
-                if exist "!CAND!" set "PYEXE=!CAND!"
-            )
+            if exist "!CAND!" if not defined PYEXE set "PYEXE=!CAND!"
         )
     )
 )
 
-rem --- 1b. also try py launcher (python.org installs register "py")-
+rem --- Strategy C: probe common install paths ----------------------
 if not defined PYEXE (
-    where py >nul 2>&1
-    if not errorlevel 1 (
-        for /f "delims=" %%i in ('py -3 -c "import sys; print(sys.executable)" 2^>nul') do (
-            set "PYEXE=%%i"
-        )
-    )
-)
-
-rem --- 2. probe well-known install paths ---------------------------
-if not defined PYEXE (
+    echo   [C] Probing well-known install paths ...
     for %%d in (
         "%LOCALAPPDATA%\Programs\Python\Python314\python.exe"
         "%LOCALAPPDATA%\Programs\Python\Python313\python.exe"
@@ -81,14 +72,14 @@ if not defined PYEXE (
     )
 )
 
-rem --- 3. probe registry ------------------------------------------
+rem --- Strategy D: read registry InstallPath ----------------------
 if not defined PYEXE (
+    echo   [D] Reading registry ...
     for %%k in (
-        "HKLM\SOFTWARE\Python\PythonCore"
         "HKCU\SOFTWARE\Python\PythonCore"
+        "HKLM\SOFTWARE\Python\PythonCore"
     ) do (
-        for /f "delims=" %%v in ('reg query %%k /s /f python.exe 2^>nul ^| findstr /i "InstallPath"') do (
-            rem "InstallPath"="C:\Python312\"  -> append python.exe
+        for /f "delims=" %%v in ('reg query %%k /s /f InstallPath 2^>nul ^| findstr /i "InstallPath"') do (
             for /f "tokens=2,* delims==" %%a in ("%%v") do (
                 set "p=%%b"
                 set "p=!p:"=!"
@@ -98,27 +89,27 @@ if not defined PYEXE (
     )
 )
 
-rem --- 4. still nothing? ------------------------------------------
+rem --- not found? --------------------------------------------------
 if not defined PYEXE (
     echo.
     echo ================================================================
-    echo   [ERROR] Real Python not found on this system.
+    echo   [ERROR] Real Python was not located.
     echo ================================================================
     echo.
-    echo   The "python" you have on PATH is the Microsoft Store stub -
-    echo   it just opens the Store instead of actually running Python.
+    echo   On your machine it is very likely at:
+    echo   C:\Users\%USERNAME%\AppData\Local\Programs\Python\Python314\python.exe
     echo.
-    echo   Please install Python properly:
+    echo   Please do one of the following:
     echo.
-    echo     1) Go to  https://www.python.org/downloads/
-    echo        (NOT the Microsoft Store version)
-    echo     2) Run the installer
-    echo        - IMPORTANT: tick "Add Python to PATH" at the bottom
-    echo        - Click "Install Now"
-    echo     3) Re-run this build script
+    echo   1) Open cmd and run:
+    echo        py -3 -m pip install pyinstaller
+    echo        py -3 -m PyInstaller --onefile --name make_kfile ^
+    echo           --add-data "paramk\_template.pkb.gz;paramk" ^
+    echo           --distpath .. --workpath build --specpath build ^
+    echo           paramk\generator.py
     echo.
-    echo   Alternative: open cmd and type "where python" - none of the
-    echo   results should contain "WindowsApps".
+    echo   2) Or re-run the python.org installer and TICK:
+    echo        "Add Python to PATH" at the bottom of the first page.
     echo.
     echo ================================================================
     pause
@@ -128,12 +119,12 @@ if not defined PYEXE (
 echo [OK] python = %PYEXE%
 "%PYEXE%" --version
 
-rem ---- [1] make sure pip + pyinstaller are available ---------------
+rem ---- [1] ensure pyinstaller -------------------------------------
 echo.
 echo [1/3] Checking pyinstaller ...
 "%PYEXE%" -c "import PyInstaller" 2>nul
 if errorlevel 1 (
-    echo   Installing pyinstaller via python -m pip ...
+    echo   Installing via python -m pip ...
     "%PYEXE%" -m pip install --upgrade pip
     if errorlevel 1 (
         echo [ERROR] pip failed. Check network.
@@ -166,14 +157,13 @@ if errorlevel 1 (
     exit /b 1
 )
 
-rem ---- [3] clean up ------------------------------------------------
+rem ---- [3] clean up -----------------------------------------------
 echo.
 echo [3/3] Cleaning ...
 if exist build rmdir /s /q build
 
 cd /d "%~dp0"
 if not exist make_kfile.exe (
-    echo.
     echo [ERROR] make_kfile.exe not produced. See build output above.
     pause
     exit /b 1
@@ -183,8 +173,8 @@ for %%A in ("make_kfile.exe") do (
     echo.
     echo ============================================================
     echo   DONE !
-    echo   make_kfile.exe is in:
-    echo     %~dp0
+    echo   make_kfile.exe path:
+    echo     %~dp0make_kfile.exe
     echo   Size: %%~zA bytes
     echo ============================================================
 )
