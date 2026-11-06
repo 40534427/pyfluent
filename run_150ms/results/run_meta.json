@@ -39,6 +39,7 @@
     "contact_vdc": null,
     "contact_thk_scale": 1.0,
     "vtk_every": 0.005,
+    "checkpoint_every": 0.02,
     "outdir": "/workspace/run_150ms/results",
     "max_steps": 400000,
     "verbose": true,
@@ -185,10 +186,10 @@
     "logical_cores": "3"
   },
   "run": {
-    "start": "2026-11-06T14:25:28",
+    "start": "2026-11-06T14:36:08",
     "wall_time": null,
     "steps": null
   },
   "schema": 1,
-  "generated": "2026-11-06T14:25:28"
+  "generated": "2026-11-06T14:36:08"
 }

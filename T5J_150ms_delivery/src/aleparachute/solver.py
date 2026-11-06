@@ -60,6 +60,7 @@ class Options:
     contact_vdc: Optional[float] = None   # viscous damping (card VDC)
     contact_thk_scale: float = 1.0
     vtk_every: float = 0.0        # <=0 -> only the final state
+    checkpoint_every: float = 0.02  # checkpoint interval [s]; <=0 -> every VTK state
     outdir: str = "out"
     max_steps: int = 100000
     verbose: bool = True
@@ -372,6 +373,10 @@ class Simulation:
         os.makedirs(opt.outdir, exist_ok=True)
         endtime = opt.endtime
         next_vtk = 0.0
+        ckpt_every = float(opt.checkpoint_every or 0.0)
+        if ckpt_every <= 0.0:
+            ckpt_every = float(opt.vtk_every)   # fall back to the VTK cadence
+        next_ckpt = 0.0
         hist_every = max(endtime / 200.0, 1e-9)
         next_hist = hist_every
         restarted = bool(opt.restart) and os.path.exists(opt.restart)
@@ -381,6 +386,8 @@ class Simulation:
                   f"step={self.step_count}", flush=True)
             if opt.vtk_every > 0:
                 next_vtk = np.floor(self.t / opt.vtk_every + 1e-9) * opt.vtk_every
+            if ckpt_every > 0:
+                next_ckpt = (np.floor(self.t / ckpt_every + 1e-9) + 1.0) * ckpt_every
             next_hist = (np.floor(self.t / hist_every + 1e-9) + 1.0) * hist_every
         dt = self.stable_dt() * opt.tssfac
         self.dt_last = dt
@@ -442,6 +449,10 @@ class Simulation:
                 next_vtk += opt.vtk_every
                 self.write_state(os.path.join(opt.outdir,
                                               f"state_{next_vtk:8.4f}"))
+
+            if ckpt_every > 0 and self.t >= next_ckpt - 1e-12:
+                while self.t >= next_ckpt - 1e-12:
+                    next_ckpt += ckpt_every
                 self.save_checkpoint(os.path.join(opt.outdir, "checkpoint.npz"))
 
             dt_new = self.stable_dt() * opt.tssfac

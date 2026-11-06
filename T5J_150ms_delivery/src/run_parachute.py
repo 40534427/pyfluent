@@ -126,6 +126,9 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--vtk-every", type=float, default=0.0,
                    help="write VTK states every dt [s] (0 = final state only)")
     p.add_argument("--outdir", default="out")
+    p.add_argument("--checkpoint-every", type=float, default=0.02,
+                   help="write checkpoint.npz every this many seconds "
+                        "(default 0.02; <=0 = every VTK state)")
     p.add_argument("--restart", default="",
                    help="resume a long run from the checkpoint.npz written "
                         "alongside the VTK states (e.g. "
@@ -192,6 +195,7 @@ def main(argv=None) -> int:
         contact_vdc=args.contact_vdc,
         contact_thk_scale=args.contact_thk_scale,
         coupling=not args.no_coupling, vtk_every=args.vtk_every,
+        checkpoint_every=args.checkpoint_every,
         outdir=args.outdir, max_steps=args.max_steps, verbose=not args.quiet,
         restart=args.restart, kfile=os.path.abspath(args.k),
         nx=(0 if args.mesh == "native" else args.nx),
