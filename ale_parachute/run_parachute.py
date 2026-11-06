@@ -86,10 +86,17 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--tension-only-membrane", action="store_true",
                    help="slack-fibre membrane: a compressed fibre direction "
                         "carries no stress (*MAT_FABRIC semantics)")
-    p.add_argument("--vent-radius", type=float, default=0.0,
+    p.add_argument("--vent-radius", type=float, default=0.02,
                    help="radius [m] of a tension-only reinforcement ring "
                         "threaded through the apex nodes; the ring is slack "
-                        "until the vent opens to this radius (0 = off)")
+                        "until the vent opens to this radius (0 = off). "
+                        "Default 0.02 m; use smaller for a tighter vent")
+    p.add_argument("--vent-ring-E-factor", type=float, default=5.0,
+                   help="elastic-modulus multiplier for the vent ring "
+                        "beams relative to the suspension lines (default 5.0)")
+    p.add_argument("--vent-ring-A-factor", type=float, default=2.0,
+                   help="cross-sectional-area multiplier for the vent ring "
+                        "beams relative to the suspension lines (default 2.0)")
     p.add_argument("--hg-qh", type=float, default=0.1,
                    help="*CONTROL_HOURGLASS qh for the quad flap mode")
     p.add_argument("--struct-damping", type=float, default=0.0,
@@ -187,6 +194,8 @@ def main(argv=None) -> int:
         pfac=args.pfac, eb_stab_frac=args.eb_stab_frac,
         eb_frac=args.eb_frac, membrane_tension_only=args.tension_only_membrane,
         vent_radius=args.vent_radius,
+        vent_ring_E_factor=args.vent_ring_E_factor,
+        vent_ring_A_factor=args.vent_ring_A_factor,
         hg_qh=args.hg_qh, struct_damping=args.struct_damping,
         struct_damping_vmax=args.struct_damping_vmax,
         bend_scale=args.bend_scale, bend_damp=args.bend_damp,

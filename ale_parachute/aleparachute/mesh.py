@@ -266,7 +266,9 @@ class Structure:
                 "cables": int(self.beams.shape[0]),
                 "mass": float(self.mass.sum())}
 
-def build_structure(model, vent_radius: float = 0.0) -> Structure:
+def build_structure(model, vent_radius: float = 0.0,
+                    vent_ring_E_factor: float = 5.0,
+                    vent_ring_A_factor: float = 2.0) -> Structure:
     nodes = model.mesh["nodes"]
     ids = nodes[:, 0].astype(np.int64)
     n2i = {int(v): i for i, v in enumerate(ids)}
@@ -363,12 +365,14 @@ def build_structure(model, vent_radius: float = 0.0) -> Structure:
             n = int(ring.size)
             rbeams = np.stack([ring, np.roll(ring, -1)], axis=1)
             L0t = 2.0 * np.pi * vent_radius / n
+            rings_A = b_area_s * float(vent_ring_A_factor)
+            rings_E = b_E * float(vent_ring_E_factor)
             beams = np.vstack([beams, rbeams])
             L0 = np.concatenate([L0, np.full(n, L0t)])
-            beam_area = np.concatenate([beam_area, np.full(n, b_area_s)])
-            beam_E = np.concatenate([beam_E, np.full(n, b_E)])
+            beam_area = np.concatenate([beam_area, np.full(n, rings_A)])
+            beam_E = np.concatenate([beam_E, np.full(n, rings_E)])
             beam_mass_e = np.concatenate([beam_mass_e,
-                                          np.full(n, b_rho * b_area_s * L0t)])
+                                          np.full(n, b_rho * rings_A * L0t)])
             beam_eid = np.concatenate([beam_eid, np.full(n, -1, dtype=np.int64)])
             vent_beams = np.arange(beams.shape[0] - n, beams.shape[0],
                                    dtype=np.int64)

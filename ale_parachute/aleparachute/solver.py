@@ -44,6 +44,8 @@ class Options:
     eb_frac: Optional[float] = None      # eb / ea explicit override (T4: 0.3)
     membrane_tension_only: bool = False  # *MAT_FABRIC slack-fibre membrane
     vent_radius: float = 0.0             # reinforced vent ring radius [m] (0 = off)
+    vent_ring_E_factor: float = 5.0      # E multiplier on the vent ring beams (vs suspension lines)
+    vent_ring_A_factor: float = 2.0       # area multiplier on the vent ring beams (vs suspension lines)
     hg_qh: float = 0.1           # *CONTROL_HOURGLASS qh for the quad flap mode
     struct_damping: float = 0.0  # mass-proportional velocity damping [1/s]
     struct_damping_vmax: float = 0.0  # smart damping: node-v threshold (m/s)
@@ -132,7 +134,9 @@ class Simulation:
             IdealGas.from_model(model, model.parts[pid_air]["mid"],
                                 model.parts[pid_air]["eosid"]),
             cfl=options.cfl)
-        self.struct = build_structure(model, vent_radius=float(options.vent_radius))
+        self.struct = build_structure(model, vent_radius=float(options.vent_radius),
+                                      vent_ring_E_factor=float(options.vent_ring_E_factor),
+                                      vent_ring_A_factor=float(options.vent_ring_A_factor))
         if options.mass_scale != 1.0:
             self.struct.mass *= float(options.mass_scale)
         if options.eb_frac is not None:
