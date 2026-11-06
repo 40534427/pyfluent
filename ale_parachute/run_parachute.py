@@ -126,11 +126,22 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--vtk-every", type=float, default=0.0,
                    help="write VTK states every dt [s] (0 = final state only)")
     p.add_argument("--outdir", default="out")
+    p.add_argument("--restart", default="",
+                   help="resume a long run from the checkpoint.npz written "
+                        "alongside the VTK states (e.g. "
+                        "--restart outdir/checkpoint.npz)")
     p.add_argument("--max-steps", type=int, default=100000)
     p.add_argument("--quiet", action="store_true")
     p.add_argument("--generate-report", action="store_true",
                    help="after the run, generate the full calculation report "
                         "(HTML + figures + .dat tables + video) in --outdir")
+    p.add_argument("--report-only", action="store_true",
+                   help="skip the solve and rebuild the report from the "
+                        "existing outputs + run_meta.json (combine with "
+                        "--wall-time to correct the recorded duration)")
+    p.add_argument("--wall-time", type=float, default=None,
+                   help="wall-clock seconds to record in the report "
+                        "(normally measured automatically)")
     return p
 
 
@@ -182,6 +193,12 @@ def main(argv=None) -> int:
         contact_thk_scale=args.contact_thk_scale,
         coupling=not args.no_coupling, vtk_every=args.vtk_every,
         outdir=args.outdir, max_steps=args.max_steps, verbose=not args.quiet,
+        restart=args.restart, kfile=os.path.abspath(args.k),
+        nx=(0 if args.mesh == "native" else args.nx),
+        ny=(0 if args.mesh == "native" else args.ny),
+        nz=(0 if args.mesh == "native" else args.nz),
+        y1_extension=(args.y1_extension if args.mesh != "native" else 0.0),
+        domain_radius=(args.domain_radius or 0.0),
     )
     sim = Simulation(model, grid, opt)
     st = sim.struct
@@ -190,6 +207,36 @@ def main(argv=None) -> int:
     gas = sim.fluid.gas
     print(f"gas: rho0={gas.rho0:.4f}  e0={gas.e0:.1f}  ambient p0={gas.c4 * gas.e0:.1f} Pa  "
           f"pref={gas.pref:.1f} Pa")
+
+    conditions = None
+    try:
+        from aleparachute.report import (conditions_from_objects,
+                                         read_run_meta, write_run_meta)
+        if args.report_only:
+            # keep the recorded conditions; only rebuild them if missing
+            if not (read_run_meta(args.outdir) or {}).get("conditions"):
+                conditions = conditions_from_objects(model, opt, grid, sim)
+                write_run_meta(args.outdir, {"conditions": conditions}, merge=True)
+        else:
+            conditions = conditions_from_objects(model, opt, grid, sim)
+            write_run_meta(args.outdir, {
+                "kfile": {"path": os.path.abspath(args.k),
+                          "name": os.path.basename(args.k)},
+                "options": {k: v for k, v in vars(opt).items()
+                            if isinstance(v, (bool, int, float, str)) or v is None},
+                "conditions": conditions,
+                "cpu": get_cpu_info(),
+                "run": {"start": __import__("datetime").datetime.now().isoformat(
+                    timespec="seconds"), "wall_time": None, "steps": None},
+            }, merge=False)
+    except Exception as exc:
+        print(f"[meta] WARNING: {exc}")
+
+    if args.report_only:
+        print("rebuilding report from existing outputs ...")
+        generate_report(args.outdir, wall_time=args.wall_time)
+        print(f"  report: {os.path.join(args.outdir, 'calculation_report.html')}")
+        return 0
 
     res = sim.run()
 
@@ -203,9 +250,19 @@ def main(argv=None) -> int:
     if args.generate_report:
         print("generating calculation report ...")
         try:
+            from aleparachute.report import write_run_meta as _wmeta
+            _wmeta(args.outdir, {
+                "run": {"end": __import__("datetime").datetime.now().isoformat(
+                    timespec="seconds"),
+                    "wall_time": float(res["wall"]),
+                    "steps": int(res["steps"]),
+                    "endtime": float(opt.endtime)},
+                "conditions": conditions,
+            })
             generate_report(args.outdir, model=model, opt=opt, grid=grid,
                             sim=sim, wall_time=float(res["wall"]),
                             cpu_info=get_cpu_info())
+            print(f"  report: {os.path.join(args.outdir, 'calculation_report.html')}")
         except Exception as exc:
             print(f"[report] WARNING: report generation failed: {exc}")
     return 0

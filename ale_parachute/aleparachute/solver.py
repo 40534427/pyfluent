@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import csv
+import json
 import os
 import time as wallclock
 from dataclasses import dataclass, field
@@ -62,6 +63,14 @@ class Options:
     outdir: str = "out"
     max_steps: int = 100000
     verbose: bool = True
+    restart: str = ""            # checkpoint .npz to resume from ("" = off)
+    # ---- metadata used by the calculation report -------------------------
+    kfile: str = ""              # source keyword deck
+    nx: int = 0                  # auto-grid resolution (0 = native mesh)
+    ny: int = 0
+    nz: int = 0
+    y1_extension: float = 0.0    # downstream extension of the auto grid [m]
+    domain_radius: float = 0.0   # design cylinder radius [m] (0 = K file)
 
 
 def driven_cells(grid: HexGrid, model: Model,
@@ -318,6 +327,32 @@ class Simulation:
                     w.writerow([t] + vals[:nline])
 
     # ------------------------------------------------------------ combined dt
+    def save_checkpoint(self, path: str) -> None:
+        """Persist the full integration state (arrays + history) to .npz."""
+        np.savez_compressed(
+            path,
+            t=np.array(self.t), step=np.array(self.step_count),
+            dt=np.array(self.dt_last),
+            U=self.fluid.U, x=self.struct.x, v=self.struct.v,
+            history=np.array(json.dumps(self.history)),
+            line_history=np.array(json.dumps(
+                [[float(r[0]), [float(q) for q in r[1]]]
+                 for r in self.line_history])),
+        )
+
+    def load_checkpoint(self, path: str) -> None:
+        """Restore the integration state written by :meth:`save_checkpoint`."""
+        d = np.load(path, allow_pickle=False)
+        self.t = float(d["t"])
+        self.step_count = int(d["step"])
+        self.dt_last = float(d["dt"])
+        self.fluid.U = np.array(d["U"], dtype=float)
+        self.struct.x = np.array(d["x"], dtype=float)
+        self.struct.v = np.array(d["v"], dtype=float)
+        self.history = json.loads(str(d["history"]))
+        self.line_history = [(float(r[0]), np.asarray(r[1], dtype=float))
+                             for r in json.loads(str(d["line_history"]))]
+
     def stable_dt(self) -> float:
         """Smallest explicit stable step over all physics.
 
@@ -336,14 +371,22 @@ class Simulation:
         opt = self.opt
         os.makedirs(opt.outdir, exist_ok=True)
         endtime = opt.endtime
-        dt = self.stable_dt() * opt.tssfac
-        self.dt_last = dt
         next_vtk = 0.0
         hist_every = max(endtime / 200.0, 1e-9)
         next_hist = hist_every
+        restarted = bool(opt.restart) and os.path.exists(opt.restart)
+        if restarted:
+            self.load_checkpoint(opt.restart)
+            print(f"[restart] resumed from {opt.restart} at t={self.t:.5f}s "
+                  f"step={self.step_count}", flush=True)
+            if opt.vtk_every > 0:
+                next_vtk = np.floor(self.t / opt.vtk_every + 1e-9) * opt.vtk_every
+            next_hist = (np.floor(self.t / hist_every + 1e-9) + 1.0) * hist_every
+        dt = self.stable_dt() * opt.tssfac
+        self.dt_last = dt
         f_c = np.zeros_like(self.struct.x)
         f_ct = np.zeros_like(self.struct.x)
-        if opt.vtk_every > 0:
+        if opt.vtk_every > 0 and not restarted:
             self.write_state(os.path.join(opt.outdir, "state_0000"))
 
         curves = self.model.curves if self.pm is not None else {}
@@ -391,11 +434,15 @@ class Simulation:
                           f"ct={row['contact_pairs']} "
                           f"pen={row['contact_penetration']:.3e} "
                           f"ctf={row['contact_force_max']:.3e}")
+                # periodic flush so a long run survives an interrupted stop
+                if len(self.history) % 10 == 0:
+                    self.write_history(os.path.join(opt.outdir, "history.csv"))
 
             if opt.vtk_every > 0 and self.t >= next_vtk + opt.vtk_every - 1e-12:
                 next_vtk += opt.vtk_every
                 self.write_state(os.path.join(opt.outdir,
                                               f"state_{next_vtk:8.4f}"))
+                self.save_checkpoint(os.path.join(opt.outdir, "checkpoint.npz"))
 
             dt_new = self.stable_dt() * opt.tssfac
             dt = min(dt_new, 1.3 * dt)      # gentle growth
