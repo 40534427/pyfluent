@@ -14,7 +14,10 @@ ROOT = "/workspace/run_150ms_vent"
 RES = os.path.join(ROOT, "results")
 LOG = os.path.join(ROOT, "longrun_test.log")
 SOLVER_LOG = os.path.join(ROOT, "run_resume.log")
-DURATION = 3 * 3600.0
+# Absolute end of the 3 h test window (started 2026-11-07 10:53:54).
+# Using a fixed deadline keeps the window intact across supervisor restarts.
+DEADLINE_STR = os.environ.get("LONGRUN_DEADLINE", "2026-11-07 13:53:54")
+DEADLINE = time.mktime(time.strptime(DEADLINE_STR, "%Y-%m-%d %H:%M:%S"))
 
 CMD = [
     "python3", "run_parachute.py",
@@ -75,17 +78,15 @@ def launch():
 
 
 def main():
-    t0 = time.time()
     fh = open(LOG, "a")
-    fh.write(f"\n===== 3h long-run test start {stamp()} =====\n")
+    fh.write(f"\n===== long-run test {stamp()} (window ends {DEADLINE_STR}) =====\n")
     fh.write("time,alive,ckpt_t,step,hist_t,event\n")
     fh.flush()
 
     restarts = 0
     missing_since = None
     while True:
-        elapsed = time.time() - t0
-        if elapsed >= DURATION:
+        if time.time() >= DEADLINE:
             fh.write(f"{stamp()},, , , ,TEST_WINDOW_ELAPSED\n")
             fh.flush()
             break
