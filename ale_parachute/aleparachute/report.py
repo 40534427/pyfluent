@@ -38,6 +38,8 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.tri import Triangulation
 
+from .mesh import fluid_geometry
+
 
 META_NAME = "run_meta.json"
 R_AIR = 287.05          # J/(kg.K), dry air
@@ -825,7 +827,11 @@ def conditions_from_objects(model, opt, grid, sim) -> Dict[str, Any]:
 
     y0, y1 = float(grid.x[:, 1].min()), float(grid.x[:, 1].max())
     r_env = float(np.max(np.sqrt(grid.x[:, 0] ** 2 + grid.x[:, 2] ** 2)))
-    r_design = float(opt.domain_radius) if opt.domain_radius else r_env
+    try:
+        r_kfile = float(fluid_geometry(model)[2])
+    except Exception:
+        r_kfile = r_env
+    r_design = float(opt.domain_radius) if opt.domain_radius else r_kfile
     xs = sim.struct.x
     r_can0 = float(np.max(np.sqrt(xs[:, 0] ** 2 + xs[:, 2] ** 2)))
     block0 = (r_can0 / r_design) ** 2 * 100.0 if r_design > 0 else 0.0
@@ -865,7 +871,7 @@ def conditions_from_objects(model, opt, grid, sim) -> Dict[str, Any]:
                         if opt.y1_extension else "")),
         ("轴向范围", f"y ∈ [{y0:.4f}, {y1:.4f}] m"),
         ("截面半径 R", f"{r_design:.4f} m（设计值；K 文件原始流域半径 "
-                       f"{r_env:.4f} m）"),
+                       f"{r_kfile:.4f} m）"),
         ("伞衣初始折叠半径", f"{r_can0:.4f} m"),
         ("初始阻塞比", f"{block0:.2f} %（按初始折叠半径 / 设计半径）"),
         ("气体参考态", f"ρ0 = {rho0:.4f} kg/m³，p0 = {p0:.1f} Pa，"
@@ -1051,11 +1057,18 @@ def generate_report(outdir: str, model=None, opt=None, grid=None, sim=None,
         h_ = int(wall_time // 3600)
         m_ = int((wall_time % 3600) // 60)
         s_ = wall_time - h_ * 3600 - m_ * 60
-        ct += (f"计算用时（wall-clock）：<b>{wall_time:.1f} s</b>"
-               f"（{h_} h {m_} min {s_:.1f} s）<br>")
+        resumed = bool((meta.get("options") or {}).get("restart"))
+        label = ("本段计算用时（自 checkpoint 续算，wall-clock）"
+                 if resumed else "计算用时（wall-clock）")
+        ct += (f"{label}：<b>{wall_time:.1f} s</b>"
+               f"（{h_} h {m_} min {s_:.1f} s）")
+        if resumed:
+            ct += "<br><span style='color:#666;font-size:13px'>注：全程经多次断点续算，"\
+                  "各段分别计时，本值不含此前各段；累计进度以下方累计步数为准。</span>"
+        ct += "<br>"
     steps = (meta.get("run") or {}).get("steps")
     if steps:
-        ct += f"时间步数：<b>{steps}</b><br>"
+        ct += f"累计时间步数：<b>{steps}</b><br>"
     ct += (f"CPU 型号：<b>{cpu['model']}</b><br>"
            f"物理核心：<b>{cpu['physical_cores']}</b> &nbsp; "
            f"逻辑核心：{cpu['logical_cores']}<br>"
