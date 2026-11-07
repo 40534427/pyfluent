@@ -93,7 +93,10 @@ def build_parser() -> argparse.ArgumentParser:
                         "Default 0.02 m; use smaller for a tighter vent")
     p.add_argument("--vent-ring-E-factor", type=float, default=5.0,
                    help="elastic-modulus multiplier for the vent ring "
-                        "beams relative to the suspension lines (default 5.0)")
+                        "beams relative to the suspension lines (default 5.0); "
+                        "0 = rigid hoop enforced by radial projection, which "
+                        "keeps the vent at the design radius without the tiny "
+                        "chord acoustic time-step limit")
     p.add_argument("--vent-ring-A-factor", type=float, default=2.0,
                    help="cross-sectional-area multiplier for the vent ring "
                         "beams relative to the suspension lines (default 2.0)")

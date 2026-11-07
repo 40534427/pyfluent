@@ -898,7 +898,10 @@ def conditions_from_objects(model, opt, grid, sim) -> Dict[str, Any]:
         ("结构", f"mass_scale = {opt.mass_scale}，tension_only = "
                  f"{opt.membrane_tension_only}，eb_frac = {opt.eb_frac}，"
                  f"eb_stab_frac = {opt.eb_stab_frac}，"
-                 f"vent_radius = {opt.vent_radius} m"),
+                 f"vent_radius = {opt.vent_radius} m"
+                 + ("（刚性环：径向投影约束，顶孔半径固定）"
+                    if opt.vent_radius and opt.vent_ring_E_factor <= 0
+                    else "")),
         ("弯曲 / 阻尼", f"bend_scale = {opt.bend_scale}，"
                         f"bend_damp = {opt.bend_damp}，"
                         f"struct_damping = {opt.struct_damping} 1/s，"

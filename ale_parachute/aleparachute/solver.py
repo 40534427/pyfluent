@@ -216,6 +216,42 @@ class Simulation:
         self.dt_last = 0.0
         self.wall0 = wallclock.time()
 
+        # A vent ring with E_factor <= 0 is a *rigid* hoop: the (nearly
+        # inextensible) reinforcement is imposed by radial projection instead
+        # of elastic truss elements, which removes the tiny-chord chatter that
+        # otherwise blows up the explicit integrator.
+        self.vent_ring = np.unique(self.struct.beams[self.struct.vent_beams]) \
+            if getattr(self.struct, "vent_beams", np.zeros(0)).size else np.zeros(0, int)
+        self.vent_ring_r = 0.0
+        self.vent_clamp = (self.vent_ring.size > 0
+                           and float(options.vent_ring_E_factor) <= 0.0)
+        if self.vent_ring.size:
+            n = float(self.vent_ring.size)
+            self.vent_ring_r = float(np.mean(
+                self.struct.beam_L0[self.struct.vent_beams])) / (
+                2.0 * np.sin(np.pi / n))
+
+    def _clamp_vent(self) -> None:
+        """Project the apex nodes onto the rigid vent circle (tension-only)."""
+        if not self.vent_clamp or self.vent_ring_r <= 0.0:
+            return
+        st = self.struct
+        p = st.x[self.vent_ring]
+        dx = p[:, 0] - p[:, 0].mean()
+        dz = p[:, 2] - p[:, 2].mean()
+        r = np.hypot(dx, dz)
+        r_mean = float(r.mean())
+        if r_mean <= self.vent_ring_r or r_mean <= 1e-12:
+            return
+        s = self.vent_ring_r / r_mean
+        st.x[self.vent_ring, 0] = p[:, 0].mean() + dx * s
+        st.x[self.vent_ring, 2] = p[:, 2].mean() + dz * s
+        er = np.stack([dx / np.maximum(r, 1e-12),
+                       np.zeros_like(r),
+                       dz / np.maximum(r, 1e-12)], axis=1)
+        vr = np.einsum("ij,ij->i", st.v[self.vent_ring], er)
+        st.v[self.vent_ring] -= np.maximum(vr, 0.0)[:, None] * er
+
     # ------------------------------------------------------------- diagnostics
     def diagnostics(self, f_couple: np.ndarray) -> dict:
         rho, u, p, c = self.fluid.primitive()
@@ -412,6 +448,7 @@ class Simulation:
             # ---- structure
             if opt.structure:
                 self.ssolver.step(dt, self.t, curves, opt.vel_scale, f_ext=f_ext)
+                self._clamp_vent()
             # ---- fluid reaction
             if opt.coupling:
                 self.coupler.transfer(f_c, dt)
