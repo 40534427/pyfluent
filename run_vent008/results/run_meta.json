@@ -1,0 +1,197 @@
+{
+  "kfile": {
+    "path": "/workspace/run_150ms_vent/Parachute_0903.k",
+    "name": "Parachute_0903.k"
+  },
+  "options": {
+    "endtime": 0.06,
+    "vel_scale": 1.0,
+    "constant_vel": 220.0,
+    "cfl": 0.5,
+    "tssfac": 0.8,
+    "coupling": true,
+    "structure": true,
+    "mass_scale": 1.0,
+    "omega": 0.2,
+    "cdamp": 1.0,
+    "fsi_mach_cap": 0.3,
+    "fsi_leak": true,
+    "pleak": 0.1,
+    "drive_full_inlet_layer": true,
+    "leak_cap": null,
+    "p_cap": null,
+    "pfac": null,
+    "eb_stab_frac": null,
+    "eb_frac": 0.05,
+    "membrane_tension_only": true,
+    "vent_radius": 0.008,
+    "vent_ring_E_factor": 5.0,
+    "vent_ring_A_factor": 2.0,
+    "hg_qh": 0.1,
+    "struct_damping": 100.0,
+    "struct_damping_vmax": 30.0,
+    "bend_scale": 1.0,
+    "bend_damp": 0.0,
+    "alt_floor": 0.1,
+    "theory": null,
+    "bwc": null,
+    "ihq": null,
+    "contact": false,
+    "contact_scale": 1.0,
+    "contact_vdc": null,
+    "contact_thk_scale": 1.0,
+    "vtk_every": 0.01,
+    "checkpoint_every": 0.005,
+    "outdir": "/workspace/run_vent008/results",
+    "max_steps": 200000,
+    "verbose": true,
+    "restart": "",
+    "kfile": "/workspace/run_150ms_vent/Parachute_0903.k",
+    "nx": 30,
+    "ny": 40,
+    "nz": 30,
+    "y1_extension": 0.4,
+    "domain_radius": 0.5
+  },
+  "conditions": {
+    "groups": [
+      {
+        "title": "1.1 计算工况",
+        "rows": [
+          [
+            "K 文件",
+            "Parachute_0903.k — Simplified Paracute_0828                          CHUTE                 kg-m-s"
+          ],
+          [
+            "单位制",
+            "kg-m-s"
+          ],
+          [
+            "部件",
+            "PID 11 Para_Surf; PID 12 PARA_String; PID 14 Air"
+          ],
+          [
+            "计算时长",
+            "60.0 ms"
+          ],
+          [
+            "来流条件",
+            "恒定 220.0 m/s（Ma∞ = 0.639）"
+          ]
+        ]
+      },
+      {
+        "title": "1.2 计算流域与气体参考态",
+        "rows": [
+          [
+            "流域类型",
+            "圆柱形外流场（结构化自动网格），下游延伸 +0.4000 m"
+          ],
+          [
+            "轴向范围",
+            "y ∈ [-0.8996, 0.5675] m"
+          ],
+          [
+            "截面半径 R",
+            "0.5000 m（设计值；K 文件原始流域半径 0.2348 m）"
+          ],
+          [
+            "伞衣初始折叠半径",
+            "0.0618 m"
+          ],
+          [
+            "初始阻塞比",
+            "1.53 %（按初始折叠半径 / 设计半径）"
+          ],
+          [
+            "气体参考态",
+            "ρ0 = 1.1800 kg/m³，p0 = 100000.0 Pa，T0 = 295.2 K，c0 = 344.4 m/s，动压 q = 28556 Pa"
+          ]
+        ]
+      },
+      {
+        "title": "1.3 流场网格",
+        "rows": [
+          [
+            "网格分辨率",
+            "30 × 40 × 30"
+          ],
+          [
+            "单元 / 面",
+            "28640 单元，89036 面"
+          ],
+          [
+            "网格尺度",
+            "dx ≈ 0.0333 m，dy ≈ 0.0367 m，dz ≈ 0.0333 m"
+          ]
+        ]
+      },
+      {
+        "title": "1.4 求解器与耦合设置",
+        "rows": [
+          [
+            "时间积分",
+            "显式时间推进，CFL = 0.5，TSSFAC = 0.8，初始 dt ≈ 6.981e-07 s"
+          ],
+          [
+            "流体",
+            "ALE Eulerian 有限体积，一阶 Rusanov 数值通量"
+          ],
+          [
+            "气体状态方程",
+            "LINEAR_POLYNOMIAL 理想气体分支 p = (c4 + c5·μ)·e_int，c4 = 0.4，e0 = 250000.0，p0 = 100000.0 Pa"
+          ],
+          [
+            "FSI 耦合",
+            "CLLS 罚函数：omega = 0.2，cdamp = 1.0，pfac = None，pleak = 0.1，leak_cap = None，mach_cap = 0.3，p_cap = None"
+          ],
+          [
+            "结构",
+            "mass_scale = 1.0，tension_only = True，eb_frac = 0.05，eb_stab_frac = None，vent_radius = 0.008 m"
+          ],
+          [
+            "弯曲 / 阻尼",
+            "bend_scale = 1.0，bend_damp = 0.0，struct_damping = 100.0 1/s，vmax 门限 = 30.0 m/s"
+          ],
+          [
+            "壳 / 沙漏",
+            "THEORY = 5，BWC = 2，IHQ = 1，hg_qh = 0.1"
+          ],
+          [
+            "接触",
+            "enabled = False，scale = 1.0，vdc = None"
+          ]
+        ]
+      },
+      {
+        "title": "1.5 材料与状态方程卡片",
+        "rows": [
+          "MID 21（FABRIC）: ro = 533.77, ea = 43090000.0, eb = 0.0, prba = 0.14, prab = 0.0, gab = 0.0, cse = 0.0, el = 0.0, prl = 0.0, lratio = 0.0, damp = 0.0, aopt = 0.0, tsrfac = 0.0, a1 = 0.0, a2 = 0.0, a3 = 0.0",
+          "MID 22（PLASTIC_KINEMATIC）: ro = 462.0, e = 970000000.0, pr = 0.35, sigy = 1000000000.0, etan = 0.0, beta = 0.0",
+          "MID 24（NULL）: ro = 1.18, pc = -0.001, mu = 0.001",
+          "EOS 24（LINEAR_POLYNOMIAL）: eosid = 24, c0 = 0.0, c1 = 0.0, c2 = 0.0, c3 = 0.0, c4 = 0.4, c5 = 0.4, c6 = 0.0, e0 = 250000.0, v0 = 1.0"
+        ]
+      }
+    ],
+    "domain": {
+      "r_design": 0.5,
+      "r_env": 0.5218468458049463,
+      "y0": -0.8995681,
+      "y1": 0.56755,
+      "r_canopy0": 0.06175743347662693
+    }
+  },
+  "cpu": {
+    "model": "INTEL(R) XEON(R) PLATINUM 8582C",
+    "physical_cores": "3",
+    "base_frequency_ghz": "2.60",
+    "logical_cores": "3"
+  },
+  "run": {
+    "start": "2026-11-07T20:13:43",
+    "wall_time": null,
+    "steps": null
+  },
+  "schema": 1,
+  "generated": "2026-11-07T20:13:43"
+}
