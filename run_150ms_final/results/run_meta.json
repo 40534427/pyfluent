@@ -45,7 +45,7 @@
     "outdir": "/workspace/run_150ms_final/results",
     "max_steps": 400000,
     "verbose": false,
-    "restart": "",
+    "restart": "/workspace/run_150ms_final/results/checkpoint.npz",
     "kfile": "/workspace/run_150ms_vent/Parachute_0903.k",
     "nx": 30,
     "ny": 40,
@@ -188,10 +188,10 @@
     "logical_cores": "3"
   },
   "run": {
-    "start": "2026-11-08T05:12:22",
+    "start": "2026-11-08T11:16:10",
     "wall_time": null,
     "steps": null
   },
   "schema": 1,
-  "generated": "2026-11-08T05:12:22"
+  "generated": "2026-11-08T11:16:10"
 }
