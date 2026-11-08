@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lingua 多语种在线学习平台 · 英语、日语、韩语沉浸式学习空间">
+  <title>Lingua · 学习空间</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="side-brand" href="#/dashboard" aria-label="Lingua 首页">
+        <span class="brand-mark">L</span>
+        <span class="brand-word">Lingua<em>MULTILINGUAL ATELIER</em></span>
+      </a>
+      <div class="side-label">LEARNING · 学习空间</div>
+      <nav class="side-nav" id="sideNav" aria-label="主导航"></nav>
+      <div class="side-note" id="sideNote"></div>
+      <div class="side-foot">
+        <div class="side-user" id="sideUser"></div>
+      </div>
+    </aside>
+
+    <div class="app-main">
+      <header class="topbar">
+        <div class="topbar-crumb" id="topbarCrumb"></div>
+        <div class="topbar-right" id="topbarRight"></div>
+      </header>
+      <main class="content" id="view" tabindex="-1"></main>
+    </div>
+  </div>
+
+  <div class="toast-root" id="toastRoot" aria-live="polite"></div>
+
+  <script src="js/icons.js"></script>
+  <script src="js/mock.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/views-dashboard.js"></script>
+  <script src="js/views-courses.js"></script>
+  <script src="js/views-learn.js"></script>
+  <script src="js/views-progress.js"></script>
+  <script src="js/views-path.js"></script>
+  <script src="js/views-community.js"></script>
+  <script src="js/views-achievements.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
