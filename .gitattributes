@@ -1,0 +1,17 @@
+*.vtk    filter=lfs diff=lfs merge=lfs -text
+*.npz    filter=lfs diff=lfs merge=lfs -text
+*.zip    filter=lfs diff=lfs merge=lfs -text
+*.mp4    filter=lfs diff=lfs merge=lfs -text
+*.h5     filter=lfs diff=lfs merge=lfs -text
+*.hdf5   filter=lfs diff=lfs merge=lfs -text
+*.nc     filter=lfs diff=lfs merge=lfs -text
+*.stl    filter=lfs diff=lfs merge=lfs -text
+*.obj    filter=lfs diff=lfs merge=lfs -text
+*.ply    filter=lfs diff=lfs merge=lfs -text
+*.k      filter=lfs diff=lfs merge=lfs -text
+*.key    filter=lfs diff=lfs merge=lfs -text
+*.dat    filter=lfs diff=lfs merge=lfs -text
+*.par    filter=lfs diff=lfs merge=lfs -text
+*.d3plot filter=lfs diff=lfs merge=lfs -text
+*.bin    filter=lfs diff=lfs merge=lfs -text
+*.pvd    filter=lfs diff=lfs merge=lfs -text
