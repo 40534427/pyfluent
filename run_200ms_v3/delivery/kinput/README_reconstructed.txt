@@ -1,0 +1,1 @@
+This package was recomputed from t=0 because the original K file and\n150ms checkpoint were lost with a sandbox reset. The input K was rebuilt\nfrom kparam templates (cone_angle=29.28 deg, line_length=1.51 m).

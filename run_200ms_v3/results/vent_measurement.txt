@@ -1,0 +1,7 @@
+apex ring nodes: 16 (indices [21, 509, 1394, 2352, 3291, 4230, 5169, 6108, 7045, 7982, 9410, 10347, 11284, 12220, 13157, 14094])
+     t [s]  vent_d [mm]   R_max [mm]    ratio
+    0.0050        7.482       62.943   0.0594
+    0.0000       15.338       61.759   0.1242
+
+FINAL: t=0.0050 s  vent diameter = 7.48 mm, max projected diameter = 125.89 mm, vent/max = 5.94 %
+PEAK R: t=0.0050 s  R_max = 62.9 mm, vent/max = 5.94 %
