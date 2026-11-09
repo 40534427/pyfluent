@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/workspace/measure_vent.py", line 84, in <module>
+    main(sys.argv[1] if len(sys.argv) > 1 else "/workspace/run_150ms_final/results")
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/measure_vent.py", line 50, in main
+    p0, _ = read_points(st0)
+            ~~~~~~~~~~~^^^^^
+  File "/workspace/measure_vent.py", line 22, in read_points
+    with open(path) as fh:
+         ~~~~^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/workspace/run_300ms/results/state_0000_structure.vtk'
