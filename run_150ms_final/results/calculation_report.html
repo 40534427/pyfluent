@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh"><head><meta charset="utf-8">
+<title>减速伞展开过程数值计算报告</title>
+<style>
+body{font-family:-apple-system,Segoe UI,Roboto,sans-serif;margin:24px;
+     color:#222;max-width:1100px}
+h1{border-bottom:2px solid #444;padding-bottom:6px}
+h2{margin-top:28px;border-left:4px solid #3a7;color:#2a5;padding-left:10px}
+table.cond{border-collapse:collapse;width:100%;margin:8px 0}
+table.cond th.k{background:#eef;text-align:left;vertical-align:top;
+     padding:8px;width:220px;border:1px solid #ccd}
+table.cond td{padding:8px;border:1px solid #ccd;background:#fafafa}
+table.cond pre{margin:0;white-space:pre-wrap;font-size:12px}
+.fig{margin:14px 0}
+.fig img{max-width:100%;border:1px solid #ccc}
+.meta{background:#f4f4f4;padding:10px 14px;border-radius:6px;margin:10px 0}
+.tag{display:inline-block;background:#3a7;color:#fff;padding:2px 8px;
+     border-radius:10px;font-size:12px;margin-right:6px}
+</style></head><body>
+<h1>减速伞展开过程数值计算报告</h1>
+<div class='meta'>生成时间: 2026-11-09 14:39:10 &nbsp;|&nbsp;
+结果目录: <code>/workspace/run_150ms_final/results</code></div>
+
+<div class='meta'><span class='tag'>峰值伞衣气动力</span> 2208 N @ 60.8 ms &nbsp;&nbsp; <span class='tag'>峰值汇聚点伞绳力</span> 2831 N @ 62.3 ms &nbsp;&nbsp; <span class='tag'>末态面积</span> 0.117 m&sup2; &nbsp;&nbsp; <span class='tag'>末态平均半径</span> 0.082 m</div>
+
+<h2>1 计算条件</h2>
+<h3 style='margin:14px 0 4px'>1.1 计算工况</h3><table class='cond'><tr><th class='k'>K 文件</th><td><pre>Parachute_0903.k — Simplified Paracute_0828                          CHUTE                 kg-m-s</pre></td></tr><tr><th class='k'>单位制</th><td><pre>kg-m-s</pre></td></tr><tr><th class='k'>部件</th><td><pre>PID 11 Para_Surf; PID 12 PARA_String; PID 14 Air</pre></td></tr><tr><th class='k'>计算时长</th><td><pre>150.0 ms</pre></td></tr><tr><th class='k'>来流条件</th><td><pre>恒定 220.0 m/s（Ma∞ = 0.639）</pre></td></tr></table><h3 style='margin:14px 0 4px'>1.2 计算流域与气体参考态</h3><table class='cond'><tr><th class='k'>流域类型</th><td><pre>圆柱形外流场（结构化自动网格），下游延伸 +0.4000 m</pre></td></tr><tr><th class='k'>轴向范围</th><td><pre>y ∈ [-0.8996, 0.5675] m</pre></td></tr><tr><th class='k'>截面半径 R</th><td><pre>0.5000 m（设计值；K 文件原始流域半径 0.2348 m）</pre></td></tr><tr><th class='k'>伞衣初始折叠半径</th><td><pre>0.0618 m</pre></td></tr><tr><th class='k'>初始阻塞比</th><td><pre>1.53 %（按初始折叠半径 / 设计半径）</pre></td></tr><tr><th class='k'>气体参考态</th><td><pre>ρ0 = 1.1800 kg/m³，p0 = 100000.0 Pa，T0 = 295.2 K，c0 = 344.4 m/s，动压 q = 28556 Pa</pre></td></tr><tr><th class='k'>末态阻塞比</th><td><pre>2.68 %（末态平均半径 0.0818 m / 设计半径）</pre></td></tr></table><h3 style='margin:14px 0 4px'>1.3 流场网格</h3><table class='cond'><tr><th class='k'>网格分辨率</th><td><pre>30 × 40 × 30</pre></td></tr><tr><th class='k'>单元 / 面</th><td><pre>28640 单元，89036 面</pre></td></tr><tr><th class='k'>网格尺度</th><td><pre>dx ≈ 0.0333 m，dy ≈ 0.0367 m，dz ≈ 0.0333 m</pre></td></tr></table><h3 style='margin:14px 0 4px'>1.4 求解器与耦合设置</h3><table class='cond'><tr><th class='k'>时间积分</th><td><pre>显式时间推进，CFL = 0.5，TSSFAC = 0.8，初始 dt ≈ 3.813e-06 s</pre></td></tr><tr><th class='k'>流体</th><td><pre>ALE Eulerian 有限体积，一阶 Rusanov 数值通量</pre></td></tr><tr><th class='k'>气体状态方程</th><td><pre>LINEAR_POLYNOMIAL 理想气体分支 p = (c4 + c5·μ)·e_int，c4 = 0.4，e0 = 250000.0，p0 = 100000.0 Pa</pre></td></tr><tr><th class='k'>FSI 耦合</th><td><pre>CLLS 罚函数：omega = 0.2，cdamp = 1.0，pfac = None，pleak = 0.1，leak_cap = None，mach_cap = 0.3，p_cap = None</pre></td></tr><tr><th class='k'>结构</th><td><pre>mass_scale = 1.0，tension_only = True，eb_frac = 0.05，eb_stab_frac = None，vent_radius = 0.006 m（刚性环：径向投影约束，顶孔半径固定）</pre></td></tr><tr><th class='k'>弯曲 / 阻尼</th><td><pre>bend_scale = 1.0，bend_damp = 0.0，struct_damping = 100.0 1/s，vmax 门限 = 30.0 m/s</pre></td></tr><tr><th class='k'>壳 / 沙漏</th><td><pre>THEORY = 5，BWC = 2，IHQ = 1，hg_qh = 0.1</pre></td></tr><tr><th class='k'>接触</th><td><pre>enabled = False，scale = 1.0，vdc = None</pre></td></tr></table><h3 style='margin:14px 0 4px'>1.5 材料与状态方程卡片</h3><table class='cond'><tr><td colspan='2'><pre>MID 21（FABRIC）: ro = 533.77, ea = 43090000.0, eb = 0.0, prba = 0.14, prab = 0.0, gab = 0.0, cse = 0.0, el = 0.0, prl = 0.0, lratio = 0.0, damp = 0.0, aopt = 0.0, tsrfac = 0.0, a1 = 0.0, a2 = 0.0, a3 = 0.0</pre></td></tr><tr><td colspan='2'><pre>MID 22（PLASTIC_KINEMATIC）: ro = 462.0, e = 970000000.0, pr = 0.35, sigy = 1000000000.0, etan = 0.0, beta = 0.0</pre></td></tr><tr><td colspan='2'><pre>MID 24（NULL）: ro = 1.18, pc = -0.001, mu = 0.001</pre></td></tr><tr><td colspan='2'><pre>EOS 24（LINEAR_POLYNOMIAL）: eosid = 24, c0 = 0.0, c1 = 0.0, c2 = 0.0, c3 = 0.0, c4 = 0.4, c5 = 0.4, c6 = 0.0, e0 = 250000.0, v0 = 1.0</pre></td></tr></table>
+
+<h2>2 计算资源与用时</h2>
+<div class='meta'>本段计算用时（自 checkpoint 续算，wall-clock）：<b>11481.7 s</b>（3 h 11 min 21.7 s）<br><span style='color:#666;font-size:13px'>注：全程经多次断点续算，各段分别计时，本值不含此前各段；累计进度以下方累计步数为准。</span><br>累计时间步数：<b>105283</b><br>CPU 型号：<b>INTEL(R) XEON(R) PLATINUM 8582C</b><br>物理核心：<b>3</b> &nbsp; 逻辑核心：3<br>基准频率：<b>2.60 GHz</b></div>
+
+<h2>3 伞绳力与汇聚点受力时程曲线</h2>
+<div class='fig'><img src='figures/line_tension_per_line.png' alt='line_tension_per_line.png'><div style='font-size:13px;color:#555;margin-top:4px'>逐根伞绳张力时程曲线</div></div>
+<div class='fig'><img src='figures/anchor_force_time.png' alt='anchor_force_time.png'><div style='font-size:13px;color:#555;margin-top:4px'>汇聚点伞绳合力时程曲线</div></div>
+<p style='color:#666;font-size:13px'>原始数据见 <code>data/</code> 目录下的
+<code>.dat</code> 文件（列：时间 ms，力 N）。</p>
+
+<h2>4 伞衣气动力、面积与速度时程</h2>
+<div class='fig'><img src='figures/canopy_drag_time.png' alt='canopy_drag_time.png'><div style='font-size:13px;color:#555;margin-top:4px'>伞衣气动力合力时程曲线</div></div>
+<div class='fig'><img src='figures/canopy_area_radius_time.png' alt='canopy_area_radius_time.png'><div style='font-size:13px;color:#555;margin-top:4px'>伞衣面积与平均半径时程曲线</div></div>
+<div class='fig'><img src='figures/struct_vmax_time.png' alt='struct_vmax_time.png'><div style='font-size:13px;color:#555;margin-top:4px'>结构最大节点速度（vmax）时程曲线</div></div>
+
+<h2>5 伞衣形态变化</h2>
+<div class='fig'><img src='figures/canopy_shape_evolution.png' alt='canopy_shape_evolution.png'><div style='font-size:13px;color:#555;margin-top:4px'>伞衣形态演化（x-z 投影，均采样 6 时刻）</div></div>
+<div class='fig'><img src='figures/canopy_shape_side_evolution.png' alt='canopy_shape_side_evolution.png'><div style='font-size:13px;color:#555;margin-top:4px'>伞衣形态演化（x-y 侧视，均采样 6 时刻）</div></div>
+
+<h2>6 流场云图（速度 / 压力，峰值时刻与末态）</h2>
+<div class='fig'><img src='figures/field_pressure.png' alt='field_pressure.png'><div style='font-size:13px;color:#555;margin-top:4px'>压力场云图（中截面；左：峰值时刻，右：末态）</div></div>
+<div class='fig'><img src='figures/field_velocity.png' alt='field_velocity.png'><div style='font-size:13px;color:#555;margin-top:4px'>速度场云图（中截面；左：峰值时刻，右：末态）</div></div>
+
+<h2>7 伞衣应力 / 应变云图（峰值时刻与末态）</h2>
+<div class='fig'><img src='figures/canopy_stress_11.png' alt='canopy_stress_11.png'><div style='font-size:13px;color:#555;margin-top:4px'>伞衣膜应力 S11 云图（左：峰值时刻，右：末态）</div></div>
+<div class='fig'><img src='figures/canopy_strain_11.png' alt='canopy_strain_11.png'><div style='font-size:13px;color:#555;margin-top:4px'>伞衣膜应变 E11 云图（左：峰值时刻，右：末态）</div></div>
+
+<h2>8 展开过程动画</h2><video controls width='100%' src='figures/canopy_inflation.mp4'>Your browser does not support video.</video><p style='color:#666;font-size:13px'>左：压力场中截面；右：伞衣张力分布，覆盖整个展开过程。</p>
+
+<h2>9 数据文件说明</h2>
+<ul>
+<li><code>data/*.dat</code> — 所有曲线的原始数据（空格分隔，首行为列名注释）</li>
+<li><code>figures/*.png</code> — 报告中所有图片</li>
+<li><code>figures/canopy_inflation.mp4</code> — 展开过程动画</li>
+<li><code>history.csv</code> — 完整时程历史</li>
+<li><code>line_force.csv</code> — 逐伞绳张力时程</li>
+<li><code>state_*_fluid.vtk / *_structure.vtk</code> — 各时刻流场/结构 VTK</li>
+<li><code>run_meta.json</code> — 工况/选项/CPU/用时元数据（供 --report-only 重出报告）</li>
+<li><code>checkpoint.npz</code> — 断点续算检查点（--restart 恢复）</li>
+</ul>
+</body></html>

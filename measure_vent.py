@@ -70,6 +70,7 @@ def main(results):
     for t, vd, rm, ratio in rows:
         print(f"{t:10.4f} {vd * 1e3:12.3f} {rm * 1e3:12.3f} {ratio:8.4f}")
     if rows:
+        rows.sort(key=lambda r: r[0])   # state_0000 sorts last in ASCII order
         t, vd, rm, ratio = rows[-1]
         print(f"\nFINAL: t={t:.4f} s  vent diameter = {vd * 1e3:.2f} mm, "
               f"max projected diameter = {2 * rm * 1e3:.2f} mm, "
