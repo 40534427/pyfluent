@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh"><head><meta charset="utf-8">
+<title>Parachute inflation calculation report</title>
+<style>
+body{font-family:-apple-system,Segoe UI,Roboto,sans-serif;margin:24px;
+     color:#222;max-width:1100px}
+h1{border-bottom:2px solid #444;padding-bottom:6px}
+h2{margin-top:28px;border-left:4px solid #3a7;color:#2a5;padding-left:10px}
+table.cond{border-collapse:collapse;width:100%;margin:8px 0}
+table.cond th.k{background:#eef;text-align:left;vertical-align:top;
+     padding:8px;width:220px;border:1px solid #ccd}
+table.cond td{padding:8px;border:1px solid #ccd;background:#fafafa}
+table.cond pre{margin:0;white-space:pre-wrap;font-size:12px}
+.fig{margin:14px 0}
+.fig img{max-width:100%;border:1px solid #ccc}
+.meta{background:#f4f4f4;padding:10px 14px;border-radius:6px;margin:10px 0}
+.tag{display:inline-block;background:#3a7;color:#fff;padding:2px 8px;
+     border-radius:10px;font-size:12px;margin-right:6px}
+</style></head><body>
+<h1>减速伞展开过程数值计算报告</h1>
+<div class='meta'>生成时间: 2026-11-04 14:17:13 &nbsp;|&nbsp;
+结果目录: <code>/workspace/ale_parachute/out/T5J_states</code></div>
+
+<div class='meta'><span class='tag'>peak canopy force</span> 3467 N @ 42.5 ms &nbsp;&nbsp; <span class='tag'>peak line force</span> 3763 N @ 44.5 ms &nbsp;&nbsp; <span class='tag'>final area</span> 0.143 m&sup2; &nbsp;&nbsp; <span class='tag'>final radius</span> 0.108 m</div>
+
+<h2>1 计算条件</h2>
+<table class='cond'><tr><th class='k'>K-file title</th><td><pre>Simplified Paracute_0828                          CHUTE                 kg-m-s</pre></td></tr><tr><th class='k'>Units</th><td><pre>kg-m-s</pre></td></tr><tr><th class='k'>Parts</th><td><pre>  PID 11: Para_Surf
+  PID 12: PARA_String
+  PID 14: Air</pre></td></tr><tr><th class='k'>Fluid domain &amp; mesh</th><td><pre>cylinder: y=[-0.900, 0.568] m, R=0.522 m
+cells=28640, faces=89036</pre></td></tr><tr><th class='k'>Materials</th><td><pre>  MID 21 (FABRIC): ro=533.77, ea=43090000.0, eb=0.0, prba=0.14, prab=0.0, gab=0.0, cse=0.0, el=0.0, prl=0.0, lratio=0.0, damp=0.0, aopt=0.0, tsrfac=0.0, a1=0.0, a2=0.0, a3=0.0
+  MID 22 (PLASTIC_KINEMATIC): ro=462.0, e=970000000.0, pr=0.35, sigy=1000000000.0, etan=0.0, beta=0.0
+  MID 24 (NULL): ro=1.18, pc=-0.001, mu=0.001</pre></td></tr><tr><th class='k'>Equation of state</th><td><pre>  EOS 24 (LINEAR_POLYNOMIAL): eosid=24, c0=0.0, c1=0.0, c2=0.0, c3=0.0, c4=0.4, c5=0.4, c6=0.0, e0=250000.0, v0=1.0</pre></td></tr><tr><th class='k'>Solver &amp; coupling settings</th><td><pre>endtime=0.05 s, cfl=0.5, tssfac=0.8
+inflow: constant 220.0 m/s  (vel_scale=1.0)
+fluid: ALE Eulerian, Rusanov flux, ideal gas (rho0=1.1800, e0=250000.0, p0=100000.0 Pa)
+FSI penalty coupling: omega=0.2, cdamp=1.0, pfac=None, pleak=0.1, leak_cap=None, mach_cap=0.3, p_cap=None
+structure: mass_scale=1.0, membrane_tension_only=True, eb_frac=0.05, eb_stab_frac=None
+bending: bend_scale=1.0, bend_damp=0.0
+damping: struct_damping=100.0 1/s, struct_damping_vmax=30.0 m/s (smart gate)
+shell: THEORY=5, BWC=2, IHQ=1, hg_qh=0.1
+contact: enabled=True, scale=1.0, vdc=None</pre></td></tr></table>
+
+<h2>2 计算资源与用时</h2>
+<div class='meta'>wall-clock time: <b>5078.3 s</b> (1h 24m 38.3s)<br>CPU model: <b>INTEL(R) XEON(R) PLATINUM 8582C</b><br>physical cores: <b>3</b> &nbsp; logical cores: 3<br>base frequency: <b>2.60 GHz</b></div>
+
+<h2>3 伞绳力与汇聚点受力时程曲线</h2>
+<div class='fig'><img src='figures/line_tension_per_line.png' alt='line_tension_per_line.png'><div style='font-size:13px;color:#555;margin-top:4px'>Per-line suspension-line tension vs time</div></div>
+<div class='fig'><img src='figures/anchor_force_time.png' alt='anchor_force_time.png'><div style='font-size:13px;color:#555;margin-top:4px'>Convergence-point resultant line force vs time</div></div>
+<p style='color:#666;font-size:13px'>原始数据见 <code>data/</code> 目录下的
+<code>.dat</code> 文件（列：时间 ms，力 N）。</p>
+
+<h2>4 伞衣气动力、面积与速度时程</h2>
+<div class='fig'><img src='figures/canopy_drag_time.png' alt='canopy_drag_time.png'><div style='font-size:13px;color:#555;margin-top:4px'>Canopy resultant aerodynamic force vs time</div></div>
+<div class='fig'><img src='figures/canopy_area_radius_time.png' alt='canopy_area_radius_time.png'><div style='font-size:13px;color:#555;margin-top:4px'>Canopy area and mean radius vs time</div></div>
+<div class='fig'><img src='figures/struct_vmax_time.png' alt='struct_vmax_time.png'><div style='font-size:13px;color:#555;margin-top:4px'>Structure max nodal velocity (vmax) vs time</div></div>
+
+<h2>5 伞衣形态变化</h2>
+<div class='fig'><img src='figures/canopy_shape_evolution.png' alt='canopy_shape_evolution.png'><div style='font-size:13px;color:#555;margin-top:4px'>Canopy shape evolution (x-z projection)</div></div>
+<div class='fig'><img src='figures/canopy_shape_side_evolution.png' alt='canopy_shape_side_evolution.png'><div style='font-size:13px;color:#555;margin-top:4px'>Canopy shape evolution (x-y side view)</div></div>
+
+<h2>6 流场云图（速度 / 压力）</h2>
+<div class='fig'><img src='figures/field_pressure.png' alt='field_pressure.png'><div style='font-size:13px;color:#555;margin-top:4px'>Pressure field (mid z-plane, final state)</div></div>
+<div class='fig'><img src='figures/field_velocity.png' alt='field_velocity.png'><div style='font-size:13px;color:#555;margin-top:4px'>Velocity-magnitude field (mid z-plane, final state)</div></div>
+
+<h2>7 伞衣应力 / 应变云图</h2>
+<div class='fig'><img src='figures/canopy_stress_11.png' alt='canopy_stress_11.png'><div style='font-size:13px;color:#555;margin-top:4px'>Canopy membrane stress S11 (final state)</div></div>
+<div class='fig'><img src='figures/canopy_strain_11.png' alt='canopy_strain_11.png'><div style='font-size:13px;color:#555;margin-top:4px'>Canopy membrane strain E11 (final state)</div></div>
+
+<h2>Video animation</h2><video controls width='100%' src='figures/canopy_inflation.mp4'>Your browser does not support video.</video><p style='color:#666;font-size:13px'>Animation of the pressure field (left) and canopy tension (right) over the full inflation.</p>
+
+<h2>8 数据文件说明</h2>
+<ul>
+<li><code>data/*.dat</code> — 所有曲线的原始数据（空格分隔，首行为列名注释）</li>
+<li><code>figures/*.png</code> — 报告中所有图片</li>
+<li><code>figures/canopy_inflation.mp4</code> — 展开过程动画</li>
+<li><code>history.csv</code> — 完整时程历史</li>
+<li><code>line_force.csv</code> — 逐伞绳张力时程</li>
+<li><code>state_*_fluid.vtk / *_structure.vtk</code> — 各时刻流场/结构 VTK</li>
+</ul>
+</body></html>
