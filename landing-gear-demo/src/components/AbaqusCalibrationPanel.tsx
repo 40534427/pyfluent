@@ -149,7 +149,7 @@ export const AbaqusCalibrationPanel: React.FC<AbaqusCalibrationPanelProps> = ({
         // 如果 ABAQUS 压缩量是 m → 转 mm；如果已经是 mm 不变
         // 启发式：若所有值都 <1 则判为 m → *1000
         const maxVal = Math.max(...abqSeries.map(Math.abs));
-        if (maxVal < 0.05) abqSeries = abqSeries.map(v => v * 1000);
+        if (maxVal < 0.5) abqSeries = abqSeries.map(v => v * 1000);
       }
       if (key === 'strutForce' || key === 'tireForce') {
         // 如果 ABAQUS 单位是 N（典型量级 1e3~1e6）→ 保持 N；如果是 kN → *1000
