@@ -265,6 +265,43 @@ export const ParamsPanel: React.FC<ParamsPanelProps> = ({
         />
       </Section>
 
+      {/* 求解器时间设置 */}
+      <Section title="⏱️ 计算时间设置">
+        <ParamInput
+          label="总仿真时长"
+          value={params.solver.totalTime}
+          unit="s"
+          min={0.1}
+          max={2.0}
+          step={0.05}
+          onChange={(v) => update('solver.totalTime', v)}
+          hint="落震通常0.3s内完成"
+        />
+        <ParamInput
+          label="时间步长 dt"
+          value={params.solver.timeStep * 1e6}
+          unit="μs"
+          min={1}
+          max={50}
+          step={1}
+          onChange={(v) => update('solver.timeStep', v / 1e6)}
+          hint="冲击问题建议≤10μs"
+        />
+        <ParamInput
+          label="输出间隔"
+          value={params.solver.outputInterval * 1e6}
+          unit="μs"
+          min={10}
+          max={5000}
+          step={10}
+          onChange={(v) => update('solver.outputInterval', v / 1e6)}
+          hint="越小数据点越多"
+        />
+        <div className="mt-2 p-2 bg-amber-50 border border-amber-200 rounded text-[11px] text-amber-700 leading-relaxed">
+          ⚠️ 总时长越长 / 步长越小 → 计算量越大。当前配置约 {Math.floor(params.solver.totalTime / params.solver.timeStep / 1000)} k步。
+        </div>
+      </Section>
+
       {/* 运行按钮 */}
       <button
         onClick={onRun}
