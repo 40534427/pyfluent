@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { ParamsPanel } from './components/ParamsPanel';
 import { ResultsPanel } from './components/ResultsPanel';
+import { AbaqusCalibrationPanel } from './components/AbaqusCalibrationPanel';
 import { TimeSeriesChart } from './components/Charts';
 import { simulateLanding, createDefaultParams } from './lib/solver';
 import type { SimulationParams, SimulationResult, GeometryParams, LoadCaseParams } from './lib/types';
@@ -28,11 +29,11 @@ const App: React.FC = () => {
   const [isRunning, setIsRunning] = useState(false);
   const [scanResults, setScanResults] = useState<{ paramName: string; scanData: { value: number; peakLoad: number; maxCompression: number }[] } | null>(null);
   const [showScanPanel, setShowScanPanel] = useState(false);
+  const [activeTab, setActiveTab] = useState<'sim' | 'calibration'>('sim');
 
   const handleRun = useCallback(async () => {
     setIsRunning(true);
     setCompareResult(null);
-    // 使用setTimeout让UI更新
     await new Promise(resolve => setTimeout(resolve, 50));
     
     const res = simulateLanding(params);
@@ -190,7 +191,33 @@ const App: React.FC = () => {
       </header>
 
       <div className="max-w-[1600px] mx-auto px-6 py-6">
-        {/* 参数扫描快捷按钮 */}
+        {/* Tab 切换 */}
+        <div className="mt-4 flex gap-2 border-b border-gray-200">
+          <button
+            onClick={() => setActiveTab('sim')}
+            className={`px-4 py-2 text-sm font-semibold border-b-2 transition-colors -mb-px ${
+              activeTab === 'sim'
+                ? 'border-blue-600 text-blue-700 bg-white'
+                : 'border-transparent text-gray-500 hover:text-gray-700'
+            }`}
+          >
+            🔧 快速仿真 · 参数扫描
+          </button>
+          <button
+            onClick={() => setActiveTab('calibration')}
+            className={`px-4 py-2 text-sm font-semibold border-b-2 transition-colors -mb-px ${
+              activeTab === 'calibration'
+                ? 'border-indigo-600 text-indigo-700 bg-white'
+                : 'border-transparent text-gray-500 hover:text-gray-700'
+            }`}
+          >
+            🎯 ABAQUS 校核 · 参数辨识
+          </button>
+        </div>
+
+        {/* 主内容区 - Tab 1: 快速仿真 */}
+        {activeTab === 'sim' && (
+          <>
         {result && (
           <div className="bg-white rounded-xl border border-gray-200 p-3 mb-4">
             <div className="flex items-center gap-3 flex-wrap">
@@ -303,6 +330,28 @@ const App: React.FC = () => {
             </div>
           </div>
         </div>
+          </>
+        )}
+
+        {/* 主内容区 - Tab 2: ABAQUS 校核 */}
+        {activeTab === 'calibration' && (
+          <div className="grid grid-cols-1 lg:grid-cols-[380px_1fr] gap-6 mt-4">
+            <div className="lg:sticky lg:top-6 lg:self-start max-h-[calc(100vh-120px)] overflow-hidden">
+              <ParamsPanel
+                params={params}
+                onChange={setParams}
+                onRun={handleRun}
+                isRunning={isRunning}
+              />
+            </div>
+            <AbaqusCalibrationPanel
+              currentParams={params}
+              currentResult={result}
+              onParamsUpdate={setParams}
+              onRun={handleRun}
+            />
+          </div>
+        )}
       </div>
 
       {/* 全局样式补充 */}
