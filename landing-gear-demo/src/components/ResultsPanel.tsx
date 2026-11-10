@@ -194,6 +194,7 @@ export const ResultsPanel: React.FC<ResultsPanelProps> = ({ result, compareResul
               color="#9333ea"
               yLabel="加速度"
               unit="m/s²"
+              symmetric
             />
           </div>
 
@@ -205,6 +206,7 @@ export const ResultsPanel: React.FC<ResultsPanelProps> = ({ result, compareResul
               color="#059669"
               yLabel="轮胎力"
               unit="kN"
+              quantileClip={false}
             />
           </div>
 
