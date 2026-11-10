@@ -4,7 +4,7 @@
     "name": "Parachute_0903_origcards.k"
   },
   "options": {
-    "endtime": 0.045,
+    "endtime": 0.25,
     "vel_scale": 1.0,
     "constant_vel": 220.0,
     "cfl": 0.5,
@@ -40,8 +40,8 @@
     "contact_scale": 1.0,
     "contact_vdc": null,
     "contact_thk_scale": 1.0,
-    "vtk_every": 0.0,
-    "checkpoint_every": 0.005,
+    "vtk_every": 0.01,
+    "checkpoint_every": 0.001,
     "outdir": "/workspace/run_250ms/results",
     "max_steps": 400000,
     "verbose": true,
@@ -72,7 +72,7 @@
           ],
           [
             "计算时长",
-            "45.0 ms"
+            "250.0 ms"
           ],
           [
             "来流条件",
@@ -188,10 +188,10 @@
     "logical_cores": "3"
   },
   "run": {
-    "start": "2026-11-10T10:35:10",
+    "start": "2026-11-10T10:39:49",
     "wall_time": null,
     "steps": null
   },
   "schema": 1,
-  "generated": "2026-11-10T10:35:10"
+  "generated": "2026-11-10T10:39:49"
 }
