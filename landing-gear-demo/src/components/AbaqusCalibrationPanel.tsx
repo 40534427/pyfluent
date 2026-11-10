@@ -121,11 +121,15 @@ export const AbaqusCalibrationPanel: React.FC<AbaqusCalibrationPanelProps> = ({
   const [abaqusData, setAbaqusData] = useState<AbaqusTimeHistory | null>(null);
   const [error, setError] = useState<string | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
+  const [pasteText, setPasteText] = useState('');
+  const [urlInput, setUrlInput] = useState('');
+  const [loadType, setLoadType] = useState<'file' | 'paste' | 'url'>('file');
 
   // 标定状态
   const [calibResult, setCalibResult] = useState<CalibrationParams | null>(null);
   const [calibHistory, setCalibHistory] = useState<{ iter: number; score: number }[]>([]);
   const [calibRunning, setCalibRunning] = useState(false);
+  const [busy, setBusy] = useState(false);
 
   // 对比指标（针对不同物理量）
   const metrics: Record<CompareKey, CompareMetrics | null> = useMemo(() => {
@@ -163,6 +167,7 @@ export const AbaqusCalibrationPanel: React.FC<AbaqusCalibrationPanelProps> = ({
   }, [abaqusData, currentResult]);
 
   const handleFile = async (file: File) => {
+    setBusy(true);
     try {
       const text = await file.text();
       const data = parseAbaqusText(text, file.name);
@@ -171,6 +176,59 @@ export const AbaqusCalibrationPanel: React.FC<AbaqusCalibrationPanelProps> = ({
     } catch (e: any) {
       setError(e.message ?? String(e));
       setAbaqusData(null);
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const handleLoadPaste = () => {
+    setBusy(true);
+    try {
+      if (!pasteText.trim()) throw new Error('粘贴框为空');
+      const data = parseAbaqusText(pasteText, 'pasted.csv');
+      setAbaqusData(data);
+      setError(null);
+    } catch (e: any) {
+      setError(e.message ?? String(e));
+      setAbaqusData(null);
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const handleLoadUrl = async () => {
+    setBusy(true);
+    try {
+      if (!urlInput.trim()) throw new Error('请输入 URL');
+      const resp = await fetch(urlInput.trim());
+      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+      const text = await resp.text();
+      const name = urlInput.split('/').pop() || 'remote.csv';
+      const data = parseAbaqusText(text, name);
+      setAbaqusData(data);
+      setError(null);
+    } catch (e: any) {
+      setError(e.message ?? String(e));
+      setAbaqusData(null);
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const handleLoadSample = async () => {
+    setBusy(true);
+    try {
+      const resp = await fetch('/abaqus_sample.csv');
+      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+      const text = await resp.text();
+      const data = parseAbaqusText(text, 'abaqus_sample.csv');
+      setAbaqusData(data);
+      setError(null);
+    } catch (e: any) {
+      setError(e.message ?? String(e));
+      setAbaqusData(null);
+    } finally {
+      setBusy(false);
     }
   };
 
@@ -248,39 +306,160 @@ export const AbaqusCalibrationPanel: React.FC<AbaqusCalibrationPanelProps> = ({
         ABAQUS 校核与参数辨识
       </h2>
 
-      {/* Step 1: 文件导入 */}
+      {/* Step 1: 文件导入 - 移动端友好 */}
       <div className="mb-4 p-3 bg-white rounded-lg border border-gray-200">
-        <div className="flex items-center justify-between mb-2">
+        <div className="flex items-center justify-between mb-3">
           <span className="text-sm font-semibold text-gray-700">Step 1 · 导入 ABAQUS 结果</span>
-          <span className="text-xs text-gray-400">.csv / .dat / .rpt</span>
-        </div>
-        <div
-          className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-indigo-400 hover:bg-indigo-50 transition-colors cursor-pointer"
-          onClick={() => fileRef.current?.click()}
-        >
-          <svg className="w-8 h-8 mx-auto text-gray-400 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-          </svg>
-          <p className="text-xs text-gray-600">点击或拖入 ABAQUS 导出的 .csv 时间历程文件</p>
-          <p className="text-[10px] text-gray-400 mt-1">支持列名: Time, U1/U2/U3, V1/V2/V3, A1/A2/A3, RF1/CF1/S11</p>
-          <input
-            ref={fileRef}
-            type="file"
-            accept=".csv,.dat,.rpt,.txt"
-            className="hidden"
-            onChange={(e) => {
-              const f = e.target.files?.[0];
-              if (f) handleFile(f);
-            }}
-          />
+          <button
+            onClick={handleLoadSample}
+            disabled={busy}
+            className="text-xs px-2 py-1 bg-blue-50 text-blue-700 rounded hover:bg-blue-100 disabled:opacity-40 border border-blue-200"
+          >
+            📥 加载示例数据
+          </button>
         </div>
 
-        {abaqusData && (
-          <div className="mt-3 p-2 bg-green-50 border border-green-200 rounded text-xs text-green-700">
-            ✅ 已加载 <b>{abaqusData.source}</b> · {abaqusData.rowCount} 行 ·
-            列: {Object.keys(abaqusData.series).join(', ')}
+        {/* 加载方式 Tab */}
+        <div className="flex gap-1 mb-3 bg-gray-100 rounded-lg p-1">
+          {([
+            { key: 'file', label: '📱 选文件', hint: '手机/电脑存储' },
+            { key: 'paste', label: '📋 粘贴', hint: 'CSV 文本' },
+            { key: 'url', label: '🔗 URL', hint: '远程文件' },
+          ] as const).map(t => (
+            <button
+              key={t.key}
+              onClick={() => setLoadType(t.key)}
+              className={`flex-1 py-2 text-xs font-semibold rounded-md transition-all ${
+                loadType === t.key
+                  ? 'bg-white text-indigo-700 shadow-sm border border-gray-200'
+                  : 'text-gray-500 hover:text-gray-700'
+              }`}
+            >
+              <div>{t.label}</div>
+              <div className="text-[10px] font-normal opacity-70">{t.hint}</div>
+            </button>
+          ))}
+        </div>
+
+        {/* 方式 A: 文件选择 */}
+        {loadType === 'file' && (
+          <div className="space-y-2">
+            <label
+              htmlFor="abaqus-file-input"
+              className="block w-full cursor-pointer"
+            >
+              <div className="border-2 border-dashed border-gray-300 rounded-xl p-6 text-center hover:border-indigo-400 hover:bg-indigo-50 active:bg-indigo-100 transition-colors">
+                <svg className="w-10 h-10 mx-auto text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
+                </svg>
+                <p className="text-sm font-semibold text-gray-700">点击按钮选择文件</p>
+                <p className="text-[11px] text-gray-500 mt-1">
+                  支持 {'.csv / .dat / .rpt / .txt'.split(' / ').map((s, i, a) => (
+                    <span key={s}>
+                      <span className="inline-block px-1.5 py-0.5 bg-gray-100 rounded text-gray-600 font-mono">{s}</span>
+                      {i < a.length - 1 && <span className="text-gray-300 mx-1">+</span>}
+                    </span>
+                  ))}
+                </p>
+                <p className="text-[10px] text-gray-400 mt-1">
+                  手机上会弹出系统文件选择器，可从"文件/相册/下载"中选择
+                </p>
+              </div>
+              <input
+                id="abaqus-file-input"
+                ref={fileRef}
+                type="file"
+                accept=".csv,.dat,.rpt,.txt,text/csv,text/plain"
+                className="hidden"
+                onChange={(e) => {
+                  const f = e.target.files?.[0];
+                  if (f) handleFile(f);
+                  // 重置 value，允许选同一个文件再次触发
+                  if (e.target) e.target.value = '';
+                }}
+              />
+            </label>
           </div>
         )}
+
+        {/* 方式 B: 粘贴文本 */}
+        {loadType === 'paste' && (
+          <div className="space-y-2">
+            <textarea
+              value={pasteText}
+              onChange={(e) => setPasteText(e.target.value)}
+              placeholder={"Time, U2, A2, RF2, CF2\n0.0001, 0.000, 3.50, 15000, 15000\n0.0002, 0.001, 3.48, 14980, 14960\n..."}
+              rows={8}
+              className="w-full px-3 py-2 text-xs font-mono border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 bg-gray-50"
+            />
+            <button
+              onClick={handleLoadPaste}
+              disabled={busy}
+              className="w-full py-2 bg-indigo-600 text-white text-sm font-semibold rounded-lg hover:bg-indigo-700 disabled:opacity-50"
+            >
+              {busy ? '解析中...' : '解析粘贴内容'}
+            </button>
+          </div>
+        )}
+
+        {/* 方式 C: URL */}
+        {loadType === 'url' && (
+          <div className="space-y-2">
+            <input
+              type="url"
+              value={urlInput}
+              onChange={(e) => setUrlInput(e.target.value)}
+              placeholder="https://example.com/abaqus_result.csv"
+              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            />
+            <button
+              onClick={handleLoadUrl}
+              disabled={busy}
+              className="w-full py-2 bg-indigo-600 text-white text-sm font-semibold rounded-lg hover:bg-indigo-700 disabled:opacity-50"
+            >
+              {busy ? '加载中...' : '远程加载'}
+            </button>
+            <p className="text-[10px] text-gray-500">
+              注意：URL 服务器需允许 CORS。同域可直接用 <code>/abaqus_sample.csv</code>。
+            </p>
+          </div>
+        )}
+
+        {/* 加载状态反馈 */}
+        {busy && (
+          <div className="mt-3 p-2 bg-indigo-50 border border-indigo-200 rounded text-xs text-indigo-700 flex items-center gap-2">
+            <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+            </svg>
+            正在加载并解析...
+          </div>
+        )}
+
+        {/* 成功状态 */}
+        {abaqusData && (
+          <div className="mt-3 p-3 bg-green-50 border border-green-200 rounded-lg">
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-2">
+                <span className="text-green-700 font-semibold text-sm">✅ 已加载</span>
+                <span className="text-xs text-green-600">{abaqusData.source}</span>
+              </div>
+              <button
+                onClick={() => { setAbaqusData(null); setError(null); }}
+                className="text-[11px] text-gray-500 hover:text-gray-700 px-2 py-0.5 rounded hover:bg-gray-200"
+              >
+                清除
+              </button>
+            </div>
+            <div className="text-[11px] text-green-700">
+              {abaqusData.rowCount} 行 × {Object.keys(abaqusData.series).length} 列
+            </div>
+            <div className="mt-1 text-[10px] text-green-600 font-mono">
+              列: {Object.keys(abaqusData.series).join(', ')}
+            </div>
+          </div>
+        )}
+
         {error && (
           <div className="mt-3 p-2 bg-red-50 border border-red-200 rounded text-xs text-red-700">
             ❌ {error}
