@@ -26,7 +26,8 @@ def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(
         description="ALE / Lagrangian penalty coupling solver for the "
                     "parachute inflation K file.")
-    p.add_argument("--k", required=True, help="LS-DYNA keyword file")
+    p.add_argument("--k", help="LS-DYNA keyword file "
+                               "(required unless --report-only is used)")
     p.add_argument("--mesh", choices=("auto", "native"), default="auto",
                    help="auto = cartesian grid clipped to the K file cylinder, "
                         "native = reuse *ELEMENT_SOLID (large, slow)")
@@ -170,7 +171,16 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def main(argv=None) -> int:
-    args = build_parser().parse_args(argv)
+    parser = build_parser()
+    args = parser.parse_args(argv)
+
+    if args.report_only:
+        print("rebuilding report from existing outputs ...")
+        generate_report(args.outdir, wall_time=args.wall_time)
+        print(f"  report: {os.path.join(args.outdir, 'calculation_report.html')}")
+        return 0
+    if not args.k:
+        parser.error("--k is required unless --report-only is used")
 
     print(f"reading {args.k} ...")
     model = load_model(args.k)
@@ -239,33 +249,20 @@ def main(argv=None) -> int:
 
     conditions = None
     try:
-        from aleparachute.report import (conditions_from_objects,
-                                         read_run_meta, write_run_meta)
-        if args.report_only:
-            # keep the recorded conditions; only rebuild them if missing
-            if not (read_run_meta(args.outdir) or {}).get("conditions"):
-                conditions = conditions_from_objects(model, opt, grid, sim)
-                write_run_meta(args.outdir, {"conditions": conditions}, merge=True)
-        else:
-            conditions = conditions_from_objects(model, opt, grid, sim)
-            write_run_meta(args.outdir, {
-                "kfile": {"path": os.path.abspath(args.k),
-                          "name": os.path.basename(args.k)},
-                "options": {k: v for k, v in vars(opt).items()
-                            if isinstance(v, (bool, int, float, str)) or v is None},
-                "conditions": conditions,
-                "cpu": get_cpu_info(),
-                "run": {"start": __import__("datetime").datetime.now().isoformat(
-                    timespec="seconds"), "wall_time": None, "steps": None},
-            }, merge=False)
+        from aleparachute.report import conditions_from_objects, write_run_meta
+        conditions = conditions_from_objects(model, opt, grid, sim)
+        write_run_meta(args.outdir, {
+            "kfile": {"path": os.path.abspath(args.k),
+                      "name": os.path.basename(args.k)},
+            "options": {k: v for k, v in vars(opt).items()
+                        if isinstance(v, (bool, int, float, str)) or v is None},
+            "conditions": conditions,
+            "cpu": get_cpu_info(),
+            "run": {"start": __import__("datetime").datetime.now().isoformat(
+                timespec="seconds"), "wall_time": None, "steps": None},
+        }, merge=False)
     except Exception as exc:
         print(f"[meta] WARNING: {exc}")
-
-    if args.report_only:
-        print("rebuilding report from existing outputs ...")
-        generate_report(args.outdir, wall_time=args.wall_time)
-        print(f"  report: {os.path.join(args.outdir, 'calculation_report.html')}")
-        return 0
 
     res = sim.run()
 

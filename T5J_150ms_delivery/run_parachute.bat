@@ -1,24 +1,32 @@
 @echo off
 REM ============================================================
 REM  T5J 减速伞 150 ms 充气展开 ALE 流固耦合算例 - 一键计算
-REM  优先使用系统 Python，否则回退 bin\run_parachute.exe
+REM  优先使用 bin\run_parachute.exe 和随包运行库，无需安装 Python
 REM  结果输出到 results\，报告为 results\calculation_report.html
 REM ============================================================
 setlocal
-set PYEXE=
-where python >nul 2>nul && set PYEXE=python
-if not defined PYEXE (
-    if exist bin\run_parachute.exe set PYEXE=bin\run_parachute.exe
+cd /d "%~dp0"
+set "PYEXE=%~dp0bin\run_parachute.exe"
+set "SCRIPT="
+if not exist "%PYEXE%" (
+    where python >nul 2>nul
+    if errorlevel 1 (
+        echo [错误] 未找到 bin\run_parachute.exe，也未找到 python
+        pause
+        exit /b 1
+    )
+    set "PYEXE=python"
+    set SCRIPT="%~dp0src\run_parachute.py"
 )
-if not defined PYEXE (
-    echo [错误] 未找到 python，也未找到 bin\run_parachute.exe
-    echo        请安装 Python，或先运行 src\build_windows_exe.bat 构建exe 并放入 bin\
+
+if not exist kinput\Parachute_0903.k (
+    echo [错误] 缺少输入文件 kinput\Parachute_0903.k
+    echo        请将原始 LS-DYNA K 文件放入 kinput 目录后重新运行。
     pause
     exit /b 1
 )
-
 if not exist results mkdir results
-%PYEXE% src\run_parachute.py --k kinput\Parachute_0903.k ^
+"%PYEXE%" %SCRIPT% --k kinput\Parachute_0903.k ^
   --nx 30 --ny 40 --nz 30 --domain-radius 0.5 --y1-extension 0.4 ^
   --endtime 0.150 --tssfac 0.8 --cfl 0.5 --constant-vel 220 ^
   --bend-scale 1 --bend-damp 0 --pleak 0.1 ^

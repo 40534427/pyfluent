@@ -21,26 +21,30 @@
 
 ## 2. 目录说明
 
-- `kinput/Parachute_0903.k` —— LS-DYNA 关键字文件（53 MB，15024 节点 / 13056 伞衣壳 + 160 伞绳梁 + ALE 流体）
+- `kinput/Parachute_0903.k` —— 原始 LS-DYNA 关键字文件（当前工作区未保留，计算前请重新放入）
 - `src/` —— 求解器源码（aleparachute 包 + run_parachute.py + 绘图脚本 + exe 构建脚本）
-- `bin/` —— 可选的 Windows 可执行文件放置目录（用 src/build_windows_exe.bat 构建后放入）
-- `results/` —— 全部计算结果（213 MB）
+- `bin/` —— `run_parachute.exe` 原生启动器及 `runtime/` 免安装运行库
+- `results/` —— 当前已有的计算结果（HTML 报告、CSV 历史数据和图件；不含 VTK 帧与检查点）
   - `history.csv` 每 5 ms 一行的全局历史（阻力、伞衣半径、压力、线张力、dt 等，t=0–150 ms）
   - `line_force.csv` 16 根伞绳逐时刻张力
-  - `state_*.vtk` 每 5 ms 一帧的流体/结构状态（ParaView 可视化，32 帧 ×2）
-  - `final_*.vtk` 终态
-  - `calculation_report.html` 计算报告（工况、网格、求解设置、11 幅曲线图、动画）
+  - `calculation_report.html` 计算报告（工况、网格、求解设置与曲线图）
   - `run_meta.json` 运行元数据（全部运行参数、CPU 信息、墙钟）
   - `vent_measurement.txt` 顶孔逐时刻量测与 FINAL/PEAK 行
 
 ## 3. Windows 一键运行
 
-1. `run_parachute.bat` —— 全新计算 150 ms（约 3.2 h @ 3 核 Xeon）
-2. `run_resume.bat` —— 从 results/checkpoint.npz 断点续算（每 5 ms 自动存检查点，可反复续算）
-3. `run_report_only.bat` —— 仅根据已有 history.csv 重新生成报告
+目标系统为 **Windows 7 SP1 x64 / Windows 10 x64 / Windows 11 x64**。
+随包提供 64 位 `bin\run_parachute.exe`、Python 3.8.10、NumPy/SciPy/Matplotlib、
+UCRT 及 VC++ 运行库，**无需安装 Python 或 VC++ Redistributable**。
 
-系统有 Python 时自动使用 Python（依赖 numpy/scipy/matplotlib，见 src/requirements.txt），
-否则回退 bin/run_parachute.exe（先用 src/build_windows_exe.bat 构建，再把 dist/run_parachute.exe 放入 bin/）。
+1. 将原始 `Parachute_0903.k` 放入 `kinput\`（当前工作区未保留该输入文件）。
+2. `run_parachute.bat` —— 全新计算 150 ms。
+3. `run_resume.bat` —— 从 `results\checkpoint.npz` 断点续算。
+4. `run_report_only.bat` —— 直接根据已有 CSV 和运行元数据重新生成报告，不需要 K 文件。
+
+也可在命令行运行 `bin\run_parachute.exe --help` 查看全部参数。
+**请完整保留 `bin\runtime` 和 `src`，不要只复制 EXE。** 三个批处理均优先使用随包运行库，
+只有 EXE 缺失时才回退系统 Python。`src\build_windows_exe.bat` 仅用于可选的单文件版重建。
 
 ## 4. 关键计算设置
 
@@ -76,3 +80,14 @@
 - `--fsi-implicit`：罚函数刚度半隐式（可去掉 CLLS 的 `sqrt(m/k)` 步长限制）。
   **默认关闭**：dt 接近该限制时会改变耦合动力学（dt = 3e-6 时阻力偏差约 18 %），
   仅在与 `--max-dt` 配合、需要强行加大步长时使用。
+
+## 6. 验证范围与输入文件说明
+
+- `run_parachute.exe` 为 PE32+ x64 原生控制台程序；已在 Wine 中验证 `--help`、
+  中文及空格路径启动和参数转发。
+- 已通过该 EXE 对现有结果执行 `--report-only`，成功重建 HTML 报告和 5 张曲线图；
+  另行通过 NumPy 矩阵运算、SciPy KDTree、Matplotlib PNG 和求解器导入自检。
+- 当前验证环境为 Wine，未在真实 Windows 7/11 物理机上执行；目标兼容性采用
+  Python 3.8.10 x64、Win7 目标启动器及随包正式 UCRT/VC++ 运行库实现。
+- 当前工作区未保留原始 `Parachute_0903.k`、VTK 状态帧和 `checkpoint.npz`，因此本次
+  未重新执行完整 150 ms 求解。全新计算前必须补回 K 文件；断点续算还必须提供检查点。

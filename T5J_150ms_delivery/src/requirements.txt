@@ -1,4 +1,7 @@
-numpy
-scipy
-matplotlib
-psutil
+# Win7/Win11 x64：随包运行库使用 Python 3.8.10 及以下版本。
+numpy==1.24.4
+scipy==1.10.1
+matplotlib==3.7.5
+psutil==6.0.0
+importlib_resources==6.4.5
+zipp==3.20.2

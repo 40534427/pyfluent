@@ -4,13 +4,21 @@ REM  T5J 算例断点续算：从 results\checkpoint.npz 恢复并算到 150 ms
 REM  如中途再次中断，重新运行本脚本即可（每 5 ms 自动保存检查点）
 REM ============================================================
 setlocal
-set PYEXE=
-where python >nul 2>nul && set PYEXE=python
-if not defined PYEXE (
-    if exist bin\run_parachute.exe set PYEXE=bin\run_parachute.exe
+cd /d "%~dp0"
+set "PYEXE=%~dp0bin\run_parachute.exe"
+set "SCRIPT="
+if not exist "%PYEXE%" (
+    where python >nul 2>nul
+    if errorlevel 1 (
+        echo [错误] 未找到 bin\run_parachute.exe，也未找到 python
+        pause
+        exit /b 1
+    )
+    set "PYEXE=python"
+    set SCRIPT="%~dp0src\run_parachute.py"
 )
-if not defined PYEXE (
-    echo [错误] 未找到 python，也未找到 bin\run_parachute.exe
+if not exist kinput\Parachute_0903.k (
+    echo [错误] 缺少输入文件 kinput\Parachute_0903.k
     pause
     exit /b 1
 )
@@ -20,7 +28,7 @@ if not exist results\checkpoint.npz (
     exit /b 1
 )
 
-%PYEXE% src\run_parachute.py --k kinput\Parachute_0903.k ^
+"%PYEXE%" %SCRIPT% --k kinput\Parachute_0903.k ^
   --nx 30 --ny 40 --nz 30 --domain-radius 0.5 --y1-extension 0.4 ^
   --endtime 0.150 --tssfac 0.8 --cfl 0.5 --constant-vel 220 ^
   --bend-scale 1 --bend-damp 0 --pleak 0.1 ^
