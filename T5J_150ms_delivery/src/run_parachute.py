@@ -57,6 +57,17 @@ def build_parser() -> argparse.ArgumentParser:
                    help="under-relaxation of the exchanged traction (0..1)")
     p.add_argument("--cdamp", type=float, default=1.0,
                    help="acoustic impedance damping coefficient of the penalty")
+    p.add_argument("--fsi-implicit", action="store_true",
+                   help="treat the penalty stiffness semi-implicitly, which "
+                        "removes the CLLS sqrt(m/k) step limit (use together "
+                        "with --max-dt; the default explicit scheme is the "
+                        "validated physics)")
+    p.add_argument("--threads", type=int, default=0,
+                   help="worker threads for the element kernels (0 = auto, "
+                        "1 = serial)")
+    p.add_argument("--max-dt", type=float, default=0.0,
+                   help="hard cap on the time step [s] (0 = no cap; e.g. 3e-6 "
+                        "to keep the structure stable during the inflation peak)")
     p.add_argument("--fsi-mach-cap", type=float, default=0.3,
                    help="max Mach number of the velocity increment fed back "
                         "into a fluid cell (0 = no cap)")
@@ -191,6 +202,8 @@ def main(argv=None) -> int:
         else float(model.controls.get("CONTROL_TERMINATION", {}).get("endtim", 0.02)),
         vel_scale=args.vel_scale, constant_vel=args.constant_vel, cfl=args.cfl, tssfac=args.tssfac,
         mass_scale=args.mass_scale, omega=args.omega, cdamp=args.cdamp,
+        fsi_implicit=args.fsi_implicit, threads=args.threads,
+        max_dt=args.max_dt,
         fsi_mach_cap=args.fsi_mach_cap, fsi_leak=not args.no_fsi_leak,
         drive_full_inlet_layer=args.domain_radius is not None,
         pleak=args.pleak, leak_cap=args.leak_cap, p_cap=args.p_cap,

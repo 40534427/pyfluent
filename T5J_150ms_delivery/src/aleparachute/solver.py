@@ -33,6 +33,13 @@ class Options:
     mass_scale: float = 1.0      # structure mass scaling (explicit FSI aid)
     omega: float = 0.2           # under-relaxation of the exchanged traction
     cdamp: float = 1.0           # acoustic impedance damping of the penalty
+    # The explicit penalty is the validated physics (the semi-implicit spring
+    # changes the coupling dynamics by ~18 % at dt = 3e-6), so it stays the
+    # default.  ``True`` removes the CLLS sqrt(m/k) step limit and is meant to
+    # be used together with ``max_dt``.
+    fsi_implicit: bool = False
+    threads: int = 0             # worker threads for the element kernels (0 = auto)
+    max_dt: float = 0.0          # hard cap on the time step [s] (0 = no cap)
     fsi_mach_cap: float = 0.3    # max Mach number of the injected FSI source
     fsi_leak: bool = True         # CLLS leakage control (card ILEAK)
     pleak: Optional[float] = None # PLEAK override
@@ -134,6 +141,7 @@ class Simulation:
             IdealGas.from_model(model, model.parts[pid_air]["mid"],
                                 model.parts[pid_air]["eosid"]),
             cfl=options.cfl)
+        self.fluid.set_threads(int(options.threads))
         self.struct = build_structure(model, vent_radius=float(options.vent_radius),
                                       vent_ring_E_factor=float(options.vent_ring_E_factor),
                                       vent_ring_A_factor=float(options.vent_ring_A_factor))
@@ -169,6 +177,7 @@ class Simulation:
                                       enabled=options.coupling)
         self.coupler.omega = float(options.omega)
         self.coupler.cdamp = float(options.cdamp)
+        self.coupler.implicit = bool(options.fsi_implicit)
         if options.pfac is not None:
             self.coupler.pfac = float(options.pfac)
         self.coupler.mach_cap = float(options.fsi_mach_cap)
@@ -403,8 +412,12 @@ class Simulation:
         dt = min(self.fluid.stable_dt(), self.ssolver.stable_dt())
         if self.contact is not None:
             dt = min(dt, self.contact.stable_dt())
-        if np.isfinite(self.coupler.fsi_dt):
-            dt = min(dt, self.coupler.fsi_dt)
+        # with the semi-implicit penalty stiffness the CLLS limit no longer
+        # applies (the spring term is solved for v^{n+1}); keep the analytic
+        # value available for reporting only.
+        if not getattr(self.coupler, "implicit", False):
+            if np.isfinite(self.coupler.fsi_dt):
+                dt = min(dt, self.coupler.fsi_dt)
         return float(dt)
 
     # -------------------------------------------------------------------- run
@@ -430,6 +443,8 @@ class Simulation:
                 next_ckpt = (np.floor(self.t / ckpt_every + 1e-9) + 1.0) * ckpt_every
             next_hist = (np.floor(self.t / hist_every + 1e-9) + 1.0) * hist_every
         dt = self.stable_dt() * opt.tssfac
+        if opt.max_dt > 0.0:
+            dt = min(dt, opt.max_dt)
         self.dt_last = dt
         f_c = np.zeros_like(self.struct.x)
         f_ct = np.zeros_like(self.struct.x)
@@ -497,6 +512,8 @@ class Simulation:
                 self.save_checkpoint(os.path.join(opt.outdir, "checkpoint.npz"))
 
             dt_new = self.stable_dt() * opt.tssfac
+            if opt.max_dt > 0.0:
+                dt_new = min(dt_new, opt.max_dt)
             dt = min(dt_new, 1.3 * dt)      # gentle growth
             dt = max(dt, 2e-9)
             self.dt_last = dt

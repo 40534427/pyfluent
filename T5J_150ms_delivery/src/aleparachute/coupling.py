@@ -103,6 +103,18 @@ class PenaltyCoupler:
             self.p_cap = float(self.p_cap)
         self.k_fsi = 0.0
         self.fsi_dt = float("inf")
+        # Semi-implicit (energy conserving) treatment of the penalty
+        # *stiffness* term.  The damping term is already solved for
+        # v_n^{n+1}; doing the same for the spring part
+        #   F^{n+1} ~ F^n - k dt v_n
+        # adds dt^2 k / m to the denominator and removes the explicit
+        # stability limit sqrt(m/k) that otherwise sets the step of the whole
+        # simulation (it is ~3x smaller than the membrane limit of the shell).
+        # Off by default: the explicit penalty is the validated physics.  With
+        # ``implicit`` the spring part is advanced semi-implicitly, which
+        # removes the sqrt(m/k) limit but alters the coupling dynamics once dt
+        # approaches that limit (measured ~18 % at dt = 3e-6).
+        self.implicit = False
         self.impedance = 0.0
         self._dt = 0.0
         # cap of the momentum source expressed as a local Mach number.  A
@@ -253,10 +265,19 @@ class PenaltyCoupler:
         k_node = np.maximum(k_node, 0.0)
         self.k_fsi = float(np.max(k_node)) if k_node.size else 0.0
         self.impedance = float(np.mean(rc)) if rc.size else 0.0
-        m_node = float(np.min(st.mass[act])) if act.size else 1.0
-        self.fsi_dt = (0.9 * float(np.sqrt(max(m_node, 1e-18)
-                                            / max(self.k_fsi, 1e-30)))
-                       if self.k_fsi > 0.0 else float("inf"))
+        # stable FSI step.  With ``implicit`` the per-node limit is reported
+        # (the solver ignores it anyway); in the validated explicit setting the
+        # original global min(m)/max(k) estimate is kept, because raising it
+        # measured unstable during the inflation peak.
+        m_act = np.maximum(st.mass[act], 1e-18)
+        if self.implicit:
+            self.fsi_dt = (float(np.min(0.9 * np.sqrt(
+                m_act / np.maximum(k_node, 1e-30))))
+                if k_node.size else float("inf"))
+        else:
+            self.fsi_dt = (0.9 * np.sqrt(float(np.min(m_act))
+                                         / max(self.k_fsi, 1e-30))
+                           if k_node.size else float("inf"))
 
         # normal relative velocity: nodal part and fluid part are separated so
         # that the *nodal* part can be treated implicitly.  A fabric node is
@@ -279,6 +300,9 @@ class PenaltyCoupler:
         if self._dt > 0.0:
             m = np.maximum(st.mass[act], 1e-18)
             den = 1.0 + A * d * self._dt / m
+            if self.implicit:
+                # semi-implicit spring: F^{n+1} = F^n - k dt v_n
+                den = den + self._dt * self._dt * k_node / m
         fn = (dp - corr) / den                             # scalar traction
         an = A[:, None] * nrm
         dsrc = (0.5 * corr / den)[:, None] * an           # damping reaction

@@ -221,6 +221,16 @@ class StructureSolver:
         self.q_khg = np.maximum(self.hg_qh * self.q_C11 * self.q_thk, 1e-12)
         self.q_chg = 2.0 * self.hg_damp * np.sqrt(self.q_khg * self.q_mass)
         self.h_pattern = np.array([0.5, -0.5, 0.5, -0.5])
+        # flat (doF) scatter indices, built once instead of every step.
+        # ``_q_idx3`` is used twice per step (membrane + w-mode), so the
+        # concatenation is pre-built as well.
+        self._q_flat = q.ravel()
+        self._q_idx3 = (self._q_flat[:, None] * 3
+                        + np.arange(3)).ravel()
+        self._q_idx3_2 = np.concatenate([self._q_idx3, self._q_idx3])
+        # scratch for the merged membrane + w-mode scatter
+        self._q_buf = np.empty(2 * self._q_flat.size * 3)
+        self._q_tA = (self.q_thk * self.q_area0)
 
         # transverse w-mode: LS-DYNA keeps the hourglass stabilisation of the
         # zero-energy thickness mode.  BWC = 2 selects plain B-T and therefore
@@ -296,6 +306,13 @@ class StructureSolver:
         self.be_l = q[q2, (o2 % 4 + 2) % 4].astype(np.int64)
         self.be_q1 = q1
         self.be_q2 = q2
+        # flat doF scatter map: all four hinge nodes in a single bincount.
+        # The ordering must match ``np.stack([fa, fb, fc, fd], axis=1)``,
+        # i.e. hinge-major / (i, j, k, l) / component.
+        self._be_idx = np.stack([self.be_i, self.be_j,
+                                 self.be_k, self.be_l], axis=1)
+        self._be_idx3 = (self._be_idx[:, :, None] * 3
+                         + np.arange(3)).ravel()
 
         x = st.x
         pi, pj = x[self.be_i], x[self.be_j]
@@ -424,11 +441,12 @@ class StructureSolver:
                        np.einsum("qij,qj->qi", v, e2)], axis=2)
         d = xc - self.qX                                   # co-rotational
 
-        # F = I + d u / d X with the reference B-operator
-        F = np.einsum("nia,nib->nab", d, self.qB0)
+        # F = I + d u / d X with the reference B-operator.  A batched matmul
+        # is ~5x faster than the generic einsum path at this array size.
+        F = np.matmul(d.transpose(0, 2, 1), self.qB0)
         F[:, 0, 0] += 1.0
         F[:, 1, 1] += 1.0
-        FtF = np.einsum("nji,njk->nik", F, F)
+        FtF = np.matmul(F.transpose(0, 2, 1), F)
         E = 0.5 * (FtF - np.eye(2)[None])
         S11 = self.q_C11 * E[:, 0, 0] + self.q_C12 * E[:, 1, 1]
         S22 = self.q_C12 * E[:, 0, 0] + self.q_C22 * E[:, 1, 1]
@@ -442,17 +460,20 @@ class StructureSolver:
             S11 = np.where(slack_a, 0.0, S11)
             S22 = np.where(slack_b, 0.0, S22)
             S12 = np.where(slack_a & slack_b, 0.0, S12)
-        S = np.stack([np.stack([S11, S12], axis=1),
-                      np.stack([S12, S22], axis=1)], axis=1)
-        P = np.einsum("nij,njk->nik", F, S)
+        S = np.empty((self.nq, 2, 2))
+        S[:, 0, 0] = S11
+        S[:, 0, 1] = S12
+        S[:, 1, 0] = S12
+        S[:, 1, 1] = S22
+        P = np.matmul(F, S)
 
         self.membrane_stress = np.stack([S11, S22, S12], axis=1)
         self.membrane_strain = np.stack([E[:, 0, 0], E[:, 1, 1],
                                          E[:, 0, 1]], axis=1)
 
-        # nodal forces in the local frame, -t0 A0 P B
-        fl = -np.einsum("n,n,nab,nib->nia", self.q_thk, self.q_area0,
-                        P, self.qB0)
+        # nodal forces in the local frame, -t0 A0 P B  (shape (Nq,4,2))
+        fl = np.matmul(self.qB0, P.transpose(0, 2, 1))
+        fl *= -self._q_tA[:, None, None]
 
         # ---- in-plane hourglass (IHQ = 1) --------------------------------
         h = self.h_pattern
@@ -463,9 +484,6 @@ class StructureSolver:
 
         # map local (e1,e2) forces back to global
         fq = fl[:, :, 0, None] * e1[:, None, :] + fl[:, :, 1, None] * e2[:, None, :]
-        fqt = fq.reshape(-1, 3)
-        for k in range(3):
-            np.add.at(f[:, k], q.ravel(), fqt[:, k])
 
         # ---- transverse w-mode hourglass ---------------------------------
         s = np.einsum("ij,ij->i", p[:, 0] - p[:, 1] + p[:, 2] - p[:, 3], nrm)
@@ -473,9 +491,13 @@ class StructureSolver:
         fmag = -(self.q_kw * s + self.q_cw * sd)
         g = np.array([1.0, -1.0, 1.0, -1.0])
         fw = (fmag[:, None] * g[None, :])[:, :, None] * nrm[:, None, :]
-        fwt = fw.reshape(-1, 3)
-        for k in range(3):
-            np.add.at(f[:, k], q.ravel(), fwt[:, k])
+
+        # membrane and w-mode nodal forces in a single bincount scatter
+        buf = self._q_buf
+        buf[0:fq.size] = fq.ravel()
+        buf[fq.size:] = fw.ravel()
+        f += np.bincount(self._q_idx3_2, weights=buf,
+                         minlength=3 * st.nnode).reshape(st.nnode, 3)
 
         self.q_warp_angle = float(np.degrees(np.max(np.abs(s) /
                                                     np.maximum(self.q_alt0, 1e-30))))
@@ -547,10 +569,9 @@ class StructureSolver:
         fc = -M[:, None] * gc
         fd = -M[:, None] * gd
 
-        idx = np.concatenate([self.be_i, self.be_j, self.be_k, self.be_l])
-        w = np.concatenate([fa, fb, fc, fd], axis=0)
-        for k in range(3):
-            f[:, k] += np.bincount(idx, weights=w[:, k], minlength=st.nnode)
+        w = np.stack([fa, fb, fc, fd], axis=1)      # (Nh,4,3)
+        f += np.bincount(self._be_idx3, weights=w.ravel(),
+                         minlength=3 * st.nnode).reshape(st.nnode, 3)
 
     # ---- constant-strain-triangle fallback --------------------------------
     def _cst_membrane_forces(self, f: np.ndarray) -> None:
