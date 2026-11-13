@@ -21,7 +21,7 @@
 
 ## 2. 目录说明
 
-- `kinput/Parachute_0903.k` —— 原始 LS-DYNA 关键字文件（当前工作区未保留，计算前请重新放入）
+- `kinput/Parachute_0903.k` —— 原始 LS-DYNA 关键字文件（已随包提供）
 - `src/` —— 求解器源码（aleparachute 包 + run_parachute.py + 绘图脚本 + exe 构建脚本）
 - `bin/` —— `run_parachute.exe` 原生启动器及 `runtime/` 免安装运行库
 - `results/` —— 当前已有的计算结果（HTML 报告、CSV 历史数据和图件；不含 VTK 帧与检查点）
@@ -37,8 +37,8 @@
 随包提供 64 位 `bin\run_parachute.exe`、Python 3.8.10、NumPy/SciPy/Matplotlib、
 UCRT 及 VC++ 运行库，**无需安装 Python 或 VC++ Redistributable**。
 
-1. 将原始 `Parachute_0903.k` 放入 `kinput\`（当前工作区未保留该输入文件）。
-2. `run_parachute.bat` —— 全新计算 150 ms。
+1. `verify_windows.bat` —— 交付包自检（系统版本、运行库、EXE、绘图与短算例），详见第 7 节。
+2. `run_parachute.bat` —— 全新计算 150 ms（`kinput\Parachute_0903.k` 已随包提供）。
 3. `run_resume.bat` —— 从 `results\checkpoint.npz` 断点续算。
 4. `run_report_only.bat` —— 直接根据已有 CSV 和运行元数据重新生成报告，不需要 K 文件。
 
@@ -89,5 +89,20 @@ UCRT 及 VC++ 运行库，**无需安装 Python 或 VC++ Redistributable**。
   另行通过 NumPy 矩阵运算、SciPy KDTree、Matplotlib PNG 和求解器导入自检。
 - 当前验证环境为 Wine，未在真实 Windows 7/11 物理机上执行；目标兼容性采用
   Python 3.8.10 x64、Win7 目标启动器及随包正式 UCRT/VC++ 运行库实现。
-- 当前工作区未保留原始 `Parachute_0903.k`、VTK 状态帧和 `checkpoint.npz`，因此本次
-  未重新执行完整 150 ms 求解。全新计算前必须补回 K 文件；断点续算还必须提供检查点。
+- 原始 `Parachute_0903.k` 已随包提供；本次验证只执行了 4 步冒烟求解，未重新执行完整
+  150 ms 计算。`results/` 不含 VTK 状态帧和 `checkpoint.npz`，断点续算前需重新生成检查点。
+
+## 7. Windows 7 / 11 验证脚本
+
+在交付包根目录双击 `verify_windows.bat`（或在 cmd 中运行），脚本自动完成：
+
+1. 读取注册表识别系统版本与位数（Win7 必须为 SP1，即 build 7601；Win10/11 为 10.0）。
+2. 检查 EXE、随包 Python、UCRT/VC++、NumPy/SciPy/Matplotlib、源码、结果和 K 文件是否齐全。
+3. 直接调用 `bin\runtime\python.exe`，输出版本并验证科学计算库可导入。
+4. 在包目录内和包目录外分别执行 `run_parachute.exe --help`，验证路径无关性。
+5. 复制 `results` 后执行 `--report-only`，确认 HTML 报告和图件可重新生成。
+6. 用 K 文件跑 4 步、8×8×8 网格的求解冒烟测试，确认历史、伞绳力、检查点和 VTK 输出。
+
+结果写入 `verify_windows.log`，退出码 0 表示全部通过，1 表示存在失败项；`verify_out`
+为测试临时目录，可直接删除。脚本为纯批处理，不依赖系统 Python 或 PowerShell。
+在 Windows 7 上请使用 SP1 且以 64 位 cmd 运行。
