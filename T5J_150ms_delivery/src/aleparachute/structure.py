@@ -816,6 +816,12 @@ class StructureSolver:
         dt_s = np.inf
         if self.use_quads:
             h0 = float(self.q_alt0.min())
+            # Reference altitude of the undeformed canopy.  Using the current
+            # (folded) altitude was tested and rejected: one collapsed quad
+            # drives the global step below 5e-7 s during inflation and makes
+            # the 150 ms run an order of magnitude slower.  The reference value
+            # is the one validated over the full run; a genuinely unstable step
+            # is caught by the adaptive roll-back in ``Simulation.run``.
             hc = h0
             # The co-rotational B-T tangent carries the frame-rotation (follower)
             # terms, which lower the element's real stability limit well below

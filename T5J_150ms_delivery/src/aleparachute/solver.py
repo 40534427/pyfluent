@@ -420,6 +420,61 @@ class Simulation:
                 dt = min(dt, self.coupler.fsi_dt)
         return float(dt)
 
+    # ------------------------------------------------------- stability guard
+    def _capture_state(self):
+        """Shallow-proof snapshot of everything one explicit step mutates."""
+        c = self.coupler
+        c_state = None
+        if c is not None:
+            c_state = (c._f_prev.copy(), c._srcp_prev.copy(),
+                       c._srcm_prev.copy(), float(c.k_fsi),
+                       float(c.fsi_dt))
+        return (self.t, self.step_count, self.fluid.U.copy(),
+                self.struct.x.copy(), self.struct.v.copy(), c_state)
+
+    def _restore_state(self, snapshot) -> None:
+        """Undo a rejected step."""
+        t, step, U, x, v, c_state = snapshot
+        self.t = t
+        self.step_count = step
+        self.fluid.U = U
+        self.fluid._prim_cache = None
+        self.struct.x = x
+        self.struct.v = v
+        c = self.coupler
+        if c is not None and c_state is not None:
+            c._f_prev[:] = c_state[0]
+            c._srcp_prev[:] = c_state[1]
+            c._srcm_prev[:] = c_state[2]
+            c.k_fsi = c_state[3]
+            c.fsi_dt = c_state[4]
+        self._growth_hold = 20
+
+    def _state_is_healthy(self) -> bool:
+        """Reject non-finite or clearly non-physical states.
+
+        Density is kept within 1 %..2500 % of ambient.  The nodal speed limit
+        is 650 m/s: the validated 150 ms reference run peaks at 520 m/s
+        (t = 95.3 ms, 99th percentile 333 m/s), while the marginally stable
+        hem elements were observed to ring up to 700-1200 m/s when the local
+        step exceeded their stability limit.  Catching the spike *before* the
+        step is accepted lets the adaptive roll-back redo it at half dt; once
+        such a spike is accepted, the distorted state can no longer be
+        integrated at any dt.
+        """
+        U = self.fluid.U
+        if not np.all(np.isfinite(U)):
+            return False
+        rho = U[:, 0]
+        rho0 = max(float(self.fluid.gas.rho0), 1e-12)
+        if float(rho.min()) < 0.01 * rho0 or float(rho.max()) > 25.0 * rho0:
+            return False
+        x, v = self.struct.x, self.struct.v
+        if not (np.all(np.isfinite(x)) and np.all(np.isfinite(v))):
+            return False
+        v2 = np.einsum("ij,ij->i", v, v)
+        return float(np.sqrt(v2.max())) <= 650.0
+
     # -------------------------------------------------------------------- run
     def run(self) -> dict:
         opt = self.opt
@@ -446,6 +501,7 @@ class Simulation:
         if opt.max_dt > 0.0:
             dt = min(dt, opt.max_dt)
         self.dt_last = dt
+        self._growth_hold = 0
         f_c = np.zeros_like(self.struct.x)
         f_ct = np.zeros_like(self.struct.x)
         if opt.vtk_every > 0 and not restarted:
@@ -453,34 +509,68 @@ class Simulation:
 
         curves = self.model.curves if self.pm is not None else {}
         while self.t < endtime and self.step_count < opt.max_steps:
-            # ---- coupling force at t
-            f_c = (self.coupler.force(self.t, dt) if opt.coupling
-                   else np.zeros_like(self.struct.x))
-            # ---- penalty self-contact of the canopy at t
-            f_ct = (self.contact.force() if self.contact is not None
-                    else np.zeros_like(self.struct.x))
-            f_ext = f_c + f_ct
-            # ---- structure
-            if opt.structure:
-                self.ssolver.step(dt, self.t, curves, opt.vel_scale, f_ext=f_ext)
-                self._clamp_vent()
-            # ---- fluid reaction
-            if opt.coupling:
-                self.coupler.transfer(f_c, dt)
-            # ---- driven flow (prescribed motion card)
-            if self.pm is not None:
-                if opt.constant_vel is not None:
-                    val = float(opt.constant_vel)
-                else:
-                    val = timeseries(self.model.curve(self.pm["lcid"]), self.t) * opt.vel_scale
-                self.fluid.set_drive(self.driven_cells, self.pm["dof"], val)
-            # ---- fluid
-            self.fluid.step(dt)
-            if opt.coupling:
-                self.coupler.cap_pressure()
+            # ---- one explicit step, retried with a smaller dt if the state
+            # leaves the physical envelope (adaptive sub-stepping).  The
+            # validated trajectory is unchanged: the guard only fires when a
+            # step would otherwise produce a non-finite or runaway state.
+            attempt = 0
+            while True:
+                snapshot = self._capture_state()
+                # ---- coupling force at t
+                f_c = (self.coupler.force(self.t, dt) if opt.coupling
+                       else np.zeros_like(self.struct.x))
+                # ---- penalty self-contact of the canopy at t
+                f_ct = (self.contact.force() if self.contact is not None
+                        else np.zeros_like(self.struct.x))
+                f_ext = f_c + f_ct
+                # ---- structure
+                if opt.structure:
+                    self.ssolver.step(dt, self.t, curves, opt.vel_scale,
+                                      f_ext=f_ext)
+                    self._clamp_vent()
+                # ---- fluid reaction
+                if opt.coupling:
+                    self.coupler.transfer(f_c, dt)
+                # ---- driven flow (prescribed motion card)
+                if self.pm is not None:
+                    if opt.constant_vel is not None:
+                        val = float(opt.constant_vel)
+                    else:
+                        val = timeseries(self.model.curve(self.pm["lcid"]),
+                                         self.t) * opt.vel_scale
+                    self.fluid.set_drive(self.driven_cells, self.pm["dof"], val)
+                # ---- fluid
+                self.fluid.step(dt)
+                if opt.coupling:
+                    self.coupler.cap_pressure()
 
-            self.t += dt
-            self.step_count += 1
+                self.t += dt
+                self.step_count += 1
+
+                if self._state_is_healthy():
+                    break
+                # state diagnostics of the rejected attempt, before roll-back
+                U_bad = self.fluid.U
+                bad = (float(np.sqrt(np.max(np.einsum("ij,ij->i",
+                                                      self.struct.v,
+                                                      self.struct.v)))),
+                       float(U_bad[:, 0].min()), float(U_bad[:, 0].max()),
+                       bool(np.all(np.isfinite(U_bad))))
+                # roll the failed attempt back and retry at half the step
+                self._restore_state(snapshot)
+                attempt += 1
+                dt *= 0.5
+                if attempt > 30 or dt < 2e-9:
+                    raise RuntimeError(
+                        f"step could not be stabilised at t={self.t:.6f}s "
+                        f"(dt={dt:.3e}s, vmax={bad[0]:.3e}m/s, "
+                        f"rho=[{bad[1]:.4e},{bad[2]:.4e}], "
+                        f"finite={bad[3]})")
+                dt = min(dt, self.stable_dt() * opt.tssfac)
+                print(f"[stability] rejected step at t={self.t:.6f}s "
+                      f"(vmax={bad[0]:.3e}m/s, rho=[{bad[1]:.4e},"
+                      f"{bad[2]:.4e}], finite={bad[3]}), "
+                      f"retry dt={dt:.3e}s", flush=True)
 
             if self.t >= next_hist - 1e-15 or self.step_count == 1:
                 next_hist += hist_every
@@ -514,15 +604,14 @@ class Simulation:
             dt_new = self.stable_dt() * opt.tssfac
             if opt.max_dt > 0.0:
                 dt_new = min(dt_new, opt.max_dt)
-            dt = min(dt_new, 1.3 * dt)      # gentle growth
+            if self._growth_hold > 0:
+                # do not climb straight back into the rejected step
+                self._growth_hold -= 1
+                dt = min(dt_new, dt)
+            else:
+                dt = min(dt_new, 1.3 * dt)  # gentle growth
             dt = max(dt, 2e-9)
             self.dt_last = dt
-
-            if not np.all(np.isfinite(self.fluid.U)):
-                raise RuntimeError("fluid state became non finite")
-            if not (np.all(np.isfinite(self.struct.x))
-                    and np.all(np.isfinite(self.struct.v))):
-                raise RuntimeError("structure state became non finite")
 
         final = self.diagnostics(f_c)
         self.history.append(final)
