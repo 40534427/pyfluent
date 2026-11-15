@@ -1,0 +1,87 @@
+T5J 减速伞 150 ms 充气展开 ALE 流固耦合计算交付包
+交付清单（MANIFEST）
+生成日期：2026-11-15
+包根目录：T5J_150ms_delivery/
+
+一、总体
+  文件总数：6349（不含本清单；含本清单为 6350）
+  总体积：549.8 MiB（不含本清单；576540167 字节）
+  包内容：求解器源码、两套免安装运行库、两套启动器、示例结果、自检脚本
+
+二、支持平台与随包运行库
+  1) Windows 7 SP1 x64 / Windows 10 x64 / Windows 11 x64
+     启动器：bin/run_parachute.exe（PE32+ x64 控制台，子系统 5.2）
+     运行时：Python 3.8.10 x64（含 python38.zip 标准库）
+             contourpy-1.1.0.dist-info, cycler-0.12.1.dist-info, fonttools-4.57.0.dist-info, importlib_resources-6.4.5.dist-info, kiwisolver-1.4.7.dist-info, matplotlib-3.7.5.dist-info, numpy-1.24.4.dist-info, packaging-26.2.dist-info, pillow-10.4.0.dist-info, psutil-6.0.0.dist-info, pyparsing-3.1.4.dist-info, python_dateutil-2.9.0.post0.dist-info, scipy-1.10.1.dist-info, six-1.17.0.dist-info, zipp-3.20.2.dist-info
+  2) 麒麟 V10 x86_64 / 其他 Linux x86_64（glibc >= 2.27）
+     启动器：bin/linux-x86_64/run_parachute（静态链接 ELF x86_64，无 glibc 版本依赖）
+     运行时：Python 3.9.20（可移植构建）
+             contourpy-1.3.0.dist-info, cycler-0.12.1.dist-info, fonttools-4.60.2.dist-info, importlib_resources-6.4.5.dist-info, kiwisolver-1.4.7.dist-info, matplotlib-3.7.5.dist-info, numpy-1.24.4.dist-info, packaging-26.2.dist-info, pillow-11.3.0.dist-info, psutil-6.0.0.dist-info, pyparsing-3.3.2.dist-info, python_dateutil-2.9.0.post0.dist-info, scipy-1.10.1.dist-info, six-1.17.0.dist-info, zipp-3.20.2.dist-info
+
+三、关键文件 SHA-256
+  SHA-256                                                                   字节  文件
+  dc58a1d5356ae5d0252ef1e93707e6aeb60a426dc31028b83e00a9a9add5ee0c       16450  README.md
+  66f57cb180bbdb8e7914c8c476a0abc520efd703c7112238839afcb6733b59c4        1490  run_parachute.bat
+  83ec34ffdea608ef9bcf5551948feb9c1408f8dfb06efb5dae477cfd5cf039e3        1648  run_resume.bat
+  916d636849bf15a433140770ade32de3dc7e7da06c44333bf62194046b248ab2        1002  run_report_only.bat
+  cce7f4cd037fc0f14449ca89277a3a6ecb5207f544c86a06eccc1ff77fcb4163        9822  verify_windows.bat
+  0ff9550d60a4cda4dcc7c271abdf5c87e63b525c216db32241f9ec40ad2abe1e         988  run_parachute.sh
+  244805e72c28e747ee3318d53453b08d14f840427359ef8a308207b145fd92ea        1167  run_resume.sh
+  8880a94cfeb6f61fa4dbf1a8d4bba1a4c08261abc9d51fbc47158842fca5061f         533  run_report_only.sh
+  7f188f6d3b61ceedc9a88dc0555834423c6278a311345ee17342ad16f213691f        4952  verify_linux.sh
+  00af696a65896cf27d1c038b9da624a1386be995ecda6f442abab05810af077d       41472  bin/run_parachute.exe
+  5275c42f7359fa2c7ec473be3240e57d5ce5b9301a26bd2e98e89bb9db074581      101552  bin/runtime/python.exe
+  613e0d63b54ed995273eda446eb09e51066e486f1e72b94f1c338a83dca3a021     2465341  bin/runtime/python38.zip
+  db5c6d6012414193c19b98b696a7f94cbc38c89809c2fe77a9219ca5c6db7f35         116  bin/runtime/python38._pth
+  337c9d5c866c914bf62e5822f5f2712154399064aea3edd3831726962cf66400      739336  bin/linux-x86_64/run_parachute
+  0638ffc05d63ab34d96e8673ca123948d077db6b8d621c270b8870cfd9aee8b5       20944  bin/linux-x86_64/runtime/bin/python3
+  252dc36cb8698e68c02d9d72ed10505f032f58a3e7aa7a2c666082fd10db9d74     4717995  kinput/Parachute_0903.k
+  a17d042a3b9144d8cbc147c1aa61bc374d5fba1b2de528a5e2b822c5bdfcbee5       16466  src/run_parachute.py
+  1900bcd5f7193be02f463d7827cf96f2db4d8f08e4762cd66a91d9cc2efeec67       29291  src/aleparachute/solver.py
+  82736b4afaa1af60cd2e35b3a7567079670489810c1bd0ec51e7d0dacd4473cc       22947  src/aleparachute/kfile.py
+  220c6e20b732ffca8b356d7b986912899a87c714b00e5d72191379939c0d4a98        3882  src/run_parachute_launcher.c
+  cb2fcf4d7f4f8701a48fca206bac872b97d66d8047a6993f5c6c2e197611004e        2111  src/run_parachute_launcher_linux.c
+  7e6c53bbfaf12afda8bff87e0a946cdb294b80a79612a64dd691c2c1abd1681b        1311  src/build_windows_exe.bat
+  6f09596b950d53989a9bcc30497b7ae88ff8b1c05aed40a5144f09262307e105       94958  results/history.csv
+  316fd21af108cdd9e30f001912eeac9ae0f2c84912c23cbe416a27add2828a88       62876  results/line_force.csv
+  9afdce395dcc77ba52ba2153ae6c40c796fff19e56d600497d50ce84bd65c580        9455  results/calculation_report.html
+  f44143c04e585c777c9b280db99ec725363e519deed96686e4621f9903f29ba7        5654  results/run_meta.json
+  0709558d0f660743ad6e51e21d5441f96e578d18e14ad44e346f9a7903fc9ba7        1482  results/vent_measurement.txt
+
+四、根目录结构
+  README.md   （16450 字节）
+  bin/   （6805 个文件，551.3 MiB）
+  kinput/   （1 个文件，4.5 MiB）
+  results/   （16 个文件，4.1 MiB）
+  run_parachute.bat   （1490 字节）
+  run_parachute.sh   （988 字节）
+  run_report_only.bat   （1002 字节）
+  run_report_only.sh   （533 字节）
+  run_resume.bat   （1648 字节）
+  run_resume.sh   （1167 字节）
+  src/   （39 个文件，0.7 MiB）
+  verify_linux.sh   （4952 字节）
+  verify_windows.bat   （9822 字节）
+
+五、包内结果文件
+  results/history.csv               每 5 ms 一行，t=0–150 ms
+  results/line_force.csv            16 根伞绳逐时刻张力
+  results/calculation_report.html   计算报告（11 张图）
+  results/run_meta.json             运行参数与墙钟
+  results/vent_measurement.txt      顶孔量测与 FINAL/PEAK
+  说明：results/ 不含 VTK 状态帧与 checkpoint.npz。
+
+六、验证记录（2026-11-15）
+  Windows：bin/run_parachute.exe 经 Wine 实测 --help、4 步冒烟求解、
+           --report-only（HTML + 11 图）、checkpoint 写入与 restart 续算，均通过。
+           未在真实 Win7/Win11 物理机执行；依据为 PE32+ x64 / 子系统 5.2 /
+           仅依赖 KERNEL32+msvcrt，以及随包 Python 3.8.10 与 UCRT/VC++。
+  Linux  ：bin/linux-x86_64/run_parachute 在 x86_64 实测 verify_linux.sh 全项通过，
+           含 --help、报告重建（11 图）、4 步求解、checkpoint 写入与 restart 续算。
+           启动器静态链接；随包 .so 所需 glibc 最高 2.27，麒麟 V10（2.28）满足。
+  断点续算：详见 README.md 第 9 节。
+
+七、其它说明
+  kinput/Parachute_0903.k 为按原始模板与参数重建的 K 文件，
+  CLLS 罚函数系数已恢复 A1=1.6e6、B1=4.8e5。
+  bin/ 与 src/ 必须完整保留，不要只复制单个可执行文件。
